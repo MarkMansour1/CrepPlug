@@ -6,13 +6,12 @@ import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const StylePage = () => (
   <Layout>
-    <SEO title="Home" />
-    <div className="container container-wide">
+    <SEO title="Style Guide" />
+    <div className="container container-wide pt-5">
       <h3>Brand Colours</h3>
       <div className="row w-25">
         <div className="col-6">
@@ -182,31 +181,4 @@ const IndexPage = () => (
   </Layout>
 )
 
-export default IndexPage
-
-function create() {
-  const dataset = {
-    title: "My test",
-    status: "draft",
-    content: "lalala",
-    excerpt: "Read this awesome post",
-    slug: "new-test-post",
-  }
-
-  fetch("https://designsuite.pro/wp-json/wp/v2/posts/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk0Njc0ODkwLCJuYmYiOjE1OTQ2NzQ4OTAsImV4cCI6MTU5NTI3OTY5MCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.1T_RkyP8GO2TN4EYEYCk8mzreg8JFuXoV2kmuk6jaSA",
-    },
-    body: JSON.stringify(dataset),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
+export default StylePage
