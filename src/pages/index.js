@@ -21,9 +21,9 @@ const IndexPage = () => (
           <p>#000</p>
         </div>
         <div className="col-6">
-          <div className="p-5 mb-3" style={{ background: "#1793b8" }} />
+          <div className="p-5 mb-3" style={{ background: "#23a1d3" }} />
           <h5 className="mb-1">Secondary</h5>
-          <p>#007BFF</p>
+          <p>#23a1d3</p>
         </div>
       </div>
       <h3 className="mt-4">Monochrome Palette</h3>

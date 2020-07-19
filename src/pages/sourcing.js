@@ -10,13 +10,13 @@ const SourcingPage = () => (
   <Layout>
     <SEO title="Sourcing" />
     <div className="container container-wide">
-      <div className="row" style={{ paddingTop: "100px" }}>
+      <div className="row" style={{ paddingTop: "50px" }}>
         <div className="col-6">
           <h2 className="text-gray-dark">Sourcing</h2>
           <p className="text-gray">
             Looking for a pair of trainers to buy? Fill out the form with the
             details of the pair you’re looking for. We will get back to you ASAP
-            with price.
+            with a price.
           </p>
         </div>
         <div className="col-5 offset-1">
