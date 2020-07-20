@@ -51,9 +51,11 @@ class PageComponent extends React.Component {
               </Link>
               .
             </small>
-            <button type="submit" class="btn btn-primary w-100">
-              Sign Up
-            </button>
+            <Link to="/account">
+              <button type="submit" class="btn btn-primary w-100">
+                Sign Up
+              </button>
+            </Link>
           </form>
         </div>
       </Layout>

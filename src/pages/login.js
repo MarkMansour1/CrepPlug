@@ -31,9 +31,11 @@ class PageComponent extends React.Component {
             <Link to="/" className="text-underline">
               <small>Forgot your password?</small>
             </Link>
-            <button type="submit" class="btn btn-primary w-100">
-              Log In
-            </button>
+            <Link to="/account">
+              <button type="submit" class="btn btn-primary w-100">
+                Log In
+              </button>
+            </Link>
           </form>
         </div>
       </Layout>

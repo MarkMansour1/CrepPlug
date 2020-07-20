@@ -4,10 +4,15 @@
 
 .layout-minimal {
   width: 95%;
-  max-width: 480px;
+  max-width: 420px;
   min-height: 70vh;
   text-align: left;
   margin: 2.5rem auto 5rem;
+
+  h2,
+  p {
+    text-align: center;
+  }
 }
 
 .layout-minimal-links {

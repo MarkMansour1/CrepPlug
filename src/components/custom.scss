@@ -13,6 +13,7 @@ $secondary: #23a1d3;
 $dark: #222222;
 $gray-dark: #333;
 $gray: #555;
+$gray-light: #888;
 $light: #f0f0f0;
 
 // System colours
@@ -92,12 +93,16 @@ h3 {
 }
 h4 {
   font-size: 1.25rem;
+  letter-spacing: 1px;
 }
 h5 {
+  font-weight: 400;
   font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 h6 {
   font-size: 1rem;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 767px) {
@@ -128,11 +133,6 @@ form {
     color: $gray-dark;
   }
 
-  .form-group > label {
-    color: $gray;
-    font-weight: 600;
-  }
-
   .btn {
     margin-top: 1.5rem;
   }
@@ -158,19 +158,57 @@ ul {
   .card {
     border-left: none;
     border-right: none;
-    font-size: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
 
     .card-header {
       background: white;
       cursor: pointer;
       border: none;
       padding: 1rem 0;
+      position: relative;
+      width: 100%;
+      flex-basis: 100%;
+      order: 1;
+
+      &:after {
+        content: "+";
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+      }
     }
 
     .card-body {
+      font-size: 0.9rem;
       padding: 1rem 0;
     }
+
+    .collapsing,
+    .collapse.show {
+      order: 2;
+
+      & + .card-header:after {
+        content: "-";
+      }
+    }
   }
+}
+
+// Stepper
+
+.step-trigger:focus {
+  color: $secondary !important;
+}
+
+.active .bs-stepper-circle {
+  background-color: $secondary !important;
+}
+
+.bs-stepper-content .content {
+  padding-top: 2rem;
 }
 
 // Layout Components
@@ -267,12 +305,16 @@ ul {
   font-family: $mont;
 }
 
+.text-gray-dark {
+  color: $gray-dark !important;
+}
+
 .text-gray {
   color: $gray !important;
 }
 
-.text-gray-dark {
-  color: $gray-dark !important;
+.text-gray-light {
+  color: $gray-light !important;
 }
 
 .text-uppercase {

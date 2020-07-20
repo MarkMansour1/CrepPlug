@@ -10,15 +10,19 @@ class PageComponent extends React.Component {
       <Layout minimal={true}>
         <SEO title="Contact Us" />
         <div className="layout-minimal">
+          <h2 className="text-gray-dark">Contact Us</h2>
+          <p className="text-gray-light mb-4">
+            Before contacting the support team be sure to look at our{" "}
+            <Link
+              to="/faq"
+              className="text-gray-light text-underline"
+              target="_blank"
+            >
+              FAQs
+            </Link>
+            .
+          </p>
           <form>
-            <h2 className="text-gray-dark">Contact Us</h2>
-            <p className="mb-4">
-              Before contacting the support team be sure to look at our{" "}
-              <Link to="/faq" className="text-underline">
-                FAQs
-              </Link>
-              .
-            </p>
             <div class="form-group">
               <label for="email">Email address</label>
               <input type="email" class="form-control" id="email" />
