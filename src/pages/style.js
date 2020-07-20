@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const StylePage = () => (
+const PageComponent = () => (
   <Layout>
     <SEO title="Style Guide" />
     <div className="container container-wide pt-5">
@@ -181,4 +181,4 @@ const StylePage = () => (
   </Layout>
 )
 
-export default StylePage
+export default PageComponent

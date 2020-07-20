@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 
 import sourcing from "../images/sourcing.jpg"
 
-const SourcingPage = () => (
+const PageComponent = () => (
   <Layout>
     <SEO title="Sourcing" />
     <div className="container container-wide">
@@ -21,34 +21,38 @@ const SourcingPage = () => (
         </div>
         <div className="col-5 offset-1">
           <form>
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" />
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input type="email" className="form-control" id="email" />
             </div>
-            <div class="form-group">
-              <label for="model">Model (name of trainer)</label>
-              <input type="text" class="form-control" id="model" />
+            <div className="form-group">
+              <label htmlFor="model">Model (name of trainer)</label>
+              <input type="text" className="form-control" id="model" />
             </div>
-            <div class="form-group">
-              <label for="size">UK size</label>
-              <input type="text" class="form-control" id="size" />
+            <div className="form-group">
+              <label htmlFor="size">UK size</label>
+              <input type="number" className="form-control" id="size" />
             </div>
-            <div class="form-group">
-              <label for="instagram">
+            <div className="form-group">
+              <label htmlFor="instagram">
                 Instagram (Expect to receive an invoice within two hours)
               </label>
-              <input type="text" class="form-control" id="instagram" />
+              <input type="text" className="form-control" id="instagram" />
             </div>
             <div className="form-group">
               <label>Upload a photo</label>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile" />
-                <label class="custom-file-label" for="customFile">
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="customFile"
+                />
+                <label className="custom-file-label" htmlFor="customFile">
                   Choose file
                 </label>
               </div>
             </div>
-            <button type="submit" class="btn btn-secondary w-100">
+            <button type="submit" className="btn btn-secondary w-100">
               Send Request
             </button>
           </form>
@@ -58,4 +62,4 @@ const SourcingPage = () => (
   </Layout>
 )
 
-export default SourcingPage
+export default PageComponent

@@ -9,11 +9,11 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+const PageComponent = () => (
   <Layout>
     <SEO title="Home" />
-    <div className="container container-wide">
-      <h3>Brand Colours</h3>
+    <div className="container container-wide py-5">
+      <h4>Brand Colours</h4>
       <div className="row w-25">
         <div className="col-6">
           <div className="p-5 mb-3" style={{ background: "black" }} />
@@ -49,7 +49,7 @@ const IndexPage = () => (
           <p>#F0F0F0</p>
         </div>
       </div>
-      <h3 className="mt-4">System Colours</h3>
+      <h4 className="mt-4">System Colours</h4>
       <div className="row w-50">
         <div className="col-3">
           <div className="p-5 mb-3 bg-success" />
@@ -72,7 +72,7 @@ const IndexPage = () => (
           <p>#17A2B8</p>
         </div>
       </div>
-      <h3 className="mt-5">Typography</h3>
+      <h4 className="mt-5">Typography</h4>
       <h1>H1 - Montserrat 700</h1>
       <h2>H2 - Eurostyle 700</h2>
       <h3>H3 - Montserrat 700</h3>
@@ -81,7 +81,7 @@ const IndexPage = () => (
       <h6>H6 - Eurostyle 600</h6>
       <p>P - Eurostyle 400</p>
 
-      <h3 className="mt-5">Buttons</h3>
+      <h4 className="mt-5">Buttons</h4>
       <div className="btn btn-primary btn-lg mr-3">Click Here</div>
       <div className="btn btn-primary mr-3">Click Here</div>
       <div className="btn btn-primary btn-sm mr-5">Click Here</div>
@@ -96,7 +96,7 @@ const IndexPage = () => (
       <div className="btn btn-outline-secondary btn-lg mr-3">Click Here</div>
       <div className="btn btn-outline-secondary mr-3">Click Here</div>
       <div className="btn btn-outline-secondary btn-sm mr-3">Click Here</div>
-      <h3 className="mt-5">Forms</h3>
+      <h4 className="mt-5">Forms</h4>
       <form className="w-75">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -143,11 +143,15 @@ const IndexPage = () => (
             </label>
           </div>
         </div>
-        <div class="form-group">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck" />
-            <label class="form-check-label" for="gridCheck">
-              Checkbox text
+        <div className="form-group">
+          <div class="custom-control custom-checkbox">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="identifier"
+            />
+            <label class="custom-control-label" for="identifier">
+              Check this custom checkbox
             </label>
           </div>
         </div>
@@ -155,7 +159,7 @@ const IndexPage = () => (
           Submit Form
         </button>
       </form>
-      <h3 className="mt-5">Accordion</h3>
+      <h4 className="mt-5">Accordion</h4>
       <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
@@ -182,7 +186,7 @@ const IndexPage = () => (
   </Layout>
 )
 
-export default IndexPage
+export default PageComponent
 
 function create() {
   const dataset = {

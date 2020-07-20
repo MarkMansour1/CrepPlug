@@ -6,7 +6,7 @@ import Layout from "../components/layout"
 
 // import protection from "../img/protection.png"
 
-class ProtectionPage extends React.Component {
+class PageComponent extends React.Component {
   render() {
     return (
       <Layout>
@@ -204,4 +204,4 @@ class ProtectionPage extends React.Component {
   }
 }
 
-export default ProtectionPage
+export default PageComponent
