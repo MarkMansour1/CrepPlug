@@ -37,8 +37,12 @@ class PageComponent extends React.Component {
               <input type="password" class="form-control" id="password" />
             </div>
             <div class="form-group">
-              <label for="password">Confirm Password</label>
-              <input type="password" class="form-control" id="password" />
+              <label for="confirmpassword">Confirm Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="confirmpassword"
+              />
             </div>
             <small>
               By creating an account you agree to our{" "}

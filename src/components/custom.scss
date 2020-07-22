@@ -123,6 +123,16 @@ h6 {
   border-radius: 0;
 }
 
+.btn-light {
+  background: white;
+  border-color: white;
+
+  &:hover {
+    background: $light;
+    border-color: $light;
+  }
+}
+
 form {
   label {
     font-family: $mont;
@@ -137,6 +147,12 @@ form {
   .custom-control-label::before,
   .custom-control-label::after {
     top: 2px;
+  }
+
+  .input-group-prepend {
+    .input-group-text {
+      background: white;
+    }
   }
 }
 

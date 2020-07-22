@@ -24,21 +24,69 @@ class PageComponent extends React.Component {
             <div class="bs-stepper-header">
               <div class="step" data-target="#orderreview">
                 <button class="step-trigger">
-                  <span class="bs-stepper-circle">1</span>
+                  <span class="bs-stepper-circle">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-bag"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z"
+                      />
+                      <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
+                    </svg>
+                  </span>
                   <span class="bs-stepper-label">Cart Review</span>
                 </button>
               </div>
               <div class="line"></div>
               <div class="step" data-target="#billingdetails">
                 <button class="step-trigger">
-                  <span class="bs-stepper-circle">2</span>
+                  <span class="bs-stepper-circle">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-layout-text-window-reverse"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M2 1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M5 15V4H4v11h1zM.5 4h15V3H.5v1zM13 6.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"
+                      />
+                    </svg>
+                  </span>
                   <span class="bs-stepper-label">Billing Details</span>
                 </button>
               </div>
               <div class="line"></div>
               <div class="step" data-target="#payment">
                 <button class="step-trigger">
-                  <span class="bs-stepper-circle">3</span>
+                  <span class="bs-stepper-circle">
+                    <svg
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 16 16"
+                      class="bi bi-credit-card"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"
+                      />
+                      <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
+                    </svg>
+                  </span>
                   <span class="bs-stepper-label">Payment</span>
                 </button>
               </div>
@@ -46,12 +94,11 @@ class PageComponent extends React.Component {
             <div class="bs-stepper-content">
               <div id="orderreview" class="content">
                 <h2>Cart</h2>
-
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary mt-3"
                   onClick={() => this.stepper.next()}
                 >
-                  Checkout
+                  Next
                 </button>
               </div>
               <div id="billingdetails" class="content">
@@ -170,15 +217,14 @@ class PageComponent extends React.Component {
                     </ul>
                   </div>
                 </div>
-
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary mt-3 mr-3"
                   onClick={() => this.stepper.previous()}
                 >
                   Previous
                 </button>
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary mt-3"
                   onClick={() => this.stepper.next()}
                 >
                   Next
@@ -187,12 +233,12 @@ class PageComponent extends React.Component {
               <div id="payment" class="content text-center">
                 <h2>Payment here</h2>
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary mt-3 mr-3"
                   onClick={() => this.stepper.previous()}
                 >
                   Previous
                 </button>
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary mt-3">
                   PayPal
                 </button>
               </div>

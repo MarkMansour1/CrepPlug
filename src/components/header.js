@@ -119,7 +119,7 @@ class Header extends React.Component {
                       />
                     </svg>
                   </Link>
-                  <Link to="/login">
+                  <Link to="/account">
                     <svg
                       width="1.5rem"
                       height="1.5rem"

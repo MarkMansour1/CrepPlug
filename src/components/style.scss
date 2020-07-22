@@ -46,10 +46,14 @@
   align-items: center;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
+  max-width: 350px;
 
   &:hover {
     text-decoration: none;
-    color: $gray;
+
+    .welcome-text span {
+      color: $secondary;
+    }
   }
 
   .profile-picture {
@@ -71,15 +75,27 @@
       font-family: $mont;
       display: block;
       font-size: 1.5rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
   }
 }
 
 .account-nav {
+  max-width: 350px;
+
   a {
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    transition: all 0.2s ease;
+    border: 3px solid white;
+
+    &:hover {
+      color: $secondary;
+      text-decoration: none;
+    }
 
     svg {
       width: 1.5rem;
@@ -94,6 +110,8 @@
 
     &.active {
       color: $secondary;
+      border-left: 3px solid $secondary;
+      border-radius: 3px;
     }
   }
 }
