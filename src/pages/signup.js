@@ -56,6 +56,12 @@ class PageComponent extends React.Component {
                 Sign Up
               </button>
             </Link>
+            <p className="mt-4">
+              Already have an account?{" "}
+              <Link to="/login" className="text-underline">
+                Log in here.
+              </Link>
+            </p>
           </form>
         </div>
       </Layout>

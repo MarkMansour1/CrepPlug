@@ -33,7 +33,7 @@ class PageComponent extends React.Component {
             </div>
             <div class="form-group">
               <label for="reason">Reason for request</label>
-              <input type="number" class="form-control" id="reason" />
+              <input type="text" class="form-control" id="reason" />
             </div>
             <div class="form-group">
               <label for="message">Your message</label>
