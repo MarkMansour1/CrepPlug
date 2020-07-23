@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 
 const AccountSection = () => {
-  const [user, setUser] = useState(0)
-  const [first, setFirst] = useState(1)
-  const [last, setLast] = useState(2)
+  const [user, setUser] = useState("")
+  const [first, setFirst] = useState("")
+  const [last, setLast] = useState("")
 
   useEffect(() => {
     fetch(`https://designsuite.pro/wp-json/wp/v2/users/me`, {
@@ -25,7 +25,7 @@ const AccountSection = () => {
       <h2>Settings</h2>
       <form>
         <div className="form-group">
-          <label for="username">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             className="form-control"
@@ -37,24 +37,24 @@ const AccountSection = () => {
         </div>
         <div className="form-row">
           <div className="col-6">
-            <label for="firstname">First Name</label>
+            <label htmlFor="firstname">First Name</label>
             <input
               type="text"
               className="form-control"
               id="firstname"
               name="firstname"
-              onChange={event => setUser(event.target.value)}
+              onChange={event => setFirst(event.target.value)}
               value={first}
             />
           </div>
           <div className="col-6">
-            <label for="lastname">Last Name</label>
+            <label htmlFor="lastname">Last Name</label>
             <input
               type="text"
               className="form-control"
               id="lastname"
               name="lastname"
-              onChange={event => setUser(event.target.value)}
+              onChange={event => setLast(event.target.value)}
               value={last}
             />
           </div>

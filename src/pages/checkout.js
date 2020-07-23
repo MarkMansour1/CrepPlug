@@ -11,9 +11,7 @@ class PageComponent extends React.Component {
         <SEO title="Cart" />
         <div className="container py-5">
           <h2 className="mb-4">Checkout</h2>
-          <div className="row">
-            
-          </div>
+          <div className="row"></div>
         </div>
       </Layout>
     )
@@ -26,8 +24,8 @@ class CountrySelect extends React.Component {
   render() {
     return (
       <>
-        <label for="inputState">Country</label>
-        <select id="inputState" class="form-control">
+        <label htmlFor="inputState">Country</label>
+        <select id="inputState" className="form-control">
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>

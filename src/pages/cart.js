@@ -20,16 +20,16 @@ class PageComponent extends React.Component {
       <Layout>
         <SEO title="Cart" />
         <div className="container py-5">
-          <div id="stepper1" class="bs-stepper">
-            <div class="bs-stepper-header">
-              <div class="step" data-target="#orderreview">
-                <button class="step-trigger">
-                  <span class="bs-stepper-circle">
+          <div id="stepper1" className="bs-stepper">
+            <div className="bs-stepper-header">
+              <div className="step" data-target="#orderreview">
+                <button className="step-trigger">
+                  <span className="bs-stepper-circle">
                     <svg
                       width="1em"
                       height="1em"
                       viewBox="0 0 16 16"
-                      class="bi bi-bag"
+                      className="bi bi-bag"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -40,18 +40,18 @@ class PageComponent extends React.Component {
                       <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
                     </svg>
                   </span>
-                  <span class="bs-stepper-label">Cart Review</span>
+                  <span className="bs-stepper-label">Cart Review</span>
                 </button>
               </div>
-              <div class="line"></div>
-              <div class="step" data-target="#billingdetails">
-                <button class="step-trigger">
-                  <span class="bs-stepper-circle">
+              <div className="line"></div>
+              <div className="step" data-target="#billingdetails">
+                <button className="step-trigger">
+                  <span className="bs-stepper-circle">
                     <svg
                       width="1em"
                       height="1em"
                       viewBox="0 0 16 16"
-                      class="bi bi-layout-text-window-reverse"
+                      className="bi bi-layout-text-window-reverse"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -65,18 +65,18 @@ class PageComponent extends React.Component {
                       />
                     </svg>
                   </span>
-                  <span class="bs-stepper-label">Billing Details</span>
+                  <span className="bs-stepper-label">Billing Details</span>
                 </button>
               </div>
-              <div class="line"></div>
-              <div class="step" data-target="#payment">
-                <button class="step-trigger">
-                  <span class="bs-stepper-circle">
+              <div className="line"></div>
+              <div className="step" data-target="#payment">
+                <button className="step-trigger">
+                  <span className="bs-stepper-circle">
                     <svg
                       width="1em"
                       height="1em"
                       viewBox="0 0 16 16"
-                      class="bi bi-credit-card"
+                      className="bi bi-credit-card"
                       fill="currentColor"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -87,130 +87,148 @@ class PageComponent extends React.Component {
                       <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
                     </svg>
                   </span>
-                  <span class="bs-stepper-label">Payment</span>
+                  <span className="bs-stepper-label">Payment</span>
                 </button>
               </div>
             </div>
-            <div class="bs-stepper-content">
-              <div id="orderreview" class="content">
+            <div className="bs-stepper-content">
+              <div id="orderreview" className="content">
                 <h2>Cart</h2>
                 <button
-                  class="btn btn-primary mt-3"
+                  className="btn btn-primary mt-3"
                   onClick={() => this.stepper.next()}
                 >
                   Next
                 </button>
               </div>
-              <div id="billingdetails" class="content">
+              <div id="billingdetails" className="content">
                 <div className="row">
                   <div className="col-7 order-md-1 pr-5">
-                    <h5 class="text-gray mb-4">Billing Details</h5>
+                    <h5 className="text-gray mb-4">Billing Details</h5>
                     <form
-                      class="needs-validation"
+                      className="needs-validation"
                       novalidate
                       onSubmit={this.onSubmit}
                     >
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="inputEmail4">First Name</label>
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label htmlFor="inputEmail4">First Name</label>
                           <input
                             type="email"
-                            class="form-control"
+                            className="form-control"
                             id="inputEmail4"
                           />
                         </div>
-                        <div class="form-group col-md-6">
-                          <label for="inputPassword4">Last Name</label>
+                        <div className="form-group col-md-6">
+                          <label htmlFor="inputPassword4">Last Name</label>
                           <input
                             type="password"
-                            class="form-control"
+                            className="form-control"
                             id="inputPassword4"
                           />
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" class="form-control" id="email" />
+                      <div className="form-group">
+                        <label htmlFor="email">Email Address</label>
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="email"
+                        />
                       </div>
-                      <div class="form-group">
+                      <div className="form-group">
                         <CountrySelect />
                       </div>
-                      <div class="form-group">
-                        <label for="inputAddress">Address</label>
+                      <div className="form-group">
+                        <label htmlFor="inputAddress">Address</label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="inputAddress"
                         />
                       </div>
-                      <div class="form-group">
-                        <label for="inputAddress2">Address 2 (optional)</label>
+                      <div className="form-group">
+                        <label htmlFor="inputAddress2">
+                          Address 2 (optional)
+                        </label>
                         <input
                           type="text"
-                          class="form-control"
+                          className="form-control"
                           id="inputAddress2"
                         />
                       </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="city">City</label>
-                          <input type="text" class="form-control" id="city" />
-                        </div>
-                        <div class="form-group col-md-6">
-                          <label for="postcode">Postcode</label>
+                      <div className="form-row">
+                        <div className="form-group col-md-6">
+                          <label htmlFor="city">City</label>
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
+                            id="city"
+                          />
+                        </div>
+                        <div className="form-group col-md-6">
+                          <label htmlFor="postcode">Postcode</label>
+                          <input
+                            type="text"
+                            className="form-control"
                             id="postcode"
                           />
                         </div>
                       </div>
-                      <hr class="mb-4" />
-                      <div class="custom-control custom-checkbox">
+                      <hr className="mb-4" />
+                      <div className="custom-control custom-checkbox">
                         <input
                           type="checkbox"
-                          class="custom-control-input"
+                          className="custom-control-input"
                           id="differentaddress"
                         />
                         <label
-                          class="custom-control-label"
-                          for="differentaddress"
+                          className="custom-control-label"
+                          htmlFor="differentaddress"
                         >
                           Ship to a different address
                         </label>
                       </div>
                       {/* second address here */}
-                      <hr class="mb-4" />
+                      <hr className="mb-4" />
                       <div clasName="form-group">
-                        <label for="notes">Order notes (optional)</label>
-                        <textarea class="form-control" id="notes" rows="3" />
+                        <label htmlFor="notes">Order notes (optional)</label>
+                        <textarea
+                          className="form-control"
+                          id="notes"
+                          rows="3"
+                        />
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-5 order-md-2 mb-4">
-                    <h5 class="text-gray mb-4">Your Order</h5>
-                    <ul class="list-group mb-3">
-                      <li class="list-group-item d-flex justify-content-between">
+                  <div className="col-md-5 order-md-2 mb-4">
+                    <h5 className="text-gray mb-4">Your Order</h5>
+                    <ul className="list-group mb-3">
+                      <li className="list-group-item d-flex justify-content-between">
                         <div>
-                          <h6 class="my-0">Product name</h6>
-                          <small class="text-muted">Brief description</small>
+                          <h6 className="my-0">Product name</h6>
+                          <small className="text-muted">
+                            Brief description
+                          </small>
                         </div>
-                        <span class="text-muted">£120</span>
+                        <span className="text-muted">£120</span>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between">
+                      <li className="list-group-item d-flex justify-content-between">
                         <div>
-                          <h6 class="my-0">Second product</h6>
-                          <small class="text-muted">Brief description</small>
+                          <h6 className="my-0">Second product</h6>
+                          <small className="text-muted">
+                            Brief description
+                          </small>
                         </div>
-                        <span class="text-muted">£40</span>
+                        <span className="text-muted">£40</span>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between">
+                      <li className="list-group-item d-flex justify-content-between">
                         <div>
-                          <h6 class="my-0">Shipping</h6>
+                          <h6 className="my-0">Shipping</h6>
                         </div>
-                        <span class="text-muted">£3.99</span>
+                        <span className="text-muted">£3.99</span>
                       </li>
-                      <li class="list-group-item d-flex justify-content-between">
+                      <li className="list-group-item d-flex justify-content-between">
                         <span>Total (GBP)</span>
                         <strong>£163.99</strong>
                       </li>
@@ -218,27 +236,27 @@ class PageComponent extends React.Component {
                   </div>
                 </div>
                 <button
-                  class="btn btn-primary mt-3 mr-3"
+                  className="btn btn-primary mt-3 mr-3"
                   onClick={() => this.stepper.previous()}
                 >
                   Previous
                 </button>
                 <button
-                  class="btn btn-primary mt-3"
+                  className="btn btn-primary mt-3"
                   onClick={() => this.stepper.next()}
                 >
                   Next
                 </button>
               </div>
-              <div id="payment" class="content text-center">
+              <div id="payment" className="content text-center">
                 <h2>Payment here</h2>
                 <button
-                  class="btn btn-primary mt-3 mr-3"
+                  className="btn btn-primary mt-3 mr-3"
                   onClick={() => this.stepper.previous()}
                 >
                   Previous
                 </button>
-                <button type="submit" class="btn btn-primary mt-3">
+                <button type="submit" className="btn btn-primary mt-3">
                   PayPal
                 </button>
               </div>
@@ -256,8 +274,8 @@ class CountrySelect extends React.Component {
   render() {
     return (
       <>
-        <label for="inputState">Country</label>
-        <select id="inputState" class="form-control">
+        <label htmlFor="inputState">Country</label>
+        <select id="inputState" className="form-control">
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
           <option value="Algeria">Algeria</option>

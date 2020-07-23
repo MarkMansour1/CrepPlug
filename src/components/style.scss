@@ -50,15 +50,11 @@
 
   &:hover {
     text-decoration: none;
-
-    .welcome-text span {
-      color: $secondary;
-    }
   }
 
   .profile-picture {
     border-radius: 50%;
-    background: $gray;
+    background: $gray-dark;
     width: 4rem;
     height: 4rem;
     display: flex;

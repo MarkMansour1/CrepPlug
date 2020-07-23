@@ -22,19 +22,19 @@ const PageComponent = () => (
         <div className="col-5 offset-1">
           <form>
             <div className="form-group">
-              <label htmlFor="email">Email address</label>
+              <label htmlhtmlFor="email">Email address</label>
               <input type="email" className="form-control" id="email" />
             </div>
             <div className="form-group">
-              <label htmlFor="model">Model (name of trainer)</label>
+              <label htmlhtmlFor="model">Model (name of trainer)</label>
               <input type="text" className="form-control" id="model" />
             </div>
             <div className="form-group">
-              <label htmlFor="size">UK size</label>
+              <label htmlhtmlFor="size">UK size</label>
               <input type="number" className="form-control" id="size" />
             </div>
             <div className="form-group">
-              <label htmlFor="instagram">
+              <label htmlhtmlFor="instagram">
                 Instagram (Expect to receive an invoice within two hours)
               </label>
               <input type="text" className="form-control" id="instagram" />
@@ -47,7 +47,7 @@ const PageComponent = () => (
                   className="custom-file-input"
                   id="customFile"
                 />
-                <label className="custom-file-label" htmlFor="customFile">
+                <label className="custom-file-label" htmlhtmlFor="customFile">
                   Choose file
                 </label>
               </div>

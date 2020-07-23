@@ -98,64 +98,68 @@ const PageComponent = () => (
       <div className="btn btn-outline-secondary btn-sm mr-3">Click Here</div>
       <h4 className="mt-5">Forms</h4>
       <form className="w-75">
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">First Name</label>
-            <input type="email" class="form-control" id="inputEmail4" />
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="inputEmail4">First Name</label>
+            <input type="email" className="form-control" id="inputEmail4" />
           </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Last Name</label>
-            <input type="password" class="form-control" id="inputPassword4" />
+          <div className="form-group col-md-6">
+            <label htmlFor="inputPassword4">Last Name</label>
+            <input
+              type="password"
+              className="form-control"
+              id="inputPassword4"
+            />
           </div>
         </div>
-        <div class="form-group">
-          <label for="inputAddress">Address</label>
-          <input type="text" class="form-control" id="inputAddress" />
+        <div className="form-group">
+          <label htmlFor="inputAddress">Address</label>
+          <input type="text" className="form-control" id="inputAddress" />
         </div>
-        <div class="form-group">
-          <label for="inputAddress2">Address 2</label>
-          <input type="text" class="form-control" id="inputAddress2" />
+        <div className="form-group">
+          <label htmlFor="inputAddress2">Address 2</label>
+          <input type="text" className="form-control" id="inputAddress2" />
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity" />
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="inputCity">City</label>
+            <input type="text" className="form-control" id="inputCity" />
           </div>
-          <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
+          <div className="form-group col-md-4">
+            <label htmlFor="inputState">State</label>
+            <select id="inputState" className="form-control">
               <option>Option 1</option>
               <option>Option 2</option>
               <option>Option 3</option>
             </select>
           </div>
-          <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip" />
+          <div className="form-group col-md-2">
+            <label htmlFor="inputZip">Zip</label>
+            <input type="text" className="form-control" id="inputZip" />
           </div>
         </div>
         <div className="form-group w-25">
           <label>Upload a photo</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile" />
-            <label class="custom-file-label" for="customFile">
+          <div className="custom-file">
+            <input type="file" className="custom-file-input" id="customFile" />
+            <label className="custom-file-label" htmlFor="customFile">
               Choose file
             </label>
           </div>
         </div>
         <div className="form-group">
-          <div class="custom-control custom-checkbox">
+          <div className="custom-control custom-checkbox">
             <input
               type="checkbox"
-              class="custom-control-input"
+              className="custom-control-input"
               id="identifier"
             />
-            <label class="custom-control-label" for="identifier">
+            <label className="custom-control-label" htmlFor="identifier">
               Check this custom checkbox
             </label>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit Form
         </button>
       </form>
@@ -187,30 +191,3 @@ const PageComponent = () => (
 )
 
 export default PageComponent
-
-function create() {
-  const dataset = {
-    title: "My test",
-    status: "draft",
-    content: "lalala",
-    excerpt: "Read this awesome post",
-    slug: "new-test-post",
-  }
-
-  fetch("https://designsuite.pro/wp-json/wp/v2/posts/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk0Njc0ODkwLCJuYmYiOjE1OTQ2NzQ4OTAsImV4cCI6MTU5NTI3OTY5MCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.1T_RkyP8GO2TN4EYEYCk8mzreg8JFuXoV2kmuk6jaSA",
-    },
-    body: JSON.stringify(dataset),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}

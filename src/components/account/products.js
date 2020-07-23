@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
+import { getUser } from "../../services/auth"
 
 const AccountSection = () => {
   const [data, setData] = useState(0)
+  const user = getUser()
 
   useEffect(() => {
-    fetch(`https://designsuite.pro/wp-json/wc/v3/products?per_page=100`, {
+    fetch(`https://designsuite.pro/wp-json/wcfmmp/v1/products/`, {
       headers: {
-        Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk1NDEwNjA1LCJuYmYiOjE1OTU0MTA2MDUsImV4cCI6MTU5NjAxNTQwNSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.G4UVrydLcSEXY165AauqjuA8QXwl9RgCLgunoV6E0_4",
+        Authorization: `Bearer ${user.token}`,
       },
     })
       .then(response => response.json())
@@ -22,7 +23,7 @@ const AccountSection = () => {
       <div className="row">
         {data
           ? data.map(product => (
-              <div className="col-3">
+              <div className="col-4">
                 <img
                   src={
                     product.images && product.images[0]
@@ -30,7 +31,7 @@ const AccountSection = () => {
                       : null
                   }
                   alt=""
-                  className="w-100 h-50 mb-3"
+                  className="w-100 h-50"
                 />
                 <p>{product.name}</p>
                 <strong>£{product.price}</strong>

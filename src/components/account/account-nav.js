@@ -1,22 +1,25 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
+import { logout } from "../../services/auth"
 
 class AccountNav extends React.Component {
   render() {
+    const user = this.props.user
+
     return (
       <>
         <Link to="/account" className="account-nav-header">
-          <div className="profile-picture">MM</div>
+          <div className="profile-picture">{user.username[0]}</div>
           <div className="welcome-text">
             Welcome,
-            <span>Mark Mansour</span>
+            <span>{user.username}</span>
           </div>
         </Link>
         <div className="account-nav">
           <Link activeClassName="active" to="/account/add-product">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-plus-square"
+              className="bi bi-plus-square"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -38,7 +41,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/products">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-archive"
+              className="bi bi-archive"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -56,7 +59,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/orders">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-bag-check"
+              className="bi bi-bag-check"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -75,7 +78,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/messages">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-inbox"
+              className="bi bi-inbox"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -93,7 +96,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/settings">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-layout-text-window-reverse"
+              className="bi bi-layout-text-window-reverse"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -111,7 +114,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/payment">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-credit-card"
+              className="bi bi-credit-card"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -126,7 +129,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/addresses">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-folder2-open"
+              className="bi bi-folder2-open"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -140,7 +143,7 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account/reviews">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-chat-right-text"
+              className="bi bi-chat-right-text"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -155,6 +158,34 @@ class AccountNav extends React.Component {
             </svg>
             <div>Reviews</div>
           </Link>
+          <a
+            onClick={event => {
+              event.preventDefault()
+              logout(() => navigate(`/login`))
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <svg
+              viewBox="0 0 16 16"
+              className="bi bi-box-arrow-left"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.354 11.354a.5.5 0 0 0 0-.708L1.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M11.5 8a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0 0 1h9a.5.5 0 0 0 .5-.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M14 13.5a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v1.5a.5.5 0 0 0 1 0V4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-1 0V12A1.5 1.5 0 0 0 7 13.5h7z"
+              />
+            </svg>
+            <div>Logout</div>
+          </a>
         </div>
       </>
     )

@@ -353,8 +353,9 @@ ul {
     height: 50px;
     align-items: center;
 
-    img {
+    svg {
       height: 25px;
+      fill: black;
     }
   }
 
@@ -367,7 +368,6 @@ ul {
 $headerbg: white;
 $headertext: black;
 $headerborder: 1px solid $light;
-$filter: none;
 $formbg: white;
 $formborder: 1px solid $light;
 $formborderfocus: 1px solid $gray;
@@ -377,7 +377,6 @@ $headersecondarybg: white;
 $headerbg: $dark;
 $headertext: white;
 $headerborder: none;
-$filter: invert(1);
 $formbg: $gray-dark;
 $formborder: none;
 $formborderfocus: none;
@@ -431,9 +430,9 @@ header {
         height: 50px;
         align-items: center;
 
-        img {
-          filter: $filter;
+        svg {
           height: 25px;
+          fill: $headertext;
         }
       }
 

@@ -1,11 +1,32 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
+import { handleLogin, isLoggedIn } from "../services/auth"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 class PageComponent extends React.Component {
+  state = {
+    username: ``,
+    password: ``,
+  }
+
+  handleUpdate = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    handleLogin(this.state)
+  }
+
   render() {
+    if (isLoggedIn()) {
+      navigate(`/account`)
+    }
+
     return (
       <Layout minimal={true}>
         <SEO title="Login" />
@@ -18,24 +39,39 @@ class PageComponent extends React.Component {
               SIGNUP
             </Link>
           </div>
-          <form>
+          <form
+            method="post"
+            onSubmit={event => {
+              this.handleSubmit(event)
+            }}
+          >
             <h2 className="text-gray-dark">Log In</h2>
-            <div class="form-group">
-              <label for="email">Username or Email address</label>
-              <input type="email" class="form-control" id="email" />
+            <div className="form-group">
+              <label htmlFor="username">Username or Email address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                name="username"
+                onChange={this.handleUpdate}
+              />
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" />
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                onChange={this.handleUpdate}
+              />
             </div>
             <Link to="/" className="text-underline">
               <small>Forgot your password?</small>
             </Link>
-            <Link to="/account">
-              <button type="submit" class="btn btn-primary w-100">
-                Log In
-              </button>
-            </Link>
+            <button type="submit" className="btn btn-primary w-100">
+              Log In
+            </button>
             <p className="mt-4">
               New to CrepPlug?{" "}
               <Link to="/signup" className="text-underline">

@@ -23,32 +23,36 @@ class PageComponent extends React.Component {
             .
           </p>
           <form>
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" />
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input type="email" className="form-control" id="email" />
             </div>
-            <div class="form-group">
-              <label for="listing">Listing URL (Optional)</label>
-              <input type="text" class="form-control" id="listing" />
+            <div className="form-group">
+              <label htmlFor="listing">Listing URL (Optional)</label>
+              <input type="text" className="form-control" id="listing" />
             </div>
-            <div class="form-group">
-              <label for="reason">Reason for request</label>
-              <input type="text" class="form-control" id="reason" />
+            <div className="form-group">
+              <label htmlFor="reason">Reason for request</label>
+              <input type="text" className="form-control" id="reason" />
             </div>
-            <div class="form-group">
-              <label for="message">Your message</label>
-              <textarea class="form-control" id="message" rows="3" />
+            <div className="form-group">
+              <label htmlFor="message">Your message</label>
+              <textarea className="form-control" id="message" rows="3" />
             </div>
             <div className="form-group">
               <label>Upload a photo</label>
-              <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile" />
-                <label class="custom-file-label" for="customFile">
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="customFile"
+                />
+                <label className="custom-file-label" htmlFor="customFile">
                   Choose file
                 </label>
               </div>
             </div>
-            <button type="submit" class="btn btn-secondary w-100">
+            <button type="submit" className="btn btn-secondary w-100">
               Send Message
             </button>
           </form>

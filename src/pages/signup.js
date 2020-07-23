@@ -20,27 +20,27 @@ class PageComponent extends React.Component {
         <div className="layout-minimal">
           <form>
             <h2 className="text-gray-dark">Sign Up</h2>
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" />
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input type="text" className="form-control" id="username" />
             </div>
-            <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="email" />
+            <div className="form-group">
+              <label htmlFor="email">Email address</label>
+              <input type="email" className="form-control" id="email" />
             </div>
-            <div class="form-group">
-              <label for="size">Shoe Size</label>
-              <input type="number" class="form-control" id="size" />
+            <div className="form-group">
+              <label htmlFor="size">Shoe Size</label>
+              <input type="number" className="form-control" id="size" />
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" />
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input type="password" className="form-control" id="password" />
             </div>
-            <div class="form-group">
-              <label for="confirmpassword">Confirm Password</label>
+            <div className="form-group">
+              <label htmlFor="confirmpassword">Confirm Password</label>
               <input
                 type="password"
-                class="form-control"
+                className="form-control"
                 id="confirmpassword"
               />
             </div>
@@ -56,7 +56,7 @@ class PageComponent extends React.Component {
               .
             </small>
             <Link to="/account">
-              <button type="submit" class="btn btn-primary w-100">
+              <button type="submit" className="btn btn-primary w-100">
                 Sign Up
               </button>
             </Link>

@@ -1,129 +1,146 @@
 import React from "react"
 
-import Stepper from "bs-stepper"
+function create(dataset) {
+  fetch("https://designsuite.pro/wp-json/wcfmmp/v1/products/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk1NTI2NzM5LCJuYmYiOjE1OTU1MjY3MzksImV4cCI6MTU5NjEzMTUzOSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.8jUmZRUF1shX0yh9vdWnUFSY_2aiIDi4k1PS7UQ3WJU",
+    },
+    body: JSON.stringify(dataset),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 
 class AccountSection extends React.Component {
-  componentDidMount() {
-    this.stepper = new Stepper(document.querySelector("#stepper1"), {
-      linear: false,
+  constructor(props) {
+    super(props)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  state = {
+    name: "",
+    type: "simple",
+    regular_price: "",
+    sale_price: "",
+    short_description: "",
+    featured_image: { src: "" },
+  }
+
+  handleUpdate = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
     })
+  }
+
+  handlePhotoUpload = event => {
+    var image = event.target.files[0]
+
+    this.setState({
+      featured_image: { src: image },
+    })
+
+    console.log(image)
   }
 
   onSubmit(e) {
     e.preventDefault()
+    create(this.state)
   }
 
   render() {
     return (
-      <div style={{ maxWidth: "992px", margin: "0 auto" }}>
-        <div id="stepper1" class="bs-stepper">
-          <div class="bs-stepper-header">
-            <div class="step" data-target="#details">
-              <button class="step-trigger">
-                <span class="bs-stepper-circle">1</span>
-                <span class="bs-stepper-label">Product Info</span>
-              </button>
+      <div>
+        <form onSubmit={this.onSubmit}>
+          <div id="details" className="form-group">
+            <label for="name">Product Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              onChange={this.handleUpdate}
+            />
+          </div>
+          <div className="form-row">
+            <div className="form-group col-md-6">
+              <label htmlFor="regular_price">Price</label>
+              <input
+                type="number"
+                className="form-control"
+                id="regular_price"
+                name="regular_price"
+                onChange={this.handleUpdate}
+              />
             </div>
-            <div class="line"></div>
-            <div class="step" data-target="#categories">
-              <button class="step-trigger">
-                <span class="bs-stepper-circle">2</span>
-                <span class="bs-stepper-label">Categories</span>
-              </button>
-            </div>
-            <div class="line"></div>
-            <div class="step" data-target="#images">
-              <button class="step-trigger">
-                <span class="bs-stepper-circle">3</span>
-                <span class="bs-stepper-label">Images</span>
-              </button>
+            <div className="form-group col-md-6">
+              <label htmlFor="inputPassword4">Sale Price</label>
+              <input
+                type="number"
+                className="form-control"
+                id="inputPassword4"
+                onChange={this.handleUpdate}
+              />
             </div>
           </div>
-          <div class="bs-stepper-content">
-            <div id="details" class="content">
-              <form>
-                <div className="form-group">
-                  <label>Name</label>
-                  <input type="text" className="form-control" />
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputEmail4">Price</label>
-                    <input type="email" class="form-control" id="inputEmail4" />
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword4">Sale Price</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="inputPassword4"
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea rows="3" className="form-control" />
-                </div>
-              </form>
-              <button
-                class="btn btn-primary mt-3"
-                onClick={() => this.stepper.next()}
-              >
-                Next
-              </button>
-            </div>
-            <div id="categories" class="content">
-              <form>
-                <div className="form-group">
-                  <label>Categories</label>
-                  <select id="inputState" class="form-control">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Colour</label>
-                  <select id="inputState" class="form-control">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label for="inputState">Size</label>
-                  <select id="inputState" class="form-control">
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                  </select>
-                </div>
-              </form>
-              <button
-                class="btn btn-primary mt-3 mr-3"
-                onClick={() => this.stepper.previous()}
-              >
-                Previous
-              </button>
-              <button
-                class="btn btn-primary mt-3"
-                onClick={() => this.stepper.next()}
-              >
-                Next
-              </button>
-            </div>
-            <div id="images" class="content">
-              <div className="border p-5"></div>
-              <button
-                class="btn btn-primary mt-3 mr-3"
-                onClick={() => this.stepper.previous()}
-              >
-                Previous
-              </button>
-              <button class="btn btn-primary mt-3">Add Product</button>
+          <div className="form-group">
+            <label for="short_description">Description</label>
+            <textarea
+              rows="3"
+              className="form-control"
+              id="short_description"
+              name="short_description"
+              onChange={this.handleUpdate}
+            />
+          </div>
+          <div className="form-group">
+            <label>Categories</label>
+            <select id="inputState" className="form-control">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Colour</label>
+            <select id="inputState" className="form-control">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+          <div id="categories" className="form-group">
+            <label htmlFor="inputState">Size</label>
+            <select id="inputState" className="form-control">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+          <div className="form-group mb-5">
+            <label>Upload a photo</label>
+            <div className="custom-file">
+              <input
+                type="file"
+                className="custom-file-input"
+                id="featured_image"
+                name="featured_image"
+                onChange={this.handlePhotoUpload}
+              />
+              <label className="custom-file-label" htmlFor="featured_image">
+                Choose file
+              </label>
             </div>
           </div>
-        </div>
+          <button className="btn btn-primary mt-3">Add Product</button>
+        </form>
       </div>
     )
   }

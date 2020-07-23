@@ -1,24 +1,32 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import { Router } from "@reach/router"
+import { isLoggedIn, getUser } from "../services/auth"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import AccountNav from "../components/account/nav"
+import AccountNav from "../components/account/account-nav"
 import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Orders from "../components/account/orders"
 import Settings from "../components/account/settings"
 
 const PageComponent = () => {
+  if (isLoggedIn()) {
+    var user = getUser()
+  } else {
+    navigate("/login")
+    return null
+  }
+
   return (
     <Layout>
       <SEO title="Account" />
-      <div className="container container-wide pt-5">
+      <div className="container pt-5">
         <div className="row" style={{ position: "relative" }}>
           <div className="col-4" style={{ position: "sticky", top: "0" }}>
-            <AccountNav />
+            <AccountNav user={user} />
           </div>
           <div className="col-8">
             <Router>
