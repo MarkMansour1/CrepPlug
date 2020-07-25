@@ -41,13 +41,14 @@
   }
 }
 
-.account-nav-header {
+.account-header {
+  background: $light;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
-  max-width: 350px;
 
   &:hover {
     text-decoration: none;

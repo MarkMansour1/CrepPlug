@@ -25,6 +25,14 @@ const PageComponent = () => {
     <Layout>
       <SEO title="Account" />
       <div className="container pt-5">
+        <Link to="/account" className="account-header">
+          <div className="profile-picture">{user.username[0]}</div>
+          <div className="welcome-text">
+            Welcome,
+            <span>{user.username}</span>
+          </div>
+          <div style={{ flexGrow: 1 }} />
+        </Link>
         <div className="row" style={{ position: "relative" }}>
           <div className="col-4" style={{ position: "sticky", top: "0" }}>
             <AccountNav user={user} />

@@ -1,13 +1,13 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../components/layout-minimal"
 import SEO from "../components/seo"
 
 class PageComponent extends React.Component {
   render() {
     return (
-      <Layout minimal={true}>
+      <Layout>
         <SEO title="Contact Us" />
         <div className="layout-minimal">
           <h2 className="text-gray-dark">Contact Us</h2>

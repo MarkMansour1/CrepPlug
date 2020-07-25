@@ -4,17 +4,8 @@ import { logout } from "../../services/auth"
 
 class AccountNav extends React.Component {
   render() {
-    const user = this.props.user
-
     return (
       <>
-        <Link to="/account" className="account-nav-header">
-          <div className="profile-picture">{user.username[0]}</div>
-          <div className="welcome-text">
-            Welcome,
-            <span>{user.username}</span>
-          </div>
-        </Link>
         <div className="account-nav">
           <Link activeClassName="active" to="/account/add-product">
             <svg
