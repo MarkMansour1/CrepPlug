@@ -44,6 +44,7 @@
 .account-nav-header {
   display: flex;
   align-items: center;
+  padding: 1rem 0;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
   max-width: 350px;
@@ -55,8 +56,8 @@
   .profile-picture {
     border-radius: 50%;
     background: $gray-dark;
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,6 +68,8 @@
   }
 
   .welcome-text {
+    font-size: 0.9rem;
+
     span {
       font-family: $mont;
       display: block;
@@ -84,9 +87,9 @@
     display: flex;
     align-items: center;
     padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
+    margin: 1rem 0;
     transition: all 0.2s ease;
-    border: 3px solid white;
+    border-left: 3px solid white;
 
     &:hover {
       color: $secondary;
@@ -94,20 +97,21 @@
     }
 
     svg {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.25rem;
+      height: 1.25rem;
     }
 
     div {
-      margin-left: 1.5rem;
+      margin-left: 1rem;
       font-family: $mont;
-      font-weight: 500;
+      font-weight: 400;
+      letter-spacing: 1px;
     }
 
     &.active {
       color: $secondary;
       border-left: 3px solid $secondary;
-      border-radius: 3px;
+      border-radius: 0;
     }
   }
 }

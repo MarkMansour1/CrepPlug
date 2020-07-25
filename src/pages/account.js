@@ -7,6 +7,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import AccountNav from "../components/account/account-nav"
+import Dashboard from "../components/account/dashboard"
 import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Orders from "../components/account/orders"
@@ -30,6 +31,7 @@ const PageComponent = () => {
           </div>
           <div className="col-8">
             <Router>
+              <Dashboard path="account" />
               <Products path="account/products" />
               <Orders path="account/orders" />
               <Settings path="account/settings" />

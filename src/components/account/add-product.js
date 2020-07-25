@@ -1,12 +1,12 @@
 import React from "react"
+import { getUser } from "../../services/auth"
 
-function create(dataset) {
+function create(dataset, bearer) {
   fetch("https://designsuite.pro/wp-json/wcfmmp/v1/products/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk1NTI2NzM5LCJuYmYiOjE1OTU1MjY3MzksImV4cCI6MTU5NjEzMTUzOSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.8jUmZRUF1shX0yh9vdWnUFSY_2aiIDi4k1PS7UQ3WJU",
+      Authorization: `Bearer ${bearer}`,
     },
     body: JSON.stringify(dataset),
   })
@@ -31,7 +31,7 @@ class AccountSection extends React.Component {
     regular_price: "",
     sale_price: "",
     short_description: "",
-    featured_image: { src: "" },
+    // featured_image: { src: "" },
   }
 
   handleUpdate = event => {
@@ -52,7 +52,7 @@ class AccountSection extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    create(this.state)
+    create(this.state, getUser().token)
   }
 
   render() {
@@ -132,7 +132,7 @@ class AccountSection extends React.Component {
                 className="custom-file-input"
                 id="featured_image"
                 name="featured_image"
-                onChange={this.handlePhotoUpload}
+                // onChange={this.handlePhotoUpload}
               />
               <label className="custom-file-label" htmlFor="featured_image">
                 Choose file
