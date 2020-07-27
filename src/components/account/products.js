@@ -18,27 +18,24 @@ const AccountSection = () => {
   }, [])
 
   return (
-    <div>
-      <h2>Products</h2>
-      <div className="row">
-        {data
-          ? data.map(product => (
-              <div className="col-4">
-                <img
-                  src={
-                    product.images && product.images[0]
-                      ? product.images[0].src
-                      : null
-                  }
-                  alt=""
-                  className="w-100 h-50"
-                />
-                <p>{product.name}</p>
-                <strong>£{product.price}</strong>
-              </div>
-            ))
-          : false}
-      </div>
+    <div className="row">
+      {data
+        ? data.map(product => (
+            <div className="col-4">
+              <img
+                src={
+                  product.images && product.images[0]
+                    ? product.images[0].src
+                    : null
+                }
+                alt=""
+                className="w-100 h-50"
+              />
+              <p>{product.name}</p>
+              <strong>£{product.price}</strong>
+            </div>
+          ))
+        : false}
     </div>
   )
 }

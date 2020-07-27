@@ -42,11 +42,9 @@
 }
 
 .account-header {
-  background: $light;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
 
@@ -57,8 +55,8 @@
   .profile-picture {
     border-radius: 50%;
     background: $gray-dark;
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 4rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,7 +88,7 @@
     padding: 0.5rem 1rem;
     margin: 1rem 0;
     transition: all 0.2s ease;
-    border-left: 3px solid white;
+    border-left: 2px solid white;
 
     &:hover {
       color: $secondary;
@@ -103,7 +101,7 @@
     }
 
     div {
-      margin-left: 1rem;
+      margin-left: 1.25rem;
       font-family: $mont;
       font-weight: 400;
       letter-spacing: 1px;
@@ -111,7 +109,7 @@
 
     &.active {
       color: $secondary;
-      border-left: 3px solid $secondary;
+      border-left: 2px solid $secondary;
       border-radius: 0;
     }
   }
