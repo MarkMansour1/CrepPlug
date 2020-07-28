@@ -14,7 +14,7 @@ $dark: #222222;
 $gray-dark: #333;
 $gray: #555;
 $gray-light: #888;
-$light: #f0f0f0;
+$light: #f8f9fa;
 
 // System colours
 $success: #28a745;
@@ -117,7 +117,7 @@ h6 {
 
 .btn {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   font-family: $mont;
   border-radius: 0;
@@ -340,6 +340,26 @@ ul {
 
 // Navigation
 
+.nav-tabs {
+  .nav-link {
+    padding: 1.25rem;
+    border: none;
+    border-radius: 0;
+    font-family: $mont;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+
+    &.active {
+      margin: 0;
+      background: $light;
+      border: none;
+    }
+  }
+}
+
 // Navbar
 .minimal-header {
   display: flex;
@@ -367,7 +387,7 @@ ul {
 // Light theme
 $headerbg: white;
 $headertext: black;
-$headerborder: 1px solid $light;
+$headerborder: 2px solid $light;
 $formbg: white;
 $formborder: 1px solid $light;
 $formborderfocus: 1px solid $gray;

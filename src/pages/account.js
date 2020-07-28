@@ -31,7 +31,7 @@ const PageComponent = () => {
             10 products | 3 reviews
           </div>
           <div style={{ flexGrow: 1 }} />
-          <div className="mr-4">
+          <div className="btn btn-light">
             Add Product
             <svg
               width="1rem"
@@ -55,7 +55,7 @@ const PageComponent = () => {
               />
             </svg>
           </div>
-          <div className="mr-4">
+          <div className="btn btn-light">
             Inbox
             <svg
               width="1em"
@@ -71,7 +71,7 @@ const PageComponent = () => {
               />
             </svg>
           </div>
-          <div>
+          <div className="btn btn-light">
             Notifications
             <svg
               width="1rem"
@@ -94,7 +94,7 @@ const PageComponent = () => {
           <div className="col-3" style={{ position: "sticky", top: "0" }}>
             <AccountNav user={user} />
           </div>
-          <div className="col-9 pl-5">
+          <div className="col-9 pl-5 pt-3">
             <Router>
               <Products path="account" />
               <Orders path="account/orders" />

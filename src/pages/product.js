@@ -4,10 +4,15 @@ import Layout from "../components/layout"
 
 class PageComponent extends React.Component {
   render() {
+    const url = typeof window !== "undefined" ? window.location.href : ""
+
     return (
       <Layout>
         <div className="container container-wide pt-5">
-          <div className="row"></div>
+          <div className="row">
+            <h2>Product</h2>
+            <h4>{url}</h4>
+          </div>
         </div>
       </Layout>
     )

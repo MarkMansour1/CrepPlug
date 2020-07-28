@@ -11,12 +11,14 @@ exports.onCreatePage = async ({ page, actions }) => {
 const path = require(`path`)
 const { slash } = require(`gatsby-core-utils`)
 
+// Creates a page for each product and post
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const {
     data: {
       allWpSimpleProduct: { nodes: allProducts },
+      allWpPost: { nodes: allPosts },
     },
   } = await graphql(`
     query {
@@ -26,10 +28,17 @@ exports.createPages = async ({ graphql, actions }) => {
           slug
         }
       }
+      allWpPost {
+        nodes {
+          id
+          uri
+        }
+      }
     }
   `)
 
   const productTemplate = path.resolve(`./src/templates/product.js`)
+  const postTemplate = path.resolve(`./src/templates/post.js`)
 
   allProducts.forEach(product => {
     createPage({
@@ -37,6 +46,16 @@ exports.createPages = async ({ graphql, actions }) => {
       component: slash(productTemplate),
       context: {
         id: product.id,
+      },
+    })
+  })
+
+  allPosts.forEach(post => {
+    createPage({
+      path: `/blog${post.uri}`,
+      component: slash(postTemplate),
+      context: {
+        id: post.id,
       },
     })
   })
