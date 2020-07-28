@@ -10,24 +10,6 @@ class AccountNav extends React.Component {
           <Link activeClassName="active" to="/account">
             <svg
               viewBox="0 0 16 16"
-              class="bi bi-person-square"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-              />
-              <path
-                fill-rule="evenodd"
-                d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-              />
-            </svg>
-            <div>Dashboard</div>
-          </Link>
-          <Link activeClassName="active" to="/account/products">
-            <svg
-              viewBox="0 0 16 16"
               className="bi bi-archive"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +24,20 @@ class AccountNav extends React.Component {
               />
             </svg>
             <div>Products</div>
+          </Link>
+          <Link activeClassName="active" to="/account/messages">
+            <svg
+              viewBox="0 0 16 16"
+              class="bi bi-envelope"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
+              />
+            </svg>
+            <div>Messages</div>
           </Link>
           <Link activeClassName="active" to="/account/orders">
             <svg
@@ -62,20 +58,6 @@ class AccountNav extends React.Component {
             </svg>
             <div>Orders</div>
           </Link>
-          <Link activeClassName="active" to="/account/messages">
-            <svg
-              viewBox="0 0 16 16"
-              class="bi bi-envelope"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
-              />
-            </svg>
-            <div>Messages</div>
-          </Link>
           <Link activeClassName="active" to="/account/settings">
             <svg
               viewBox="0 0 16 16"
@@ -93,35 +75,6 @@ class AccountNav extends React.Component {
               />
             </svg>
             <div>Settings</div>
-          </Link>
-          <Link activeClassName="active" to="/account/payment">
-            <svg
-              viewBox="0 0 16 16"
-              className="bi bi-credit-card"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"
-              />
-              <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z" />
-            </svg>
-            <div>Payment</div>
-          </Link>
-          <Link activeClassName="active" to="/account/addresses">
-            <svg
-              viewBox="0 0 16 16"
-              className="bi bi-folder2-open"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z"
-              />
-            </svg>
-            <div>Addresses</div>
           </Link>
           <Link activeClassName="active" to="/account/reviews">
             <svg

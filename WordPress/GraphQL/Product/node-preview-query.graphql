@@ -1,0 +1,508 @@
+query PREVIEW_QUERY($id: ID!) {
+  product(id: $id, idType: ID, asPreview: true) {
+    ... on VariableProduct {
+      backordersAllowed
+      crossSell(first: 100) {
+        nodes {
+          id
+        }
+      }
+      defaultAttributes(first: 100) {
+        nodes {
+          attributeId
+          id
+          name
+          value
+        }
+      }
+      height
+      length
+      manageStock
+      metaData {
+        id
+        key
+        value
+      }
+      price
+      regularPrice
+      salePrice
+      shippingClassId
+      shippingRequired
+      shippingTaxable
+      soldIndividually
+      stockQuantity
+      variations(first: 100) {
+        nodes {
+          attributes(first: 100) {
+            nodes {
+              attributeId
+              id
+              name
+              value
+            }
+          }
+          backordersAllowed
+          contentType {
+            node {
+              id
+            }
+          }
+          date
+          dateOnSaleFrom
+          dateOnSaleTo
+          description
+          downloadExpiry
+          downloadLimit
+          downloadable
+          downloads {
+            allowedFileType
+            downloadId
+            file
+            fileExists
+            fileExt
+            filePathType
+            fileType
+            name
+          }
+          hasAttributes
+          height
+          id
+          image {
+            id
+            sourceUrl
+          }
+          length
+          menuOrder
+          metaData {
+            id
+            key
+            value
+          }
+          modified
+          name
+          onSale
+          wpParent: parent {
+            id
+            ...VariableProductFragment
+          }
+          price
+          purchasable
+          purchaseNote
+          regularPrice
+          salePrice
+          shippingClass
+          shippingClasses(first: 100) {
+            nodes {
+              id
+            }
+          }
+          sku
+          status
+          stockQuantity
+          variationId
+          virtual
+          visibleProducts(first: 100) {
+            nodes {
+              id
+            }
+          }
+          weight
+          width
+        }
+      }
+      weight
+      width
+    }
+    ... on ExternalProduct {
+      buttonText
+      defaultAttributes(first: 100) {
+        nodes {
+          attributeId
+          id
+          name
+          value
+        }
+      }
+      externalUrl
+      metaData {
+        id
+        key
+        value
+      }
+      price
+      regularPrice
+      salePrice
+    }
+    ... on GroupProduct {
+      addToCartDescription
+      addToCartText
+      defaultAttributes(first: 100) {
+        nodes {
+          attributeId
+          id
+          name
+          value
+        }
+      }
+      metaData {
+        id
+        key
+        value
+      }
+      products(first: 100) {
+        nodes {
+          id
+        }
+      }
+    }
+    ... on SimpleProduct {
+      backordersAllowed
+      crossSell(first: 100) {
+        nodes {
+          id
+        }
+      }
+      defaultAttributes(first: 100) {
+        nodes {
+          attributeId
+          id
+          name
+          value
+        }
+      }
+      downloadExpiry
+      downloadLimit
+      downloadable
+      downloads {
+        allowedFileType
+        downloadId
+        file
+        fileExists
+        fileExt
+        filePathType
+        fileType
+        name
+      }
+      height
+      length
+      manageStock
+      metaData {
+        id
+        key
+        value
+      }
+      price
+      regularPrice
+      salePrice
+      shippingClassId
+      shippingRequired
+      shippingTaxable
+      soldIndividually
+      stockQuantity
+      virtual
+      weight
+      width
+    }
+    attributes(first: 100) {
+      nodes {
+        attributeId
+        id
+        name
+        options
+        position
+        variation
+        visible
+        __typename
+        ... on GlobalProductAttribute {
+          terms(first: 100) {
+            nodes {
+              id
+            }
+          }
+        }
+      }
+    }
+    averageRating
+    contentType {
+      node {
+        id
+      }
+    }
+    date
+    dateOnSaleFrom
+    dateOnSaleTo
+    description
+    featured
+    galleryImages(first: 100) {
+      nodes {
+        id
+        sourceUrl
+      }
+    }
+    globalAttributes(first: 100) {
+      nodes {
+        attributeId
+        id
+        name
+        options
+        position
+        terms(first: 100) {
+          nodes {
+            id
+          }
+        }
+        variation
+        visible
+      }
+    }
+    id
+    image {
+      id
+      sourceUrl
+    }
+    link
+    localAttributes(first: 100) {
+      nodes {
+        attributeId
+        id
+        name
+        options
+        position
+        variation
+        visible
+      }
+    }
+    menuOrder
+    modified
+    name
+    onSale
+    paSizes(first: 100) {
+      nodes {
+        id
+      }
+    }
+    wpParent: parent {
+      id
+      __typename
+    }
+    productCategories(first: 100) {
+      nodes {
+        id
+      }
+    }
+    productId
+    productTags(first: 100) {
+      nodes {
+        id
+      }
+    }
+    productTypes(first: 100) {
+      nodes {
+        id
+      }
+    }
+    purchasable
+    purchaseNote
+    related(first: 100) {
+      nodes {
+        id
+      }
+    }
+    reviewCount
+    reviews(first: 100) {
+      averageRating
+      nodes {
+        id
+      }
+    }
+    reviewsAllowed
+    shippingClasses(first: 100) {
+      nodes {
+        id
+      }
+    }
+    shortDescription
+    sku
+    slug
+    status
+    totalSales
+    upsell(first: 100) {
+      nodes {
+        id
+      }
+    }
+    visibleProducts(first: 100) {
+      nodes {
+        id
+      }
+    }
+    __typename
+  }
+}
+fragment VariableProductFragment on VariableProduct {
+  attributes(first: 100) {
+    nodes {
+      attributeId
+      id
+      name
+      options
+      position
+      variation
+      visible
+      __typename
+      ... on GlobalProductAttribute {
+        terms(first: 100) {
+          nodes {
+            id
+          }
+        }
+      }
+    }
+  }
+  averageRating
+  backordersAllowed
+  contentType {
+    node {
+      id
+    }
+  }
+  crossSell(first: 100) {
+    nodes {
+      id
+    }
+  }
+  date
+  dateOnSaleFrom
+  dateOnSaleTo
+  defaultAttributes(first: 100) {
+    nodes {
+      attributeId
+      id
+      name
+      value
+    }
+  }
+  description
+  featured
+  galleryImages(first: 100) {
+    nodes {
+      id
+      sourceUrl
+    }
+  }
+  globalAttributes(first: 100) {
+    nodes {
+      attributeId
+      id
+      name
+      options
+      position
+      terms(first: 100) {
+        nodes {
+          id
+        }
+      }
+      variation
+      visible
+    }
+  }
+  height
+  id
+  image {
+    id
+    sourceUrl
+  }
+  length
+  link
+  localAttributes(first: 100) {
+    nodes {
+      attributeId
+      id
+      name
+      options
+      position
+      variation
+      visible
+    }
+  }
+  manageStock
+  menuOrder
+  metaData {
+    id
+    key
+    value
+  }
+  modified
+  name
+  onSale
+  paSizes(first: 100) {
+    nodes {
+      id
+    }
+  }
+  wpParent: parent {
+    id
+    __typename
+  }
+  price
+  productCategories(first: 100) {
+    nodes {
+      id
+    }
+  }
+  productId
+  productTags(first: 100) {
+    nodes {
+      id
+    }
+  }
+  productTypes(first: 100) {
+    nodes {
+      id
+    }
+  }
+  purchasable
+  purchaseNote
+  regularPrice
+  related(first: 100) {
+    nodes {
+      id
+    }
+  }
+  reviewCount
+  reviews(first: 100) {
+    averageRating
+    nodes {
+      id
+    }
+  }
+  reviewsAllowed
+  salePrice
+  shippingClassId
+  shippingClasses(first: 100) {
+    nodes {
+      id
+    }
+  }
+  shippingRequired
+  shippingTaxable
+  shortDescription
+  sku
+  slug
+  soldIndividually
+  status
+  stockQuantity
+  totalSales
+  upsell(first: 100) {
+    nodes {
+      id
+    }
+  }
+  visibleProducts(first: 100) {
+    nodes {
+      id
+    }
+  }
+  weight
+  width
+}

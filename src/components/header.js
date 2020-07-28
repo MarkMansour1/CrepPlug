@@ -102,7 +102,7 @@ class Header extends React.Component {
                   </div>
                 </div>
                 <div className="header-right">
-                  <Link to="/">Buy</Link>
+                  <Link to="/shop">Buy</Link>
                   <Link to="/">Sell</Link>
                   <Link to="/wishlist">
                     <svg

@@ -1,24 +1,43 @@
+// Creates client only route for all product pages
+// This allows the page to be queried during runtime for products that haven't been built yet
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions
-  // Only update the `/app` page.
-  if (page.path.match(/^\/posts/)) {
-    // page.matchPath is a special key that's used for matching pages
-    // with corresponding routes only on the client.
-    page.matchPath = "/posts/*"
-    // Update the page.
+  if (page.path.match(/^\/product/)) {
+    page.matchPath = "/product/*"
     createPage(page)
   }
 }
 
-exports.createPages = async ({ actions: { createPage } }) => {
-  // `getPokemonData` is a function that fetches our data
-  const allPokemon = ["pikachu", "charizard", "squirtle"]
+const path = require(`path`)
+const { slash } = require(`gatsby-core-utils`)
 
-  allPokemon.forEach(pokemon => {
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+
+  const {
+    data: {
+      allWpSimpleProduct: { nodes: allProducts },
+    },
+  } = await graphql(`
+    query {
+      allWpSimpleProduct {
+        nodes {
+          id
+          slug
+        }
+      }
+    }
+  `)
+
+  const productTemplate = path.resolve(`./src/templates/product.js`)
+
+  allProducts.forEach(product => {
     createPage({
-      path: `/posts/${pokemon}/`,
-      component: require.resolve("./src/pages/faq.js"),
-      context: { pokemon },
+      path: `/product/${product.slug}/`,
+      component: slash(productTemplate),
+      context: {
+        id: product.id,
+      },
     })
   })
 }

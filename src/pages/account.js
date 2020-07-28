@@ -7,7 +7,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import AccountNav from "../components/account/account-nav"
-import Dashboard from "../components/account/dashboard"
 import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Orders from "../components/account/orders"
@@ -25,11 +24,11 @@ const PageComponent = () => {
     <Layout>
       <SEO title="Account" />
       <div className="container pt-5">
-        <Link to="/account" className="account-header">
+        <div className="account-header">
           <div className="profile-picture">{user.username[0]}</div>
           <div className="welcome-text">
-            Welcome,
             <span>{user.username}</span>
+            10 products | 3 reviews
           </div>
           <div style={{ flexGrow: 1 }} />
           <div className="mr-4">
@@ -38,7 +37,7 @@ const PageComponent = () => {
               width="1rem"
               height="1rem"
               viewBox="0 0 16 16"
-              className="bi bi-plus-square"
+              className="bi bi-plus-square ml-2"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -57,12 +56,28 @@ const PageComponent = () => {
             </svg>
           </div>
           <div className="mr-4">
+            Inbox
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 16 16"
+              class="bi bi-envelope ml-2"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
+              />
+            </svg>
+          </div>
+          <div>
             Notifications
             <svg
               width="1rem"
               height="1rem"
               viewBox="0 0 16 16"
-              class="bi bi-bell"
+              class="bi bi-bell ml-2"
               fill="currentColor"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -73,31 +88,15 @@ const PageComponent = () => {
               />
             </svg>
           </div>
-          <div>
-            Inbox
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-envelope"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
-              />
-            </svg>
-          </div>
-        </Link>
+        </div>
+        <hr className="my-4" />
         <div className="row" style={{ position: "relative" }}>
-          <div className="col-4" style={{ position: "sticky", top: "0" }}>
+          <div className="col-3" style={{ position: "sticky", top: "0" }}>
             <AccountNav user={user} />
           </div>
-          <div className="col-8">
+          <div className="col-9 pl-5">
             <Router>
-              <Dashboard path="account" />
-              <Products path="account/products" />
+              <Products path="account" />
               <Orders path="account/orders" />
               <Settings path="account/settings" />
               <AddProduct path="account/add-product" />

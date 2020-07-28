@@ -14,21 +14,26 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    // {
-    //   resolve: `gatsby-source-wordpress-experimental`,
-    //   options: {
-    //     /*
-    //      * The full URL of the WordPress site's GraphQL API.
-    //      * Example : 'https://www.example-site.com/graphql'
-    //      */
-    //     url: `https://designsuite.pro/graphql`,
-    //     type: {
-    //       Page: {
-    //         exclude: true,
-    //       },
-    //     },
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-wordpress-experimental`,
+      options: {
+        url: `https://designsuite.pro/graphql`,
+        verbose: true,
+        develop: {
+          hardCacheMediaFiles: true,
+        },
+        debug: {
+          graphql: {
+            writeQueriesToDisk: true,
+          },
+        },
+        type: {
+          Page: {
+            exclude: true,
+          },
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
