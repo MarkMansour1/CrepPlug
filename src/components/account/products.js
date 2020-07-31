@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { getUser } from "../../services/auth"
 
+import SingleProduct from "../single-product"
+
 const AccountSection = () => {
   const [data, setData] = useState(0)
   const user = getUser()
@@ -22,17 +24,7 @@ const AccountSection = () => {
       {data
         ? data.map(product => (
             <div className="col-4">
-              <img
-                src={
-                  product.images && product.images[0]
-                    ? product.images[0].src
-                    : null
-                }
-                alt=""
-                className="w-100 h-50"
-              />
-              <p>{product.name}</p>
-              <strong>£{product.price}</strong>
+              <SingleProduct data={product} />
             </div>
           ))
         : false}
