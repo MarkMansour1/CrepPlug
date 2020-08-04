@@ -84,9 +84,11 @@ const AccountSection = () => {
             />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">
-          Save Changes
-        </button>
+        <div className="text-center">
+          <button type="submit" class="btn btn-dark">
+            Save Changes
+          </button>
+        </div>
       </form>
     </div>
   )

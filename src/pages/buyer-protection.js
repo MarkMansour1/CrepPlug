@@ -104,11 +104,9 @@ class PageComponent extends React.Component {
                   <p>
                     If you do not receive your purchase or receive an item that
                     is significantly different from the listing,{" "}
-                    <a href="https://shop.crepplug.com/contact-us">
-                      contact our support team
-                    </a>{" "}
-                    and we will guide you through the process of receiving a
-                    full refund (including shipping costs) through PayPal.
+                    <Link to="/contact-us">contact our support team</Link> and
+                    we will guide you through the process of receiving a full
+                    refund (including shipping costs) through PayPal.
                   </p>
                 </div>
               </div>

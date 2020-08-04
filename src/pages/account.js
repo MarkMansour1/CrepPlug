@@ -31,7 +31,7 @@ const PageComponent = () => {
             10 products | 3 reviews
           </div>
           <div style={{ flexGrow: 1 }} />
-          <div className="btn btn-light">
+          <Link to="/account/add-product" className="btn btn-light">
             Add Product
             <svg
               width="1rem"
@@ -54,8 +54,8 @@ const PageComponent = () => {
                 d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
               />
             </svg>
-          </div>
-          <div className="btn btn-light">
+          </Link>
+          <Link to="/account/messages" className="btn btn-light">
             Inbox
             <svg
               width="1em"
@@ -70,7 +70,7 @@ const PageComponent = () => {
                 d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
               />
             </svg>
-          </div>
+          </Link>
           <div className="btn btn-light">
             Notifications
             <svg

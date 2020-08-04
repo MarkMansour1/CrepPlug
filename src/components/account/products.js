@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "gatsby"
 import { getUser } from "../../services/auth"
 
 import SingleProduct from "../single-product"
@@ -8,22 +9,43 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`https://designsuite.pro/wp-json/wcfmmp/v1/products/`, {
+    fetch(`https://designsuite.pro/graphql`, {
+      method: "POST",
       headers: {
-        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        query: `{
+          products {
+            edges {
+              node {
+                id
+                slug
+                name
+                date
+                image {
+                  sourceUrl
+                }
+              }
+            }
+          }
+        }`,
+      }),
     })
-      .then(response => response.json())
-      .then(resultData => {
-        setData(resultData)
-      })
+    .then(res => res.json())
+    .then(res => {
+      setData(res.data.products.edges)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }, [])
 
   return (
     <div className="row">
       {data
-        ? data.map(product => (
-            <div className="col-4">
+        ? data.map(({ node: product }) => (
+            <div className="col-4 mb-3" key={product.id}>
               <SingleProduct data={product} />
             </div>
           ))

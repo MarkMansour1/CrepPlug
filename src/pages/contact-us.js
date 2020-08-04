@@ -14,7 +14,7 @@ class PageComponent extends React.Component {
           <p className="text-gray-light mb-4">
             Before contacting the support team be sure to look at our{" "}
             <Link
-              to="/faq"
+              to="/faqs"
               className="text-gray-light text-underline"
               target="_blank"
             >

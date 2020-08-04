@@ -202,24 +202,6 @@ query NON_NODE_QUERY {
     url
   }
 
-  getFooter {
-    copyrightText
-    sidebarOne
-    sidebarTwo
-
-    socialLinks {
-      iconName
-      iconUrl
-    }
-  }
-
-  getHeader {
-    favicon
-    siteLogoUrl
-    siteTagLine
-    siteTitle
-  }
-
   readingSettings {
     postsPerPage
   }

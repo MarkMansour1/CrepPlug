@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "gatsby"
 // import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
+import defaultimg from "../images/sourcing.jpg"
+
 class SingleProduct extends React.Component {
   render() {
     var product = this.props.data
@@ -21,21 +23,17 @@ class SingleProduct extends React.Component {
     }
 
     return (
-      <div className="single-product">
+      <div>
         <Link to={`/product/${product.slug}`}>
-          <div className="productimg">
-            <div className="img-container mb-1">
-              {product.galleryImages.nodes[0] &&
-                product.galleryImages.nodes[0].sourceUrl && (
-                  <img
-                    src={product.galleryImages.nodes[0].sourceUrl}
-                    alt={product.name}
-                  />
-                )}
-            </div>
+          <div className="img-container mb-1">
+            {product.image && product.image.sourceUrl ? (
+              <img src={product.image.sourceUrl} alt={product.name} />
+            ) : (
+              <img src={defaultimg} alt="" />
+            )}
           </div>
           <small>{timeSince(product.date)}</small>
-          <p className="name product-name mb-1">
+          <p className="mb-1">
             {product.name ? product.name : "Name Unavailable"}
           </p>
         </Link>
