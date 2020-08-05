@@ -126,8 +126,9 @@ a > *:hover {
   transition: 0.2s ease;
   font-family: $mont;
 
-  &:after {
-    content: " 🡒";
+  svg {
+    width: 1rem;
+    height: 1rem;
   }
 }
 

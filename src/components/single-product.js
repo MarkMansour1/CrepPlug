@@ -22,25 +22,30 @@ class SingleProduct extends React.Component {
       sizeList = "Size " + sizes[0]
     }
 
+    sizeList = "Size 7"
+
     return (
-      <div>
+      <div className="single-product">
         <Link to={`/product/${product.slug}`}>
-          <div className="img-container mb-1">
-            {product.image && product.image.sourceUrl ? (
-              <img src={product.image.sourceUrl} alt={product.name} />
-            ) : (
-              <img src={defaultimg} alt="" />
-            )}
+          <div className="product-image">
+            <div className="img-container">
+              {product.image && product.image.sourceUrl ? (
+                <img src={product.image.sourceUrl} alt={product.name} />
+              ) : (
+                <img src={defaultimg} alt="" />
+              )}
+            </div>
           </div>
-          <small>{timeSince(product.date)}</small>
-          <p className="mb-1">
-            {product.name ? product.name : "Name Unavailable"}
-          </p>
         </Link>
-        <div className="product-bottom">
-          <strong>{product.price}</strong>
-          {/* <span className="views d-none">{product.meta_data.views}</span> */}
-          <span className="sizes">{sizeList}</span>
+        <div className="product-date">{timeSince(product.date)}</div>
+        <Link to={`/product/${product.slug}`}>
+          <div className="product-name">
+            {product.name ? product.name : "Name Unavailable"}
+          </div>
+        </Link>
+        <div className="d-flex justify-content-between">
+          <div className="product-price">{product.price}</div>
+          <div className="product-size">{sizeList}</div>
         </div>
       </div>
     )

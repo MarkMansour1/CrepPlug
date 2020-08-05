@@ -1,6 +1,6 @@
 @import "./custom.scss";
 
-// Blocks
+// Block
 
 .block-wrapper {
   padding: 20px 0;
@@ -16,7 +16,8 @@
     margin-bottom: 1.5rem;
 
     h3 {
-      margin: 0;  
+      color: $gray-dark;
+      margin: 0;
     }
 
     a {
@@ -342,9 +343,8 @@
 
 .single-product {
   font-size: 16px;
-  font-weight: 500;
 
-  .productimg {
+  .product-image {
     position: relative;
 
     .soldindicator {
@@ -371,48 +371,29 @@
     }
   }
 
-  small {
-    color: #767676;
-    font-size: 12px;
+  .product-date {
+    color: $gray-light;
+    font-size: 0.75rem;
+    margin: 0.4rem 0 0.2rem;
   }
 
-  p {
+  .product-name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #333;
+    margin-bottom: 0.4rem;
   }
 
-  strong {
+  .product-price {
     font-weight: 600;
   }
 
-  .crossed-out {
-    text-decoration: line-through;
-    color: #666;
-    font-size: 14px;
-  }
-
-  .product-bottom {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 0.3rem 0 0.1rem;
-
-    i {
-      margin-top: 0.2rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .sizes {
-      color: #333;
-      font-size: 14px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  .product-size {
+    color: $gray-dark;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

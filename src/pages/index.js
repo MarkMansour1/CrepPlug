@@ -5,32 +5,54 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
+import ProductBlock from "../components/block-product"
 import SingleProduct from "../components/single-product"
 
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
-    const allProducts = data.products.edges
+    const products = data.products.edges
+
+    var mostPopular = products
+      .slice()
+      .sort(function (a, b) {
+        return Number(b.node.date) - Number(a.node.date)
+      })
+      .slice(0, 10)
+
+    var mostRecent = []
+    for (var i = 0; i < products.length; i++) {
+      if (
+        mostRecent.length < 10 &&
+        products[i].node.image &&
+        products[i].node.image.sourceUrl
+      ) {
+        mostRecent.push(products[i])
+      }
+    }
 
     return (
       <Layout>
         <SEO title="Home" />
         <div className="container container-wide py-5">
-          <div className="block-wrapper">
-            <div className="block-header">
-              <h3>Most Popular</h3>
-              <Link to="/shop" className="link-flat text-secondary">
-                Shop All
-              </Link>
-            </div>
-            <div className="block-body">
-              {allProducts.map(({ node: product }) => (
-                <div className="block-product" key={product.id}>
-                  <SingleProduct data={product} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <ProductBlock
+            title="Most Popular"
+            link="/shop"
+            linkText="Shop All"
+            products={mostPopular}
+          />
+          <ProductBlock
+            title="Latest Footwear"
+            link="/shop"
+            linkText="Shop All"
+            products={mostRecent}
+          />
+          <ProductBlock
+            title="CrepPlug Picks"
+            link="/shop"
+            linkText="Shop All"
+            products={mostPopular}
+          />
         </div>
       </Layout>
     )
