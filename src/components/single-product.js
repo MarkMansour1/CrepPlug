@@ -9,8 +9,8 @@ class Single extends React.Component {
     var sizes = []
 
     if (product.attributes) {
-      product.attributes.forEach(attribute => {
-        if (attribute.name === "Size") {
+      product.attributes.nodes.forEach(attribute => {
+        if (attribute.name === "pa_size") {
           sizes.push(attribute.options)
         }
       })
@@ -19,9 +19,9 @@ class Single extends React.Component {
     var sizeList = ""
     if (sizes.length > 0) {
       sizeList = "Size " + sizes[0]
+    } else {
+      sizeList = "Size 7"
     }
-
-    sizeList = "Size 7"
 
     return (
       <div className="single-product">

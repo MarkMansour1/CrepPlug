@@ -145,7 +145,7 @@ const BackgroundSection = () => (
                     <Link to="/account">Messages</Link>
                     <Link to="/account">Orders</Link>
                     <Link to="/account">Settings</Link>
-                    <Link to="/account">Change Password</Link>
+                    <Link to="/account">Reviews</Link>
                     <Link to="/account">Logout</Link>
                   </div>
                 </div>
@@ -175,9 +175,8 @@ const BackgroundSection = () => (
               <div className="row copyrightrow">
                 <div className="col-12 col-sm-6">© Copyright CrepPlug 2020</div>
                 <div className="col-12 col-sm-6 text-right">
-                  Website by{" "}
                   <a href="https://captivastudio.com" target="_blank">
-                    Captiva
+                    Website by Captiva
                   </a>
                 </div>
               </div>

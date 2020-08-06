@@ -13,7 +13,8 @@ class PageComponent extends React.Component {
     super(props)
 
     this.state = {
-      priceRange: [null, null],
+      minPrice: null,
+      maxPrice: null,
       categories: [],
       conditions: [],
       sizes: [],
@@ -31,55 +32,117 @@ class PageComponent extends React.Component {
     const name = target.name
     const value = target.value
 
-    if (name == "minPrice") {
-      this.setState({
-        priceRange: [value, this.state.priceRange[1]],
-      })
-    } else if (name == "maxPrice") {
-      this.setState({
-        priceRange: [this.state.priceRange[0], value],
-      })
+    if (name === "minPrice" || name === "maxPrice") {
+      this.setState(
+        {
+          [name]: parseFloat(value),
+        },
+        () => this.filterProducts()
+      )
     } else {
       var stateValues = this.state[name]
       var index = stateValues.indexOf(value)
       index > -1 ? stateValues.splice(index, 1) : stateValues.push(value)
 
-      this.setState({
-        [name]: stateValues,
-      })
+      this.setState(
+        {
+          [name]: stateValues,
+        },
+        () => this.filterProducts()
+      )
     }
-
-    this.filterProducts()
   }
 
   clearFilters() {
-    this.setState({
-      priceRange: [null, null],
-      categories: [],
-      conditions: [],
-      sizes: [],
-      colours: [],
-      search: "",
-    })
-
-    this.filterProducts()
+    this.setState(
+      {
+        minPrice: null,
+        maxPrice: null,
+        categories: [],
+        conditions: [],
+        sizes: [],
+        colours: [],
+        search: "",
+      },
+      () => this.filterProducts()
+    )
   }
 
   filterProducts() {
-    var productList = this.props.data.products.edges
+    const allProducts = this.props.data.products.edges
+    var productList = allProducts.slice()
 
-    if (this.state.categories.length > 0) {
-      for (var i in productList) {
+    // If a minimum price is set, remove all products below it
+    if (this.state.minPrice !== null) {
+      for (var i = 0; i < productList.length; i++) {
         if (
-          productList[i].node.productCategories.nodes.some(
-            category => this.state.categories.indexOf(category.name) >= 0
-          ) === false
+          parseFloat(productList[i].node.price.substr(1)) < this.state.minPrice
         ) {
           productList.splice(i, 1)
+          i--
         }
       }
     }
 
+    // If a maximum price is set, remove all products above it
+    if (this.state.maxPrice !== null) {
+      for (var i = 0; i < productList.length; i++) {
+        if (
+          parseFloat(productList[i].node.price.substr(1)) > this.state.maxPrice
+        ) {
+          productList.splice(i, 1)
+          i--
+        }
+      }
+    }
+
+    // If there are category filters enabled, apply them to the product list
+    if (this.state.categories.length > 0) {
+      // Loops through every product in the list
+      for (var i = 0; i < productList.length; i++) {
+        // Checks if any of the product categories are included in the filters
+        if (
+          !productList[i].node.productCategories.nodes.some(
+            category => this.state.categories.indexOf(category.name) >= 0
+          )
+        ) {
+          // If not, remove the product from the array
+          productList.splice(i, 1)
+          i--
+        }
+      }
+    }
+
+    // If there are condition filters enabled, apply them to the product list
+    if (this.state.conditions.length > 0) {
+      for (var i = 0; i < productList.length; i++) {
+        var product = productList[i].node
+
+        // Creates an array of conditions from the product attributes
+        var conditions = []
+        if (product.attributes) {
+          for (var index in product.attributes.nodes) {
+            if (product.attributes.nodes[index].name === "pa_condition") {
+              conditions = conditions.concat(
+                product.attributes.nodes[index].options
+              )
+            }
+          }
+        }
+
+        // If none of the product conditions match an active filter, remove the product from the list
+        if (
+          !this.state.conditions.some(
+            condition => conditions.indexOf(condition.toLowerCase()) >= 0
+          )
+        ) {
+          productList.splice(i, 1)
+          i--
+        }
+      }
+    }
+
+    // Update the state with the filtered product list
     this.setState({
       items: productList,
     })
@@ -117,9 +180,9 @@ class PageComponent extends React.Component {
                       <Card.Body>
                         <div className="form-row">
                           <div className="form-group col-md-6">
-                            <label htmlFor="priceRange0" />
+                            <label htmlFor="minPrice" />
                             <input
-                              id="priceRange0"
+                              id="minPrice"
                               className="form-control"
                               label="Min"
                               type="number"
@@ -131,9 +194,9 @@ class PageComponent extends React.Component {
                             />
                           </div>
                           <div className="form-group col-md-6">
-                            <label htmlFor="priceRange1" />
+                            <label htmlFor="maxPrice" />
                             <input
-                              id="priceRange1"
+                              id="maxPrice"
                               className="form-control"
                               label="Max"
                               type="number"
@@ -264,7 +327,7 @@ class PageComponent extends React.Component {
                   </Card>
                 </Accordion>
                 <button
-                  className="btn btn-outline-primary btn-sm w-100 mt-4"
+                  className="btn btn-light btn-sm w-100 mt-4"
                   onClick={this.clearFilters}
                 >
                   Clear Filters
@@ -275,12 +338,14 @@ class PageComponent extends React.Component {
               <div className="row">
                 {this.state.items.map(({ node: product }) => {
                   return (
-                    <div
-                      className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
-                      key={product.id}
-                    >
-                      <SingleProduct data={product} />
-                    </div>
+                    <>
+                      <div
+                        className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                        key={product.id}
+                      >
+                        <SingleProduct data={product} />
+                      </div>
+                    </>
                   )
                 })}
               </div>

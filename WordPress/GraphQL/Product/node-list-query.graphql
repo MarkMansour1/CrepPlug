@@ -277,6 +277,16 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
       modified
       name
       onSale
+      paColours(first: 100) {
+        nodes {
+          id
+        }
+      }
+      paConditions(first: 100) {
+        nodes {
+          id
+        }
+      }
       paSizes(first: 100) {
         nodes {
           id
@@ -441,6 +451,16 @@ fragment VariableProductFragment on VariableProduct {
   modified
   name
   onSale
+  paColours(first: 100) {
+    nodes {
+      id
+    }
+  }
+  paConditions(first: 100) {
+    nodes {
+      id
+    }
+  }
   paSizes(first: 100) {
     nodes {
       id

@@ -685,7 +685,7 @@ footer {
     padding-bottom: 50px;
 
     svg {
-      width: 250px;
+      width: 225px;
       fill: white;
     }
 
@@ -696,10 +696,10 @@ footer {
       justify-content: center;
 
       a {
-        margin: 1rem;
+        margin: 0.75rem;
 
         svg {
-          width: 30px;
+          width: 1.75rem;
           fill: $gray-light;
           transition: 0.2s;
         }
@@ -745,7 +745,12 @@ footer {
     color: $gray-light;
 
     a {
-      color: $light;
+      color: $gray-light;
+      transition: all 0.2s;
+
+      &:hover {
+        color: $secondary;
+      }
     }
 
     &:after {
