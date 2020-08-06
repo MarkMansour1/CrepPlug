@@ -8,6 +8,8 @@ import Card from "react-bootstrap/Card"
 import Layout from "../components/layout"
 import SingleProduct from "../components/single-product"
 
+import { applyFilters, applySort } from "../services/filters"
+
 class PageComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -20,11 +22,39 @@ class PageComponent extends React.Component {
       sizes: [],
       colours: [],
       search: "",
+      sort: "recent",
       items: [],
     }
 
     this.handleFilterChange = this.handleFilterChange.bind(this)
+    this.handleSorterChange = this.handleSorterChange.bind(this)
     this.clearFilters = this.clearFilters.bind(this)
+  }
+
+  filterProducts() {
+    const allProducts = this.props.data.products.edges
+    var productList = applyFilters(this.state, allProducts.slice())
+
+    this.setState({
+      items: productList,
+    })
+  }
+
+  clearFilters() {
+    // TODO reset form elements as well
+
+    this.setState(
+      {
+        minPrice: null,
+        maxPrice: null,
+        categories: [],
+        conditions: [],
+        sizes: [],
+        colours: [],
+        search: "",
+      },
+      () => this.filterProducts()
+    )
   }
 
   handleFilterChange(event) {
@@ -53,97 +83,13 @@ class PageComponent extends React.Component {
     }
   }
 
-  clearFilters() {
-    this.setState(
-      {
-        minPrice: null,
-        maxPrice: null,
-        categories: [],
-        conditions: [],
-        sizes: [],
-        colours: [],
-        search: "",
-      },
-      () => this.filterProducts()
-    )
-  }
+  handleSorterChange(event) {
+    var value = event.target.value
+    var productList = this.state.items.slice()
+    productList = applySort(value, productList)
 
-  filterProducts() {
-    const allProducts = this.props.data.products.edges
-    var productList = allProducts.slice()
-
-    // If a minimum price is set, remove all products below it
-    if (this.state.minPrice !== null) {
-      for (var i = 0; i < productList.length; i++) {
-        if (
-          parseFloat(productList[i].node.price.substr(1)) < this.state.minPrice
-        ) {
-          productList.splice(i, 1)
-          i--
-        }
-      }
-    }
-
-    // If a maximum price is set, remove all products above it
-    if (this.state.maxPrice !== null) {
-      for (var i = 0; i < productList.length; i++) {
-        if (
-          parseFloat(productList[i].node.price.substr(1)) > this.state.maxPrice
-        ) {
-          productList.splice(i, 1)
-          i--
-        }
-      }
-    }
-
-    // If there are category filters enabled, apply them to the product list
-    if (this.state.categories.length > 0) {
-      // Loops through every product in the list
-      for (var i = 0; i < productList.length; i++) {
-        // Checks if any of the product categories are included in the filters
-        if (
-          !productList[i].node.productCategories.nodes.some(
-            category => this.state.categories.indexOf(category.name) >= 0
-          )
-        ) {
-          // If not, remove the product from the array
-          productList.splice(i, 1)
-          i--
-        }
-      }
-    }
-
-    // If there are condition filters enabled, apply them to the product list
-    if (this.state.conditions.length > 0) {
-      for (var i = 0; i < productList.length; i++) {
-        var product = productList[i].node
-
-        // Creates an array of conditions from the product attributes
-        var conditions = []
-        if (product.attributes) {
-          for (var index in product.attributes.nodes) {
-            if (product.attributes.nodes[index].name === "pa_condition") {
-              conditions = conditions.concat(
-                product.attributes.nodes[index].options
-              )
-            }
-          }
-        }
-
-        // If none of the product conditions match an active filter, remove the product from the list
-        if (
-          !this.state.conditions.some(
-            condition => conditions.indexOf(condition.toLowerCase()) >= 0
-          )
-        ) {
-          productList.splice(i, 1)
-          i--
-        }
-      }
-    }
-
-    // Update the state with the filtered product list
     this.setState({
+      sort: value,
       items: productList,
     })
   }
@@ -163,10 +109,7 @@ class PageComponent extends React.Component {
     const categories = ["Nike", "Adidas", "Vans", "Jordans"]
     const conditions = ["New", "Used"]
     const colours = ["White", "Black", "Red", "Blue", "Green"]
-    var sizes = []
-    for (var i = 1; i < 12; i += 0.5) {
-      sizes.push(i)
-    }
+    var sizes = [6, 7, 8, 9]
 
     return (
       <Layout>
@@ -174,6 +117,16 @@ class PageComponent extends React.Component {
           <div className="row">
             <div className="col-3">
               <div className="shop-filters">
+                <div className="py-3">Showing {this.state.items.length} products</div>
+                <select
+                  className="form-control mb-4"
+                  onChange={this.handleSorterChange}
+                >
+                  <option value="recent">Sort By: Most Recent</option>
+                  <option value="popular">Sort By: Most Popular</option>
+                  <option value="priceasc">Sort By: Lowest Price</option>
+                  <option value="pricedesc">Sort By: Highest Price</option>
+                </select>
                 <Accordion>
                   <Card>
                     <Accordion.Collapse eventKey="1">
@@ -218,16 +171,16 @@ class PageComponent extends React.Component {
                     <Accordion.Collapse eventKey="2">
                       <Card.Body>
                         {categories.map(filter => (
-                          <div class="form-check">
+                          <div className="form-check" key={filter}>
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value={filter}
                               id={filter}
                               name="categories"
                               onChange={this.handleFilterChange}
                             />
-                            <label class="form-check-label" for={filter}>
+                            <label className="form-check-label" for={filter}>
                               {filter}
                             </label>
                           </div>
@@ -236,7 +189,7 @@ class PageComponent extends React.Component {
                     </Accordion.Collapse>
                     <Accordion.Toggle as={Card.Header} eventKey="2">
                       Categories
-                      <span class="badge badge-light ml-3">
+                      <span className="badge badge-light ml-3">
                         {this.state.categories.length > 0 &&
                           this.state.categories.length}
                       </span>
@@ -246,16 +199,16 @@ class PageComponent extends React.Component {
                     <Accordion.Collapse eventKey="3">
                       <Card.Body>
                         {conditions.map(filter => (
-                          <div class="form-check">
+                          <div className="form-check" key={filter}>
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value={filter}
                               id={filter}
                               name="conditions"
                               onChange={this.handleFilterChange}
                             />
-                            <label class="form-check-label" for={filter}>
+                            <label className="form-check-label" for={filter}>
                               {filter}
                             </label>
                           </div>
@@ -264,7 +217,7 @@ class PageComponent extends React.Component {
                     </Accordion.Collapse>
                     <Accordion.Toggle as={Card.Header} eventKey="3">
                       Condition
-                      <span class="badge badge-light ml-3">
+                      <span className="badge badge-light ml-3">
                         {this.state.conditions.length > 0 &&
                           this.state.conditions.length}
                       </span>
@@ -274,16 +227,16 @@ class PageComponent extends React.Component {
                     <Accordion.Collapse eventKey="4">
                       <Card.Body>
                         {sizes.map(filter => (
-                          <div class="form-check">
+                          <div className="form-check" key={filter}>
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value={filter}
                               id={filter}
                               name="sizes"
                               onChange={this.handleFilterChange}
                             />
-                            <label class="form-check-label" for={filter}>
+                            <label className="form-check-label" for={filter}>
                               {filter}
                             </label>
                           </div>
@@ -292,7 +245,7 @@ class PageComponent extends React.Component {
                     </Accordion.Collapse>
                     <Accordion.Toggle as={Card.Header} eventKey="4">
                       Size
-                      <span class="badge badge-light ml-3">
+                      <span className="badge badge-light ml-3">
                         {this.state.sizes.length > 0 && this.state.sizes.length}
                       </span>
                     </Accordion.Toggle>
@@ -301,16 +254,16 @@ class PageComponent extends React.Component {
                     <Accordion.Collapse eventKey="5">
                       <Card.Body>
                         {colours.map(filter => (
-                          <div class="form-check">
+                          <div className="form-check" key={filter}>
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="checkbox"
                               value={filter}
                               id={filter}
                               name="colours"
                               onChange={this.handleFilterChange}
                             />
-                            <label class="form-check-label" for={filter}>
+                            <label className="form-check-label" for={filter}>
                               {filter}
                             </label>
                           </div>
@@ -319,7 +272,7 @@ class PageComponent extends React.Component {
                     </Accordion.Collapse>
                     <Accordion.Toggle as={Card.Header} eventKey="5">
                       Colour
-                      <span class="badge badge-light ml-3">
+                      <span className="badge badge-light ml-3">
                         {this.state.colours.length > 0 &&
                           this.state.colours.length}
                       </span>
