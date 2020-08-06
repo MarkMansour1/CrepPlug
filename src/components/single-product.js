@@ -1,10 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
-// import { OutboundLink } from 'gatsby-plugin-google-analytics'
 
 import defaultimg from "../images/sourcing.jpg"
 
-class SingleProduct extends React.Component {
+class Single extends React.Component {
   render() {
     var product = this.props.data
     var sizes = []
@@ -52,7 +51,7 @@ class SingleProduct extends React.Component {
   }
 }
 
-export default SingleProduct
+export default Single
 
 function timeSince(date) {
   date = new Date(date)

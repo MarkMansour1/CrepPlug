@@ -57,7 +57,7 @@ class AccountSection extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="w-75 mx-auto">
         <form onSubmit={this.onSubmit}>
           <div id="details" className="form-group">
             <label for="name">Product Name</label>

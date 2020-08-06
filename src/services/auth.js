@@ -10,7 +10,7 @@ export const getUser = () =>
 const setUser = user =>
   window.localStorage.setItem("currentUser", JSON.stringify(user))
 
-export const handleLoginJWT = ({ username, password }) => {
+export const handleLogin = ({ username, password }) => {
   fetch(
     `https://designsuite.pro/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
     {
@@ -33,7 +33,7 @@ export const handleLoginJWT = ({ username, password }) => {
   return false
 }
 
-export const handleLogin = ({ username, password }) => {
+export const handleLoginGraphql = ({ username, password }) => {
   fetch("https://designsuite.pro/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

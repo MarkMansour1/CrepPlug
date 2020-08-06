@@ -23,7 +23,7 @@ const PageComponent = () => {
   return (
     <Layout>
       <SEO title="Account" />
-      <div className="container pt-5">
+      <div className="container container-wide pt-5">
         <div className="account-header">
           <div className="profile-picture">{user.username[0]}</div>
           <div className="welcome-text">

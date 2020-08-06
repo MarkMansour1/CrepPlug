@@ -6,12 +6,13 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 
 import ProductBlock from "../components/block-product"
-import SingleProduct from "../components/single-product"
+import PostBlock from "../components/block-post"
 
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
     const products = data.products.edges
+    const posts = data.posts.edges
 
     var mostPopular = products
       .slice()
@@ -53,6 +54,12 @@ class PageComponent extends React.Component {
             linkText="Shop All"
             products={mostPopular}
           />
+          <PostBlock
+            title="From The Blog"
+            link="/blog"
+            linkText="Read More"
+            posts={posts}
+          />
         </div>
       </Layout>
     )
@@ -84,6 +91,36 @@ export const query = graphql`
             nodes {
               name
               options
+            }
+          }
+        }
+      }
+    }
+    posts: allWpPost(limit: 6, sort: { fields: date, order: DESC }) {
+      edges {
+        node {
+          id
+          title
+          excerpt
+          featuredImage {
+            node {
+              sourceUrl
+            }
+          }
+          author {
+            node {
+              username
+              avatar {
+                url
+              }
+            }
+          }
+          date(formatString: "MMMM DD, YYYY")
+          slug
+          categories {
+            nodes {
+              name
+              slug
             }
           }
         }
