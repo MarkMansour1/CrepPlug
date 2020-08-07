@@ -117,9 +117,11 @@ class PageComponent extends React.Component {
           <div className="row">
             <div className="col-3">
               <div className="shop-filters">
-                <div className="py-3">Showing {this.state.items.length} products</div>
+                <div className="py-3">
+                  Showing {this.state.items.length} products
+                </div>
                 <select
-                  className="form-control mb-4"
+                  className="form-control form-control-sm mb-4"
                   onChange={this.handleSorterChange}
                 >
                   <option value="recent">Sort By: Most Recent</option>

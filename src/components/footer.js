@@ -196,3 +196,5 @@ const Footer = () => (
 )
 
 export default Footer
+
+export const MinimalFooter = () => <div>Copyright 2020</div>

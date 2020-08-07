@@ -1,13 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import Header from "./header"
-import Footer from "./footer"
+import { MinimalHeader as Header } from "./header"
+import { MinimalFooter as Footer } from "./footer"
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Header minimal={true} />
+      <Header />
       <main>{children}</main>
       <Footer />
     </>
