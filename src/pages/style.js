@@ -73,12 +73,12 @@ const PageComponent = () => (
       </div>
       <h3 className="mt-5">Typography</h3>
       <h1>H1 - Montserrat 700</h1>
-      <h2>H2 - Eurostyle 700</h2>
+      <h2>H2 - Montserrat 700</h2>
       <h3>H3 - Montserrat 700</h3>
-      <h4>H4 - Eurostyle 600</h4>
-      <h5>H5 - Eurostyle 600</h5>
-      <h6>H6 - Eurostyle 600</h6>
-      <p>P - Eurostyle 400</p>
+      <h4>H4 - Poppins 600</h4>
+      <h5>H5 - Poppins 600</h5>
+      <h6>H6 - Poppins 600</h6>
+      <p>P - Poppins 400</p>
 
       <h3 className="mt-5">Buttons</h3>
       <div className="btn btn-primary btn-lg mr-3">Click Here</div>

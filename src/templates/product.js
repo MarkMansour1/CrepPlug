@@ -1,6 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Flicking from "@egjs/react-flicking"
+import AliceCarousel from "react-alice-carousel"
 
 import Layout from "../components/layout"
 
@@ -8,31 +8,38 @@ import defaultimg from "../images/sourcing.jpg"
 
 const PageTemplate = ({ data }) => {
   const { page } = data
-  const { name, price, shortDescription, image, galleryImages } = page
-  var images = [{ sourceUrl: defaultimg }]
+  const {
+    name,
+    price,
+    shortDescription,
+    attributes,
+    image,
+    galleryImages,
+  } = page
 
+  var images = []
   if (image && image.sourceUrl) {
     images = [{ sourceUrl: image.sourceUrl }]
-  } else if (
+  }
+  if (
     galleryImages &&
     galleryImages.nodes[0] &&
     galleryImages.nodes[0].sourceUrl
   ) {
-    images = galleryImages.nodes
+    images = images.concat(galleryImages.nodes)
+  }
+  if (images.length === 0) {
+    images.push({ sourceUrl: defaultimg })
   }
 
   return (
     <Layout>
       <div className="container py-5">
         <div className="row">
-          <div className="col-7">
-            <Flicking className="w-75" circular={true}>
-              {images.map(image => (
-                <img src={image.sourceUrl} alt="" className="w-100" />
-              ))}
-            </Flicking>
+          <div className="col-12 col-md-6">
+            <ImageCarousel images={images} />
           </div>
-          <div className="col-lg-5 pl-lg-4 order-1 order-lg-2">
+          <div className="col-12 col-md-5 offset-lg-1">
             <h3 className="mb-4">{name}</h3>
             <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between mb-4">
               <ul className="list-inline mb-2 mb-sm-0">
@@ -77,6 +84,12 @@ export const query = graphql`
       name
       price
       shortDescription
+      attributes {
+        nodes {
+          name
+          options
+        }
+      }
       image {
         sourceUrl
       }
@@ -88,3 +101,49 @@ export const query = graphql`
     }
   }
 `
+
+class ImageCarousel extends React.Component {
+  state = {
+    images: this.props.images,
+    galleryImages: this.props.images.map(image => (
+      <div className="img-container" key={image.sourceUrl}>
+        <img src={image.sourceUrl} alt="" />
+      </div>
+    )),
+  }
+
+  thumbItem = (image, i) => (
+    <div
+      className="col"
+      key={image.sourceUrl}
+      onClick={() => this.Carousel.slideTo(i)}
+    >
+      <div className="img-container">
+        <img
+          src={image.sourceUrl}
+          alt=""
+          style={{ opacity: "0.75", cursor: "pointer", maxHeight: "125px" }}
+        />
+      </div>
+    </div>
+  )
+
+  render() {
+    return (
+      <div>
+        <AliceCarousel
+          dotsDisabled={true}
+          buttonsDisabled={true}
+          swipeDisabled={false}
+          items={this.state.galleryImages}
+          ref={el => (this.Carousel = el)}
+        />
+        {this.state.images.length > 1 && (
+          <div className="row small-gutter mt-3">
+            {this.state.images.map(this.thumbItem)}
+          </div>
+        )}
+      </div>
+    )
+  }
+}

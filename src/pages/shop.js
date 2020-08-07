@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card"
 
 import Layout from "../components/layout"
 import SingleProduct from "../components/single-product"
+import ProductBlock from "../components/block-product"
 
 import { applyFilters, applySort } from "../services/filters"
 
@@ -111,9 +112,22 @@ class PageComponent extends React.Component {
     const colours = ["White", "Black", "Red", "Blue", "Green"]
     var sizes = [6, 7, 8, 9]
 
+    var mostPopular = allProducts
+      .slice()
+      .sort(function (a, b) {
+        return Number(b.node.date) - Number(a.node.date)
+      })
+      .slice(0, 10)
+
     return (
       <Layout>
         <div className="container container-wide pt-5">
+          {/* <ProductBlock
+            title="Most Popular"
+            link="/shop"
+            linkText="Shop All"
+            products={mostPopular}
+          /> */}
           <div className="row">
             <div className="col-3">
               <div className="shop-filters">

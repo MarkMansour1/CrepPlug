@@ -46,6 +46,7 @@ $input-btn-focus-color: transparent;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../../node_modules/bs-stepper/dist/css/bs-stepper.min.css";
+@import "../../node_modules/react-alice-carousel/lib/alice-carousel.css";
 
 html,
 body {
@@ -364,6 +365,14 @@ ul {
 }
 
 .small-gutter {
+  .col:not(:first-of-type) {
+    padding-left: 0.5rem;
+  }
+
+  .col:not(:last-of-type) {
+    padding-right: 0.5rem;
+  }
+
   .col-6 {
     padding: 0 0.5rem;
 
@@ -1107,6 +1116,8 @@ footer {
     text-overflow: ellipsis;
   }
 }
+
+// Product Page
 
 // Posts
 

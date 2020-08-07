@@ -37,12 +37,6 @@ class PageComponent extends React.Component {
         <SEO title="Home" />
         <div className="container container-wide py-5">
           <ProductBlock
-            title="Most Popular"
-            link="/shop"
-            linkText="Shop All"
-            products={mostPopular}
-          />
-          <ProductBlock
             title="Latest Footwear"
             link="/shop"
             linkText="Shop All"
