@@ -117,13 +117,15 @@ class ImageCarousel extends React.Component {
       className="col"
       key={image.sourceUrl}
       onClick={() => this.Carousel.slideTo(i)}
+      style={{
+        maxWidth: "35%",
+        maxHeight: "125px",
+        opacity: "0.75",
+        cursor: "pointer",
+      }}
     >
       <div className="img-container">
-        <img
-          src={image.sourceUrl}
-          alt=""
-          style={{ opacity: "0.75", cursor: "pointer", maxHeight: "125px" }}
-        />
+        <img src={image.sourceUrl} alt="" />
       </div>
     </div>
   )

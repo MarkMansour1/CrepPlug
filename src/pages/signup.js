@@ -1,10 +1,29 @@
 import React from "react"
 import { Link } from "gatsby"
+import { handleSignup, isLoggedIn } from "../services/auth"
 
 import Layout from "../components/layout-minimal"
 import SEO from "../components/seo"
 
 class PageComponent extends React.Component {
+  state = {
+    username: ``,
+    email: ``,
+    password: ``,
+    repeat: ``,
+  }
+
+  handleUpdate = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    handleSignup(this.state)
+  }
+
   render() {
     return (
       <Layout>
@@ -18,32 +37,63 @@ class PageComponent extends React.Component {
           </Link>
         </div>
         <div className="layout-minimal">
-          <form>
+          <form
+            method="post"
+            onSubmit={event => {
+              this.handleSubmit(event)
+            }}
+          >
             <h2 className="text-gray-dark">Sign Up</h2>
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <input type="text" className="form-control" id="username" />
+              <input
+                type="text"
+                className="form-control"
+                id="username"
+                name="username"
+                onChange={this.handleUpdate}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
-              <input type="email" className="form-control" id="email" />
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                onChange={this.handleUpdate}
+              />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="size">Shoe Size</label>
-              <input type="number" className="form-control" id="size" />
-            </div>
+              <input
+                type="number"
+                className="form-control"
+                id="size"
+                name="size"
+                onChange={this.handleUpdate}
+              />
+            </div> */}
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" className="form-control" id="password" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmpassword">Confirm Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="confirmpassword"
+                id="password"
+                name="password"
+                onChange={this.handleUpdate}
               />
             </div>
+            {/* <div className="form-group">
+              <label htmlFor="repeat">Confirm Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="repeat"
+                name="repeat"
+                onChange={this.handleUpdate}
+              />
+            </div> */}
             <small>
               By creating an account you agree to our{" "}
               <Link to="/" className="text-underline">
@@ -55,11 +105,9 @@ class PageComponent extends React.Component {
               </Link>
               .
             </small>
-            <Link to="/account">
-              <button type="submit" className="btn btn-primary w-100">
-                Sign Up
-              </button>
-            </Link>
+            <button type="submit" className="btn btn-primary w-100">
+              Sign Up
+            </button>
             <p className="mt-4">
               Already have an account?{" "}
               <Link to="/login" className="text-underline">

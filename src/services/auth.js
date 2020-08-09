@@ -33,6 +33,24 @@ export const handleLogin = ({ username, password }) => {
   return false
 }
 
+export const handleSignup = ({ username, email, password }) => {
+  fetch(
+    `https://designsuite.pro/wp-json/wp/v2/users?username=${username}&email=${email}&password=${password}&roles=wcfm_vendor`,
+    {
+      method: "POST",
+    }
+  )
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  return false
+}
+
 export const handleLoginGraphql = ({ username, password }) => {
   fetch("https://designsuite.pro/graphql", {
     method: "POST",

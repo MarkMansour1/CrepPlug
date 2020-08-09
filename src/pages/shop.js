@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { InfiniteScroll } from "react-simple-infinite-scroll"
 
 import Accordion from "react-bootstrap/Accordion"
 import Card from "react-bootstrap/Card"
