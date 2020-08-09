@@ -34,12 +34,16 @@ export const handleLogin = ({ username, password }) => {
 }
 
 export const handleSignup = ({ username, email, password }) => {
-  fetch(
-    `https://designsuite.pro/wp-json/wp/v2/users?username=${username}&email=${email}&password=${password}&roles=wcfm_vendor`,
-    {
-      method: "POST",
-    }
-  )
+  fetch(`https://designsuite.pro/wp-json/wp/v2/users/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: username,
+      email: email,
+      password: password,
+      role: `wcfm_vendor`,
+    }),
+  })
     .then(response => response.json())
     .then(data => {
       console.log(data)

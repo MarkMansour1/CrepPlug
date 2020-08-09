@@ -10,32 +10,14 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`https://designsuite.pro/graphql`, {
-      method: "POST",
+    fetch(`https://designsuite.pro/wp-json/wc/v3/orders`, {
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
       },
-      body: JSON.stringify({
-        query: `{
-          orders {
-            edges {
-              node {
-                id
-                date
-                status
-                total
-              }
-            }
-          }
-        }
-        `,
-      }),
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
-        setData(res.data.orders.edges)
+        setData(res)
       })
       .catch(err => {
         console.log(err)
@@ -47,24 +29,19 @@ const AccountSection = () => {
       <Tabs justify defaultActiveKey="purchases" transition={false}>
         <Tab eventKey="purchases" title="Purchases">
           <table className="table">
-            {/* <thead>
-              <tr>
-                <th>Order</th>
-                <th>Products</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Total</th>
-                <th>Actions</th>
-              </tr>
-            </thead> */}
             <tbody>
               {data
-                ? data.map(({ node: order }, index) => {
+                ? data.map((order, index) => {
                     if (index % 2 == 0) {
                       return (
                         <tr>
                           <td>{order.id}</td>
-                          <td>{order.date.slice(0, 10)}</td>
+                          <td>
+                            {order.line_items.map(item => (
+                              <span className="d-block">{item.name}</span>
+                            ))}
+                          </td>
+                          <td>{order.date_created.slice(0, 10)}</td>
                           <td>{order.status}</td>
                           <td>{order.total}</td>
                           <td>
@@ -85,19 +62,29 @@ const AccountSection = () => {
         </Tab>
         <Tab eventKey="sales" title="Sales">
           <table className="table">
+            {/* <thead>
+              <tr>
+                <th>Order</th>
+                <th>Products</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th>Actions</th>
+              </tr>
+            </thead> */}
             <tbody>
               {data
-                ? data.map(({ node: order }, index) => {
+                ? data.map((order, index) => {
                     if (index % 2 == 1) {
                       return (
                         <tr>
                           <td>{order.id}</td>
-                          {/* <td>
+                          <td>
                             {order.line_items.map(item => (
                               <span className="d-block">{item.name}</span>
                             ))}
-                          </td> */}
-                          <td>{order.date.slice(0, 10)}</td>
+                          </td>
+                          <td>{order.date_created.slice(0, 10)}</td>
                           <td>{order.status}</td>
                           <td>{order.total}</td>
                           <td>

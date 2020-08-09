@@ -23,7 +23,7 @@ const PageComponent = () => {
   return (
     <Layout>
       <SEO title="Account" />
-      <div className="container container-wide pt-5">
+      <div className="container pt-5">
         <div className="account-header">
           <div className="profile-picture">{user.username[0]}</div>
           <div className="welcome-text">
@@ -52,22 +52,6 @@ const PageComponent = () => {
               <path
                 fill-rule="evenodd"
                 d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-              />
-            </svg>
-          </Link>
-          <Link to="/account/messages" className="btn btn-light">
-            Inbox
-            <svg
-              width="1em"
-              height="1em"
-              viewBox="0 0 16 16"
-              class="bi bi-envelope ml-2"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"
               />
             </svg>
           </Link>

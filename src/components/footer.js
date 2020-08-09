@@ -197,4 +197,17 @@ const Footer = () => (
 
 export default Footer
 
-export const MinimalFooter = () => <div>Copyright 2020</div>
+export const MinimalFooter = () => (
+  <div className="bg-light py-3">
+    <div className="container container-wide">
+      <div className="row">
+        <div className="col-12 col-sm-6">© Copyright CrepPlug 2020</div>
+        <div className="col-12 col-sm-6 text-right">
+          <a href="https://captivastudio.com" target="_blank">
+            Website by Captiva
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+)
