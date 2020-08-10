@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react"
 
+import { getUser } from "../../services/auth"
+
 const AccountSection = () => {
-  const [user, setUser] = useState("")
-  const [first, setFirst] = useState("")
-  const [last, setLast] = useState("")
-  const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("loading...")
+  const [first, setFirst] = useState("loading...")
+  const [last, setLast] = useState("loading...")
+  const [email, setEmail] = useState("loading...")
+  const user = getUser()
 
   useEffect(() => {
     fetch(`https://designsuite.pro/wp-json/wp/v2/users/me`, {
       headers: {
-        Authorization: ` "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGVzaWduc3VpdGUucHJvIiwiaWF0IjoxNTk1NDEwNjA1LCJuYmYiOjE1OTU0MTA2MDUsImV4cCI6MTU5NjAxNTQwNSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.G4UVrydLcSEXY165AauqjuA8QXwl9RgCLgunoV6E0_4"`,
+        Authorization: `Bearer ${user.token}`,
       },
     })
       .then(response => response.json())
       .then(resultData => {
-        setUser(resultData.name)
+        setUsername(resultData.name)
         setFirst(resultData.first_name)
         setLast(resultData.last_name)
-        setEmail(resultData.email)
+        setEmail(resultData.user_email)
       })
   }, [])
 
@@ -28,14 +31,15 @@ const AccountSection = () => {
           <label htmlFor="username" className="col-sm-3 col-form-label">
             Username
           </label>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
             <input
               type="text"
               className="form-control"
               id="username"
               name="username"
-              onChange={event => setUser(event.target.value)}
-              value={user}
+              onChange={event => setUsername(event.target.value)}
+              value={username}
+              disabled
             />
           </div>
         </div>
@@ -43,7 +47,7 @@ const AccountSection = () => {
           <label htmlFor="firstname" className="col-sm-3 col-form-label">
             First Name
           </label>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
             <input
               type="text"
               className="form-control"
@@ -58,7 +62,7 @@ const AccountSection = () => {
           <label htmlFor="lastname" className="col-sm-3 col-form-label">
             Last Name
           </label>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
             <input
               type="text"
               className="form-control"
@@ -73,7 +77,7 @@ const AccountSection = () => {
           <label htmlFor="email" className="col-sm-3 col-form-label">
             Email Address
           </label>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
             <input
               type="email"
               className="form-control"

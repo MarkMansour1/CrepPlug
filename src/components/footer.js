@@ -4,9 +4,9 @@ import BackgroundImage from "gatsby-background-image"
 
 import Logo from "./logo"
 
-import fees from "../images/fees.png"
-import protection from "../images/protection.png"
-import listings from "../images/listings.png"
+import fees from "../images/footer/fees.png"
+import protection from "../images/footer/protection.png"
+import listings from "../images/footer/listings.png"
 
 const Boxes = () => (
   <div className="container container-wide">
@@ -46,7 +46,7 @@ const BackgroundSection = () => (
   <StaticQuery
     query={graphql`
       query {
-        background: file(relativePath: { eq: "footer.png" }) {
+        background: file(relativePath: { eq: "footer/footer.png" }) {
           childImageSharp {
             fluid(quality: 90, maxWidth: 1920) {
               ...GatsbyImageSharpFluid_withWebp

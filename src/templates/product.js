@@ -118,8 +118,7 @@ class ImageCarousel extends React.Component {
       key={image.sourceUrl}
       onClick={() => this.Carousel.slideTo(i)}
       style={{
-        maxWidth: "35%",
-        maxHeight: "125px",
+        maxWidth: "125px",
         opacity: "0.75",
         cursor: "pointer",
       }}
@@ -141,7 +140,7 @@ class ImageCarousel extends React.Component {
           ref={el => (this.Carousel = el)}
         />
         {this.state.images.length > 1 && (
-          <div className="row small-gutter mt-3">
+          <div className="row small-gutter mt-3 px-4">
             {this.state.images.map(this.thumbItem)}
           </div>
         )}

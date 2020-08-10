@@ -10,6 +10,7 @@ import AccountNav from "../components/account/account-nav"
 import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Orders from "../components/account/orders"
+import OrderDetails from "../components/account/order-details"
 import Settings from "../components/account/settings"
 
 const PageComponent = () => {
@@ -78,12 +79,13 @@ const PageComponent = () => {
           <div className="col-3" style={{ position: "sticky", top: "0" }}>
             <AccountNav user={user} />
           </div>
-          <div className="col-9 pl-5 pt-3">
+          <div className="col-9 account-wrapper">
             <Router>
               <Products path="account" />
               <Orders path="account/orders" />
               <Settings path="account/settings" />
               <AddProduct path="account/add-product" />
+              <OrderDetails path="account/order/*" />
             </Router>
           </div>
         </div>

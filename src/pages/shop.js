@@ -5,6 +5,7 @@ import Accordion from "react-bootstrap/Accordion"
 import Card from "react-bootstrap/Card"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import SingleProduct from "../components/single-product"
 import ProductBlock from "../components/block-product"
 
@@ -120,6 +121,7 @@ class PageComponent extends React.Component {
 
     return (
       <Layout>
+        <SEO title="Shop" />
         <div className="container container-wide pt-5">
           {/* <ProductBlock
             title="Most Popular"

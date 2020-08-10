@@ -980,6 +980,19 @@ footer {
   }
 }
 
+.account-wrapper {
+  padding-left: 2rem;
+  font-size: 14px;
+}
+
+// Orders
+
+.order-table {
+  td {
+    padding: 1rem 0.75rem;
+  }
+}
+
 // Protection
 
 .protection-section {
@@ -1172,6 +1185,119 @@ footer {
 
     .form-check {
       margin: 0.5rem 0;
+    }
+  }
+}
+
+// About Page
+
+.about-us {
+  text-align: center;
+
+  .block {
+    margin: 150px 0 200px;
+
+    &:last-of-type {
+      margin-bottom: 100px;
+    }
+  }
+
+  .aboutdesc {
+    margin: 0;
+
+    @media (min-width: 768px) {
+      width: 75%;
+      margin-left: calc((100% - 75%) / 2);
+    }
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-size: 3rem;
+  }
+
+  img {
+    height: 600px;
+    width: 80%;
+    object-fit: cover;
+
+    @media (max-width: 767px) {
+      height: 300px;
+      transform: translateY(-4rem);
+    }
+  }
+
+  h3 {
+    font-weight: 500;
+    text-transform: capitalize;
+    transform: translateY(-2rem);
+  }
+
+  p {
+    margin-bottom: 2rem;
+  }
+
+  .aboutcommission {
+    /* margin: 150px 0; */
+
+    p {
+      font-size: 1.2rem;
+    }
+
+    small {
+      display: block;
+      margin-top: 1rem;
+    }
+
+    .commissionboxes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0 5rem;
+
+      .commissionbox {
+        padding: 1.5rem 2rem;
+        width: 250px;
+        border: 1px solid #aaa;
+        font-size: 1.5rem;
+        position: relative;
+
+        span {
+          width: 100%;
+          font-size: 1rem;
+          position: absolute;
+          left: 50%;
+          margin-top: 4rem;
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+}
+
+// 404 page
+
+.fourohfour {
+  text-align: center;
+
+  @media (min-width: 768px) {
+    margin: 50px auto 100px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 8rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 50px 0;
+
+    h1 {
+      font-size: 6rem;
+    }
+
+    img {
+      width: 300px;
     }
   }
 }
