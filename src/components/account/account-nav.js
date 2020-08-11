@@ -1,12 +1,20 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
-import { logout } from "../../services/auth"
+import { getUser, logout } from "../../services/auth"
 
 class AccountNav extends React.Component {
   render() {
+    const user = getUser()
+
     return (
       <>
         <div className="account-nav">
+          {/* <div className="profile-picture">{user.username[0]}</div> */}
+          <h6>My Account</h6>
+          <div className="welcome-text">
+            <span>{user.username}</span>
+            10 products | 3 reviews
+          </div>
           <Link activeClassName="active" to="/account">
             <svg
               viewBox="0 0 16 16"

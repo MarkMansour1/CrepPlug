@@ -29,7 +29,7 @@ const AccountSection = () => {
   }, [])
 
   return (
-    <div>
+    <div className="order-details">
       <Link to="/account/orders" className="link-flat text-secondary">
         <svg
           viewBox="0 0 16 16"
@@ -48,9 +48,10 @@ const AccountSection = () => {
         </svg>
         {` Back to all orders`}
       </Link>
-      <hr className="my-4" />
-      {loading && <h4>Loading...</h4>}
-      {data ? <OrderDetails order={data} /> : null}
+      <div className="pt-4">
+        {loading && <h4>Loading...</h4>}
+        {data ? <OrderDetails order={data} /> : null}
+      </div>
     </div>
   )
 }
@@ -58,48 +59,20 @@ const AccountSection = () => {
 export default AccountSection
 
 const OrderDetails = ({ order }) => {
-  var customerEmail
+  const billing = order.billing
 
-  for (var index in order.meta_data) {
-    if (order.meta_data[index].key == "_customer_email") {
-      var customerEmail = order.meta_data[index].value
-    }
-  }
-
-  // "first_name": "Ziggy",
-  //   "last_name": "Botchey",
-  //     "company": "",
-  //       "address_1": "178 maple road",
-  //         "address_2": "",
-  //           "city": "London",
-  //             "state": "Kent",
-  //               "postcode": "SE20 8JB",
-  //                 "country": "GB"
-
-  var shippingFields = [
-    "First Name",
-    "Last Name",
-    "Company",
-    "Address 1",
-    "Address 2",
-    "City",
-    "State",
-    "Postcode",
-    "Country",
-    "Email",
-    "Phone",
+  var shippingDetails = [
+    ["Address 1", billing.address_1],
+    ["Address 2", billing.address_2],
+    ["Company", billing.company],
+    ["City", billing.city],
+    ["State", billing.state],
+    ["Postcode", billing.postcode],
+    ["Country", billing.country],
   ]
 
-  var shippingDetails = []
-  // TODO change billing back to shipping
-  for (var i in order.billing) {
-    shippingDetails.push(order.billing[i])
-  }
-
-  const billing = order.billing
   var customerDetails = [
-    ["First Name", billing.first_name],
-    ["Last Name", billing.last_name],
+    ["Name", billing.first_name + " " + billing.last_name],
     ["Email", billing.email],
     ["Phone", billing.phone],
   ]
@@ -107,32 +80,60 @@ const OrderDetails = ({ order }) => {
   return (
     <div>
       <h3>Order #{order.id}</h3>
-      <p>
-        Placed on{" "}
-        <strong>{new Date(order.date_created).toLocaleDateString()}</strong> and
-        currently <strong>{order.status}</strong>
-      </p>
-      <div className="d-flex justify-content-evenly">
-        <div>
-          <strong>Shipping Details:</strong>
-          <p>
-            {shippingDetails.map((detail, index) => (
-              <div>{shippingFields[index] + ": " + detail}</div>
+      <p>Placed on: {new Date(order.date_created).toLocaleDateString()}</p>
+      <p className="m-0">Status: {order.status}</p>
+      <div className="pt-5">
+        <h4>Order Items</h4>
+        <table className="w-100">
+          <thead>
+            <tr>
+              <th>Product(s)</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody className="order-items">
+            {order.line_items.map(item => (
+              <tr>
+                <td>
+                  {item.name} x {item.quantity}
+                </td>
+                <td>£{item.total}</td>
+              </tr>
             ))}
-          </p>
+          </tbody>
+          <tbody>
+            <tr>
+              <th>Shipping</th>
+              <td>£{order.shipping_total}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Total</th>
+              <td>£{order.total}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div className="d-flex justify-content-between pt-5">
+        <div>
+          <h4>Shipping Address:</h4>
+          {shippingDetails.map(detail => {
+            if (detail[1]) {
+              return <div className="mb-1">{detail[1]}</div>
+            }
+          })}
         </div>
         <div>
-          <strong>Customer Details:</strong>
-          <p>
-            {customerDetails.map(detail => (
-              <div>{detail[0] + ": " + detail[1]}</div>
-            ))}
-          </p>
+          <h4>Customer Details:</h4>
+          {customerDetails.map(detail => (
+            <>
+              <small className="d-block text-gray-light">{detail[0]}</small>
+              <div className="mb-2">{detail[1]}</div>
+            </>
+          ))}
         </div>
       </div>
-
-      <hr />
-      <h4>Order Details</h4>
     </div>
   )
 }
