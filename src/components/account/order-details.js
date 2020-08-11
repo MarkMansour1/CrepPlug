@@ -74,7 +74,7 @@ const OrderDetails = ({ order }) => {
   var customerDetails = [
     ["Name", billing.first_name + " " + billing.last_name],
     ["Email", billing.email],
-    ["Phone", billing.phone],
+    ["Phone", "+44 " + billing.phone],
   ]
 
   return (

@@ -10,7 +10,6 @@ class AccountNav extends React.Component {
       <>
         <div className="account-nav">
           {/* <div className="profile-picture">{user.username[0]}</div> */}
-          <h6>My Account</h6>
           <div className="welcome-text">
             <span>{user.username}</span>
             10 products | 3 reviews
