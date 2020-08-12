@@ -44,7 +44,7 @@ export const applyFilters = (state, productList) => {
       // Creates an array of conditions from the product attributes
       var conditions = []
       if (product.attributes) {
-        for (var index in product.attributes.nodes) {
+        for (let index in product.attributes.nodes) {
           if (product.attributes.nodes[index].name === "pa_condition") {
             conditions = conditions.concat(
               product.attributes.nodes[index].options
@@ -73,7 +73,7 @@ export const applyFilters = (state, productList) => {
       // Creates an array of sizes from the product attributes
       var sizes = []
       if (product.attributes) {
-        for (var index in product.attributes.nodes) {
+        for (let index in product.attributes.nodes) {
           if (product.attributes.nodes[index].name === "pa_size") {
             sizes = sizes.concat(product.attributes.nodes[index].options)
           }
@@ -96,7 +96,7 @@ export const applyFilters = (state, productList) => {
       // Creates an array of colours from the product attributes
       var colours = []
       if (product.attributes) {
-        for (var index in product.attributes.nodes) {
+        for (let index in product.attributes.nodes) {
           if (product.attributes.nodes[index].name === "pa_colour") {
             colours = colours.concat(product.attributes.nodes[index].options)
           }

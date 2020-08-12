@@ -11,8 +11,10 @@ class Single extends React.Component {
       <div className="single-post">
         <Link to={`/blog/${post.slug}`}>
           <div className="img-container-sm">
-            {post.image && post.image.sourceUrl ? (
-              <img src={post.image.sourceUrl} alt={post.title} />
+            {post.featuredImage &&
+            post.featuredImage.node &&
+            post.featuredImage.node.sourceUrl ? (
+              <img src={post.featuredImage.node.sourceUrl} alt={post.title} />
             ) : (
               <img src={defaultimg} alt="" />
             )}

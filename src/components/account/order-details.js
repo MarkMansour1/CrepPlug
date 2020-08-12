@@ -79,6 +79,12 @@ const OrderDetails = ({ order }) => {
 
   return (
     <div>
+      <div class="alert alert-secondary" role="alert">
+        Already shipped this order?{" "}
+        <a href="#" class="alert-link">
+          Mark as shipped.
+        </a>
+      </div>
       <h3>Order #{order.id}</h3>
       <p>Placed on: {new Date(order.date_created).toLocaleDateString()}</p>
       <p className="m-0">Status: {order.status}</p>

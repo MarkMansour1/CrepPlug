@@ -11,11 +11,11 @@ class PageComponent extends React.Component {
         <SEO title="Contact Us" />
         <div className="layout-minimal">
           <h2 className="text-gray-dark">Contact Us</h2>
-          <p className="text-gray-light mb-4">
+          <p className="text-gray mb-4">
             Before contacting the support team be sure to look at our{" "}
             <Link
               to="/faqs"
-              className="text-gray-light text-underline"
+              className="text-gray text-underline"
               target="_blank"
             >
               FAQs

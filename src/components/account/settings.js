@@ -88,10 +88,12 @@ const AccountSection = () => {
             />
           </div>
         </div>
-        <div className="text-center">
-          <button type="submit" class="btn btn-dark">
-            Save Changes
-          </button>
+        <div className="form-group row">
+          <div className="col-sm-9 offset-3">
+            <button type="submit" class="btn btn-secondary w-100">
+              Save Changes
+            </button>
+          </div>
         </div>
       </form>
     </div>

@@ -104,8 +104,7 @@ class PageComponent extends React.Component {
   }
 
   render() {
-    const { data } = this.props
-    const allProducts = data.products.edges
+    const allProducts = this.props.data.products.edges
 
     const categories = ["Nike", "Adidas", "Vans", "Jordans"]
     const conditions = ["New", "Used"]
