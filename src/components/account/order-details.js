@@ -134,7 +134,7 @@ const OrderDetails = ({ order }) => {
           <h4>Customer Details:</h4>
           {customerDetails.map(detail => (
             <>
-              <small className="d-block text-gray-light">{detail[0]}</small>
+              <small className="d-block text-gray">{detail[0]}</small>
               <div className="mb-2">{detail[1]}</div>
             </>
           ))}

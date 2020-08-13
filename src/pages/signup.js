@@ -43,7 +43,7 @@ class PageComponent extends React.Component {
               this.handleSubmit(event)
             }}
           >
-            <h2 className="text-gray-dark">Sign Up</h2>
+            <h2>Sign Up</h2>
             <div className="form-group">
               <label htmlFor="username">Username</label>
               <input

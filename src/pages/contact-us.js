@@ -10,7 +10,7 @@ class PageComponent extends React.Component {
       <Layout>
         <SEO title="Contact Us" />
         <div className="layout-minimal">
-          <h2 className="text-gray-dark">Contact Us</h2>
+          <h2>Contact Us</h2>
           <p className="text-gray mb-4">
             Before contacting the support team be sure to look at our{" "}
             <Link

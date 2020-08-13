@@ -25,75 +25,58 @@ const AccountSection = () => {
   }, [])
 
   return (
-    <div>
+    <div className="account-settings">
       <form>
-        <div class="form-group row">
-          <label htmlFor="username" className="col-sm-3 col-form-label">
-            Username
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              name="username"
-              onChange={event => setUsername(event.target.value)}
-              value={username}
-              disabled
-            />
-          </div>
+        <div class="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
+            name="username"
+            onChange={event => setUsername(event.target.value)}
+            value={username}
+            disabled
+          />
         </div>
-        <div class="form-group row">
-          <label htmlFor="firstname" className="col-sm-3 col-form-label">
-            First Name
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              className="form-control"
-              id="firstname"
-              name="firstname"
-              onChange={event => setFirst(event.target.value)}
-              value={first}
-            />
-          </div>
+        <div class="form-group">
+          <label htmlFor="firstname">First Name</label>
+
+          <input
+            type="text"
+            className="form-control"
+            id="firstname"
+            name="firstname"
+            onChange={event => setFirst(event.target.value)}
+            value={first}
+          />
         </div>
-        <div class="form-group row">
-          <label htmlFor="lastname" className="col-sm-3 col-form-label">
-            Last Name
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="text"
-              className="form-control"
-              id="lastname"
-              name="lastname"
-              onChange={event => setLast(event.target.value)}
-              value={last}
-            />
-          </div>
+        <div class="form-group">
+          <label htmlFor="lastname">Last Name</label>
+          <input
+            type="text"
+            className="form-control"
+            id="lastname"
+            name="lastname"
+            onChange={event => setLast(event.target.value)}
+            value={last}
+          />
         </div>
-        <div class="form-group row">
-          <label htmlFor="email" className="col-sm-3 col-form-label">
-            Email Address
-          </label>
-          <div class="col-sm-9">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              onChange={event => setEmail(event.target.value)}
-              value={email}
-            />
-          </div>
+        <div class="form-group">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            onChange={event => setEmail(event.target.value)}
+            value={email}
+          />
         </div>
-        <div className="form-group row">
-          <div className="col-sm-9 offset-3">
-            <button type="submit" class="btn btn-secondary w-100">
-              Save Changes
-            </button>
-          </div>
+        <div className="form-group">
+          <button type="submit" class="btn btn-secondary w-100">
+            Save Changes
+          </button>
         </div>
       </form>
     </div>

@@ -10,45 +10,37 @@ class PageComponent extends React.Component {
     super(props)
 
     this.state = {
-      categories: [],
       items: [],
     }
 
-    this.handleFilterChange = this.handleFilterChange.bind(this)
+    this.filterPosts = this.filterPosts.bind(this)
   }
 
-  filterProducts() {
-    // const allPosts = this.props.data.products.edges
-    // var productList = applyFilters(this.state, allProducts.slice())
-    // this.setState({
-    //   items: productList,
-    // })
-  }
+  filterPosts(filter) {
+    const allPosts = this.props.data.posts.edges
+    var postList = allPosts.slice()
 
-  handleFilterChange(event) {
-    const target = event.target
-    const name = target.name
-    const value = target.value
+    if (filter != "All") {
+      for (let i = 0; i < postList.length; i++) {
+        var contains = false
 
-    // if (name === "minPrice" || name === "maxPrice") {
-    //   this.setState(
-    //     {
-    //       [name]: parseFloat(value),
-    //     },
-    //     () => this.filterProducts()
-    //   )
-    // } else {
-    //   var stateValues = this.state[name]
-    //   var index = stateValues.indexOf(value)
-    //   index > -1 ? stateValues.splice(index, 1) : stateValues.push(value)
+        for (let cat in postList[i].node.categories.nodes) {
+          if (postList[i].node.categories.nodes[cat].name === filter) {
+            contains = true
+            break
+          }
+        }
 
-    //   this.setState(
-    //     {
-    //       [name]: stateValues,
-    //     },
-    //     () => this.filterProducts()
-    //   )
-    // }
+        if (contains === false) {
+          postList.splice(i, 1)
+          i--
+        }
+      }
+    }
+
+    this.setState({
+      items: postList,
+    })
   }
 
   componentDidMount() {
@@ -62,33 +54,40 @@ class PageComponent extends React.Component {
   render() {
     const posts = this.props.data.posts.edges
 
-    // var categories = ["All"]
-    // for(let post in posts){
-    //     for(let cat in posts[post].categories.nodes){
-    //              categories.indexOf(posts[post].categories[j].name) === -1
-    //       ? categories.push(posts[i].node.categories[j].name)
-    //       : null
-    //     }
-    // }
-
-    // for (var i = 0; i < posts.length; i++) {
-    //   for (var j = 0; j < posts[i].node.categories.length; j++) {
-    //     categories.indexOf(posts[i].node.categories[j].name) === -1
-    //       ? categories.push(posts[i].node.categories[j].name)
-    //       : null
-    //   }
-    // }
+    var categories = ["All"]
+    for (let post in posts) {
+      for (let cat in posts[post].node.categories.nodes) {
+        if (
+          categories.indexOf(posts[post].node.categories.nodes[cat].name) === -1
+        ) {
+          categories.push(posts[post].node.categories.nodes[cat].name)
+        }
+      }
+    }
 
     return (
       <Layout>
         <SEO title="Shop" />
         <div className="container container-wide pt-5">
+          <div className="py-4">
+            {categories.map(category => (
+              <button
+                className="btn btn-light btn-sm ml-2"
+                key={category}
+                id={category}
+                onClick={() => {
+                  this.filterPosts(category)
+                }}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
           <div className="row">
             {this.state.items.map(({ node: post }) => {
               return (
-                <div className="col-3" key={post.id}>
+                <div className="col-3 mb-4" key={post.id}>
                   <SinglePost data={post} />
-                  category: {post.categories.nodes[0].name}
                 </div>
               )
             })}

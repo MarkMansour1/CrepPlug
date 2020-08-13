@@ -1,7 +1,7 @@
 export const applyFilters = (state, productList) => {
   // If a minimum price is set, remove all products below it
   if (state.minPrice !== null) {
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       if (parseFloat(productList[i].node.price.substr(1)) < state.minPrice) {
         productList.splice(i, 1)
         i--
@@ -11,7 +11,7 @@ export const applyFilters = (state, productList) => {
 
   // If a maximum price is set, remove all products above it
   if (state.maxPrice !== null) {
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       if (parseFloat(productList[i].node.price.substr(1)) > state.maxPrice) {
         productList.splice(i, 1)
         i--
@@ -22,7 +22,7 @@ export const applyFilters = (state, productList) => {
   // If there are category filters enabled, apply them to the product list
   if (state.categories.length > 0) {
     // Loops through every product in the list
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       // Checks if any of the product categories are included in the filters
       if (
         !productList[i].node.productCategories.nodes.some(
@@ -38,7 +38,7 @@ export const applyFilters = (state, productList) => {
 
   // If there are condition filters enabled, apply them to the product list
   if (state.conditions.length > 0) {
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       var product = productList[i].node
 
       // Creates an array of conditions from the product attributes
@@ -67,7 +67,7 @@ export const applyFilters = (state, productList) => {
 
   // If there are size filters enabled, apply them to the product list
   if (state.sizes.length > 0) {
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       var product = productList[i].node
 
       // Creates an array of sizes from the product attributes
@@ -90,7 +90,7 @@ export const applyFilters = (state, productList) => {
 
   // If there are colour filters enabled, apply them to the product list
   if (state.colours.length > 0) {
-    for (var i = 0; i < productList.length; i++) {
+    for (let i = 0; i < productList.length; i++) {
       var product = productList[i].node
 
       // Creates an array of colours from the product attributes

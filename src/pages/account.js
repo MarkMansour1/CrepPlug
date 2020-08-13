@@ -24,7 +24,7 @@ const PageComponent = () => {
   return (
     <Layout>
       <SEO title="Account" />
-      <div className="container pt-5">
+      <div className="container container-wide pt-5">
         <div className="row" style={{ position: "relative" }}>
           <div className="col-3">
             <AccountNav user={user} />
