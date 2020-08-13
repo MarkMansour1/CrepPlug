@@ -12,7 +12,7 @@ const setUser = user =>
 
 export const handleLogin = ({ username, password }) => {
   fetch(
-    `https://designsuite.pro/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
+    `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
     {
       method: "POST",
     }
@@ -34,7 +34,7 @@ export const handleLogin = ({ username, password }) => {
 }
 
 export const handleSignup = ({ username, email, password }) => {
-  fetch(`https://designsuite.pro/wp-json/wp/v2/users/register`, {
+  fetch(`${process.env.SITE_URL}/wp-json/wp/v2/users/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -56,7 +56,7 @@ export const handleSignup = ({ username, email, password }) => {
 }
 
 export const handleLoginGraphql = ({ username, password }) => {
-  fetch("https://designsuite.pro/graphql", {
+  fetch(`${process.env.SITE_URL}/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

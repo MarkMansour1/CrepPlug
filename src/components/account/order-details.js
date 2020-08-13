@@ -13,7 +13,7 @@ const AccountSection = () => {
   const orderId = url[url.length - 1]
 
   useEffect(() => {
-    fetch(`https://designsuite.pro/wp-json/wc/v3/orders/${orderId}`, {
+    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/orders/${orderId}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

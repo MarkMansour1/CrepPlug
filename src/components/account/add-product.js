@@ -2,7 +2,7 @@ import React from "react"
 import { getUser } from "../../services/auth"
 
 function create(dataset, bearer) {
-  fetch("https://designsuite.pro/wp-json/wcfmmp/v1/products/", {
+  fetch(`${process.env.SITE_URL}/wp-json/wcfmmp/v1/products/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

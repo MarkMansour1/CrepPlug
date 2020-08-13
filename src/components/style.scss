@@ -432,21 +432,25 @@ ul {
 // Navigation
 
 .nav-tabs {
+  border: none;
+
   .nav-link {
     padding: 1.25rem;
     border: none;
     border-radius: 0;
     font-family: $mont;
+    font-weight: 600;
+    color: $gray;
+    border-bottom: 2px solid $gray-light;
 
     &:focus {
-      border: none;
       outline: none;
     }
 
     &.active {
-      margin: 0;
-      background: $light;
       border: none;
+      color: black;
+      border-bottom: 2px solid black;
     }
   }
 }
@@ -967,6 +971,7 @@ footer {
   .welcome-text {
     font-size: 0.9rem;
     padding: 1rem;
+    margin-bottom: 1rem;
 
     span {
       font-family: $mont;
@@ -1024,6 +1029,8 @@ footer {
 .account-wrapper {
   padding-left: 2rem;
   font-size: 14px;
+  max-width: 800px;
+  margin-left: auto;
 
   input {
     font-size: 14px;
@@ -1033,8 +1040,6 @@ footer {
 // Settings
 
 .account-settings {
-  max-width: 500px;
-  margin: 0 auto;
 }
 
 // Orders
@@ -1042,8 +1047,16 @@ footer {
 .order-table {
   font-size: 14px;
 
+  thead {
+    th {
+      border-top: 0;
+      // padding: 1.25rem 0.75rem;
+      padding-top: 1rem;
+    }
+  }
+
   td {
-    padding: 1rem 0.75rem;
+    padding: 1.25rem 0.75rem;
   }
 }
 

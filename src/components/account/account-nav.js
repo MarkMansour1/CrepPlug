@@ -9,10 +9,11 @@ class AccountNav extends React.Component {
     return (
       <>
         <div className="account-nav">
-          {/* <div className="profile-picture">{user.username[0]}</div> */}
+          <div className="profile-picture">{user.username[0]}</div>
           <div className="welcome-text">
             <span>{user.username}</span>
-            10 products | 3 reviews
+            {user.email}
+            {/* 10 products | 3 reviews */}
           </div>
           <Link activeClassName="active" to="/account">
             <svg

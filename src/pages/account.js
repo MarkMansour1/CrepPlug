@@ -11,7 +11,9 @@ import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Orders from "../components/account/orders"
 import OrderDetails from "../components/account/order-details"
+import Messages from "../components/account/messages"
 import Settings from "../components/account/settings"
+import Reviews from "../components/account/reviews"
 
 const PageComponent = () => {
   if (isLoggedIn()) {
@@ -24,7 +26,7 @@ const PageComponent = () => {
   return (
     <Layout>
       <SEO title="Account" />
-      <div className="container container-wide pt-5">
+      <div className="container pt-5">
         <div className="row" style={{ position: "relative" }}>
           <div className="col-3">
             <AccountNav user={user} />
@@ -33,9 +35,11 @@ const PageComponent = () => {
             <Router>
               <Products path="account" />
               <Orders path="account/orders" />
+              <Messages path="account/messages" />
               <Settings path="account/settings" />
               <AddProduct path="account/add-product" />
               <OrderDetails path="account/order/*" />
+              <Reviews path="account/reviews" />
             </Router>
           </div>
         </div>

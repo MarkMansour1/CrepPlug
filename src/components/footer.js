@@ -152,7 +152,7 @@ const BackgroundSection = () => (
                 <div className="col-12 col-sm-6 col-xl-4 order-3 order-sm-1 order-xl-3">
                   <h4>Subscribe to our Newsletter</h4>
                   <form
-                    className="form-inline"
+                    className="form-inline w-100"
                     name="contact"
                     method="POST"
                     data-netlify="true"
