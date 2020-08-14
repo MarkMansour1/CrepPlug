@@ -8,7 +8,7 @@ const PageTemplate = ({ data }) => {
 
   return (
     <Layout>
-      <div className="container py-5">
+      <div className="container pt-5">
         <h2>{title}</h2>
       </div>
     </Layout>

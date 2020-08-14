@@ -105,21 +105,43 @@ class Header extends React.Component {
                     />
                   </svg>
                 </Link>
-                <Link to={isLoggedIn() ? "/account" : "/login"}>
-                  <svg
-                    width="1.5rem"
-                    height="1.5rem"
-                    viewBox="0 0 16 16"
-                    className="bi bi-person"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-                    />
-                  </svg>
-                </Link>
+                <div className="header-dropdown">
+                  <Link to={isLoggedIn() ? "/account" : "/login"}>
+                    <svg
+                      width="1.5rem"
+                      height="1.5rem"
+                      viewBox="0 0 16 16"
+                      className="bi bi-person"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+                      />
+                    </svg>
+                  </Link>
+                  <div className="header-dropdown-content">
+                    <Link to="/account">
+                      <span>My Account</span>
+                    </Link>
+                    <Link to="/account/messages">
+                      <span>Messages</span>
+                    </Link>
+                    <Link to="/account/orders">
+                      <span>Purchase History</span>
+                    </Link>
+                    <Link to="/account/settings">
+                      <span>Settings</span>
+                    </Link>
+                    <Link to="/account/settings">
+                      <span>Change Password</span>
+                    </Link>
+                    <Link to="/account">
+                      <span>Logout</span>
+                    </Link>
+                  </div>
+                </div>
                 <Link to="/cart">
                   <svg
                     width="1.4rem"
@@ -145,8 +167,34 @@ class Header extends React.Component {
                 <Link to="/sourcing">Sourcing</Link>
                 <Link to="/">Services</Link>
                 <Link to="/">Accessories</Link>
-                <Link to="/">The Hub</Link>
-                <Link to="/contact-us">Contact Us</Link>
+                <div className="header-dropdown">
+                  <div className="header-dropdown-link">The Hub</div>
+                  <div className="header-dropdown-content">
+                    <Link to="/merch">
+                      <span>Merch</span>
+                    </Link>
+                    <Link to="/collections">
+                      <span>Collections</span>
+                    </Link>
+                    <Link to="/blog">
+                      <span>Blog</span>
+                    </Link>
+                    <Link to="/youtube">
+                      <span>YouTube</span>
+                    </Link>
+                  </div>
+                </div>
+                <div className="header-dropdown">
+                  <Link to="/contact-us">Contact Us</Link>
+                  <div className="header-dropdown-content">
+                    <Link to="/how-to-sell">
+                      <span>How To Sell</span>
+                    </Link>
+                    <Link to="/about-us">
+                      <span>About Us</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

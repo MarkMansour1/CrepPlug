@@ -24,6 +24,7 @@ export const handleLogin = ({ username, password }) => {
         token: data.token,
         username: data.user_display_name,
         email: data.user_email,
+        id: data.store_id,
       })
     })
     .catch(err => {

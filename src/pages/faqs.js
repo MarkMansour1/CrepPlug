@@ -49,9 +49,7 @@ class PageComponent extends React.Component {
       <Layout>
         <SEO title="Sourcing" />
         <div className="container container-narrow">
-          <h2 className="text-gray-dark text-center py-5">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="text-center py-5">Frequently Asked Questions</h2>
           <h4>As a Seller</h4>
           <Accordion>
             {seller.map((faq, index) => (

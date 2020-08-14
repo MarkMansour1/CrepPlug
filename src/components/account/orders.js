@@ -61,31 +61,33 @@ const AccountSection = () => {
             </thead>
             <tbody>
               {data
-                ? data.map(order => {
-                    return (
-                      <tr>
-                        <td>
-                          <Link
-                            to={`/account/order/${order.id}`}
-                            className="text-secondary"
-                          >
-                            #{order.id}
-                          </Link>
-                        </td>
-                        <td>
-                          {order.line_items.map(item => (
-                            <span className="d-block">{item.name}</span>
-                          ))}
-                        </td>
-                        <td>
-                          {new Date(order.date_created).toLocaleDateString(
-                            "en-GB"
-                          )}
-                        </td>
-                        <td>{order.status}</td>
-                        <td>£{order.total}</td>
-                      </tr>
-                    )
+                ? data.map((order, index) => {
+                    if (index % 2 == 0) {
+                      return (
+                        <tr>
+                          <td>
+                            <Link
+                              to={`/account/order/${order.id}`}
+                              className="text-secondary"
+                            >
+                              #{order.id}
+                            </Link>
+                          </td>
+                          <td>
+                            {order.line_items.map(item => (
+                              <span className="d-block">{item.name}</span>
+                            ))}
+                          </td>
+                          <td>
+                            {new Date(order.date_created).toLocaleDateString(
+                              "en-GB"
+                            )}
+                          </td>
+                          <td>{order.status}</td>
+                          <td>£{order.total}</td>
+                        </tr>
+                      )
+                    }
                   })
                 : null}
             </tbody>
@@ -104,31 +106,33 @@ const AccountSection = () => {
             </thead>
             <tbody>
               {data
-                ? data.map(order => {
-                    return (
-                      <tr>
-                        <td>
-                          <Link
-                            to={`/account/order/${order.id}`}
-                            className="text-secondary"
-                          >
-                            #{order.id}
-                          </Link>
-                        </td>
-                        <td>
-                          {order.line_items.map(item => (
-                            <span className="d-block">{item.name}</span>
-                          ))}
-                        </td>
-                        <td>
-                          {new Date(order.date_created).toLocaleDateString(
-                            "en-GB"
-                          )}
-                        </td>
-                        <td>{order.status}</td>
-                        <td>£{order.total}</td>
-                      </tr>
-                    )
+                ? data.map((order, index) => {
+                    if (index % 2 == 1) {
+                      return (
+                        <tr>
+                          <td>
+                            <Link
+                              to={`/account/order/${order.id}`}
+                              className="text-secondary"
+                            >
+                              #{order.id}
+                            </Link>
+                          </td>
+                          <td>
+                            {order.line_items.map(item => (
+                              <span className="d-block">{item.name}</span>
+                            ))}
+                          </td>
+                          <td>
+                            {new Date(order.date_created).toLocaleDateString(
+                              "en-GB"
+                            )}
+                          </td>
+                          <td>{order.status}</td>
+                          <td>£{order.total}</td>
+                        </tr>
+                      )
+                    }
                   })
                 : null}
             </tbody>

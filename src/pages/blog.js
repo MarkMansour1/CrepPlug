@@ -67,7 +67,7 @@ class PageComponent extends React.Component {
 
     return (
       <Layout>
-        <SEO title="Shop" />
+        <SEO title="Blog" />
         <div className="container container-wide pt-5">
           <div className="py-4">
             {categories.map(category => (

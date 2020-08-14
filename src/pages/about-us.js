@@ -12,7 +12,7 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="About Us" />
-        <div className="container">
+        <div className="container pt-5">
           <div className="about-us">
             <div className="block aboutdesc">
               <h1 className="my-5">Be Your Own Plug</h1>

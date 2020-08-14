@@ -1,21 +1,21 @@
 import React from "react"
 import { Link } from "gatsby"
-import Helmet from "react-helmet"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
-// import protection from "../img/protection.png"
+import protection from "../images/protection.png"
 
 class PageComponent extends React.Component {
   render() {
     return (
       <Layout>
-        <Helmet title="Crep Plug | Buyer Protection" />
-        <div className="protection-section">
-          <h1> Our marketplace is 100% safe for buyers and sellers</h1>
+        <SEO title="Buyer Protection" />
+        <div className="protection-section pt-4">
+          <h2>Our marketplace is 100% safe for buyers and sellers</h2>
           <div className="container">
             <div className="protectionbox">
-              {/* <img src={protection} alt="Buyer Protection Guarantee" /> */}
+              <img src={protection} alt="Buyer Protection Guarantee" />
               <h4>Crepplug + PayPal Protection</h4>
               <p>
                 If anything goes wrong, every transaction conducted through
@@ -104,9 +104,11 @@ class PageComponent extends React.Component {
                   <p>
                     If you do not receive your purchase or receive an item that
                     is significantly different from the listing,{" "}
-                    <Link to="/contact-us">contact our support team</Link> and
-                    we will guide you through the process of receiving a full
-                    refund (including shipping costs) through PayPal.
+                    <Link to="/contact-us" className="text-secondary">
+                      contact our support team
+                    </Link>{" "}
+                    and we will guide you through the process of receiving a
+                    full refund (including shipping costs) through PayPal.
                   </p>
                 </div>
               </div>
