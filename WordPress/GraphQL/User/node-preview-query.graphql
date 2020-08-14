@@ -30,6 +30,11 @@ query PREVIEW_QUERY($id: ID!) {
     name
     nicename
     nickname
+    pages(first: 100) {
+      nodes {
+        id
+      }
+    }
     posts(first: 100) {
       nodes {
         id

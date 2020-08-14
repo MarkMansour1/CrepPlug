@@ -29,7 +29,7 @@ module.exports = {
         },
         type: {
           Page: {
-            exclude: true,
+            // exclude: true,
           },
         },
       },

@@ -7,7 +7,7 @@ import { getUser } from "../../services/auth"
 import defaultimg from "../../images/default_product.png"
 
 const AccountSection = () => {
-  const [data, setData] = useState(0)
+  const [data, setData] = useState(null)
   const user = getUser()
 
   useEffect(() => {
@@ -49,15 +49,39 @@ const AccountSection = () => {
       </h2>
       <Tabs justify defaultActiveKey="forsale" transition={false}>
         <Tab eventKey="forsale" title="For Sale">
-          <div className="row">
-            {data
-              ? data.map(product => (
-                  <div className="col-4 my-2" key={product.id}>
-                    <SingleProduct data={product} />
-                  </div>
-                ))
-              : false}
-          </div>
+          <table className="table account-table">
+            <tbody>
+              {data
+                ? data.map(product => {
+                    return (
+                      <tr>
+                        <td>
+                          <div className="img-container">
+                            {product.images[0] && product.images[0].src ? (
+                              <img
+                                src={product.images[0].src}
+                                alt={product.name}
+                              />
+                            ) : (
+                              <img src={defaultimg} alt={product.name} />
+                            )}
+                          </div>
+                        </td>
+                        <td>{product.name}</td>
+                        <td>
+                          {product.stock_status === "instock"
+                            ? "In stock"
+                            : "Out of stock"}
+                        </td>
+                        <td>£{product.price}</td>
+                        <td>{timeSince(product.date_created)}</td>
+                        <td>actions</td>
+                      </tr>
+                    )
+                  })
+                : null}
+            </tbody>
+          </table>
         </Tab>
         <Tab eventKey="sold" title="Sold">
           <div className="row">

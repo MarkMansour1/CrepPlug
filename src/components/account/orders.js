@@ -49,10 +49,19 @@ const AccountSection = () => {
       </h2>
       <Tabs justify defaultActiveKey="purchases" transition={false}>
         <Tab eventKey="purchases" title="Purchases">
-          <table className="table order-table">
+          <table className="table account-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Products</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+              </tr>
+            </thead>
             <tbody>
               {data
-                ? data.map((order, index) => {
+                ? data.map(order => {
                     return (
                       <tr>
                         <td>
@@ -83,8 +92,8 @@ const AccountSection = () => {
           </table>
         </Tab>
         <Tab eventKey="sales" title="Sales">
-          <table className="table order-table">
-            {/* <thead>
+          <table className="table account-table">
+            <thead>
               <tr>
                 <th>Order</th>
                 <th>Products</th>
@@ -92,11 +101,34 @@ const AccountSection = () => {
                 <th>Status</th>
                 <th>Total</th>
               </tr>
-            </thead> */}
+            </thead>
             <tbody>
               {data
-                ? data.map((order, index) => {
-                    return <tr>{/* {copy from purchase orders here} */}</tr>
+                ? data.map(order => {
+                    return (
+                      <tr>
+                        <td>
+                          <Link
+                            to={`/account/order/${order.id}`}
+                            className="text-secondary"
+                          >
+                            #{order.id}
+                          </Link>
+                        </td>
+                        <td>
+                          {order.line_items.map(item => (
+                            <span className="d-block">{item.name}</span>
+                          ))}
+                        </td>
+                        <td>
+                          {new Date(order.date_created).toLocaleDateString(
+                            "en-GB"
+                          )}
+                        </td>
+                        <td>{order.status}</td>
+                        <td>£{order.total}</td>
+                      </tr>
+                    )
                   })
                 : null}
             </tbody>
