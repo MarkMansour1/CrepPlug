@@ -3,7 +3,7 @@ import React from "react"
 
 import Logo from "./logo"
 
-import { isLoggedIn } from "../services/auth"
+import { isLoggedIn, logout } from "../services/auth"
 
 class Header extends React.Component {
   constructor(props) {
@@ -137,9 +137,15 @@ class Header extends React.Component {
                     <Link to="/account/settings">
                       <span>Change Password</span>
                     </Link>
-                    <Link to="/account">
-                      <span>Logout</span>
-                    </Link>
+                    <a
+                      onClick={event => {
+                        event.preventDefault()
+                        logout(() => navigate(`/login`))
+                      }}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Logout
+                    </a>
                   </div>
                 </div>
                 <Link to="/cart">
