@@ -19,13 +19,29 @@ export const handleLogin = ({ username, password }) => {
   )
     .then(response => response.json())
     .then(data => {
-      navigate("/account")
-      return setUser({
-        token: data.token,
-        username: data.user_display_name,
-        email: data.user_email,
-        id: data.store_id,
-      })
+      fetch(
+        `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/get_by_user/${data.store_id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${data.token}`,
+          },
+        }
+      )
+        .then(res => res.json())
+        .then(res => {
+          navigate("/account")
+
+          return setUser({
+            token: data.token,
+            username: data.user_display_name,
+            email: data.user_email,
+            id: data.store_id,
+            shareKey: res[0].share_key,
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     })
     .catch(err => {
       console.log(err)

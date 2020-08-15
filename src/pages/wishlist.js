@@ -10,7 +10,6 @@ import { removeProduct } from "../services/wishlist"
 import defaultimg from "../images/default_product.png"
 
 const PageComponent = props => {
-  const [shareKey, setShareKey] = useState(null)
   const [data, setData] = useState(null)
 
   const user = getUser()
@@ -18,37 +17,33 @@ const PageComponent = props => {
 
   useEffect(() => {
     fetch(
-      `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/get_by_user/${user.id}`,
+      `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/get_products`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       }
     )
-      .then(res => res.json())
-      .then(res => {
-        var share_key = res[0].share_key
-        setShareKey(share_key)
-        fetch(
-          `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${share_key}/get_products`,
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        )
-          .then(result => result.json())
-          .then(result => {
-            setData(result)
-          })
-          .catch(err => {
-            console.log(err)
-          })
+      .then(result => result.json())
+      .then(result => {
+        setData(result)
       })
       .catch(err => {
         console.log(err)
       })
   }, [])
+
+  const handleRemove = itemId => {
+    var newData = data.slice()
+    for (let i in data) {
+      if (data[i].item_id === itemId) {
+        newData.splice(i, 1)
+        setData(newData)
+        break
+      }
+    }
+    removeProduct(user, itemId)
+  }
 
   return (
     <Layout>
@@ -101,8 +96,8 @@ const PageComponent = props => {
                           </Link>
                         </td>
                         <td>
-                          {product.stockStatus && product.stockStatus == 0
-                            ? "Out of stock"
+                          {product.manageStock && !product.stockQuantity
+                            ? "Out stock"
                             : "In stock"}
                         </td>
                         <td>{product.price}</td>
@@ -111,9 +106,7 @@ const PageComponent = props => {
                             Add to cart
                           </button>
                           <button
-                            onClick={() =>
-                              setData(removeProduct(user, itemId, data))
-                            }
+                            onClick={() => handleRemove(itemId)}
                             className="btn btn-light btn-sm ml-3"
                           >
                             <svg
@@ -159,6 +152,8 @@ export const query = graphql`
           name
           price
           regularPrice
+          manageStock
+          stockQuantity
           image {
             sourceUrl
           }

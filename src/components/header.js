@@ -90,64 +90,73 @@ class Header extends React.Component {
                 <Link to={isLoggedIn() ? "/account/add-product" : "/login"}>
                   Sell
                 </Link>
-                <Link to="/wishlist">
-                  <svg
-                    width="1.25rem"
-                    height="1.25rem"
-                    viewBox="0 0 16 16"
-                    className="bi bi-heart"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
-                    />
-                  </svg>
-                </Link>
-                <div className="header-dropdown">
-                  <Link to={isLoggedIn() ? "/account" : "/login"}>
-                    <svg
-                      width="1.5rem"
-                      height="1.5rem"
-                      viewBox="0 0 16 16"
-                      className="bi bi-person"
-                      fill="currentColor"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-                      />
-                    </svg>
-                  </Link>
-                  <div className="header-dropdown-content">
-                    <Link to="/account">
-                      <span>My Account</span>
+                {isLoggedIn() ? (
+                  <>
+                    <Link to="/wishlist">
+                      <svg
+                        width="1.25rem"
+                        height="1.25rem"
+                        viewBox="0 0 16 16"
+                        className="bi bi-heart"
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+                        />
+                      </svg>
                     </Link>
-                    <Link to="/account/messages">
-                      <span>Messages</span>
-                    </Link>
-                    <Link to="/account/orders">
-                      <span>Purchase History</span>
-                    </Link>
-                    <Link to="/account/settings">
-                      <span>Settings</span>
-                    </Link>
-                    <Link to="/account/settings">
-                      <span>Change Password</span>
-                    </Link>
-                    <a
-                      onClick={event => {
-                        event.preventDefault()
-                        logout(() => navigate(`/login`))
-                      }}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Logout
-                    </a>
-                  </div>
-                </div>
+                    <div className="header-dropdown">
+                      <Link to="/account">
+                        <svg
+                          width="1.5rem"
+                          height="1.5rem"
+                          viewBox="0 0 16 16"
+                          className="bi bi-person"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+                          />
+                        </svg>
+                      </Link>
+                      <div className="header-dropdown-content">
+                        <Link to="/account">
+                          <span>My Account</span>
+                        </Link>
+                        <Link to="/account/messages">
+                          <span>Messages</span>
+                        </Link>
+                        <Link to="/account/orders">
+                          <span>Purchase History</span>
+                        </Link>
+                        <Link to="/account/settings">
+                          <span>Settings</span>
+                        </Link>
+                        <Link to="/account/settings">
+                          <span>Change Password</span>
+                        </Link>
+                        <a
+                          onClick={event => {
+                            event.preventDefault()
+                            logout(() => navigate(`/login`))
+                          }}
+                          style={{ cursor: "pointer" }}
+                        >
+                          Logout
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Signup</Link>
+                  </>
+                )}
                 <Link to="/cart">
                   <svg
                     width="1.4rem"

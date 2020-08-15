@@ -2,13 +2,19 @@ import React from "react"
 import { graphql } from "gatsby"
 import AliceCarousel from "react-alice-carousel"
 
+import { getUser } from "../services/auth"
+import { addProduct } from "../services/wishlist"
+
 import Layout from "../components/layout"
 
 import defaultimg from "../images/sourcing.jpg"
 
 const PageTemplate = ({ data }) => {
+  const user = getUser()
+
   const { page } = data
   const {
+    productId,
     name,
     price,
     shortDescription,
@@ -56,19 +62,16 @@ const PageTemplate = ({ data }) => {
               className="mb-4 text-muted"
               dangerouslySetInnerHTML={{ __html: shortDescription }}
             />
-            <form id="buyForm" action="#">
-              <div className="input-group w-100 mb-4">
-                <button className="btn btn-primary btn-block" type="submit">
-                  Add to Cart
-                </button>
-                <button className="btn btn-outline-primary w-100">
-                  Add to wishlist
-                </button>
-                <button className="btn btn-outline-primary w-100">
-                  Message seller
-                </button>
-              </div>
-            </form>
+            <button className="btn btn-primary mb-3" type="submit">
+              Add to Cart
+            </button>
+            <button
+              onClick={() => addProduct(user, { product_id: productId })}
+              className="btn btn-outline-primary mb-3"
+            >
+              Add to wishlist
+            </button>
+            <button className="btn btn-outline-primary">Message seller</button>
           </div>
         </div>
       </div>
@@ -81,6 +84,7 @@ export default PageTemplate
 export const query = graphql`
   query product($id: String!) {
     page: wpSimpleProduct(id: { eq: $id }) {
+      productId
       name
       price
       shortDescription
