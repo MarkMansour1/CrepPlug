@@ -33,7 +33,7 @@ const AccountSection = () => {
       <Link to="/account/orders" className="link-flat text-secondary">
         <svg
           viewBox="0 0 16 16"
-          class="bi bi-arrow-left"
+          className="bi bi-arrow-left"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -79,9 +79,9 @@ const OrderDetails = ({ order }) => {
 
   return (
     <div>
-      <div class="alert alert-secondary" role="alert">
+      <div className="alert alert-secondary" role="alert">
         Already shipped this order?{" "}
-        <a href="#" class="alert-link">
+        <a href="#" className="alert-link">
           Mark as shipped.
         </a>
       </div>
@@ -99,7 +99,7 @@ const OrderDetails = ({ order }) => {
           </thead>
           <tbody className="order-items">
             {order.line_items.map(item => (
-              <tr>
+              <tr key={item.id}>
                 <td>
                   {item.name} x {item.quantity}
                 </td>
@@ -124,18 +124,24 @@ const OrderDetails = ({ order }) => {
       <div className="d-flex justify-content-between pt-5">
         <div>
           <h4>Shipping Address:</h4>
-          {shippingDetails.map(detail => {
+          {shippingDetails.map((detail, index) => {
             if (detail[1]) {
-              return <div className="mb-1">{detail[1]}</div>
+              return (
+                <div className="mb-1" key={index}>
+                  {detail[1]}
+                </div>
+              )
             }
           })}
         </div>
         <div>
           <h4>Customer Details:</h4>
-          {customerDetails.map(detail => (
+          {customerDetails.map((detail, index) => (
             <>
               <small className="d-block text-gray">{detail[0]}</small>
-              <div className="mb-2">{detail[1]}</div>
+              <div className="mb-2" key={index}>
+                {detail[1]}
+              </div>
             </>
           ))}
         </div>

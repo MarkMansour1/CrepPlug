@@ -11,14 +11,14 @@ const Component = () => {
       <Collapse in={open}>
         <div>
           {categories.map(categoryFilter => (
-            <div class="form-check my-2">
+            <div className="form-check my-2">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value={categoryFilter}
                 id={categoryFilter}
               />
-              <label class="form-check-label" for={categoryFilter}>
+              <label className="form-check-label" for={categoryFilter}>
                 {categoryFilter}
               </label>
             </div>

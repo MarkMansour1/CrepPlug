@@ -113,7 +113,7 @@ const PageComponent = props => {
                               width="2em"
                               height="2em"
                               viewBox="0 0 16 16"
-                              class="bi bi-x"
+                              className="bi bi-x"
                               fill="currentColor"
                               xmlns="http://www.w3.org/2000/svg"
                             >

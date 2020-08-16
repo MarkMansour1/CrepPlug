@@ -26,7 +26,7 @@ const AccountSection = () => {
           width="1em"
           height="1em"
           viewBox="0 0 16 16"
-          class="bi bi-chat-right-text"
+          className="bi bi-chat-right-text"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >

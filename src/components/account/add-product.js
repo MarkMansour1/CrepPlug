@@ -60,7 +60,7 @@ class AccountSection extends React.Component {
       <div className="w-75 mx-auto">
         <form onSubmit={this.onSubmit}>
           <div id="details" className="form-group">
-            <label for="name">Product Name</label>
+            <label htmlFor="name">Product Name</label>
             <input
               type="text"
               className="form-control"
@@ -91,7 +91,7 @@ class AccountSection extends React.Component {
             </div>
           </div>
           <div className="form-group">
-            <label for="short_description">Description</label>
+            <label htmlFor="short_description">Description</label>
             <textarea
               rows="3"
               className="form-control"

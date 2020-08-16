@@ -33,7 +33,7 @@ const AccountSection = () => {
       <Link to="/account/messages" className="link-flat text-secondary">
         <svg
           viewBox="0 0 16 16"
-          class="bi bi-arrow-left"
+          className="bi bi-arrow-left"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >

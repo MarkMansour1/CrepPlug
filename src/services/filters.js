@@ -1,4 +1,14 @@
 export const applyFilters = (state, productList) => {
+  // If there is a search filter, remove all the products not matching the search
+  if (state.search.length > 0) {
+    for (let i = 0; i < productList.length; i++) {
+      if (!searchMatch(state.search, productList[i].node)) {
+        productList.splice(i, 1)
+        i--
+      }
+    }
+  }
+
   // If a minimum price is set, remove all products below it
   if (state.minPrice !== null) {
     for (let i = 0; i < productList.length; i++) {
@@ -132,6 +142,31 @@ export const applySort = (sort, productList) => {
   }
 
   return productList
+}
+
+function searchMatch(search, product) {
+  var searchItems = search.split(" ")
+  var searchRange = product.name
+  for (let i in product.productCategories.nodes) {
+    searchRange += " " + product.productCategories.nodes[i].name
+  }
+
+  var matchesNeeded = 0
+  if (searchItems.length > 3) {
+    matchesNeeded = 3
+  } else if (searchItems.length == 3) {
+    matchesNeeded = 2
+  } else {
+    matchesNeeded = searchItems.length
+  }
+
+  for (var item in searchItems) {
+    if (searchRange.toLowerCase().includes(searchItems[item].toLowerCase())) {
+      matchesNeeded--
+    }
+  }
+
+  return matchesNeeded > 0 ? false : true
 }
 
 function mostRecent(a, b) {

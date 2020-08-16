@@ -14,16 +14,16 @@ const PageTemplate = ({ data }) => {
   var related = []
   for (let i in posts) {
     if (
-      posts[i].node.categories.nodes[0].name == categories.nodes[0].name &&
+      posts[i].node.categories.nodes[0].name === categories.nodes[0].name &&
       related.length < 3 &&
-      posts[i].node.title != title
+      posts[i].node.title !== title
     ) {
       related.push(posts[i])
     }
   }
 
   for (let i in posts) {
-    if (related.length < 3 && posts[i].node.title != title) {
+    if (related.length < 3 && posts[i].node.title !== title) {
       related.push(posts[i])
     }
   }
@@ -53,7 +53,7 @@ const PageTemplate = ({ data }) => {
             <div className="blog-author">
               <img
                 src={author.node.avatar && author.node.avatar.url}
-                class="lazy avatar avatar-30 photo avatar-default"
+                className="lazy avatar avatar-30 photo avatar-default"
                 alt={author.name}
               />
               {author.node.name}
@@ -63,7 +63,7 @@ const PageTemplate = ({ data }) => {
                 width="1em"
                 height="1em"
                 viewBox="0 0 16 16"
-                class="bi bi-calendar-event-fill mr-2 mb-1"
+                className="bi bi-calendar-event-fill mr-2 mb-1"
                 fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >

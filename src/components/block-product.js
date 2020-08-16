@@ -11,7 +11,7 @@ const Block = ({ title, link, linkText, products }) => (
         {`${linkText} `}
         <svg
           viewBox="0 0 16 16"
-          class="bi bi-arrow-right"
+          className="bi bi-arrow-right"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >

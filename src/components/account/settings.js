@@ -32,7 +32,7 @@ const AccountSection = () => {
           width="1em"
           height="1em"
           viewBox="0 0 16 16"
-          class="bi bi-layout-text-window-reverse"
+          className="bi bi-layout-text-window-reverse"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -47,11 +47,11 @@ const AccountSection = () => {
         </svg>
       </h2>
       <form>
-        <div class="form-group row">
+        <div className="form-group row">
           <label htmlFor="username" className="col-sm-4 col-form-label">
             Username
           </label>
-          <div class="col-sm-8">
+          <div className="col-sm-8">
             <input
               type="text"
               className="form-control"
@@ -63,11 +63,11 @@ const AccountSection = () => {
             />
           </div>
         </div>
-        <div class="form-group row">
+        <div className="form-group row">
           <label htmlFor="firstname" className="col-sm-4 col-form-label">
             First Name
           </label>
-          <div class="col-sm-8">
+          <div className="col-sm-8">
             <input
               type="text"
               className="form-control"
@@ -78,11 +78,11 @@ const AccountSection = () => {
             />
           </div>
         </div>
-        <div class="form-group row">
+        <div className="form-group row">
           <label htmlFor="lastname" className="col-sm-4 col-form-label">
             Last Name
           </label>
-          <div class="col-sm-8">
+          <div className="col-sm-8">
             <input
               type="text"
               className="form-control"
@@ -93,11 +93,11 @@ const AccountSection = () => {
             />
           </div>
         </div>
-        <div class="form-group row">
+        <div className="form-group row">
           <label htmlFor="email" className="col-sm-4 col-form-label">
             Email Address
           </label>
-          <div class="col-sm-8">
+          <div className="col-sm-8">
             <input
               type="email"
               className="form-control"
@@ -110,7 +110,7 @@ const AccountSection = () => {
         </div>
         <div className="form-group row">
           <div className="col-sm-8 offset-sm-4">
-            <button type="submit" class="btn btn-secondary w-100">
+            <button type="submit" className="btn btn-secondary w-100">
               Save Changes
             </button>
           </div>
