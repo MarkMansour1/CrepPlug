@@ -3,20 +3,24 @@ import { graphql } from "gatsby"
 import AliceCarousel from "react-alice-carousel"
 
 import { getUser } from "../services/auth"
-import { addProduct } from "../services/wishlist"
+import { addWishlistProduct } from "../services/wishlist"
+import { Wishlist } from "../components/svg"
 
 import Layout from "../components/layout"
+import ProductBlock from "../components/block-product"
 
 import defaultimg from "../images/sourcing.jpg"
 
 const PageTemplate = ({ data }) => {
   const user = getUser()
 
-  const { page } = data
+  const { page, products } = data
   const {
     productId,
     name,
     price,
+    salePrice,
+    regularPrice,
     shortDescription,
     attributes,
     image,
@@ -38,6 +42,8 @@ const PageTemplate = ({ data }) => {
     images.push({ sourceUrl: defaultimg })
   }
 
+  var related = products.edges.slice(0, 6)
+
   return (
     <Layout>
       <div className="container pt-5">
@@ -45,35 +51,74 @@ const PageTemplate = ({ data }) => {
           <div className="col-12 col-md-6">
             <ImageCarousel images={images} />
           </div>
-          <div className="col-12 col-md-5 offset-lg-1">
-            <h3 className="mb-4">{name}</h3>
-            <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between mb-4">
-              <ul className="list-inline mb-2 mb-sm-0">
-                <li className="list-inline-item mb-0">{price}</li>
-                <li className="list-inline-item text-muted font-weight-light">
-                  <del>£190.00</del>
-                </li>
-              </ul>
-              <div className="d-flex align-items-center text-sm">
-                <span className="text-muted text-uppercase">25 reviews</span>
+          <div className="col-12 col-md-6">
+            <div className="product-info">
+              <h3>{name}</h3>
+              <div className="product-price">
+                {price}{" "}
+                {salePrice && <span>{regularPrice && regularPrice}</span>}
+              </div>
+              <div className="product-attributes">
+                {attributes &&
+                  attributes.nodes &&
+                  attributes.nodes[0] &&
+                  attributes.nodes[0].options.map(value => (
+                    <div>
+                      Colour: <span>{value}</span>
+                    </div>
+                  ))}
+                {attributes &&
+                  attributes.nodes &&
+                  attributes.nodes[1] &&
+                  attributes.nodes[1].options.map(value => (
+                    <div>
+                      Condition: <span>{value}</span>
+                    </div>
+                  ))}
+                {attributes &&
+                  attributes.nodes &&
+                  attributes.nodes[2] &&
+                  attributes.nodes[2].options.map(value => (
+                    <div>
+                      Size: <span>{value}</span>
+                    </div>
+                  ))}
+              </div>
+              <div
+                className="product-desc"
+                dangerouslySetInnerHTML={{ __html: shortDescription }}
+              />
+              <div className="product-stock"></div>
+              <div className="product-cart">
+                Quantity
+                <button className="btn btn-primary">Add to Cart</button>
+                <button
+                  onClick={() =>
+                    addWishlistProduct(user, { product_id: productId })
+                  }
+                  className="btn btn-light"
+                >
+                  <Wishlist size="1.5rem" />
+                </button>
+              </div>
+              <div className="product-actions">
+                <button className="btn btn-outline-primary">
+                  Message seller
+                </button>
+                <button className="btn btn-outline-primary">
+                  Request your size
+                </button>
               </div>
             </div>
-            <p
-              className="mb-4 text-muted"
-              dangerouslySetInnerHTML={{ __html: shortDescription }}
-            />
-            <button className="btn btn-primary mb-3" type="submit">
-              Add to Cart
-            </button>
-            <button
-              onClick={() => addProduct(user, { product_id: productId })}
-              className="btn btn-outline-primary mb-3"
-            >
-              Add to wishlist
-            </button>
-            <button className="btn btn-outline-primary">Message seller</button>
           </div>
         </div>
+        <div>reviews/messages</div>
+        <ProductBlock
+          title="Related Products"
+          link="/shop"
+          linkText="Shop All"
+          products={related}
+        />
       </div>
     </Layout>
   )
@@ -87,6 +132,8 @@ export const query = graphql`
       productId
       name
       price
+      salePrice
+      regularPrice
       shortDescription
       attributes {
         nodes {
@@ -103,6 +150,32 @@ export const query = graphql`
         }
       }
     }
+    products: allWpSimpleProduct {
+      edges {
+        node {
+          id
+          slug
+          name
+          price
+          regularPrice
+          date
+          image {
+            sourceUrl
+          }
+          productCategories {
+            nodes {
+              name
+            }
+          }
+          attributes {
+            nodes {
+              name
+              options
+            }
+          }
+        }
+      }
+    }
   }
 `
 
@@ -116,38 +189,35 @@ class ImageCarousel extends React.Component {
     )),
   }
 
-  thumbItem = (image, i) => (
-    <div
-      className="col"
-      key={image.sourceUrl}
-      onClick={() => this.Carousel.slideTo(i)}
-      style={{
-        maxWidth: "125px",
-        opacity: "0.75",
-        cursor: "pointer",
-      }}
-    >
-      <div className="img-container">
-        <img src={image.sourceUrl} alt="" />
-      </div>
-    </div>
-  )
-
   render() {
     return (
-      <div>
-        <AliceCarousel
-          dotsDisabled={true}
-          buttonsDisabled={true}
-          swipeDisabled={false}
-          items={this.state.galleryImages}
-          ref={el => (this.Carousel = el)}
-        />
-        {this.state.images.length > 1 && (
-          <div className="row small-gutter mt-3 px-4">
-            {this.state.images.map(this.thumbItem)}
-          </div>
-        )}
+      <div className="row">
+        <div className="col-2">
+          {this.state.images.map((image, index) => (
+            <div
+              onClick={() => this.Carousel.slideTo(index)}
+              style={{
+                width: "75px",
+                opacity: "0.75",
+                cursor: "pointer",
+              }}
+              key={index}
+            >
+              <div className="img-container mb-3">
+                <img src={image.sourceUrl} alt="" />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="col-10">
+          <AliceCarousel
+            dotsDisabled={true}
+            buttonsDisabled={true}
+            swipeDisabled={false}
+            items={this.state.galleryImages}
+            ref={el => (this.Carousel = el)}
+          />
+        </div>
       </div>
     )
   }

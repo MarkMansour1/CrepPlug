@@ -1,6 +1,8 @@
 import React from "react"
 import { getUser } from "../../services/auth"
 
+import { AddProduct } from "../svg"
+
 function create(dataset, bearer) {
   fetch(`${process.env.SITE_URL}/wp-json/wcfmmp/v1/products/`, {
     method: "POST",
@@ -58,6 +60,10 @@ class AccountSection extends React.Component {
   render() {
     return (
       <div className="w-75 mx-auto">
+        <h2 className="title">
+          Add Product
+          <AddProduct />
+        </h2>
         <form onSubmit={this.onSubmit}>
           <div id="details" className="form-group">
             <label htmlFor="name">Product Name</label>

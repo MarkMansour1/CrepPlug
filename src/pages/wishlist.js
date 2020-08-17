@@ -5,7 +5,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import { getUser } from "../services/auth"
-import { removeProduct } from "../services/wishlist"
+import { removeWishlistProduct } from "../services/wishlist"
+import { Cross } from "../components/svg"
 
 import defaultimg from "../images/default_product.png"
 
@@ -42,7 +43,7 @@ const PageComponent = props => {
         break
       }
     }
-    removeProduct(user, itemId)
+    removeWishlistProduct(user, itemId)
   }
 
   return (
@@ -97,7 +98,7 @@ const PageComponent = props => {
                         </td>
                         <td>
                           {product.manageStock && !product.stockQuantity
-                            ? "Out stock"
+                            ? "Out of stock"
                             : "In stock"}
                         </td>
                         <td>{product.price}</td>
@@ -109,23 +110,7 @@ const PageComponent = props => {
                             onClick={() => handleRemove(itemId)}
                             className="btn btn-light btn-sm ml-3"
                           >
-                            <svg
-                              width="2em"
-                              height="2em"
-                              viewBox="0 0 16 16"
-                              className="bi bi-x"
-                              fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill-rule="evenodd"
-                                d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"
-                              />
-                              <path
-                                fill-rule="evenodd"
-                                d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"
-                              />
-                            </svg>
+                            <Cross size="2em" />
                           </button>
                         </td>
                       </tr>

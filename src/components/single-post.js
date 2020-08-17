@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import { Calendar } from "../components/svg"
 import defaultimg from "../images/sourcing.jpg"
 
 class Single extends React.Component {
@@ -40,19 +41,7 @@ class Single extends React.Component {
           </div>
         ) : null}
         <div className="post-date">
-          <svg
-            width="1em"
-            height="1em"
-            viewBox="0 0 16 16"
-            className="bi bi-calendar-event-fill"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM0 5h16v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5zm12.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"
-            />
-          </svg>
+          <Calendar />
           {post.date}
         </div>
       </div>

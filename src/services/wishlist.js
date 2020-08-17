@@ -1,4 +1,4 @@
-export const addProduct = (user, data) => {
+export const addWishlistProduct = (user, data) => {
   fetch(
     `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/add_product/`,
     {
@@ -21,7 +21,7 @@ export const addProduct = (user, data) => {
   return false
 }
 
-export const removeProduct = (user, itemId) => {
+export const removeWishlistProduct = (user, itemId) => {
   fetch(
     `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/remove_product/${itemId}`,
     {

@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, navigate } from "gatsby"
 
 import Accordion from "react-bootstrap/Accordion"
 import Card from "react-bootstrap/Card"
@@ -42,7 +42,7 @@ class PageComponent extends React.Component {
   }
 
   clearFilters() {
-    // TODO reset form elements as well
+    // TODO reset form elements
 
     this.setState(
       {
@@ -54,7 +54,10 @@ class PageComponent extends React.Component {
         colours: [],
         search: "",
       },
-      () => this.filterProducts()
+      () => {
+        navigate("/shop")
+        this.filterProducts()
+      }
     )
   }
 
@@ -98,18 +101,81 @@ class PageComponent extends React.Component {
   componentDidMount() {
     const allProducts = this.props.data.products.edges
 
-    this.setState({
-      items: allProducts,
-    })
+    const url = typeof window !== "undefined" ? window.location.search : ""
+    const urlParams = new URLSearchParams(url)
+    const searchString = urlParams.get("search") ? urlParams.get("search") : ""
+
+    this.setState(
+      {
+        items: allProducts,
+        search: searchString,
+      },
+      () => {
+        this.filterProducts()
+      }
+    )
+  }
+
+  componentDidUpdate() {
+    const url = typeof window !== "undefined" ? window.location.search : ""
+    const urlParams = new URLSearchParams(url)
+    const searchString = urlParams.get("search") ? urlParams.get("search") : ""
+
+    if (searchString !== this.state.search) {
+      this.setState(
+        {
+          search: searchString,
+        },
+        () => {
+          this.filterProducts()
+        }
+      )
+    }
   }
 
   render() {
     const allProducts = this.props.data.products.edges
+    const allCategories = this.props.data.categories.edges
 
-    const categories = ["Nike", "Adidas", "Vans", "Jordans"]
-    const conditions = ["New", "Used"]
-    const colours = ["White", "Black", "Red", "Blue", "Green"]
-    var sizes = [6, 7, 8, 9]
+    var conditions = ["New", "Used"]
+    var categories = []
+    var colours = []
+    var sizes = []
+
+    // Gets all the woocommerce product categories, excluding this list
+    const exclude = ["New", "Used", "All", "Uncategorized", "Accessories"]
+    for (let i in allCategories) {
+      let category = allCategories[i].node.name
+      if (exclude.includes(category) == false) {
+        categories.push(category)
+      }
+    }
+
+    // Gets all the available colours and sizes from all the products available
+    for (let product in allProducts) {
+      let attributes =
+        allProducts[product].node.attributes &&
+        allProducts[product].node.attributes.nodes
+
+      for (let attribute in attributes) {
+        let attr = attributes[attribute]
+        if (attr.name == "pa_colour") {
+          for (let option in attr.options) {
+            let opt = attr.options[option]
+            if (!colours.includes(opt)) {
+              colours.push(opt)
+            }
+          }
+        } else if (attr.name == "pa_size") {
+          for (let option in attr.options) {
+            let opt = attr.options[option]
+            if (!sizes.includes(opt)) {
+              sizes.push(opt)
+            }
+          }
+        }
+      }
+    }
 
     var mostPopular = allProducts
       .slice()
@@ -121,28 +187,18 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="Shop" />
-        <div className="container container-wide pt-5">
+        <div className="container container-wide">
           {/* <ProductBlock
             title="Most Popular"
             link="/shop"
             linkText="Shop All"
             products={mostPopular}
           /> */}
+
           <div className="row">
             <div className="col-3">
+              <h3 className="pt-5">Filters</h3>
               <div className="shop-filters">
-                <div className="py-3">
-                  Showing {this.state.items.length} products
-                </div>
-                <select
-                  className="form-control form-control-sm mb-4"
-                  onChange={this.handleSorterChange}
-                >
-                  <option value="recent">Sort By: Most Recent</option>
-                  <option value="popular">Sort By: Most Popular</option>
-                  <option value="priceasc">Sort By: Lowest Price</option>
-                  <option value="pricedesc">Sort By: Highest Price</option>
-                </select>
                 <Accordion>
                   <Card>
                     <Accordion.Collapse eventKey="1">
@@ -304,6 +360,19 @@ class PageComponent extends React.Component {
               </div>
             </div>
             <div className="col-9">
+              <div className="d-flex justify-content-between align-items-center py-4">
+                <div>Showing {this.state.items.length} products</div>
+                <select
+                  className="form-control form-control-sm"
+                  onChange={this.handleSorterChange}
+                  style={{ maxWidth: "300px" }}
+                >
+                  <option value="recent">Sort By: Most Recent</option>
+                  <option value="popular">Sort By: Most Popular</option>
+                  <option value="priceasc">Sort By: Lowest Price</option>
+                  <option value="pricedesc">Sort By: Highest Price</option>
+                </select>
+              </div>
               <div className="row">
                 {this.state.items.map(({ node: product }) => {
                   return (
@@ -353,6 +422,13 @@ export const query = graphql`
               options
             }
           }
+        }
+      }
+    }
+    categories: allWpProductCategory {
+      edges {
+        node {
+          name
         }
       }
     }

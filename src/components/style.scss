@@ -113,6 +113,12 @@ h6 {
   }
 }
 
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 // Links, Buttons and Forms
 
 a:hover,
@@ -1040,37 +1046,37 @@ footer {
   }
 }
 
+.profile-picture {
+  border-radius: 50%;
+  background: $gray-dark;
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
+
+.welcome-text {
+  font-size: 0.9rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  span {
+    font-family: $mont;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+}
+
 .account-nav {
   max-width: 350px;
   font-size: 14px;
-
-  .profile-picture {
-    border-radius: 50%;
-    background: $gray-dark;
-    width: 5rem;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: white;
-    font-size: 1.5rem;
-    margin-left: 1rem;
-  }
-
-  .welcome-text {
-    font-size: 0.9rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-
-    span {
-      font-family: $mont;
-      display: block;
-      font-size: 1.5rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-  }
 
   a {
     display: flex;
@@ -1323,6 +1329,73 @@ footer {
 
 // Product Page
 
+.product-info {
+  padding-left: 50px;
+
+  .product-price {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    span {
+      text-decoration: line-through;
+      color: $gray;
+      font-size: 1.25rem;
+    }
+  }
+
+  .product-attributes {
+    margin: 0.5rem 0;
+    font-weight: 600;
+    font-size: 14px;
+
+    div {
+      padding: 0.5rem 0;
+
+      span {
+        font-weight: 400;
+        text-transform: capitalize;
+
+        &:not(:last-of-type):after {
+          content: ",";
+        }
+      }
+    }
+  }
+
+  .product-desc {
+    padding: 0.5rem 0;
+    margin-bottom: 1rem;
+
+    * {
+      font-size: 1rem !important;
+      font-weight: 400 !important;
+      text-align: left !important;
+      font-family: $font !important;
+      letter-spacing: 0 !important;
+    }
+  }
+
+  .product-cart {
+    margin-bottom: 1rem;
+
+    button {
+      margin-left: 1rem;
+    }
+  }
+
+  .product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+
+    button {
+      width: calc(50% - 0.5rem);
+    }
+  }
+}
+
 // Posts
 
 .single-post {
@@ -1413,6 +1486,10 @@ footer {
 
     .form-check {
       margin: 0.5rem 0;
+    }
+
+    .form-check-label {
+      text-transform: capitalize;
     }
   }
 }

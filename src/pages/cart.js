@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { PayPalButton } from "react-paypal-button-v2"
 
 import { getUser } from "../services/auth"
-import { removeProduct } from "../services/wishlist"
+import { Cart, Cross } from "../components/svg"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -12,6 +12,7 @@ import defaultimg from "../images/default_product.png"
 
 const PageComponent = props => {
   const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const user = getUser()
   const allProducts = props.data.products.edges
@@ -28,6 +29,7 @@ const PageComponent = props => {
       .then(result => result.json())
       .then(result => {
         setData(result)
+        setLoading(false)
       })
       .catch(err => {
         console.log(err)
@@ -48,20 +50,15 @@ const PageComponent = props => {
   return (
     <Layout>
       <SEO title="Cart" />
-      <div className="container pt-5">
-        <h2>Shopping Cart</h2>
+      <div className="container container-wide pt-5">
         <div className="row">
           <div className="col-12 col-md-8">
+            <h2 className="title">
+              Cart
+              <Cart />
+            </h2>
+            {loading && <h4>Loading...</h4>}
             <table className="table product-table">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th></th>
-                </tr>
-              </thead>
               <tbody>
                 {data
                   ? allProducts.map(({ node: product }) => {
@@ -78,7 +75,7 @@ const PageComponent = props => {
                       if (inWishlist) {
                         return (
                           <tr key={product.productId}>
-                            <td>
+                            <td style={{ minWidth: "100px" }}>
                               <Link to={`/product/${product.slug}`}>
                                 <div className="img-container">
                                   {product.image && product.image.sourceUrl ? (
@@ -110,23 +107,7 @@ const PageComponent = props => {
                                 onClick={() => handleRemove(itemId)}
                                 className="btn btn-light btn-sm ml-3"
                               >
-                                <svg
-                                  width="2em"
-                                  height="2em"
-                                  viewBox="0 0 16 16"
-                                  className="bi bi-x"
-                                  fill="currentColor"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"
-                                  />
-                                  <path
-                                    fill-rule="evenodd"
-                                    d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"
-                                  />
-                                </svg>
+                                <Cross size="2em" />
                               </button>
                             </td>
                           </tr>
@@ -138,7 +119,7 @@ const PageComponent = props => {
             </table>
           </div>
           <div className="col-12 col-md-4">
-            <div className="cart-total">
+            <div className="cart-total mt-5 pt-4">
               <h3>Cart Totals</h3>
               <div className="row mb-3">
                 <div className="col-6">
