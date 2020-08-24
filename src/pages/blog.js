@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Banner from "../components/banner"
 import SinglePost from "../components/single-post"
 
 class PageComponent extends React.Component {
@@ -52,7 +53,8 @@ class PageComponent extends React.Component {
   }
 
   render() {
-    const posts = this.props.data.posts.edges
+    const { data } = this.props
+    const posts = data.posts.edges
 
     var categories = ["All"]
     for (let post in posts) {
@@ -68,6 +70,13 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="Blog" />
+        <Banner
+          details={[
+            "blog",
+            "Read through our blog and find out about upcoming releases, discover new brands and individuals through our lookbooks, new ways to rock your favourite crep & more.",
+            data.banner.childImageSharp.fluid,
+          ]}
+        />
         <div className="container container-wide pt-5">
           <div className="py-4">
             {categories.map(category => (
@@ -102,6 +111,13 @@ export default PageComponent
 
 export const query = graphql`
   query {
+    banner: file(relativePath: { eq: "banners/blog.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 175) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     posts: allWpPost(sort: { fields: date, order: DESC }) {
       edges {
         node {

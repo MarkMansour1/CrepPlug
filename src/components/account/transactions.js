@@ -4,7 +4,7 @@ import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"
 
 import { getUser } from "../../services/auth"
-import { Orders } from "../svg"
+import { Transactions } from "../svg"
 
 const AccountSection = () => {
   const [data, setData] = useState(null)
@@ -16,9 +16,9 @@ const AccountSection = () => {
         Authorization: `Bearer ${user.token}`,
       },
     })
-      .then(res => res.json())
-      .then(res => {
-        setData(res)
+      .then(response => response.json())
+      .then(resultData => {
+        setData(resultData)
       })
       .catch(err => {
         console.log(err)
@@ -28,8 +28,8 @@ const AccountSection = () => {
   return (
     <div>
       <h2 className="title">
-        Orders
-        <Orders />
+        Transactions
+        <Transactions />
       </h2>
       <Tabs justify defaultActiveKey="purchases" transition={false}>
         <Tab eventKey="purchases" title="Purchases">
@@ -48,7 +48,7 @@ const AccountSection = () => {
                 ? data.map((order, index) => {
                     if (index % 2 == 0) {
                       return (
-                        <tr>
+                        <tr key={order.id}>
                           <td>
                             <Link
                               to={`/account/order/${order.id}`}
@@ -59,7 +59,9 @@ const AccountSection = () => {
                           </td>
                           <td>
                             {order.line_items.map(item => (
-                              <span className="d-block">{item.name}</span>
+                              <span className="d-block" key={item.name}>
+                                {item.name}
+                              </span>
                             ))}
                           </td>
                           <td>
@@ -93,7 +95,7 @@ const AccountSection = () => {
                 ? data.map((order, index) => {
                     if (index % 2 == 1) {
                       return (
-                        <tr>
+                        <tr key={order.id}>
                           <td>
                             <Link
                               to={`/account/order/${order.id}`}
@@ -104,7 +106,9 @@ const AccountSection = () => {
                           </td>
                           <td>
                             {order.line_items.map(item => (
-                              <span className="d-block">{item.name}</span>
+                              <span className="d-block">
+                                {item.name} key={item.name}
+                              </span>
                             ))}
                           </td>
                           <td>

@@ -2,7 +2,7 @@ import React from "react"
 import { Link, navigate } from "gatsby"
 import { handleLogin, isLoggedIn } from "../services/auth"
 
-import Layout from "../components/layout-minimal"
+import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 class PageComponent extends React.Component {

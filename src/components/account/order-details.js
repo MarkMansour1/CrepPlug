@@ -31,7 +31,7 @@ const AccountSection = () => {
 
   return (
     <div className="order-details">
-      <Link to="/account/orders" className="link-flat text-secondary">
+      <Link to="/account/transactions" className="link-flat text-secondary">
         <LeftArrow />
         {` Back to all orders`}
       </Link>

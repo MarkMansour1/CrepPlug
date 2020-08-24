@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Banner from "../components/banner"
 
 class PageComponent extends React.Component {
   render() {
@@ -12,6 +13,13 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="Delivery" />
+        <Banner
+          details={[
+            "delivery",
+            "Once you have purchased an item the seller will be ready to ship it to you. Contact them to be updated. If you have any issues, give us a message.",
+            data.banner.childImageSharp.fluid,
+          ]}
+        />
         <div className="container container-wide">
           <div
             dangerouslySetInnerHTML={{
@@ -28,6 +36,13 @@ export default PageComponent
 
 export const pageQuery = graphql`
   {
+    banner: file(relativePath: { eq: "banners/delivery.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 175) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     wpPage(title: { eq: "Privacy Policy" }) {
       id
       content

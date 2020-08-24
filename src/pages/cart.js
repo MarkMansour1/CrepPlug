@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { PayPalButton } from "react-paypal-button-v2"
 
 import { getUser } from "../services/auth"

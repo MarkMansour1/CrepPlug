@@ -16,7 +16,7 @@ class PageComponent extends React.Component {
 
     return (
       <Layout>
-        <SEO title="About Us" />
+        <SEO title="Merch" />
         <div className="container pt-4">
           <div>
             <h1>

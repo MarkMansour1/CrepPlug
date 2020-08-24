@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -50,17 +50,8 @@ const PageComponent = props => {
     <Layout>
       <SEO title="Wishlist" />
       <div className="container pt-5">
-        <h2>Save Your Favourite Trainers</h2>
-        <table className="table product-table">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Product</th>
-              <th>Stock Status</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        <h2 className="text-center">Save Your Favourite Trainers</h2>
+        <table className="table product-table mt-5">
           <tbody>
             {data
               ? allProducts.map(({ node: product }) => {
@@ -77,7 +68,7 @@ const PageComponent = props => {
                   if (inWishlist) {
                     return (
                       <tr key={product.productId}>
-                        <td>
+                        <td style={{ minWidth: "100px" }}>
                           <Link to={`/product/${product.slug}`}>
                             <div className="img-container">
                               {product.image && product.image.sourceUrl ? (

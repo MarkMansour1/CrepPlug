@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
 import { getUser } from "../../services/auth"
+import { timeSince } from "../../services/utils"
 import { Messages } from "../svg"
 
 const AccountSection = () => {
@@ -9,18 +10,33 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wcfmmp/v1/enquiries`, {
+    fetch(`${process.env.SITE_URL}/wp-json/wp/v2/messages`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
     })
       .then(response => response.json())
       .then(resultData => {
-        setData(resultData)
+        // Gets the most recent message from each sender
+        var data = []
+        var senders = []
+        for (let i in resultData) {
+          var message = resultData[i]
+          var users = message.cmb2.users
+          if (
+            !senders.includes(users.sender) &&
+            users.receiver === user.username
+          ) {
+            senders.push(users.sender)
+            data.push(message)
+          }
+        }
+        setData(data)
+      })
+      .catch(err => {
+        console.log(err)
       })
   }, [])
-
-  console.log(data)
 
   return (
     <div className="account-settings">
@@ -31,30 +47,26 @@ const AccountSection = () => {
       <table className="table account-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Product</th>
+            <th>Sender</th>
             <th>Message</th>
-            <th>Customer</th>
-            <th>Date</th>
+            <th>Time</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {data
             ? data.map(message => (
-                <tr>
+                <tr key={message.id}>
+                  <td>{message.cmb2.users.sender}</td>
+                  <td>{message.title.rendered}</td>
+                  <td>{timeSince(message.date)}</td>
                   <td>
                     <Link
-                      to={`/account/message/${message.ID}`}
+                      to={`/account/message/${message.cmb2.users.sender}`}
                       className="text-secondary"
                     >
-                      #{message.ID}
+                      Open Chat
                     </Link>
-                  </td>
-                  <td>{message.product_id}</td>
-                  <td>{message.enquiry}</td>
-                  <td>{message.customer_name}</td>
-                  <td>
-                    {new Date(message.posted).toLocaleDateString("en-GB")}
                   </td>
                 </tr>
               ))

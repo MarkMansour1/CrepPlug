@@ -74,7 +74,7 @@ class Header extends React.Component {
                         <Link to="/account/messages">
                           <span>Messages</span>
                         </Link>
-                        <Link to="/account/orders">
+                        <Link to="/account/transactions">
                           <span>Purchase History</span>
                         </Link>
                         <Link to="/account/settings">
@@ -111,8 +111,8 @@ class Header extends React.Component {
             <div className="container container-wide">
               <div className="header-menu">
                 <Link to="/sourcing">Sourcing</Link>
-                <Link to="/">Services</Link>
-                <Link to="/">Accessories</Link>
+                <Link to="/services">Services</Link>
+                <Link to="/accessories">Accessories</Link>
                 <div className="header-dropdown">
                   <div className="header-dropdown-link">The Hub</div>
                   <div className="header-dropdown-content">

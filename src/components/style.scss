@@ -14,7 +14,7 @@ $dark: #222222;
 $gray-dark: #333;
 $gray: #666;
 $gray-light: #ccc;
-$border: #e0e0e0;
+$border: #e6e6e6;
 $light: #f8f9fa;
 
 // System colours
@@ -684,7 +684,6 @@ header {
       position: absolute;
       visibility: hidden;
       opacity: 0;
-      box-shadow: 0 0 0.5rem 0.5rem rgba(0, 0, 0, 0.05);
 
       a {
         color: black;
@@ -968,12 +967,71 @@ footer {
   }
 }
 
+// Page banner
+
+.page-banner {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .banner-text {
+    width: 50%;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    h1 {
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+
+    p {
+      // font-weight: 500;
+    }
+  }
+
+  .banner-image {
+    width: 50%;
+
+    @media (max-width: 1200px) {
+      display: none;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 0;
+    text-align: center;
+
+    .page-banner-text {
+      h1 {
+        margin: 0;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
 // Account
 
 .layout-minimal {
   width: 95%;
   max-width: 420px;
-  min-height: 70vh;
+  // min-height: 70vh;
+  padding-top: 3rem;
   text-align: left;
   margin: 0 auto;
 
@@ -1149,12 +1207,71 @@ footer {
   }
 }
 
-// Settings
+// Messages
 
-.account-settings {
+.chat {
+  .chat-top {
+    padding: 1.5rem;
+    border-bottom: 1px solid $border;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .sender {
+      font-weight: 600;
+      font-family: $mont;
+      font-size: 1.1rem;
+    }
+  }
+
+  .chat-body {
+    padding: 1rem;
+    height: calc(100vh - 500px);
+    overflow-y: scroll;
+
+    .chat-message {
+      width: 60%;
+      margin-bottom: 2rem;
+
+      .message-body {
+        padding: 1rem;
+        border-radius: 10px;
+        background: $light;
+      }
+
+      .message-time {
+        margin: 0.5rem 0 0 1rem;
+        color: $gray;
+        font-size: 12px;
+      }
+
+      &.sent {
+        margin-left: auto;
+
+        .message-body {
+          background: $secondary;
+          color: white;
+        }
+
+        .message-time {
+          text-align: right;
+          margin: 0.5rem 1rem 0 0;
+        }
+      }
+    }
+  }
+
+  .chat-bottom {
+    padding: 1rem;
+    border-top: 1px solid $border;
+
+    input {
+      border: none;
+    }
+  }
 }
 
-// Orders
+// Transactions
 
 .order-details {
   max-width: 650px;
@@ -1172,6 +1289,11 @@ footer {
       padding: 1rem 0;
     }
   }
+}
+
+// Settings
+
+.account-settings {
 }
 
 // Cart Page
@@ -1396,6 +1518,19 @@ footer {
   }
 }
 
+// Add product
+
+.add-product-form {
+  .form-group,
+  .form-row {
+    margin-top: 2rem;
+
+    .form-group {
+      margin: 0;
+    }
+  }
+}
+
 // Posts
 
 .single-post {
@@ -1590,6 +1725,55 @@ footer {
         }
       }
     }
+  }
+}
+
+// Cards
+
+.brand-card {
+  position: relative;
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+}
+
+.image-card {
+  position: relative;
+  border: none;
+
+  h2 {
+    position: absolute;
+    text-transform: uppercase;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 4rem;
+    width: 90%;
+    text-align: center;
+  }
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 4rem;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    text-align: center;
+    width: 90%;
   }
 }
 

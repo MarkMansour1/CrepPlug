@@ -123,7 +123,7 @@ const BackgroundSection = () => (
                   <div className="footer-links">
                     <Link to="/account">My Account</Link>
                     <Link to="/account">Messages</Link>
-                    <Link to="/account">Orders</Link>
+                    <Link to="/account">Transactions</Link>
                     <Link to="/account">Settings</Link>
                     <Link to="/account">Reviews</Link>
                     <Link to="/account">Logout</Link>

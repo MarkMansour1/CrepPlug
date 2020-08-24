@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
-
+import { graphql } from "gatsby"
 import { timeSince } from "../services/utils"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Banner from "../components/banner"
 
-const PageComponent = () => {
+const PageComponent = props => {
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -25,8 +26,14 @@ const PageComponent = () => {
   return (
     <Layout>
       <SEO title="YouTube" />
+      <Banner
+        details={[
+          "youtube",
+          "Watch content that we've created via our YouTube channel, which features our On the Feed series, Loobook series & more to come. Created by the community for the community.",
+          props.data.banner.childImageSharp.fluid,
+        ]}
+      />
       <div className="container container-wide pt-5">
-        <h2>YouTube</h2>
         <div className="row">
           {data
             ? data.map(video => (
@@ -58,3 +65,15 @@ const PageComponent = () => {
 }
 
 export default PageComponent
+
+export const pageQuery = graphql`
+  query {
+    banner: file(relativePath: { eq: "banners/youtube.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 175) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
+`

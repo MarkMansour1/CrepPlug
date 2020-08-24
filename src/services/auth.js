@@ -7,7 +7,7 @@ export const getUser = () =>
     ? JSON.parse(window.localStorage.getItem("currentUser"))
     : {}
 
-const setUser = user =>
+export const setUser = user =>
   window.localStorage.setItem("currentUser", JSON.stringify(user))
 
 export const handleLogin = ({ username, password }) => {

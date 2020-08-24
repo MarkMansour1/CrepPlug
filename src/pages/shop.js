@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Banner from "../components/banner"
 import SingleProduct from "../components/single-product"
 import ProductBlock from "../components/block-product"
 
@@ -134,8 +135,9 @@ class PageComponent extends React.Component {
   }
 
   render() {
-    const allProducts = this.props.data.products.edges
-    const allCategories = this.props.data.categories.edges
+    const { data } = this.props
+    const allProducts = data.products.edges
+    const allCategories = data.categories.edges
 
     var conditions = ["New", "Used"]
     var categories = []
@@ -177,24 +179,34 @@ class PageComponent extends React.Component {
       }
     }
 
+    // Puts the sizes in order
+    sizes.sort((a, b) => a - b)
+
     var mostPopular = allProducts
       .slice()
-      .sort(function (a, b) {
-        return Number(b.node.date) - Number(a.node.date)
+      .sort(function () {
+        return 0.5 - Math.random()
       })
       .slice(0, 10)
 
     return (
       <Layout>
         <SEO title="Shop" />
+        <Banner
+          details={[
+            "crepplug shop",
+            "On CrepPlug, you can Buy and Sell New Trainers or Used Trainers, exclusive Custom Air Force 1, Nikes, Jordan’s, Yeezy’s and much more for the cheapest prices on the market.",
+            data.banner.childImageSharp.fluid,
+            false,
+          ]}
+        />
         <div className="container container-wide">
-          {/* <ProductBlock
+          <ProductBlock
             title="Most Popular"
             link="/shop"
             linkText="Shop All"
             products={mostPopular}
-          /> */}
-
+          />
           <div className="row">
             <div className="col-3">
               <h3 className="pt-5">Filters</h3>
@@ -361,7 +373,12 @@ class PageComponent extends React.Component {
             </div>
             <div className="col-9">
               <div className="d-flex justify-content-between align-items-center py-4">
-                <div>Showing {this.state.items.length} products</div>
+                <div>
+                  Showing {this.state.items.length}{" "}
+                  {this.state.search.length > 1
+                    ? `results for ${this.state.search}`
+                    : "products"}
+                </div>
                 <select
                   className="form-control form-control-sm"
                   onChange={this.handleSorterChange}
@@ -399,6 +416,13 @@ export default PageComponent
 
 export const query = graphql`
   query {
+    banner: file(relativePath: { eq: "banners/crep.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 175) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
     products: allWpSimpleProduct {
       edges {
         node {

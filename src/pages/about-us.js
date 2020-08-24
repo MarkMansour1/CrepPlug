@@ -4,14 +4,25 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Banner from "../components/banner"
 
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
 
+    console.log(data)
+
     return (
       <Layout>
         <SEO title="About Us" />
+        {/* <Banner
+          details={[
+            "about us",
+            "CrepPlug is a marketplace where people can come to buy and sell their trainers, a new platform dedicated to streetwear and youth culture.",
+            data.banner.childImageSharp.fluid,
+            false,
+          ]}
+        /> */}
         <div className="container pt-5">
           <div className="about-us">
             <div className="block aboutdesc">

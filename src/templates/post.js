@@ -61,7 +61,9 @@ const PageTemplate = ({ data }) => {
               {author.node.name}
             </div>
             <div>
-              <Calendar />
+              <span className="mr-2">
+                <Calendar size=".8rem" />
+              </span>
               {date}
             </div>
             <div className="blog-categories">

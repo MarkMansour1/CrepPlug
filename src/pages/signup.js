@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { handleSignup, isLoggedIn } from "../services/auth"
 
-import Layout from "../components/layout-minimal"
+import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 class PageComponent extends React.Component {
@@ -28,15 +28,15 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="Sign Up" />
-        <div className="layout-minimal-links">
-          <Link to="/login" activeClassName="active-link">
-            LOGIN
-          </Link>
-          <Link to="/signup" activeClassName="active-link">
-            SIGNUP
-          </Link>
-        </div>
         <div className="layout-minimal">
+          <div className="layout-minimal-links">
+            <Link to="/login" activeClassName="active-link">
+              LOGIN
+            </Link>
+            <Link to="/signup" activeClassName="active-link">
+              SIGNUP
+            </Link>
+          </div>
           <form
             method="post"
             onSubmit={event => {
@@ -96,13 +96,21 @@ class PageComponent extends React.Component {
             </div> */}
             <small>
               By creating an account you agree to our{" "}
-              <Link to="/" className="text-underline">
+              <a
+                href="/terms-of-service"
+                className="text-underline"
+                target="_blank"
+              >
                 Terms of Service
-              </Link>{" "}
+              </a>{" "}
               and{" "}
-              <Link to="/" className="text-underline">
+              <a
+                href="/privacy-policy"
+                className="text-underline"
+                target="_blank"
+              >
                 Privacy Policy
-              </Link>
+              </a>
               .
             </small>
             <button type="submit" className="btn btn-primary w-100">
