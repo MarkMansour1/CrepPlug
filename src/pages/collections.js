@@ -15,7 +15,7 @@ class PageComponent extends React.Component {
         <SEO title="Collections" />
         <Banner
           details={[
-            'collections',
+            "collections",
             "Discover new brands, outfits, accessories that you may not have come across elsewhere. They can complement the trainers you're looking for",
             data.banner.childImageSharp.fluid,
           ]}
@@ -60,8 +60,8 @@ export default PageComponent
 export const cardImage = graphql`
   fragment cardImage on File {
     childImageSharp {
-      fixed(width: 700, height: 500) {
-        ...GatsbyImageSharpFixed
+      fixed(width: 1000, height: 800) {
+        ...GatsbyImageSharpFixed_withWebp_tracedSVG
       }
     }
   }
@@ -72,7 +72,7 @@ export const pageQuery = graphql`
     banner: file(relativePath: { eq: "banners/collections.jpg" }) {
       childImageSharp {
         fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

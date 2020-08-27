@@ -428,7 +428,8 @@ ul {
   color: $gray-light !important;
 }
 
-.text-uppercase {
+.text-uppercase,
+.text-upper {
   text-transform: uppercase !important;
 }
 
@@ -605,16 +606,18 @@ header {
 
       a,
       .header-dropdown {
-        margin-left: 30px;
+        margin-left: 10px;
+        padding: 5px 15px;
       }
 
       .header-dropdown {
         & > a {
           margin: 0;
+          padding: 5px;
         }
 
         .header-dropdown-content {
-          right: 0;
+          right: 15px;
           top: calc(25px / 2 + 50px);
 
           &:before {
@@ -677,7 +680,7 @@ header {
     position: relative;
 
     .header-dropdown-content {
-      background: $light;
+      background: white;
       border: 1px solid $gray-light;
       border-top: none;
       transition: 0.2s ease;
@@ -772,9 +775,9 @@ header {
 footer {
   color: white;
   background: linear-gradient(
-    rgba(17, 17, 17, 0.5) 0%,
-    rgba(17, 17, 17, 0.9) 50%,
-    rgba(17, 17, 17, 1) 70%
+    rgba(12, 12, 12, 0.5) 0%,
+    rgba(12, 12, 12, 0.9) 50%,
+    rgba(12, 12, 12, 1) 70%
   );
 
   .feedrow {
@@ -978,14 +981,6 @@ footer {
   .banner-text {
     width: 50%;
 
-    @media (max-width: 1200px) {
-      width: 100%;
-
-      h1 {
-        font-size: 2rem;
-      }
-    }
-
     h1 {
       text-transform: uppercase;
       margin-bottom: 0.5rem;
@@ -993,7 +988,19 @@ footer {
     }
 
     p {
-      // font-weight: 500;
+      max-width: 90%;
+    }
+
+    @media (max-width: 1200px) {
+      width: 100%;
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        max-width: 100%;
+      }
     }
   }
 
@@ -1479,7 +1486,7 @@ footer {
         text-transform: capitalize;
 
         &:not(:last-of-type):after {
-          content: ",";
+          content: "/";
         }
       }
     }

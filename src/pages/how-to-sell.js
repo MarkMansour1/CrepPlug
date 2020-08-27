@@ -101,7 +101,7 @@ export const htsImage = graphql`
   fragment htsImage on File {
     childImageSharp {
       fixed(width: 150, height: 150) {
-        ...GatsbyImageSharpFixed
+        ...GatsbyImageSharpFixed_withWebp_tracedSVG
       }
     }
   }
@@ -112,7 +112,7 @@ export const pageQuery = graphql`
     banner: file(relativePath: { eq: "banners/collections.jpg" }) {
       childImageSharp {
         fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

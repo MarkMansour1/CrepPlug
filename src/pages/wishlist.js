@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 import { getUser } from "../services/auth"
+import { addCartProduct } from "../services/cart"
 import { removeWishlistProduct } from "../services/wishlist"
 import { Cross } from "../components/svg"
 
@@ -65,17 +66,27 @@ const PageComponent = props => {
                     }
                   }
 
+                  const {
+                    productId,
+                    slug,
+                    name,
+                    price,
+                    stockQuantity,
+                    manageStock,
+                    image,
+                  } = product
+
+                  const outOfStock =
+                    manageStock && !stockQuantity ? true : false
+
                   if (inWishlist) {
                     return (
-                      <tr key={product.productId}>
+                      <tr key={productId}>
                         <td style={{ minWidth: "100px" }}>
-                          <Link to={`/product/${product.slug}`}>
+                          <Link to={`/product/${slug}`}>
                             <div className="img-container">
-                              {product.image && product.image.sourceUrl ? (
-                                <img
-                                  src={product.image.sourceUrl}
-                                  alt={product.name}
-                                />
+                              {image && image.sourceUrl ? (
+                                <img src={image.sourceUrl} alt={name} />
                               ) : (
                                 <img src={defaultimg} alt="" />
                               )}
@@ -83,18 +94,25 @@ const PageComponent = props => {
                           </Link>
                         </td>
                         <td>
-                          <Link to={`/product/${product.slug}`}>
-                            {product.name}
-                          </Link>
+                          <Link to={`/product/${slug}`}>{name}</Link>
                         </td>
+                        <td>{outOfStock ? "Out of stock" : "In stock"}</td>
+                        <td>{price}</td>
                         <td>
-                          {product.manageStock && !product.stockQuantity
-                            ? "Out of stock"
-                            : "In stock"}
-                        </td>
-                        <td>{product.price}</td>
-                        <td>
-                          <button className="btn btn-secondary btn-sm">
+                          <button
+                            onClick={() =>
+                              addCartProduct(user, {
+                                id: productId,
+                                slug: slug,
+                                image: image,
+                                name: name,
+                                price: price,
+                                quantity: 1,
+                              })
+                            }
+                            className="btn btn-secondary btn-sm"
+                            disabled={outOfStock}
+                          >
                             Add to cart
                           </button>
                           <button

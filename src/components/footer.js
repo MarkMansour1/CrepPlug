@@ -49,7 +49,7 @@ const BackgroundSection = () => (
         background: file(relativePath: { eq: "footer/footer.png" }) {
           childImageSharp {
             fluid(quality: 90, maxWidth: 1920) {
-              ...GatsbyImageSharpFluid_withWebp
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
           }
         }

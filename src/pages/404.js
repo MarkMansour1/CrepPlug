@@ -29,7 +29,7 @@ export const pageQuery = graphql`
     kanye: file(relativePath: { eq: "kanye.png" }) {
       childImageSharp {
         fluid(maxWidth: 650, maxHeight: 400) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

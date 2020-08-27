@@ -304,16 +304,22 @@ const AccountSection = () => {
         <Tab eventKey="payment" title="Payment">
           <div className="text-center pt-3">
             <h3>Connect your paypal</h3>
-            <div dir="ltr" trbidi="on">
+            <a
+              href="https://www.sandbox.paypal.com/us/merchantsignup/partner/onboardingentry?token=NDVjN2Q4OGEtNDQxNS00NjNiLWEwZjItYmMwNTdhMDdmNWJmMFhuRFMranpyV2NHWnJOSVNLS1d5MThLVmVzR1R1c0VZSElzYks1Mk1rbz12Mg=="
+              className="btn btn-primary"
+            >
+              Connect your PayPal
+            </a>
+            {/* <div dir="ltr" trbidi="on">
               <a
                 data-paypal-button="true"
-                href="<Action-URL>&displayMode=minibrowser"
+                href="https://www.sandbox.paypal.com/us/merchantsignup/partner/onboardingentry?token=NDVjN2Q4OGEtNDQxNS00NjNiLWEwZjItYmMwNTdhMDdmNWJmMFhuRFMranpyV2NHWnJOSVNLS1d5MThLVmVzR1R1c0VZSElzYks1Mk1rbz12Mg==&displayMode=minibrowser"
                 target="PPFrame"
                 className="btn btn-primary"
               >
                 Connect your PayPal
               </a>
-            </div>
+            </div> */}
           </div>
         </Tab>
       </Tabs>

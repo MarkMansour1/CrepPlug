@@ -71,7 +71,7 @@ export const pageQuery = graphql`
     banner: file(relativePath: { eq: "banners/youtube.jpg" }) {
       childImageSharp {
         fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

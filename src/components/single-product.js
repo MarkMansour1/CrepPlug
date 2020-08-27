@@ -21,8 +21,6 @@ class Single extends React.Component {
     var sizeList = ""
     if (sizes.length > 0) {
       sizeList = "Size " + sizes[0]
-    } else {
-      sizeList = "Size 7"
     }
 
     return (

@@ -1,26 +1,31 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql } from "gatsby"
 import AliceCarousel from "react-alice-carousel"
 
 import { getUser } from "../services/auth"
+import { addCartProduct } from "../services/cart"
 import { addWishlistProduct } from "../services/wishlist"
-import { Wishlist } from "../components/svg"
 
 import Layout from "../components/layout"
 import ProductBlock from "../components/block-product"
+import { Wishlist } from "../components/svg"
 
 import defaultimg from "../images/sourcing.jpg"
 
 const PageTemplate = ({ data }) => {
+  const [quantity, setQuantity] = useState(1)
   const user = getUser()
 
   const { page, products } = data
   const {
     productId,
+    slug,
     name,
     price,
     salePrice,
     regularPrice,
+    stockQuantity,
+    manageStock,
     shortDescription,
     attributes,
     image,
@@ -62,27 +67,36 @@ const PageTemplate = ({ data }) => {
                 {attributes &&
                   attributes.nodes &&
                   attributes.nodes[0] &&
-                  attributes.nodes[0].options.map(value => (
+                  attributes.nodes[0].options && (
                     <div>
-                      Colour: <span>{value}</span>
+                      Colour:{" "}
+                      {attributes.nodes[0].options.map(value => (
+                        <span>{value}</span>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 {attributes &&
                   attributes.nodes &&
                   attributes.nodes[1] &&
-                  attributes.nodes[1].options.map(value => (
+                  attributes.nodes[1].options && (
                     <div>
-                      Condition: <span>{value}</span>
+                      Condition:{" "}
+                      {attributes.nodes[1].options.map(value => (
+                        <span>{value}</span>
+                      ))}
                     </div>
-                  ))}
+                  )}
                 {attributes &&
                   attributes.nodes &&
                   attributes.nodes[2] &&
-                  attributes.nodes[2].options.map(value => (
+                  attributes.nodes[2].options && (
                     <div>
-                      Size: <span>{value}</span>
+                      Size:{" "}
+                      {attributes.nodes[2].options.map(value => (
+                        <span>{value}</span>
+                      ))}
                     </div>
-                  ))}
+                  )}
               </div>
               <div
                 className="product-desc"
@@ -90,8 +104,49 @@ const PageTemplate = ({ data }) => {
               />
               <div className="product-stock"></div>
               <div className="product-cart">
-                Quantity
-                <button className="btn btn-primary">Add to Cart</button>
+                <button
+                  onClick={() => {
+                    if (quantity > 1) {
+                      setQuantity(quantity - 1)
+                    }
+                  }}
+                  className="btn btn-light"
+                >
+                  -
+                </button>
+                <div>{quantity}</div>
+                <button
+                  onClick={() => {
+                    console.log(manageStock)
+                    console.log(stockQuantity)
+
+                    if (
+                      !manageStock ||
+                      !stockQuantity ||
+                      quantity < stockQuantity
+                    ) {
+                      setQuantity(quantity + 1)
+                    }
+                  }}
+                  className="btn btn-light"
+                >
+                  +
+                </button>
+                <button
+                  onClick={() =>
+                    addCartProduct(user, {
+                      id: productId,
+                      slug: slug,
+                      image: image,
+                      name: name,
+                      price: price,
+                      quantity: quantity,
+                    })
+                  }
+                  className="btn btn-primary"
+                >
+                  Add to Cart
+                </button>
                 <button
                   onClick={() =>
                     addWishlistProduct(user, { product_id: productId })
@@ -130,11 +185,14 @@ export const query = graphql`
   query product($id: String!) {
     page: wpSimpleProduct(id: { eq: $id }) {
       productId
+      slug
       name
       price
       salePrice
       regularPrice
       shortDescription
+      stockQuantity
+      manageStock
       attributes {
         nodes {
           name

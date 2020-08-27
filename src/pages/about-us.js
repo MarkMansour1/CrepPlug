@@ -199,7 +199,7 @@ export const aboutImage = graphql`
   fragment aboutImage on File {
     childImageSharp {
       fluid(maxWidth: 450, maxHeight: 500) {
-        ...GatsbyImageSharpFluid
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
   }
@@ -210,7 +210,7 @@ export const pageQuery = graphql`
     banner: file(relativePath: { eq: "banners/about.jpg" }) {
       childImageSharp {
         fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
@@ -226,7 +226,7 @@ export const pageQuery = graphql`
     team: file(relativePath: { eq: "about/team.png" }) {
       childImageSharp {
         fluid(maxWidth: 450, maxHeight: 400) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

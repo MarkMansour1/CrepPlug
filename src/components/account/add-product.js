@@ -22,6 +22,7 @@ class AccountSection extends React.Component {
     colours: [],
     conditions: [],
     sizes: [],
+    stockQuantity: 1,
     // featuredImage: { src: "" },
   }
 
@@ -52,37 +53,43 @@ class AccountSection extends React.Component {
 
   onSubmit(e) {
     e.preventDefault()
-    console.log(this.state)
-    // createProduct(getUser(), this.state)
+
+    createProduct(getUser(), this.state)
   }
 
   render() {
-    const categories = [
-      { value: "Adidas", label: "Adidas" },
-      { value: "Converse", label: "Converse" },
-      { value: "Designer", label: "Designer" },
-      { value: "Jordans", label: "Jordans" },
-      { value: "Nike", label: "Nike" },
-      { value: "Puma", label: "Puma" },
-      { value: "Reebok", label: "Reebok" },
-      { value: "Vans", label: "Vans" },
-      { value: "Yeezy", label: "Yeezy" },
-    ]
+    const productOptions = this.props.productOptions
 
-    const conditions = [
-      { value: "New", label: "New" },
-      { value: "Used", label: "Used" },
-    ]
+    var categories = []
+    for (let i in productOptions.categories) {
+      categories.push({
+        value: productOptions.categories[i].node.databaseId,
+        label: productOptions.categories[i].node.name,
+      })
+    }
 
-    const colours = [
-      { value: "Red", label: "Red" },
-      { value: "Blue", label: "Blue" },
-      { value: "Green", label: "Green" },
-    ]
+    var colours = []
+    for (let i in productOptions.colours) {
+      colours.push({
+        value: productOptions.colours[i].node.name,
+        label: productOptions.colours[i].node.name,
+      })
+    }
 
-    const sizes = []
-    for (let i = 1; i <= 13; i += 0.5) {
-      sizes.push({ value: i, label: i })
+    var conditions = []
+    for (let i in productOptions.conditions) {
+      conditions.push({
+        value: productOptions.conditions[i].node.name,
+        label: productOptions.conditions[i].node.name,
+      })
+    }
+
+    var sizes = []
+    for (let i in productOptions.sizes) {
+      sizes.push({
+        value: productOptions.sizes[i].node.name,
+        label: productOptions.sizes[i].node.name,
+      })
     }
 
     return (
@@ -100,6 +107,7 @@ class AccountSection extends React.Component {
               id="name"
               name="name"
               onChange={this.handleChange}
+              required
             />
           </div>
           <div className="form-row">
@@ -110,6 +118,8 @@ class AccountSection extends React.Component {
                 className="form-control"
                 id="regularPrice"
                 name="regularPrice"
+                min="0"
+                step="10"
                 onChange={this.handleChange}
               />
             </div>
@@ -120,6 +130,9 @@ class AccountSection extends React.Component {
                 className="form-control"
                 id="salePrice"
                 name="salePrice"
+                min="0"
+                max={this.state.regularPrice}
+                step="10"
                 onChange={this.handleChange}
               />
             </div>

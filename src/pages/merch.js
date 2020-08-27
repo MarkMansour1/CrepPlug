@@ -18,18 +18,17 @@ class PageComponent extends React.Component {
       <Layout>
         <SEO title="Merch" />
         <div className="container pt-4">
-          <div>
+          <div className="text-center text-uppercase py-5 mb-5">
             <h1>
-              <span>CrepPlug's Merchandise</span> Join the Community
+              CrepPlug's Merchandise
+              <span className="d-block mt-3" style={{ fontSize: "2rem" }}>
+                Join the Community
+              </span>{" "}
             </h1>
           </div>
           <div className="block pb-5">
             <div className="row align-items-center">
               <div className="col-12 col-md-6">
-                {/* <div className="img-container img-swap-container mb-5 mb-md-0">
-                    <img src={hoodie2} />
-                    <img src={hoodie} />
-                  </div> */}
                 <Img
                   fixed={data.hoodie.childImageSharp.fixed}
                   className="img-fluid"
@@ -92,7 +91,7 @@ export const merchImage = graphql`
   fragment merchImage on File {
     childImageSharp {
       fixed(width: 500, height: 500) {
-        ...GatsbyImageSharpFixed
+        ...GatsbyImageSharpFixed_withWebp_tracedSVG
       }
     }
   }

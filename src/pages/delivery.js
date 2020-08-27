@@ -39,7 +39,7 @@ export const pageQuery = graphql`
     banner: file(relativePath: { eq: "banners/delivery.jpg" }) {
       childImageSharp {
         fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }

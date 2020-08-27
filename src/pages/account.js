@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, navigate } from "gatsby"
+import { Link, graphql, navigate } from "gatsby"
 import { Router } from "@reach/router"
 import { isLoggedIn, getUser, isBrowser } from "../services/auth"
 
@@ -16,7 +16,16 @@ import MessageDetails from "../components/account/message-details"
 import Settings from "../components/account/settings"
 import Reviews from "../components/account/reviews"
 
-const PageComponent = () => {
+const PageComponent = props => {
+  // TODO remove unneeded categories from here
+
+  const productOptions = {
+    categories: props.data.categories.edges,
+    colours: props.data.colours.edges,
+    conditions: props.data.conditions.edges,
+    sizes: props.data.sizes.edges,
+  }
+
   if (isBrowser()) {
     if (isLoggedIn()) {
       var user = getUser()
@@ -37,7 +46,7 @@ const PageComponent = () => {
           </div>
           <div className="col-9 account-wrapper">
             <Router>
-              <AddProduct path="account" />
+              <AddProduct path="account" productOptions={productOptions} />
               <Products path="account/products" />
               <Messages path="account/messages" />
               <MessageDetails path="account/message/*" />
@@ -54,3 +63,37 @@ const PageComponent = () => {
 }
 
 export default PageComponent
+
+export const query = graphql`
+  query {
+    categories: allWpProductCategory {
+      edges {
+        node {
+          name
+          databaseId
+        }
+      }
+    }
+    colours: allWpPaColour {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    conditions: allWpPaCondition {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    sizes: allWpPaSize {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+  }
+`

@@ -69,19 +69,19 @@ class Header extends React.Component {
                       </Link>
                       <div className="header-dropdown-content">
                         <Link to="/account">
-                          <span>My Account</span>
+                          <span>Account</span>
+                        </Link>
+                        <Link to="/account/products">
+                          <span>Products</span>
                         </Link>
                         <Link to="/account/messages">
                           <span>Messages</span>
                         </Link>
                         <Link to="/account/transactions">
-                          <span>Purchase History</span>
+                          <span>Transactions</span>
                         </Link>
                         <Link to="/account/settings">
                           <span>Settings</span>
-                        </Link>
-                        <Link to="/account/settings">
-                          <span>Change Password</span>
                         </Link>
                         <a
                           onClick={event => {
