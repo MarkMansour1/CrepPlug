@@ -145,7 +145,12 @@ class AccountSection extends React.Component {
               id="shortDescription"
               name="shortDescription"
               onChange={this.handleChange}
+              placeholder=""
             />
+            <small className="text-gray">
+              Please include the condition of the sneaker (Deadstock/Used) and
+              where you purchased the product from.
+            </small>
           </div>
           <div className="form-group">
             <label htmlFor="categories">Categories</label>

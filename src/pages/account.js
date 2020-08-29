@@ -46,7 +46,10 @@ const PageComponent = props => {
           </div>
           <div className="col-9 account-wrapper">
             <Router>
-              <AddProduct path="account" productOptions={productOptions} />
+              <AddProduct
+                path="account/add-product"
+                productOptions={productOptions}
+              />
               <Products path="account/products" />
               <Messages path="account/messages" />
               <MessageDetails path="account/message/*" />

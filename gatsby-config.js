@@ -49,8 +49,15 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "WpSimpleProduct",
+        imagePath: "image.sourceUrl",
+      },
+    },
+    {
       resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/account/*`] },
+      options: { prefixes: [`/account/*`, `/store/*`] },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

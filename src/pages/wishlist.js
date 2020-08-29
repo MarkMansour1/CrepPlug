@@ -3,16 +3,18 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Loader from "../components/loader"
+import { Cross } from "../components/svg"
 
 import { getUser } from "../services/auth"
 import { addCartProduct } from "../services/cart"
 import { removeWishlistProduct } from "../services/wishlist"
-import { Cross } from "../components/svg"
 
 import defaultimg from "../images/default_product.png"
 
 const PageComponent = props => {
   const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   const user = getUser()
   const allProducts = props.data.products.edges
@@ -29,6 +31,7 @@ const PageComponent = props => {
       .then(result => result.json())
       .then(result => {
         setData(result)
+        setLoading(false)
       })
       .catch(err => {
         console.log(err)
@@ -52,10 +55,12 @@ const PageComponent = props => {
       <SEO title="Wishlist" />
       <div className="container pt-5">
         <h2 className="text-center">Save Your Favourite Trainers</h2>
-        <table className="table product-table mt-5">
-          <tbody>
-            {data
-              ? allProducts.map(({ node: product }) => {
+        {<Loader visible={loading} />}
+        {data ? (
+          data.length > 0 ? (
+            <table className="table product-table mt-5">
+              <tbody>
+                {allProducts.map(({ node: product }) => {
                   var inWishlist = false
                   var itemId
                   for (var i in data) {
@@ -82,6 +87,14 @@ const PageComponent = props => {
                   if (inWishlist) {
                     return (
                       <tr key={productId}>
+                        <td>
+                          <button
+                            onClick={() => handleRemove(itemId)}
+                            className="btn btn-light btn-sm"
+                          >
+                            <Cross size="2em" />
+                          </button>
+                        </td>
                         <td style={{ minWidth: "100px" }}>
                           <Link to={`/product/${slug}`}>
                             <div className="img-container">
@@ -100,7 +113,7 @@ const PageComponent = props => {
                         <td>{price}</td>
                         <td>
                           <button
-                            onClick={() =>
+                            onClick={() => {
                               addCartProduct(user, {
                                 id: productId,
                                 slug: slug,
@@ -109,26 +122,29 @@ const PageComponent = props => {
                                 price: price,
                                 quantity: 1,
                               })
-                            }
+                              handleRemove(itemId)
+                            }}
                             className="btn btn-secondary btn-sm"
                             disabled={outOfStock}
                           >
                             Add to cart
                           </button>
-                          <button
-                            onClick={() => handleRemove(itemId)}
-                            className="btn btn-light btn-sm ml-3"
-                          >
-                            <Cross size="2em" />
-                          </button>
                         </td>
                       </tr>
                     )
                   }
-                })
-              : null}
-          </tbody>
-        </table>
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <div className="text-center py-5">
+              <h4 className="d-block mb-3">Your wishlist is empty</h4>
+              <Link to="/shop" className="btn btn-primary btn-lg">
+                Shop the feed
+              </Link>
+            </div>
+          )
+        ) : null}
       </div>
     </Layout>
   )
@@ -150,6 +166,13 @@ export const query = graphql`
           stockQuantity
           image {
             sourceUrl
+          }
+          localImage {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
           }
         }
       }

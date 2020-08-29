@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import Img from "gatsby-image"
 
 import { timeSince } from "../services/utils"
 
@@ -27,13 +28,23 @@ class Single extends React.Component {
       <div className="single-product">
         <Link to={`/product/${product.slug}`}>
           <div className="product-image">
-            <div className="img-container">
-              {product.image && product.image.sourceUrl ? (
-                <img src={product.image.sourceUrl} alt={product.name} />
-              ) : (
-                <img src={defaultimg} alt="" />
-              )}
-            </div>
+            {product.localImage ? (
+              <Img
+                fluid={{
+                  ...product.localImage.childImageSharp.fluid,
+                  aspectRatio: 1,
+                }}
+                alt={product.name}
+              />
+            ) : (
+              <div className="img-container">
+                {product.image && product.image.sourceUrl ? (
+                  <img src={product.image.sourceUrl} alt={product.name} />
+                ) : (
+                  <img src={defaultimg} alt={product.name} />
+                )}
+              </div>
+            )}
           </div>
         </Link>
         <div className="product-date">{timeSince(product.date)}</div>

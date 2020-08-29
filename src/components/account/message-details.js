@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
+import Loader from "../../components/loader"
+
 import { getUser } from "../../services/auth"
 import { timeSince } from "../../services/utils"
 import { LeftChevron, Messages } from "../svg"
@@ -37,7 +39,7 @@ const AccountSection = () => {
         Messages
         <Messages />
       </h2> */}
-      {loading && <h4>Loading...</h4>}
+      <Loader visible={loading} />
       {data ? <MessageDetails user={user} data={data} sender={sender} /> : null}
     </div>
   )

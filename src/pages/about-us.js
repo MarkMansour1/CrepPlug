@@ -10,8 +10,6 @@ class PageComponent extends React.Component {
   render() {
     const { data } = this.props
 
-    console.log(data)
-
     return (
       <Layout>
         <SEO title="About Us" />
@@ -23,9 +21,9 @@ class PageComponent extends React.Component {
             false,
           ]}
         /> */}
-        <div className="container pt-5">
+        <div className="container container-wide pt-5">
           <div className="about-us">
-            <div className="block aboutdesc">
+            <div className="block block-container p-0">
               <h1 className="my-5">Be Your Own Plug</h1>
               <p>
                 More than just a website but a unique community with every piece
@@ -46,10 +44,7 @@ class PageComponent extends React.Component {
             <div className="block">
               <div className="row">
                 <div className="col-md-6">
-                  <Img
-                    fluid={data.buyer.childImageSharp.fluid}
-                    alt="About Us"
-                  />
+                  <Img fluid={data.buyer.childImageSharp.fluid} alt="" />
                 </div>
                 <div className="col-12 col-md-6 my-auto">
                   <h3>A variety to choose from, at great prices</h3>
@@ -175,7 +170,7 @@ class PageComponent extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="block">
+            <div className="block block-container">
               <h3>More Questions?</h3>
               <p>
                 We’ve got answers. Visit our FAQs for our most Frequently Asked

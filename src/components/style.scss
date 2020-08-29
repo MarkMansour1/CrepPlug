@@ -12,8 +12,8 @@ $secondary: #23a1d3;
 // Monochrome colours
 $dark: #222222;
 $gray-dark: #333;
-$gray: #666;
-$gray-light: #ccc;
+$gray: #888;
+$gray-light: #bbb;
 $border: #e6e6e6;
 $light: #f8f9fa;
 
@@ -47,7 +47,7 @@ $input-btn-focus-color: transparent;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "../../node_modules/bs-stepper/dist/css/bs-stepper.min.css";
-@import "../../node_modules/react-alice-carousel/lib/alice-carousel.css";
+@import "../../node_modules/@brainhubeu/react-carousel/lib/style.css";
 
 html,
 body {
@@ -334,7 +334,7 @@ ul {
   }
 
   @media (min-width: 1600px) {
-    max-width: 80%;
+    max-width: 1500px;
   }
 }
 
@@ -453,6 +453,10 @@ ul {
 
     &:focus {
       outline: none;
+    }
+
+    &:hover {
+      border-bottom: 2px solid $gray-light;
     }
 
     &.active {
@@ -897,7 +901,6 @@ footer {
     margin-bottom: 1.5rem;
 
     h3 {
-      color: $gray-dark;
       margin: 0;
     }
 
@@ -1193,7 +1196,8 @@ footer {
   max-width: 800px;
   margin-left: auto;
 
-  input {
+  input,
+  textarea {
     font-size: 14px;
   }
 }
@@ -1234,6 +1238,7 @@ footer {
   .chat-body {
     padding: 1rem;
     height: calc(100vh - 500px);
+    max-height: 500px;
     overflow-y: scroll;
 
     .chat-message {
@@ -1461,22 +1466,14 @@ footer {
 .product-info {
   padding-left: 50px;
 
-  .product-price {
+  .product-rating {
     margin-bottom: 1rem;
-    font-size: 1.25rem;
-    font-weight: 600;
-
-    span {
-      text-decoration: line-through;
-      color: $gray;
-      font-size: 1.25rem;
-    }
   }
 
   .product-attributes {
     margin: 0.5rem 0;
-    font-weight: 600;
-    font-size: 14px;
+    // font-weight: 600;
+    // font-size: 14px;
 
     div {
       padding: 0.5rem 0;
@@ -1505,10 +1502,29 @@ footer {
     }
   }
 
+  .product-price {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    span {
+      text-decoration: line-through;
+      color: $gray-light;
+      font-size: 1.25rem;
+    }
+  }
+
   .product-cart {
     margin-bottom: 1rem;
 
-    button {
+    .quantity {
+      display: inline-block;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .cart-add,
+    .wishlist-add {
       margin-left: 1rem;
     }
   }
@@ -1519,9 +1535,15 @@ footer {
     align-items: center;
     padding: 1rem 0;
 
-    button {
+    button,
+    a {
       width: calc(50% - 0.5rem);
     }
+  }
+}
+
+.product-reviews {
+  .product-review {
   }
 }
 
@@ -1535,6 +1557,10 @@ footer {
     .form-group {
       margin: 0;
     }
+  }
+
+  .select__menu {
+    z-index: 3;
   }
 }
 
@@ -1668,12 +1694,12 @@ footer {
     }
   }
 
-  .aboutdesc {
-    padding: 0;
+  .block-container {
+    margin: 0 auto;
+    width: 75%;
 
     @media (min-width: 768px) {
-      width: 75%;
-      margin: 0 auto;
+      width: 60%;
     }
   }
 
@@ -1681,15 +1707,10 @@ footer {
     text-transform: uppercase;
   }
 
-  img {
-    height: 600px;
-    width: 80%;
-    object-fit: cover;
-
-    @media (max-width: 767px) {
-      height: 300px;
-      transform: translateY(-4rem);
-    }
+  .gatsby-image-wrapper {
+    width: 75%;
+    margin: 0 auto;
+    height: 500px;
   }
 
   p {
@@ -1808,5 +1829,42 @@ footer {
     img {
       width: 300px;
     }
+  }
+}
+
+.loader {
+  text-align: center;
+
+  svg {
+    margin: 0 auto;
+
+    .outer {
+      animation: outerAnimation 2s infinite;
+    }
+    .inner {
+      animation: innerAnimation 2s infinite;
+    }
+  }
+}
+
+@keyframes outerAnimation {
+  0% {
+    transform-origin: center;
+    transform: rotate(0deg);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(720deg);
+  }
+}
+
+@keyframes innerAnimation {
+  0% {
+    transform-origin: center;
+    transform: rotate(0deg);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate(-360deg);
   }
 }

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "gatsby"
 
+import Loader from "../loader"
+
 import { getUser } from "../../services/auth"
 import { timeSince } from "../../services/utils"
 import { Messages } from "../svg"
 
 const AccountSection = () => {
   const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
   const user = getUser()
 
   useEffect(() => {
@@ -32,6 +35,7 @@ const AccountSection = () => {
           }
         }
         setData(data)
+        setLoading(false)
       })
       .catch(err => {
         console.log(err)
@@ -44,35 +48,36 @@ const AccountSection = () => {
         Messages
         <Messages />
       </h2>
-      <table className="table account-table">
-        <thead>
-          <tr>
-            <th>Sender</th>
-            <th>Message</th>
-            <th>Time</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data
-            ? data.map(message => (
-                <tr key={message.id}>
-                  <td>{message.cmb2.users.sender}</td>
-                  <td>{message.title.rendered}</td>
-                  <td>{timeSince(message.date)}</td>
-                  <td>
-                    <Link
-                      to={`/account/message/${message.cmb2.users.sender}`}
-                      className="text-secondary"
-                    >
-                      Open Chat
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </table>
+      <Loader visible={loading} />
+      {data ? (
+        <table className="table account-table">
+          <thead>
+            <tr>
+              <th>Sender</th>
+              <th>Message</th>
+              <th>Time</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map(message => (
+              <tr key={message.id}>
+                <td>{message.cmb2.users.sender}</td>
+                <td>{message.title.rendered}</td>
+                <td>{timeSince(message.date)}</td>
+                <td>
+                  <Link
+                    to={`/account/message/${message.cmb2.users.sender}`}
+                    className="text-secondary"
+                  >
+                    Open Chat
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : null}
     </div>
   )
 }

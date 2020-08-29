@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "gatsby"
 
 import { Calendar } from "../components/svg"
-import defaultimg from "../images/sourcing.jpg"
+import defaultimg from "../images/default_product.png"
 
 class Single extends React.Component {
   render() {

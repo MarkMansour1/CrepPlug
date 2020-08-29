@@ -54,6 +54,7 @@ class PageComponent extends React.Component {
         sizes: [],
         colours: [],
         search: "",
+        urlSearch: "",
       },
       () => {
         navigate("/shop")
@@ -71,6 +72,13 @@ class PageComponent extends React.Component {
       this.setState(
         {
           [name]: parseFloat(value),
+        },
+        () => this.filterProducts()
+      )
+    } else if (name === "search") {
+      this.setState(
+        {
+          [name]: value,
         },
         () => this.filterProducts()
       )
@@ -110,6 +118,7 @@ class PageComponent extends React.Component {
       {
         items: allProducts,
         search: searchString,
+        urlSearch: searchString,
       },
       () => {
         this.filterProducts()
@@ -122,10 +131,11 @@ class PageComponent extends React.Component {
     const urlParams = new URLSearchParams(url)
     const searchString = urlParams.get("search") ? urlParams.get("search") : ""
 
-    if (searchString !== this.state.search) {
+    if (searchString !== this.state.urlSearch) {
       this.setState(
         {
           search: searchString,
+          urlSearch: searchString,
         },
         () => {
           this.filterProducts()
@@ -182,12 +192,7 @@ class PageComponent extends React.Component {
     // Puts the sizes in order
     sizes.sort((a, b) => a - b)
 
-    var mostPopular = allProducts
-      .slice()
-      .sort(function () {
-        return 0.5 - Math.random()
-      })
-      .slice(0, 10)
+    var mostPopular = allProducts.slice(0, 10)
 
     return (
       <Layout>
@@ -209,9 +214,33 @@ class PageComponent extends React.Component {
           />
           <div className="row">
             <div className="col-3">
-              <h3 className="pt-5">Filters</h3>
+              <h3 className="pt-4">Filters</h3>
               <div className="shop-filters">
                 <Accordion>
+                  <Card>
+                    <Accordion.Collapse eventKey="0">
+                      <Card.Body>
+                        <div className="form-group">
+                          <label htmlFor="search" />
+                          <input
+                            id="search"
+                            name="search"
+                            className="form-control"
+                            type="text"
+                            value={this.state.search}
+                            onChange={this.handleFilterChange}
+                            placeholder="Search..."
+                          />
+                        </div>
+                      </Card.Body>
+                    </Accordion.Collapse>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                      Search
+                      <span className="badge badge-light ml-3">
+                        {this.state.search.length > 0 && "1"}
+                      </span>
+                    </Accordion.Toggle>
+                  </Card>
                   <Card>
                     <Accordion.Collapse eventKey="1">
                       <Card.Body>
@@ -237,7 +266,7 @@ class PageComponent extends React.Component {
                               className="form-control"
                               label="Max"
                               type="number"
-                              min="0"
+                              min="10"
                               step="10"
                               placeholder="Max"
                               name="maxPrice"
@@ -249,6 +278,13 @@ class PageComponent extends React.Component {
                     </Accordion.Collapse>
                     <Accordion.Toggle as={Card.Header} eventKey="1">
                       Price Range
+                      <span className="badge badge-light ml-3">
+                        {this.state.minPrice && this.state.maxPrice
+                          ? "2"
+                          : this.state.minPrice || this.state.maxPrice
+                          ? "1"
+                          : null}
+                      </span>
                     </Accordion.Toggle>
                   </Card>
                   <Card>
@@ -376,7 +412,7 @@ class PageComponent extends React.Component {
                 <div>
                   Showing {this.state.items.length}{" "}
                   {this.state.search.length > 1
-                    ? `results for ${this.state.search}`
+                    ? `results for "${this.state.search}"`
                     : "products"}
                 </div>
                 <select
@@ -434,6 +470,13 @@ export const query = graphql`
           date
           image {
             sourceUrl
+          }
+          localImage {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+              }
+            }
           }
           productCategories {
             nodes {

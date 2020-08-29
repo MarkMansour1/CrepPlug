@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react"
 import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"
 
-import { getUser } from "../../services/auth"
 import { Settings } from "../svg"
+
+import { getUser } from "../../services/auth"
 import { updateUserDetails, updateUserPassword } from "../../services/settings"
 
 const AccountSection = () => {
@@ -310,16 +311,6 @@ const AccountSection = () => {
             >
               Connect your PayPal
             </a>
-            {/* <div dir="ltr" trbidi="on">
-              <a
-                data-paypal-button="true"
-                href="https://www.sandbox.paypal.com/us/merchantsignup/partner/onboardingentry?token=NDVjN2Q4OGEtNDQxNS00NjNiLWEwZjItYmMwNTdhMDdmNWJmMFhuRFMranpyV2NHWnJOSVNLS1d5MThLVmVzR1R1c0VZSElzYks1Mk1rbz12Mg==&displayMode=minibrowser"
-                target="PPFrame"
-                className="btn btn-primary"
-              >
-                Connect your PayPal
-              </a>
-            </div> */}
           </div>
         </Tab>
       </Tabs>

@@ -29,7 +29,7 @@ class AccountNav extends React.Component {
           </>
         )}
         <div className="account-nav">
-          <Link activeClassName="active" to="/account">
+          <Link activeClassName="active" to="/account/add-product">
             <AddProduct />
             <div>Add Product</div>
           </Link>
