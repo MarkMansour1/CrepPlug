@@ -200,6 +200,9 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
         shippingTaxable
         soldIndividually
         stockQuantity
+        vendorId
+        vendorImage
+        vendorName
         virtual
         weight
         width

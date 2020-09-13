@@ -1,5 +1,5 @@
-export const addWishlistProduct = (user, data) => {
-  fetch(
+export async function addWishlistProduct(user, data) {
+  const response = fetch(
     `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/add_product/`,
     {
       method: "POST",
@@ -12,13 +12,13 @@ export const addWishlistProduct = (user, data) => {
   )
     .then(response => response.json())
     .then(res => {
-      return true
+      return res
     })
     .catch(err => {
       console.log(err)
     })
 
-  return false
+  return response
 }
 
 export const removeWishlistProduct = (user, itemId) => {

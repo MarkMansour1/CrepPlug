@@ -199,6 +199,9 @@ query SINGLE_CONTENT_QUERY($id: ID!) {
       shippingTaxable
       soldIndividually
       stockQuantity
+      vendorId
+      vendorImage
+      vendorName
       virtual
       weight
       width

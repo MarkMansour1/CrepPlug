@@ -13,11 +13,7 @@ class PageComponent extends React.Component {
           <h2>Contact Us</h2>
           <p className="text-gray mb-4">
             Before contacting the support team be sure to look at our{" "}
-            <Link
-              to="/faqs"
-              className="text-gray text-underline"
-              target="_blank"
-            >
+            <Link to="/faqs" className="text-secondary" target="_blank">
               FAQs
             </Link>
             .

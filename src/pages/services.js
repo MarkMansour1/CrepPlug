@@ -26,7 +26,7 @@ class PageComponent extends React.Component {
               <Link to="/sourcing">
                 <div className="image-card">
                   <Img
-                    fixed={data.sourcing.childImageSharp.fixed}
+                    fluid={data.sourcing.childImageSharp.fluid}
                     className="img-fluid"
                     alt="Sourcing"
                   />
@@ -38,7 +38,7 @@ class PageComponent extends React.Component {
               <Link to="/services">
                 <div className="image-card">
                   <Img
-                    fixed={data.cleaning.childImageSharp.fixed}
+                    fluid={data.cleaning.childImageSharp.fluid}
                     className="img-fluid"
                     alt="Cleaning"
                   />
@@ -59,8 +59,8 @@ export default PageComponent
 export const cardImage = graphql`
   fragment cardImage on File {
     childImageSharp {
-      fixed(width: 1000, height: 800) {
-        ...GatsbyImageSharpFixed_withWebp_tracedSVG
+      fluid(maxWidth: 1000, maxHeight: 800) {
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
   }

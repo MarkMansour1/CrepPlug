@@ -129,7 +129,7 @@ const BackgroundSection = () => (
                     <Link to="/account">Logout</Link>
                   </div>
                 </div>
-                <div className="col-12 col-sm-6 col-xl-4 order-3 order-sm-1 order-xl-3">
+                <div className="col-12 col-sm-6 col-xl-4 order-3 order-sm-1 order-xl-3 mt-5 mt-sm-0">
                   <h4>Subscribe to our Newsletter</h4>
                   <form
                     className="form-inline w-100"
@@ -154,7 +154,7 @@ const BackgroundSection = () => (
               </div>
               <div className="row copyrightrow">
                 <div className="col-12 col-sm-6">© Copyright CrepPlug 2020</div>
-                <div className="col-12 col-sm-6 text-right">
+                <div className="col-12 col-sm-6 text-xl-right">
                   <a href="https://captivastudio.com" target="_blank">
                     Website by Captiva
                   </a>

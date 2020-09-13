@@ -24,10 +24,18 @@ class Single extends React.Component {
       sizeList = "Size " + sizes[0]
     }
 
+    const outOfStock =
+      product.manageStock && !product.stockQuantity ? true : false
+
     return (
       <div className="single-product">
         <Link to={`/product/${product.slug}`}>
           <div className="product-image">
+            {outOfStock && (
+              <div class="soldindicator">
+                <span>SOLD</span>
+              </div>
+            )}
             {product.localImage ? (
               <Img
                 fluid={{

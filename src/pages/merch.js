@@ -30,7 +30,7 @@ class PageComponent extends React.Component {
             <div className="row align-items-center">
               <div className="col-12 col-md-6">
                 <Img
-                  fixed={data.hoodie.childImageSharp.fixed}
+                  fluid={data.hoodie.childImageSharp.fluid}
                   className="img-fluid"
                   alt="Hoodie"
                 />
@@ -60,7 +60,7 @@ class PageComponent extends React.Component {
               </div>
               <div className="col-12 col-md-6 order-md-2">
                 <Img
-                  fixed={data.sticker.childImageSharp.fixed}
+                  fluid={data.sticker.childImageSharp.fluid}
                   className="img-fluid"
                   alt="Sticker"
                 />
@@ -90,8 +90,8 @@ export default PageComponent
 export const merchImage = graphql`
   fragment merchImage on File {
     childImageSharp {
-      fixed(width: 500, height: 500) {
-        ...GatsbyImageSharpFixed_withWebp_tracedSVG
+      fluid(maxWidth: 500, maxHeight: 500) {
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
   }

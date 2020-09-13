@@ -60,3 +60,16 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+  const typeDefs = `
+    type WpSimpleProduct implements Node {
+      vendorId: String
+      vendorName: String
+      vendorImage: String
+    }
+   
+  `
+  createTypes(typeDefs)
+}

@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
-import { PayPalButton } from "react-paypal-button-v2"
 
 import { getUser } from "../services/auth"
-import { getCartProducts, removeCartProduct } from "../services/cart"
+import {
+  addCartProduct,
+  getCartProducts,
+  removeCartProduct,
+  changeCartQuantity,
+} from "../services/cart"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { Cart, Cross } from "../components/svg"
+import PaymentSection from "../components/payment-section"
 
 import defaultimg from "../images/default_product.png"
+import dcrease from "../images/dcrease/dcrease.jpg"
 
 const PageComponent = props => {
+  const dcreaseSizes = [
+    { value: 0, label: "Small: size 3-5" },
+    { value: 1, label: "Medium: size 6-10" },
+    { value: 2, label: "Large: size 11+" },
+  ]
+
   const [data, setData] = useState(getCartProducts())
+  const [dcreaseSize, setDcreaseSize] = useState(dcreaseSizes[0].value)
   const user = getUser()
 
   const handleRemove = productId => {
@@ -40,22 +53,44 @@ const PageComponent = props => {
     }
   }
 
+  const addSuggested = e => {
+    e.preventDefault()
+
+    console.log(
+      addCartProduct(
+        user,
+        {
+          productId: "150",
+          slug: "dcreaseslug",
+          image: null,
+          name: "D-Crease Insert",
+          price: "£9.99",
+          stockQuantity: null,
+          manageStock: false,
+        },
+        1
+      )
+    )
+
+    setData(getCartProducts())
+  }
+
   return (
     <Layout>
-      <SEO title="Cart" />
+      <SEO title="Your Cart" />
       {data && data.length > 0 ? (
-        <div className="container container-wide pt-5">
+        <div className="container pt-5">
           <div className="row">
-            <div className="col">
+            <div className="col-12">
               <h2 className="title">
-                Cart
+                Your Cart
                 <Cart />
               </h2>
               <table className="table product-table">
                 <tbody>
                   {data.map(product => (
                     <tr key={product.productId}>
-                      <td style={{ minWidth: "100px" }}>
+                      <td style={{ width: "125px" }}>
                         <Link to={`/product/${product.slug}`}>
                           <div className="img-container">
                             {product.image && product.image.sourceUrl ? (
@@ -73,19 +108,44 @@ const PageComponent = props => {
                         <Link to={`/product/${product.slug}`}>
                           {product.name}
                         </Link>
+                        <small>{product.size}</small>
                       </td>
                       <td>{product.price}</td>
-                      <td>
-                        <input
-                          type="number"
-                          className="form-control form-control-sm"
-                          value={product.quantity}
-                        />
+                      <td style={{ width: "150px" }}>
+                        <div className="product-quantity">
+                          <div
+                            onClick={() => {
+                              let products = changeCartQuantity(
+                                user,
+                                product.productId,
+                                false
+                              )
+                              setData(products)
+                            }}
+                            className="btn btn-sm"
+                          >
+                            -
+                          </div>
+                          <div className="quantity">{product.quantity}</div>
+                          <div
+                            onClick={() => {
+                              let products = changeCartQuantity(
+                                user,
+                                product.productId,
+                                true
+                              )
+                              setData(products)
+                            }}
+                            className="btn btn-sm"
+                          >
+                            +
+                          </div>
+                        </div>
                       </td>
                       <td>
                         <button
                           onClick={() => handleRemove(product.productId)}
-                          className="btn btn-light btn-sm ml-3"
+                          className="btn btn-sm"
                         >
                           <Cross size="2em" />
                         </button>
@@ -94,71 +154,73 @@ const PageComponent = props => {
                   ))}
                 </tbody>
               </table>
+              {data.filter(product => product.productId === "150").length <
+                1 && (
+                <>
+                  <h3>Protect Your Crep</h3>
+                  <form onSubmit={addSuggested}>
+                    <table className="table product-table">
+                      <tbody>
+                        <tr>
+                          <td style={{ width: "125px" }}>
+                            <a href="/product/dcrease-insert" target="_blank">
+                              <div className="img-container">
+                                <img src={dcrease} alt="D-Crease Insert" />
+                              </div>
+                            </a>
+                          </td>
+                          <td style={{ maxWidth: "300px" }}>
+                            <a href="/product/dcrease-insert" target="_blank">
+                              D-Crease Insert
+                              <small className="d-block text-gray">
+                                Go Crease Free. A CrepPlug Verified product
+                                which will prolong your sneakers life-span.
+                              </small>
+                            </a>
+                          </td>
+                          <td>
+                            £9.99
+                            <small className="d-block text-gray">
+                              +£1.99 shipping
+                            </small>
+                          </td>
+                          <td>
+                            <select
+                              id="size"
+                              name="size"
+                              className="form-control form-control-sm"
+                              value={dcreaseSize}
+                              onChange={e => setDcreaseSize(e.target.value)}
+                            >
+                              {dcreaseSizes.map(size => (
+                                <option value={size.value}>{size.label}</option>
+                              ))}
+                            </select>
+                          </td>
+                          <td>
+                            <button
+                              type="submit"
+                              className="btn btn-secondary btn-sm m-0"
+                            >
+                              Add to cart
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </>
+              )}
             </div>
-            <div className="col-12 col-md-4">
-              <div className="cart-total mt-5 pt-4">
-                <h3>Cart Totals</h3>
-                <div className="row mb-3">
-                  <div className="col-6">
-                    <span>Subtotal</span>
-                    <span>Shipping</span>
-                    <span>Total</span>
-                  </div>
-                  <div className="col-6">
-                    <span>£{data && getTotals().subtotal}</span>
-                    <span>£{data && getTotals().shipping}</span>
-                    <span>£{data && getTotals().total}</span>
-                  </div>
-                </div>
-                <PayPalButton
-                  options={{
-                    clientId: process.env.PAYPAL_CLIENTID,
-                    currency: "GBP",
-                  }}
-                  createOrder={(data, actions) => {
-                    return actions.order.create({
-                      purchase_units: [
-                        {
-                          amount: {
-                            currency_code: "GBP",
-                            value: "2.56",
-                          },
-                        },
-                      ],
-                      // application_context: {
-                      //   shipping_preference: "NO_SHIPPING" // default is "GET_FROM_FILE"
-                      // }
-                    })
-                  }}
-                  onApprove={(data, actions) => {
-                    // Capture the funds from the transaction
-                    return actions.order.capture().then(function (details) {
-                      // Show a success message to your buyer
-                      alert(
-                        "Transaction completed by " +
-                          details.payer.name.given_name
-                      )
-                      console.log(details)
-                      console.log(data)
-
-                      // OPTIONAL: Call your server to save the transaction
-                      return fetch("", {
-                        method: "post",
-                        body: JSON.stringify({
-                          orderID: data.orderID,
-                        }),
-                      })
-                    })
-                  }}
-                />
-              </div>
+            <div className="col-12 col-md-6 offset-6">
+              <PaymentSection totals={getTotals()} />
             </div>
           </div>
         </div>
       ) : (
         <div className="container text-center py-5">
           <h2 className="title">
-            Cart
+            Your Cart
             <Cart />
           </h2>
           <h4 className="d-block mb-3">Your cart is empty</h4>

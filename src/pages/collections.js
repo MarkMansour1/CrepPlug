@@ -26,7 +26,7 @@ class PageComponent extends React.Component {
               <Link to="/collections">
                 <div className="image-card">
                   <Img
-                    fixed={data.crepplug.childImageSharp.fixed}
+                    fluid={data.crepplug.childImageSharp.fluid}
                     className="img-fluid"
                     alt="CrepPlug"
                   />
@@ -39,7 +39,7 @@ class PageComponent extends React.Component {
               <Link to="/collections">
                 <div className="image-card">
                   <Img
-                    fixed={data.dcrease.childImageSharp.fixed}
+                    fluid={data.dcrease.childImageSharp.fluid}
                     className="img-fluid"
                     alt="D-Crease"
                   />
@@ -60,8 +60,8 @@ export default PageComponent
 export const cardImage = graphql`
   fragment cardImage on File {
     childImageSharp {
-      fixed(width: 1000, height: 800) {
-        ...GatsbyImageSharpFixed_withWebp_tracedSVG
+      fluid(maxWidth: 1000, maxHeight: 800) {
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
   }

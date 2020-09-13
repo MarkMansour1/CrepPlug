@@ -127,7 +127,20 @@ export const applyFilters = (state, productList) => {
 
   productList = applySort(state.sort, productList)
 
-  return productList
+  // Creates a new list for the sold products
+  var soldList = []
+  for (let i = 0; i < productList.length; i++) {
+    let product = productList[i].node
+
+    // If the product is out of stock, add it to the sold list and remove it from the unsold list
+    if (product.manageStock && !product.stockQuantity) {
+      soldList.push({ node: product })
+      productList.splice(i, 1)
+      i--
+    }
+  }
+
+  return { unsold: productList, sold: soldList }
 }
 
 export const applySort = (sort, productList) => {

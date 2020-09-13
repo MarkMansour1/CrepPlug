@@ -34,7 +34,6 @@ export const handleLogin = ({ username, password }) => {
           return setUser({
             token: data.token,
             username: data.user_display_name,
-            email: data.user_email,
             id: data.store_id,
             shareKey: res[0].share_key,
           })
@@ -98,7 +97,6 @@ export const handleLoginGraphql = ({ username, password }) => {
       return setUser({
         token: res.data.login.authToken,
         username: res.data.login.user.name,
-        email: res.data.login.user.id,
       })
     })
     .catch(err => {

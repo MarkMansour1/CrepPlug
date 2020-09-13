@@ -23,8 +23,7 @@ class AccountNav extends React.Component {
             <div className="profile-picture">{user.username[0]}</div>
             <div className="welcome-text">
               <span>{user.username}</span>
-              {user.email}
-              {/* 10 products | 3 reviews */}
+              10 products | 3 reviews
             </div>
           </>
         )}

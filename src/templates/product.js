@@ -5,16 +5,67 @@ import Carousel, { Dots } from "@brainhubeu/react-carousel"
 
 import Layout from "../components/layout"
 import ProductBlock from "../components/block-product"
-import { Wishlist } from "../components/svg"
+import { Wishlist, RightArrow, Messages, Question } from "../components/svg"
+import {
+  WishModal,
+  CartModal,
+  MessageModal,
+  RequestModal,
+} from "../components/modals"
 
-import { getUser } from "../services/auth"
+import { getUser, isLoggedIn } from "../services/auth"
 import { addCartProduct } from "../services/cart"
 import { addWishlistProduct } from "../services/wishlist"
 
 import defaultimg from "../images/default_product.png"
+import protection from "../images/protection.png"
+
+const SellerInfo = ({ vendor }) => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const user = getUser()
+
+  if (!vendor || !vendor.id || !vendor.name || !vendor.image) {
+    return null
+  }
+
+  const { id, name, image } = vendor
+
+  return (
+    <div className="my-4">
+      <hr />
+      <Link to={`/store/${id}`}>
+        <div className="product-seller">
+          <img src={image} alt="" />
+          <div>
+            <span>{name}</span>
+            <StarRatings
+              name="productRating"
+              rating={5}
+              starRatedColor="black"
+              starEmptyColor="#ccc"
+              numberOfStars={5}
+              svgIconPath="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+              svgIconViewBox="0 0 16 16"
+              starDimension="10px"
+              starSpacing="0"
+            />
+            <small>10 reviews</small>
+          </div>
+        </div>
+      </Link>
+      <hr />
+    </div>
+  )
+}
 
 const PageTemplate = ({ data }) => {
   const [quantity, setQuantity] = useState(1)
+  const [size, setSize] = useState(null)
+  const [showWish, setWish] = useState(false)
+  const [showCart, setCart] = useState(false)
+  const [showMessage, setMessage] = useState(false)
+  const [showRequest, setRequest] = useState(false)
   const user = getUser()
 
   const { page, products } = data
@@ -33,7 +84,13 @@ const PageTemplate = ({ data }) => {
     reviews,
     image,
     galleryImages,
+    related,
+    vendorId,
+    vendorName,
+    vendorImage,
   } = page
+
+  const outOfStock = manageStock && !stockQuantity ? true : false
 
   var images = []
   if (image && image.sourceUrl) {
@@ -50,20 +107,71 @@ const PageTemplate = ({ data }) => {
     images.push({ sourceUrl: defaultimg })
   }
 
-  // Gets 6 random products for related
-  var related = products.edges.slice(0, 6)
+  // Gets 6  products for related
+  var relatedProducts = []
+  for (let i in related.nodes) {
+    // Adds all the products matching the related id to the relatedproducts array
+    relatedProducts = relatedProducts.concat(
+      products.edges.filter(
+        ({ node: product }) => product.id === related.nodes[i].id
+      )
+    )
+  }
+
+  // If there aren't enough related products, fill the rest with random products
+  // TODO replace 3.5 with a number related to the product to keep it different for each product but random overall
+  let num = Math.floor(products.edges.length / 3.5)
+  while (relatedProducts.length <= 6 && num < products.edges.length) {
+    let p = products.edges[num]
+    if (
+      relatedProducts.filter(({ node: product }) => product.id === p.node.id)
+        .length < 1
+    ) {
+      relatedProducts.push(p)
+    }
+    num++
+  }
+
+  const wishlistSubmit = () => {
+    addWishlistProduct(user, { product_id: productId })
+    setWish(true)
+  }
+
+  const cartSubmit = e => {
+    e.preventDefault()
+
+    let res = addCartProduct(user, page, quantity, size)
+
+    if (res == false) {
+      console.log("didnt add")
+    }
+
+    setCart(res)
+  }
 
   return (
     <Layout>
       <div className="container pt-5">
-        <div className="row">
+        {/* TODO remove pb-5 when reviews added */}
+        <div className="row pb-5">
           <div className="col-12 col-md-7">
+            <h3 className="text-left d-md-none">{name}</h3>
             <ImageCarousel images={images} />
           </div>
           <div className="col-12 col-md-5">
             <div className="product-info">
-              <h3>{name}</h3>
-              {reviews.nodes.length > 0 && (
+              <div className="d-flex justify-content-between align-items-start">
+                <h3 className="d-none d-md-block">{name}</h3>
+                {/* TODO if the logged in user is the product owner, change wishlist button to edit product button */}
+                {/* <button
+                  onClick={wishlistSubmit}
+                  className="btn wishlist-add"
+                  style={{ color: "black", padding: ".25rem" }}
+                >
+                  <Wishlist size="1.5rem" />
+                </button> */}
+              </div>
+              {/* {reviews.nodes.length > 0 && (
                 <div className="product-rating">
                   <StarRatings
                     name="productRating"
@@ -77,7 +185,7 @@ const PageTemplate = ({ data }) => {
                     starSpacing="0"
                   />
                 </div>
-              )}
+              )} */}
               <div className="product-attributes">
                 {attributes &&
                   attributes.nodes &&
@@ -101,17 +209,6 @@ const PageTemplate = ({ data }) => {
                       ))}
                     </div>
                   )}
-                {attributes &&
-                  attributes.nodes &&
-                  attributes.nodes[2] &&
-                  attributes.nodes[2].options && (
-                    <div>
-                      Size:{" "}
-                      {attributes.nodes[2].options.map(value => (
-                        <span>{value}</span>
-                      ))}
-                    </div>
-                  )}
               </div>
               <div
                 className="product-desc"
@@ -120,73 +217,115 @@ const PageTemplate = ({ data }) => {
               <div className="product-price">
                 {price}{" "}
                 {salePrice && <span>{regularPrice && regularPrice}</span>}
+                <div className="product-shipping">
+                  <strong>+£3.99</strong> shipping
+                </div>
               </div>
-              <div className="product-stock"></div>
-              <div className="product-cart">
-                <button
-                  onClick={() => {
-                    if (quantity > 1) {
-                      setQuantity(quantity - 1)
-                    }
-                  }}
-                  className="btn btn-light"
-                >
-                  -
-                </button>
-                <div className="quantity">{quantity}</div>
-                <button
-                  onClick={() => {
-                    console.log(manageStock)
-                    console.log(stockQuantity)
-
-                    if (
-                      !manageStock ||
-                      !stockQuantity ||
-                      quantity < stockQuantity
-                    ) {
-                      setQuantity(quantity + 1)
-                    }
-                  }}
-                  className="btn btn-light"
-                >
-                  +
-                </button>
-                <button
-                  onClick={() =>
-                    addCartProduct(user, {
-                      id: productId,
-                      slug: slug,
-                      image: image,
-                      name: name,
-                      price: price,
-                      quantity: quantity,
-                    })
-                  }
-                  className="btn btn-primary cart-add"
-                >
+              <div className="product-stock">
+                {/* {outOfStock
+                  ? "Out of stock"
+                  : stockQuantity
+                  ? `${stockQuantity} in stock`
+                  : "In stock"} */}
+                {outOfStock && "Out of stock"}
+              </div>
+              <form onSubmit={cartSubmit} className="product-cart">
+                <div className="form-group row">
+                  <div className="col-4">
+                    <label>Quantity:</label>
+                    <div className="product-quantity">
+                      <div
+                        onClick={() => {
+                          if (quantity > 1) {
+                            setQuantity(quantity - 1)
+                          }
+                        }}
+                        className="btn btn-sm"
+                      >
+                        -
+                      </div>
+                      <div className="quantity">{quantity}</div>
+                      <div
+                        onClick={() => {
+                          if (quantity < stockQuantity) {
+                            setQuantity(quantity + 1)
+                          }
+                        }}
+                        className="btn btn-sm"
+                      >
+                        +
+                      </div>
+                    </div>
+                  </div>
+                  {attributes &&
+                    attributes.nodes &&
+                    attributes.nodes[2] &&
+                    attributes.nodes[2].options && (
+                      <div className="col-8">
+                        <label>Size:</label>
+                        <select
+                          className="form-control form-control-sm"
+                          required
+                        >
+                          <option value="" selected disabled>
+                            Select a size
+                          </option>
+                          {attributes.nodes[2].options.map(value => (
+                            <option value={value}>Size {value}</option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                </div>
+                <button type="submit" className="btn btn-primary cart-add">
                   Add to Cart
                 </button>
-                <button
-                  onClick={() =>
-                    addWishlistProduct(user, { product_id: productId })
-                  }
-                  className="btn btn-light wishlist-add"
-                >
-                  <Wishlist size="1.5rem" />
-                </button>
-              </div>
+              </form>
               <div className="product-actions">
-                <button className="btn btn-outline-primary">
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={() => setMessage(true)}
+                >
                   Message seller
                 </button>
-                <Link
-                  to="/sourcing"
-                  state={{ name: name }}
-                  className="btn btn-outline-primary"
-                >
-                  Request your size
-                </Link>
+                <div className="product-actions-extra">
+                  <div className="link-flat" onClick={wishlistSubmit}>
+                    <Wishlist />
+                    {` Add to wishlist`}
+                  </div>
+                  <div className="link-flat" onClick={() => setRequest(true)}>
+                    <Question />
+                    {` Request your size`}
+                  </div>
+                </div>
               </div>
+              <a
+                href="/buyer-protection"
+                target="_blank"
+                className="product-protection"
+              >
+                <img src={protection} alt="" />
+                <div>
+                  <span>Buyer Protection Guarantee</span>
+                  Your purchase is protected <RightArrow />
+                </div>
+              </a>
+              <SellerInfo
+                vendor={{ id: vendorId, name: vendorName, image: vendorImage }}
+              />
+              <Link to="/sourcing" state={{ name: name }} className="link-flat">
+                Request your size
+              </Link>
+              {/* <Link to="/shop">
+                <BackgroundImage
+                  Tag="div"
+                  fluid={data.feedBanner.childImageSharp.fluid}
+                >
+                  <div className="product-shop-banner">
+                    <div className="banner-text">Visit store</div>
+                  </div>
+                </BackgroundImage>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -215,9 +354,20 @@ const PageTemplate = ({ data }) => {
           title="Related Products"
           link="/shop"
           linkText="Shop All"
-          products={related}
+          products={relatedProducts}
         />
       </div>
+      <WishModal name={name} show={showWish} onHide={() => setWish(false)} />
+      <CartModal name={name} show={showCart} onHide={() => setCart(false)} />
+      {/* TODO add vendor and user props to message */}
+      {/* TODO replace with log in modal if user is not logged in */}
+      <MessageModal show={showMessage} onHide={() => setMessage(false)} />
+      <RequestModal
+        backdrop="static"
+        name={name}
+        show={showRequest}
+        onHide={() => setRequest(false)}
+      />
     </Layout>
   )
 }
@@ -236,6 +386,14 @@ export const query = graphql`
       shortDescription
       stockQuantity
       manageStock
+      vendorId
+      vendorName
+      vendorImage
+      related {
+        nodes {
+          id
+        }
+      }
       attributes {
         nodes {
           name
@@ -298,6 +456,13 @@ export const query = graphql`
         }
       }
     }
+    feedBanner: file(relativePath: { eq: "banners/feed.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 500) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
   }
 `
 
@@ -323,8 +488,8 @@ class ImageCarousel extends React.Component {
         <Carousel
           value={this.state.value}
           onChange={this.onChange}
-          // arrows
           lazyLoad
+          arrows
         >
           {this.state.images.map((image, index) => (
             <div className="img-container" key={image.sourceUrl}>

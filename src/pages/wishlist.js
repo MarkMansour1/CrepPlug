@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Loader from "../components/loader"
 import { Cross } from "../components/svg"
+import { CartModal } from "../components/modals"
 
 import { getUser } from "../services/auth"
 import { addCartProduct } from "../services/cart"
@@ -15,6 +16,7 @@ import defaultimg from "../images/default_product.png"
 const PageComponent = props => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [showCart, setCart] = useState(false)
 
   const user = getUser()
   const allProducts = props.data.products.edges
@@ -37,6 +39,15 @@ const PageComponent = props => {
         console.log(err)
       })
   }, [])
+
+  const cartSubmit = (itemId, product) => {
+    let res = addCartProduct(user, product, 1, null)
+
+    if (res === true) {
+      handleRemove(itemId)
+      setCart(true)
+    }
+  }
 
   const handleRemove = itemId => {
     var newData = data.slice()
@@ -90,7 +101,7 @@ const PageComponent = props => {
                         <td>
                           <button
                             onClick={() => handleRemove(itemId)}
-                            className="btn btn-light btn-sm"
+                            className="btn btn-sm"
                           >
                             <Cross size="2em" />
                           </button>
@@ -113,17 +124,7 @@ const PageComponent = props => {
                         <td>{price}</td>
                         <td>
                           <button
-                            onClick={() => {
-                              addCartProduct(user, {
-                                id: productId,
-                                slug: slug,
-                                image: image,
-                                name: name,
-                                price: price,
-                                quantity: 1,
-                              })
-                              handleRemove(itemId)
-                            }}
+                            onClick={() => cartSubmit(itemId, product)}
                             className="btn btn-secondary btn-sm"
                             disabled={outOfStock}
                           >
@@ -145,6 +146,11 @@ const PageComponent = props => {
             </div>
           )
         ) : null}
+        <CartModal
+          name={"Product"}
+          show={showCart}
+          onHide={() => setCart(false)}
+        />
       </div>
     </Layout>
   )

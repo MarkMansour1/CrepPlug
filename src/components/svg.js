@@ -57,6 +57,26 @@ export const Logo = () => (
   </svg>
 )
 
+export const LogoSmall = () => (
+  <svg
+    id="logo"
+    data-name="logo"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 150 130.09"
+  >
+    {/* Outer */}
+    <path
+      d="M0,56.05C1.62,50.7,2.74,45.13,4.93,40,15.35,15.72,34.57,3.29,60.24.07c6.42-.8,7.3.45,6.4,6.9C59.42,8.64,52.14,9.64,45.35,12a55.8,55.8,0,0,0-37,56.81,57.08,57.08,0,0,0,46.17,52.08c31.89,6,62.87-17,66.52-49.32.35-3.12,1.55-5.87,5.12-5.36,3.3.48,3.61,3.32,3.31,6.25-3.05,29.54-26.89,52.93-56.22,56.89C37.93,134.13,5.48,108.72.79,75.25c-.06-.42-.52-.79-.79-1.18Z"
+      transform="translate(0 0.14)"
+    />
+    {/* Inner */}
+    <path
+      d="M93.49,77.26c4,1.57,2.22,3.91,1,6.09-9.33,17.14-33.7,22.51-50.36,11.1A35.55,35.55,0,0,1,61.91,29.59c2.36-.13,4.79.93,7.18,1.44l0,2.09A43.07,43.07,0,0,1,63,34.59c-14.39,1.29-24.89,9.87-28.38,23.35-3.14,12.14,2.49,26.35,12.9,32.62,12.55,7.55,26.92,6.46,36.82-3C87.56,84.43,90.31,80.85,93.49,77.26Z"
+      transform="translate(0 0.14)"
+    />
+  </svg>
+)
+
 export const LeftArrow = ({ size }) => (
   <svg
     width={size || defaultSize}
@@ -125,6 +145,54 @@ export const RightChevron = ({ size }) => (
     <path
       fill-rule="evenodd"
       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+    />
+  </svg>
+)
+
+export const UpChevron = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    class="bi bi-chevron-up"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+    />
+  </svg>
+)
+
+export const DownChevron = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    class="bi bi-chevron-down"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+    />
+  </svg>
+)
+
+export const Hamburger = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    class="bi bi-text-center"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
     />
   </svg>
 )
@@ -245,6 +313,39 @@ export const Wishlist = ({ size }) => (
       stroke-width="0.25"
       fillRule="evenodd"
       d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
+    />
+  </svg>
+)
+
+export const Question = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    class="bi bi-question-circle"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+    />
+    <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+  </svg>
+)
+
+export const Filters = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    class="bi bi-filter"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
     />
   </svg>
 )

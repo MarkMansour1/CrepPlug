@@ -40,11 +40,11 @@ const PageComponent = props => {
     <Layout>
       <SEO title="Account" />
       <div className="container pt-5">
-        <div className="row" style={{ position: "relative" }}>
-          <div className="col-3">
+        <div className="row">
+          <div className="col-3 d-none d-md-block">
             <AccountNav user={user} />
           </div>
-          <div className="col-9 account-wrapper">
+          <div className="col-12 col-md-9 account-wrapper">
             <Router>
               <AddProduct
                 path="account/add-product"

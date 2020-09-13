@@ -17,7 +17,7 @@ class PageComponent extends React.Component {
           <div className="row my-5 pt-4">
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.list.childImageSharp.fixed}
+                fluid={data.list.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -26,7 +26,7 @@ class PageComponent extends React.Component {
             </div>
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.view.childImageSharp.fixed}
+                fluid={data.view.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -38,7 +38,7 @@ class PageComponent extends React.Component {
             </div>
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.sellwin.childImageSharp.fixed}
+                fluid={data.sellwin.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -60,7 +60,7 @@ class PageComponent extends React.Component {
           <div className="row my-5 pt-4">
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.find.childImageSharp.fixed}
+                fluid={data.find.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -69,7 +69,7 @@ class PageComponent extends React.Component {
             </div>
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.buy.childImageSharp.fixed}
+                fluid={data.buy.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -78,7 +78,7 @@ class PageComponent extends React.Component {
             </div>
             <div className="col-12 col-lg-4">
               <Img
-                fixed={data.buywin.childImageSharp.fixed}
+                fluid={data.buywin.childImageSharp.fluid}
                 className="img-fluid"
                 alt=""
               />
@@ -100,8 +100,8 @@ export default PageComponent
 export const htsImage = graphql`
   fragment htsImage on File {
     childImageSharp {
-      fixed(width: 150, height: 150) {
-        ...GatsbyImageSharpFixed_withWebp_tracedSVG
+      fluid(maxWidth: 150, maxHeight: 150) {
+        ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }
   }
