@@ -27,119 +27,6 @@ import {
 
 import defaultimg from "../images/default_product.png"
 
-const CartMenu = props => {
-  const { open, close } = props
-  const [data, setData] = useState(getCartProducts())
-  const [dcreaseSize, setDcreaseSize] = useState(null)
-  const user = getUser()
-
-  const handleRemove = productId => {
-    var products = removeCartProduct(user, productId)
-    setData(products)
-  }
-
-  const getTotals = () => {
-    let subtotal = 0
-    let shipping = 0
-    let total = 0
-
-    for (let product in data) {
-      let price = data[product].price.substring(1)
-      subtotal += parseFloat(price) * data[product].quantity
-      shipping += 3.99
-    }
-
-    total = subtotal + shipping
-
-    return {
-      subtotal: subtotal.toFixed(2),
-      shipping: shipping.toFixed(2),
-      total: total.toFixed(2),
-    }
-  }
-
-  const addSuggested = e => {
-    e.preventDefault()
-
-    console.log(e.target.value)
-  }
-
-  return (
-    <div className={`cart-menu ${open ? "cart-menu-open" : ""}`}>
-      <div className="cart-container">
-        <div className="cart-title">
-          <h3 className="title">
-            Your Cart
-            <button className="btn btn-light" onClick={close}>
-              <Cross size="2rem" />
-            </button>
-          </h3>
-        </div>
-        <div className="cart-items">
-          {data &&
-            data.map(product => (
-              <div className="cart-item" key={product.productId}>
-                <Link to={`/product/${product.slug}`}>
-                  <div className="img-container">
-                    {product.image && product.image.sourceUrl ? (
-                      <img src={product.image.sourceUrl} alt={product.name} />
-                    ) : (
-                      <img src={defaultimg} alt="" />
-                    )}
-                  </div>
-                </Link>
-                <div>
-                  <Link to={`/product/${product.slug}`}>{product.name}</Link>
-                  <div>{product.price}</div>
-                  <div className="product-quantity">
-                    <div
-                      onClick={() => {
-                        let products = changeCartQuantity(
-                          user,
-                          product.productId,
-                          false
-                        )
-                        setData(products)
-                      }}
-                      className="btn btn-sm"
-                    >
-                      -
-                    </div>
-                    <div className="quantity">{product.quantity}</div>
-                    <div
-                      onClick={() => {
-                        let products = changeCartQuantity(
-                          user,
-                          product.productId,
-                          true
-                        )
-                        setData(products)
-                      }}
-                      className="btn btn-sm"
-                    >
-                      +
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleRemove(product.productId)}
-                    className="btn btn-sm"
-                  >
-                    <Cross size="2em" /> Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
-        <div className="cart-actions">
-          <Link to="/cart" className="btn btn-primary btn-block">
-            Checkout
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 class Header extends React.Component {
   constructor(props) {
     super(props)
@@ -149,7 +36,12 @@ class Header extends React.Component {
       mobileOpen: false,
       searchOpen: false,
       cartOpen: false,
+      cartProducts: [],
     }
+  }
+
+  componentDidMount() {
+    this.setState({ cartProducts: getCartProducts() })
   }
 
   handleInputChange = event => {
@@ -229,7 +121,7 @@ class Header extends React.Component {
         >
           <Accordion>
             <Link to="/shop">Buy</Link>
-            <Link to="/account/add-product">Sell</Link>
+            <Link to="/sell">Sell</Link>
             <Card>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
@@ -387,9 +279,7 @@ class Header extends React.Component {
               </div>
               <div className="header-right">
                 <Link to="/shop">Buy</Link>
-                <Link to={isLoggedIn() ? "/account/add-product" : "/login"}>
-                  Sell
-                </Link>
+                <Link to={isLoggedIn() ? "/sell" : "/login"}>Sell</Link>
                 <Link to="/wishlist">
                   <Wishlist size="1.25rem" />
                 </Link>
@@ -426,7 +316,7 @@ class Header extends React.Component {
                     </div>
                   </div>
                 ) : (
-                  <Link to="/account">
+                  <Link to="/login">
                     <Account size="1.5rem" />
                   </Link>
                 )}
@@ -436,8 +326,16 @@ class Header extends React.Component {
                 >
                   <Cart size="1.5rem" />
                 </div> */}
-                <Link to="/cart">
+                <Link to="/cart" style={{ position: "relative" }}>
                   <Cart size="1.5rem" />
+                  {/* {getCartProducts().length > 0 && (
+                    <span
+                      className="badge badge-light"
+                      style={{ position: "absolute", top: "25%", right: "8px" }}
+                    >
+                      {getCartProducts().length}
+                    </span>
+                  )} */}
                 </Link>
               </div>
             </div>
@@ -503,3 +401,116 @@ export const MinimalHeader = () => (
     </div>
   </header>
 )
+
+const CartMenu = props => {
+  const { open, close } = props
+  const [data, setData] = useState(getCartProducts())
+  const [dcreaseSize, setDcreaseSize] = useState(null)
+  const user = getUser()
+
+  const handleRemove = productId => {
+    var products = removeCartProduct(user, productId)
+    setData(products)
+  }
+
+  const getTotals = () => {
+    let subtotal = 0
+    let shipping = 0
+    let total = 0
+
+    for (let product in data) {
+      let price = data[product].price.substring(1)
+      subtotal += parseFloat(price) * data[product].quantity
+      shipping += 3.99
+    }
+
+    total = subtotal + shipping
+
+    return {
+      subtotal: subtotal.toFixed(2),
+      shipping: shipping.toFixed(2),
+      total: total.toFixed(2),
+    }
+  }
+
+  const addSuggested = e => {
+    e.preventDefault()
+
+    console.log(e.target.value)
+  }
+
+  return (
+    <div className={`cart-menu ${open ? "cart-menu-open" : ""}`}>
+      <div className="cart-container">
+        <div className="cart-title">
+          <h3 className="title">
+            Your Cart
+            <button className="btn btn-light" onClick={close}>
+              <Cross size="2rem" />
+            </button>
+          </h3>
+        </div>
+        <div className="cart-items">
+          {data &&
+            data.map(product => (
+              <div className="cart-item" key={product.productId + product.size}>
+                <Link to={`/product/${product.slug}`}>
+                  <div className="img-container">
+                    {product.image && product.image.sourceUrl ? (
+                      <img src={product.image.sourceUrl} alt={product.name} />
+                    ) : (
+                      <img src={defaultimg} alt="" />
+                    )}
+                  </div>
+                </Link>
+                <div>
+                  <Link to={`/product/${product.slug}`}>{product.name}</Link>
+                  <div>{product.price}</div>
+                  <div className="product-quantity">
+                    <div
+                      onClick={() => {
+                        let products = changeCartQuantity(
+                          user,
+                          product.productId,
+                          false
+                        )
+                        setData(products)
+                      }}
+                      className="btn btn-sm"
+                    >
+                      -
+                    </div>
+                    <div className="quantity">{product.quantity}</div>
+                    <div
+                      onClick={() => {
+                        let products = changeCartQuantity(
+                          user,
+                          product.productId,
+                          true
+                        )
+                        setData(products)
+                      }}
+                      className="btn btn-sm"
+                    >
+                      +
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleRemove(product.productId)}
+                    className="btn btn-sm"
+                  >
+                    <Cross size="2em" /> Remove
+                  </button>
+                </div>
+              </div>
+            ))}
+        </div>
+        <div className="cart-actions">
+          <Link to="/cart" className="btn btn-primary btn-block">
+            Checkout
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}

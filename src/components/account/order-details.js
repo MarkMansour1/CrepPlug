@@ -14,11 +14,9 @@ const AccountSection = () => {
   const orderId = url[url.length - 1]
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/orders/${orderId}`, {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
+    fetch(
+      `${process.env.SITE_URL}/wp-json/wc/v3/orders/${orderId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`
+    )
       .then(res => res.json())
       .then(res => {
         setData(res)

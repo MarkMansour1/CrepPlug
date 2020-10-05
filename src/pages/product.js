@@ -9,10 +9,8 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <div className="container container-wide pt-5">
-          <div className="row">
-            <h2>Product</h2>
-            <h4>{url}</h4>
-          </div>
+          <h2>Product</h2>
+          <h4>{url}</h4>
         </div>
       </Layout>
     )

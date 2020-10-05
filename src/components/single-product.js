@@ -32,7 +32,7 @@ class Single extends React.Component {
         <Link to={`/product/${product.slug}`}>
           <div className="product-image">
             {outOfStock && (
-              <div class="soldindicator">
+              <div className="soldindicator">
                 <span>SOLD</span>
               </div>
             )}

@@ -12,7 +12,8 @@ const PageComponent = props => {
         <Store
           path="store/*"
           banner={props.data.banner}
-          items={props.data.products}
+          products={props.data.products}
+          categories={props.data.categories}
         />
       </Router>
     </Layout>
@@ -39,6 +40,9 @@ export const query = graphql`
           price
           regularPrice
           date
+          vendorId
+          vendorImage
+          vendorName
           image {
             sourceUrl
           }
@@ -60,6 +64,13 @@ export const query = graphql`
               options
             }
           }
+        }
+      }
+    }
+    categories: allWpProductCategory {
+      edges {
+        node {
+          name
         }
       }
     }

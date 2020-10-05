@@ -16,51 +16,14 @@ import {
 import { getUser, isLoggedIn } from "../services/auth"
 import { addCartProduct } from "../services/cart"
 import { addWishlistProduct } from "../services/wishlist"
+import { updateProduct } from "../services/products"
 
 import defaultimg from "../images/default_product.png"
 import protection from "../images/protection.png"
 
-const SellerInfo = ({ vendor }) => {
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const user = getUser()
-
-  if (!vendor || !vendor.id || !vendor.name || !vendor.image) {
-    return null
-  }
-
-  const { id, name, image } = vendor
-
-  return (
-    <div className="my-4">
-      <hr />
-      <Link to={`/store/${id}`}>
-        <div className="product-seller">
-          <img src={image} alt="" />
-          <div>
-            <span>{name}</span>
-            <StarRatings
-              name="productRating"
-              rating={5}
-              starRatedColor="black"
-              starEmptyColor="#ccc"
-              numberOfStars={5}
-              svgIconPath="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-              svgIconViewBox="0 0 16 16"
-              starDimension="10px"
-              starSpacing="0"
-            />
-            <small>10 reviews</small>
-          </div>
-        </div>
-      </Link>
-      <hr />
-    </div>
-  )
-}
-
 const PageTemplate = ({ data }) => {
   const [quantity, setQuantity] = useState(1)
+  const [sizes, setSizes] = useState(null)
   const [size, setSize] = useState(null)
   const [showWish, setWish] = useState(false)
   const [showCart, setCart] = useState(false)
@@ -69,7 +32,7 @@ const PageTemplate = ({ data }) => {
   const user = getUser()
 
   const { page, products } = data
-  const {
+  var {
     productId,
     slug,
     name,
@@ -88,7 +51,45 @@ const PageTemplate = ({ data }) => {
     vendorId,
     vendorName,
     vendorImage,
+    metaData,
   } = page
+
+  useEffect(() => {
+    if (
+      attributes &&
+      attributes.nodes &&
+      attributes.nodes[2] &&
+      attributes.nodes[2].options
+    ) {
+      let sizeOptions = attributes.nodes[2].options
+      setSizes(sizeOptions)
+      setSize(sizeOptions[0])
+    }
+
+    fetch(
+      `${process.env.SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        const viewMeta = data.meta_data.find(
+          meta => meta.key === "_wcfm_product_views"
+        )
+        var views = parseInt(viewMeta.value) || 0
+
+        // TODO uncomment this in production to count views
+        // updateProduct(productId, {
+        //   meta_data: [
+        //     {
+        //       key: "_wcfm_product_views",
+        //       value: views + 1,
+        //     },
+        //   ],
+        // })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [])
 
   const outOfStock = manageStock && !stockQuantity ? true : false
 
@@ -221,64 +222,58 @@ const PageTemplate = ({ data }) => {
                   <strong>+£3.99</strong> shipping
                 </div>
               </div>
-              <div className="product-stock">
-                {/* {outOfStock
-                  ? "Out of stock"
-                  : stockQuantity
-                  ? `${stockQuantity} in stock`
-                  : "In stock"} */}
-                {outOfStock && "Out of stock"}
-              </div>
               <form onSubmit={cartSubmit} className="product-cart">
-                <div className="form-group row">
-                  <div className="col-4">
-                    <label>Quantity:</label>
-                    <div className="product-quantity">
-                      <div
-                        onClick={() => {
-                          if (quantity > 1) {
-                            setQuantity(quantity - 1)
-                          }
-                        }}
-                        className="btn btn-sm"
-                      >
-                        -
-                      </div>
-                      <div className="quantity">{quantity}</div>
-                      <div
-                        onClick={() => {
-                          if (quantity < stockQuantity) {
-                            setQuantity(quantity + 1)
-                          }
-                        }}
-                        className="btn btn-sm"
-                      >
-                        +
+                {!outOfStock && (
+                  <div className="form-group row">
+                    <div className="col-4">
+                      <label>Quantity:</label>
+                      <div className="product-quantity">
+                        <div
+                          onClick={() => {
+                            if (quantity > 1) {
+                              setQuantity(quantity - 1)
+                            }
+                          }}
+                          className="btn btn-sm"
+                        >
+                          -
+                        </div>
+                        <div className="quantity">{quantity}</div>
+                        <div
+                          onClick={() => {
+                            if (quantity < stockQuantity) {
+                              setQuantity(quantity + 1)
+                            }
+                          }}
+                          className="btn btn-sm"
+                        >
+                          +
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {attributes &&
-                    attributes.nodes &&
-                    attributes.nodes[2] &&
-                    attributes.nodes[2].options && (
+                    {sizes && (
                       <div className="col-8">
                         <label>Size:</label>
                         <select
                           className="form-control form-control-sm"
+                          value={size}
+                          onChange={event => setSize(event.target.value)}
                           required
                         >
-                          <option value="" selected disabled>
-                            Select a size
-                          </option>
-                          {attributes.nodes[2].options.map(value => (
-                            <option value={value}>Size {value}</option>
+                          {sizes.map(size => (
+                            <option value={size}>Size: {size}</option>
                           ))}
                         </select>
                       </div>
                     )}
-                </div>
-                <button type="submit" className="btn btn-primary cart-add">
-                  Add to Cart
+                  </div>
+                )}
+                <button
+                  type="submit"
+                  className="btn btn-primary cart-add"
+                  disabled={outOfStock}
+                >
+                  {outOfStock ? "Out of stock" : "Add to Cart"}
                 </button>
               </form>
               <div className="product-actions">
@@ -313,9 +308,9 @@ const PageTemplate = ({ data }) => {
               <SellerInfo
                 vendor={{ id: vendorId, name: vendorName, image: vendorImage }}
               />
-              <Link to="/sourcing" state={{ name: name }} className="link-flat">
+              {/* <Link to="/sourcing" state={{ name: name }} className="link-flat">
                 Request your size
-              </Link>
+              </Link> */}
               {/* <Link to="/shop">
                 <BackgroundImage
                   Tag="div"
@@ -361,7 +356,11 @@ const PageTemplate = ({ data }) => {
       <CartModal name={name} show={showCart} onHide={() => setCart(false)} />
       {/* TODO add vendor and user props to message */}
       {/* TODO replace with log in modal if user is not logged in */}
-      <MessageModal show={showMessage} onHide={() => setMessage(false)} />
+      <MessageModal
+        receiver={vendorName}
+        show={showMessage}
+        onHide={() => setMessage(false)}
+      />
       <RequestModal
         backdrop="static"
         name={name}
@@ -389,6 +388,11 @@ export const query = graphql`
       vendorId
       vendorName
       vendorImage
+      metaData {
+        id
+        key
+        value
+      }
       related {
         nodes {
           id
@@ -505,4 +509,43 @@ class ImageCarousel extends React.Component {
       </>
     )
   }
+}
+
+const SellerInfo = ({ vendor }) => {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const user = getUser()
+
+  if (!vendor || !vendor.id || !vendor.name || !vendor.image) {
+    return null
+  }
+
+  const { id, name, image } = vendor
+
+  return (
+    <div className="my-4">
+      <hr />
+      <Link to={`/store/${name}`}>
+        <div className="product-seller">
+          <img src={image} alt="" />
+          <div>
+            <span>{name}</span>
+            <StarRatings
+              name="productRating"
+              rating={5}
+              starRatedColor="black"
+              starEmptyColor="#ccc"
+              numberOfStars={5}
+              svgIconPath="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+              svgIconViewBox="0 0 16 16"
+              starDimension="10px"
+              starSpacing="0"
+            />
+            <small>10 reviews</small>
+          </div>
+        </div>
+      </Link>
+      <hr />
+    </div>
+  )
 }

@@ -30,7 +30,7 @@ const Boxes = () => (
         </Link>
       </div>
       <div className="col-12 col-md-4">
-        <Link to="/account/add-product">
+        <Link to="/sell">
           <img src={fees} alt="" />
           <div>
             We've got the lowest fees around
@@ -121,11 +121,11 @@ const BackgroundSection = () => (
                 <div className="col-6 col-sm-6 col-xl-2 mt-5 mt-xl-0 ml-xl-5 order-2 order-sm-3 order-xl-2">
                   <h4>Account</h4>
                   <div className="footer-links">
-                    <Link to="/account">My Account</Link>
-                    <Link to="/account">Messages</Link>
-                    <Link to="/account">Transactions</Link>
-                    <Link to="/account">Settings</Link>
-                    <Link to="/account">Reviews</Link>
+                    <Link to="/account">Dashboard</Link>
+                    <Link to="/account/products">Products</Link>
+                    <Link to="/account/messages">Messages</Link>
+                    <Link to="/account/transactions">Transactions</Link>
+                    <Link to="/account/settings">Settings</Link>
                     <Link to="/account">Logout</Link>
                   </div>
                 </div>

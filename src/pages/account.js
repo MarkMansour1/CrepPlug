@@ -6,8 +6,8 @@ import { isLoggedIn, getUser, isBrowser } from "../services/auth"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
+import Dashboard from "../components/account/dashboard"
 import AccountNav from "../components/account/account-nav"
-import AddProduct from "../components/account/add-product"
 import Products from "../components/account/products"
 import Transactions from "../components/account/transactions"
 import OrderDetails from "../components/account/order-details"
@@ -16,16 +16,7 @@ import MessageDetails from "../components/account/message-details"
 import Settings from "../components/account/settings"
 import Reviews from "../components/account/reviews"
 
-const PageComponent = props => {
-  // TODO remove unneeded categories from here
-
-  const productOptions = {
-    categories: props.data.categories.edges,
-    colours: props.data.colours.edges,
-    conditions: props.data.conditions.edges,
-    sizes: props.data.sizes.edges,
-  }
-
+const PageComponent = () => {
   if (isBrowser()) {
     if (isLoggedIn()) {
       var user = getUser()
@@ -46,10 +37,7 @@ const PageComponent = props => {
           </div>
           <div className="col-12 col-md-9 account-wrapper">
             <Router>
-              <AddProduct
-                path="account/add-product"
-                productOptions={productOptions}
-              />
+              <Dashboard path="/account" />
               <Products path="account/products" />
               <Messages path="account/messages" />
               <MessageDetails path="account/message/*" />
@@ -66,37 +54,3 @@ const PageComponent = props => {
 }
 
 export default PageComponent
-
-export const query = graphql`
-  query {
-    categories: allWpProductCategory {
-      edges {
-        node {
-          name
-          databaseId
-        }
-      }
-    }
-    colours: allWpPaColour {
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    conditions: allWpPaCondition {
-      edges {
-        node {
-          name
-        }
-      }
-    }
-    sizes: allWpPaSize {
-      edges {
-        node {
-          name
-        }
-      }
-    }
-  }
-`

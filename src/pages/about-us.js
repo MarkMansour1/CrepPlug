@@ -85,7 +85,7 @@ class PageComponent extends React.Component {
                     the lowest around. Sellers who transact through CrepPlug
                     with PayPal are protected!
                   </p>
-                  <Link to="/account/add-product" className="btn btn-secondary">
+                  <Link to="/sell" className="btn btn-secondary">
                     Sell An Item
                   </Link>
                   <Link to="/buyer-protection" className="btn btn-secondary">

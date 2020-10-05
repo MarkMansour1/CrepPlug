@@ -1,59 +1,69 @@
-export function createProduct(user, state) {
-  const categories = []
-  for (let i in state.categories) {
-    categories.push({ id: state.categories[i] })
-  }
-
-  const data = {
-    name: state.name,
-    type: "simple",
-    regular_price: state.regularPrice,
-    sale_price: state.salePrice,
-    short_description: state.shortDescription,
-    categories: categories,
-    attributes: [
-      {
-        id: "3",
-        name: "Colour",
-        visible: true,
-        variation: false,
-        options: state.colours,
-      },
-      {
-        id: "4",
-        name: "Size",
-        visible: true,
-        variation: false,
-        options: state.sizes,
-      },
-      {
-        id: "2",
-        name: "Condition",
-        visible: true,
-        variation: false,
-        options: state.conditions,
-      },
-    ],
-  }
-
-  console.log(data)
-  console.log(JSON.stringify(data))
-
-  // TODO add images
-
-  fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
+export async function createProduct(user, productData) {
+  const response = fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${user.token}`,
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(productData),
   })
     .then(response => response.json())
-    .then(data => {
-      console.log(data)
+    .then(res => {
+      return res
     })
     .catch(err => {
       console.log(err)
     })
+
+  return response
+}
+
+export async function updateProduct(productId, data) {
+  const response = fetch(
+    `${process.env.SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  )
+    .then(res => res.json())
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  return response
+}
+
+export async function uploadImage(user, file) {
+  let formData = new FormData()
+  formData.append("file", file)
+  formData.append("title", file.name)
+  formData.append("caption", "")
+
+  const data = await fetch(`${process.env.SITE_URL}/wp-json/wp/v2/media`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+    body: formData,
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.source_url) {
+        return { src: data.source_url }
+      } else {
+        return null
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+  return data
 }

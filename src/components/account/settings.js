@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Tabs from "react-bootstrap/Tabs"
 import Tab from "react-bootstrap/Tab"
 
+import Loader from "../loader"
 import { Settings } from "../svg"
 
 import { getUser } from "../../services/auth"
@@ -153,8 +154,8 @@ const AccountSection = () => {
 
     checkUserPassword(user, password).then(res => {
       if (res.token) {
-        // Checks the validity of the new password
-        if (newPassword.length < 2) {
+        // TODO add proper password checks
+        if (newPassword.length < 8) {
           setPasswordResponse({
             success: false,
             message: "Passwords must be at least 8 characters long.",
@@ -170,7 +171,7 @@ const AccountSection = () => {
             if (res && res.id) {
               setPasswordResponse({
                 success: true,
-                message: "Password changed successfully.",
+                message: "Your password has been changed successfully.",
               })
               setPassword("")
               setNewPassword("")
@@ -186,7 +187,7 @@ const AccountSection = () => {
       } else {
         setPasswordResponse({
           success: false,
-          message: "Incorrect password.",
+          message: "The password you entered is incorrect. Please try again.",
         })
       }
 
@@ -200,7 +201,7 @@ const AccountSection = () => {
         Settings
         <Settings />
       </h2>
-      <Tabs justify defaultActiveKey="settings" transition={false}>
+      <Tabs justify defaultActiveKey="settings">
         <Tab eventKey="settings" title="Account Details">
           <div className="pt-4">
             {settingResponse && (
@@ -259,29 +260,6 @@ const AccountSection = () => {
                     value={last}
                     disabled={loading}
                   />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label htmlFor="payment" className="col-sm-4 col-form-label">
-                  Display Picture
-                </label>
-                <div className="col-sm-8">
-                  <div className="custom-file">
-                    <input
-                      type="file"
-                      className="custom-file-input"
-                      id="featuredImage"
-                      name="featuredImage"
-                      // onChange={this.handlePhotoUpload}
-                      disabled={loading}
-                    />
-                    <label
-                      className="custom-file-label"
-                      htmlFor="featuredImage"
-                    >
-                      Choose file
-                    </label>
-                  </div>
                 </div>
               </div>
               <div className="form-group row">

@@ -2,7 +2,6 @@ export const timeSince = date => {
   date = new Date(date)
 
   var seconds = Math.floor((new Date() - date) / 1000)
-  var seconds = seconds - 3600
   var interval = Math.floor(seconds / 31536000)
 
   if (interval > 0) {
@@ -21,7 +20,6 @@ export const timeSince = date => {
     return interval + " hours ago"
   }
   interval = Math.floor(seconds / 60)
-  console.log(interval)
   if (interval > 0) {
     return interval + " minutes ago"
   }

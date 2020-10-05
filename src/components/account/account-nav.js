@@ -3,7 +3,7 @@ import { Link, navigate } from "gatsby"
 import { getUser, logout, isBrowser } from "../../services/auth"
 
 import {
-  AddProduct,
+  Dashboard,
   Products,
   Transactions,
   Messages,
@@ -20,17 +20,21 @@ class AccountNav extends React.Component {
       <>
         {isBrowser() && (
           <>
-            <div className="profile-picture">{user.username[0]}</div>
+            <div className="profile-picture">
+              {user.username.slice(0, 1).toUpperCase()}
+            </div>
             <div className="welcome-text">
               <span>{user.username}</span>
-              10 products | 3 reviews
+              <Link to="/account/settings" className="link-flat">
+                Edit Profile
+              </Link>
             </div>
           </>
         )}
         <div className="account-nav">
-          <Link activeClassName="active" to="/account/add-product">
-            <AddProduct />
-            <div>Add Product</div>
+          <Link activeClassName="active" to="/account">
+            <Dashboard />
+            <div>Overview</div>
           </Link>
           <Link activeClassName="active" to="/account/products">
             <Products />

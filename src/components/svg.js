@@ -122,12 +122,12 @@ export const LeftChevron = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-chevron-left"
+    className="bi bi-chevron-left"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
     />
   </svg>
@@ -138,12 +138,12 @@ export const RightChevron = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-chevron-right"
+    className="bi bi-chevron-right"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
     />
   </svg>
@@ -154,12 +154,12 @@ export const UpChevron = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-chevron-up"
+    className="bi bi-chevron-up"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
     />
   </svg>
@@ -170,12 +170,12 @@ export const DownChevron = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-chevron-down"
+    className="bi bi-chevron-down"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
     />
   </svg>
@@ -186,13 +186,13 @@ export const Hamburger = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-text-center"
+    className="bi bi-list"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+      fillRule="evenodd"
+      d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
     />
   </svg>
 )
@@ -202,7 +202,7 @@ export const Star = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-star-fill"
+    className="bi bi-star-fill"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -215,12 +215,12 @@ export const StarHalf = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-star-half"
+    className="bi bi-star-half"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M5.354 5.119L7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.55.55 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.519.519 0 0 1-.146.05c-.341.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.171-.403.59.59 0 0 1 .084-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027c.08 0 .16.018.232.056l3.686 1.894-.694-3.957a.564.564 0 0 1 .163-.505l2.906-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.002 2.223 8 2.226v9.8z"
     />
   </svg>
@@ -231,12 +231,12 @@ export const StarOutline = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-star"
+    className="bi bi-star"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"
     />
   </svg>
@@ -310,7 +310,7 @@ export const Wishlist = ({ size }) => (
   >
     <path
       stroke="currentColor"
-      stroke-width="0.25"
+      strokeWidth="0.25"
       fillRule="evenodd"
       d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
     />
@@ -322,12 +322,12 @@ export const Question = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-question-circle"
+    className="bi bi-question-circle"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
     />
     <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
@@ -339,13 +339,13 @@ export const Filters = ({ size }) => (
     width={size || defaultSize}
     height={size || defaultSize}
     viewBox="0 0 16 16"
-    class="bi bi-filter"
+    className="bi bi-sliders"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      fill-rule="evenodd"
-      d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+      fillRule="evenodd"
+      d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"
     />
   </svg>
 )
@@ -362,7 +362,7 @@ export const Account = ({ size }) => (
   >
     <path
       stroke="currentColor"
-      stroke-width="0.25"
+      strokeWidth="0.25"
       fillRule="evenodd"
       d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
     />
@@ -381,10 +381,28 @@ export const Cart = ({ size }) => (
   >
     <path
       stroke="currentColor"
-      stroke-width="0.25"
+      strokeWidth="0.25"
       fillRule="evenodd"
       d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
     />
+  </svg>
+)
+
+export const Dashboard = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    className="bi bi-window"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fillRule="evenodd"
+      d="M14 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"
+    />
+    <path fillRule="evenodd" d="M15 6H1V5h14v1z" />
+    <path d="M3 3.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm1.5 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm1.5 0a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
   </svg>
 )
 
@@ -529,6 +547,23 @@ export const Logout = ({ size }) => (
     <path
       fillRule="evenodd"
       d="M14 13.5a1.5 1.5 0 0 0 1.5-1.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v1.5a.5.5 0 0 0 1 0V4a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5v-1.5a.5.5 0 0 0-1 0V12A1.5 1.5 0 0 0 7 13.5h7z"
+    />
+  </svg>
+)
+
+export const Edit = ({ size }) => (
+  <svg
+    width={size || defaultSize}
+    height={size || defaultSize}
+    viewBox="0 0 16 16"
+    className="bi bi-pencil-square"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+    <path
+      fillRule="evenodd"
+      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
     />
   </svg>
 )

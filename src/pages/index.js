@@ -5,16 +5,28 @@ import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { RightArrow } from "../components/svg"
-
 import ProductBlock from "../components/block-product"
 import PostBlock from "../components/block-post"
+import { RightArrow } from "../components/svg"
+
+import { mostPopularFunction } from "../services/filters"
 
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
     const posts = data.posts.edges
     var products = data.products.edges
+
+    var allProducts = products.slice()
+    for (var i = 0; i < allProducts.length; i++) {
+      if (
+        allProducts[i].node.manageStock &&
+        !allProducts[i].node.stockQuantity
+      ) {
+        allProducts.splice(i, 1)
+        i--
+      }
+    }
 
     const { buy, sell, source } = data
     const { nike, adidas, jordan, puma, yeezy, vans } = data
@@ -27,37 +39,32 @@ class PageComponent extends React.Component {
       { name: "Vans", image: vans },
     ]
 
-    var mostPopular = products
-      .slice()
-      .sort(function (a, b) {
-        return Number(b.node.date) - Number(a.node.date)
-      })
-      .slice(0, 10)
-
     var mostRecent = []
-    for (var i = 0; i < products.length; i++) {
+    for (var i = 0; i < allProducts.length; i++) {
       if (
         mostRecent.length < 10 &&
-        products[i].node.image &&
-        products[i].node.image.sourceUrl
+        allProducts[i].node.image &&
+        allProducts[i].node.image.sourceUrl
       ) {
-        mostRecent.push(products[i])
+        mostRecent.push(allProducts[i])
       }
     }
 
-    products = shuffle(products.slice())
+    var mostPopular = allProducts.slice().sort(mostPopularFunction).slice(0, 10)
+
+    allProducts = shuffle(allProducts.slice())
 
     var cpPicks = []
-    for (var i = 0; i < products.length; i++) {
+    for (var i = 0; i < allProducts.length; i++) {
       if (
         cpPicks.length < 10 &&
-        products[i].node.image &&
-        products[i].node.image.sourceUrl
+        allProducts[i].node.image &&
+        allProducts[i].node.image.sourceUrl
       ) {
-        if (products[i].node.productCategories != null) {
-          products[i].node.productCategories.nodes.forEach(category => {
+        if (allProducts[i].node.productCategories != null) {
+          allProducts[i].node.productCategories.nodes.forEach(category => {
             if (category.name === "Adidas") {
-              cpPicks.push(products[i])
+              cpPicks.push(allProducts[i])
             }
           })
         }
@@ -101,10 +108,7 @@ class PageComponent extends React.Component {
                     <h2>
                       Sell your <span>trainers here</span>
                     </h2>
-                    <Link
-                      to="/account/add-product"
-                      className="btn btn-outline-light"
-                    >
+                    <Link to="/sell" className="btn btn-outline-light">
                       Start Selling
                     </Link>
                   </div>
@@ -243,8 +247,15 @@ export const query = graphql`
           price
           regularPrice
           date
+          manageStock
+          stockQuantity
           image {
             sourceUrl
+          }
+          metaData {
+            id
+            key
+            value
           }
           localImage {
             childImageSharp {

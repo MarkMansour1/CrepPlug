@@ -53,8 +53,8 @@ const AccountSection = () => {
         <table className="table account-table">
           <thead>
             <tr>
-              <th>Sender</th>
               <th>Message</th>
+              <th>Sender</th>
               <th>Time</th>
               <th>Actions</th>
             </tr>
@@ -62,8 +62,8 @@ const AccountSection = () => {
           <tbody>
             {data.map(message => (
               <tr key={message.id}>
-                <td>{message.cmb2.users.sender}</td>
                 <td>{message.title.rendered}</td>
+                <td>{message.cmb2.users.sender}</td>
                 <td>{timeSince(message.date)}</td>
                 <td>
                   <Link

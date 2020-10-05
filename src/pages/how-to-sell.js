@@ -14,7 +14,7 @@ class PageComponent extends React.Component {
         <SEO title="How To Sell" />
         <div className="container container-wide pt-5 text-center">
           <h2 className="text-uppercase">Selling on CrepPlug</h2>
-          <div className="row my-5 pt-4">
+          <div className="row my-5 pt-4 hts-row">
             <div className="col-12 col-lg-4">
               <Img
                 fluid={data.list.childImageSharp.fluid}
@@ -49,15 +49,12 @@ class PageComponent extends React.Component {
               </p>
             </div>
           </div>
-          <Link
-            to="/account/add-product"
-            className="btn btn-secondary btn-lg mt-4"
-          >
+          <Link to="/sell" className="btn btn-secondary btn-lg mt-4">
             Start Selling
           </Link>
           <hr style={{ margin: "100px 0" }} />
           <h2 className="text-uppercase">Buying on CrepPlug</h2>
-          <div className="row my-5 pt-4">
+          <div className="row my-5 pt-4 hts-row">
             <div className="col-12 col-lg-4">
               <Img
                 fluid={data.find.childImageSharp.fluid}
@@ -100,7 +97,7 @@ export default PageComponent
 export const htsImage = graphql`
   fragment htsImage on File {
     childImageSharp {
-      fluid(maxWidth: 150, maxHeight: 150) {
+      fluid(maxWidth: 300, maxHeight: 300) {
         ...GatsbyImageSharpFluid_withWebp_tracedSVG
       }
     }

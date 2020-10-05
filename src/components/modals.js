@@ -1,16 +1,35 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import Modal from "react-bootstrap/Modal"
+
 import { Wishlist, Cart, Messages, Question } from "./svg"
+
+import { isLoggedIn, getUser } from "../services/auth"
+import { sendMessage } from "../services/messages"
 
 export function MessageModal(props) {
   const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [sent, setSent] = useState(false)
 
-  const sendMessage = e => {
+  const { receiver } = props
+  const user = getUser()
+
+  const handleSubmit = e => {
     e.preventDefault()
+    setLoading(true)
 
-    console.log(message)
-    alert("message sent")
+    sendMessage(user, receiver, message).then(res => {
+      console.log(res)
+
+      if (res && res.id) {
+        setSent(true)
+      } else {
+        // error
+      }
+
+      setLoading(false)
+    })
   }
 
   return (
@@ -18,27 +37,53 @@ export function MessageModal(props) {
       <Modal.Body>
         <div className="product-modal message-modal">
           <Messages />
-          <h3>Message Seller</h3>
-          <form onSubmit={sendMessage}>
-            <div className="form-group text-left">
-              <label htmlFor="message">Your message</label>
-              <textarea
-                className="form-control"
-                id="message"
-                name="message"
-                rows="4"
-                value={message}
-                onChange={e => setMessage(e.target.value)}
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn btn-dark"
-              disabled={message.length < 1}
-            >
-              Send Message
-            </button>
-          </form>
+          {isLoggedIn() ? (
+            sent ? (
+              <>
+                <h3>Message Sent</h3>
+                <div className="py-4">Your message has been sent.</div>
+                <Link
+                  to={`/account/message/${receiver}`}
+                  className="btn btn-dark"
+                >
+                  View Chat
+                </Link>
+              </>
+            ) : (
+              <>
+                <h3>Message Seller</h3>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group text-left">
+                    <label htmlFor="message">Your message</label>
+                    <textarea
+                      className="form-control"
+                      id="message"
+                      name="message"
+                      rows="4"
+                      value={message}
+                      onChange={e => setMessage(e.target.value)}
+                      disabled={loading}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="btn btn-dark"
+                    disabled={message.length < 1 || loading}
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </>
+            )
+          ) : (
+            <>
+              <h3>Message Seller</h3>
+              <div className="py-4">Please log in to message a seller.</div>
+              <Link to="/login" className="btn btn-dark">
+                Log In
+              </Link>
+            </>
+          )}
           <button className="btn btn-outline-dark" onClick={props.onHide}>
             Close
           </button>

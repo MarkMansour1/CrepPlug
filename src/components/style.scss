@@ -46,7 +46,8 @@ $input-focus-border-color: $secondary;
 $input-btn-focus-color: transparent;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
-@import "../../node_modules/bs-stepper/dist/css/bs-stepper.min.css";
+// TODO remove this if stepper is never used
+// @import "../../node_modules/bs-stepper/dist/css/bs-stepper.min.css";
 @import "../../node_modules/@brainhubeu/react-carousel/lib/style.css";
 
 html,
@@ -157,6 +158,8 @@ a > *:hover {
 }
 
 form {
+  text-align: left;
+
   label {
     font-family: $mont;
     font-size: 0.9rem;
@@ -164,7 +167,7 @@ form {
   }
 
   .btn {
-    margin-top: 1.5rem;
+    margin-top: 0.5rem;
   }
 
   &.form-inline .btn {
@@ -301,6 +304,7 @@ ul {
 }
 
 // Stepper
+// TODO remove this if stepper is never used
 
 .step-trigger:focus {
   color: $secondary !important;
@@ -312,6 +316,23 @@ ul {
 
 .bs-stepper-content .content {
   padding-top: 2rem;
+}
+
+// React-select
+
+.select__control {
+  border-color: $border;
+  padding: 2px 0;
+}
+
+.select__control--menu-is-open,
+.basic-multi-select:focus {
+  border-color: transparent;
+  outline: none;
+}
+
+.select__menu {
+  z-index: 3;
 }
 
 // Layout Components
@@ -357,9 +378,10 @@ ul {
   }
 
   @media (min-width: 1600px) {
-    max-width: 40%;
+    max-width: 850px;
   }
 }
+
 .container-full {
   max-width: 95%;
 }
@@ -1097,7 +1119,8 @@ footer {
       top: 0;
       left: 0;
       width: 100%;
-      border: 1px solid #333;
+      height: 1px;
+      background: $gray-dark;
     }
 
     .col-12 {
@@ -1360,6 +1383,7 @@ footer {
     font-size: 1.5rem;
     font-weight: 500;
     transition: all 0.2s ease;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -1435,6 +1459,30 @@ footer {
 
   td {
     padding: 1.5rem 0.75rem;
+  }
+}
+
+// Products
+
+.product-details {
+  width: 60%;
+  padding-left: 2rem !important;
+
+  a {
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: $mont;
+  }
+
+  span {
+    display: block;
+    margin-top: 0.5rem;
+  }
+
+  strong {
+    font-size: 1rem;
+    display: block;
+    margin-top: 0.5rem;
   }
 }
 
@@ -1628,6 +1676,8 @@ footer {
 // Products
 
 .single-product {
+  text-align: left;
+
   .product-image {
     position: relative;
 
@@ -1741,9 +1791,10 @@ footer {
     }
 
     .product-shipping {
-      margin-top: 0.25rem;
-      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
       font-weight: 500;
+      color: $gray-dark;
     }
   }
 
@@ -1926,19 +1977,100 @@ footer {
 
 // Add product
 
-.add-product-form {
-  .form-group,
-  .form-row {
-    margin-top: 2rem;
+.product-form {
+  max-width: 650px;
 
-    .form-group {
-      margin: 0;
+  form {
+    text-align: left !important;
+
+    p {
+      color: $gray;
+      font-size: 14px;
+    }
+
+    .form-group > label {
+      display: block;
+      margin: 4rem 0 1rem;
+      color: $gray-dark;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: $mont;
+    }
+
+    button {
+      margin-top: 2rem;
+    }
+
+    .custom-switch label:after {
+      top: 4px;
+    }
+
+    .custom-control-input:checked ~ .custom-control-label::before {
+      background-color: $secondary;
+      border-color: $secondary;
+    }
+
+    .stock-input {
+      width: calc(50% - 7.5px);
+      margin: 1rem 0;
+    }
+
+    .price-field {
+      position: relative;
+
+      span {
+        position: absolute;
+        top: calc(50%);
+        transform: translateY(-50%);
+        left: 1.25rem;
+        color: $gray;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: $mont;
+      }
+
+      input[type="number"] {
+        padding-left: 2.5rem;
+      }
+    }
+
+    input::placeholder,
+    textarea::placeholder,
+    .select__placeholder {
+      font-size: 14px;
     }
   }
+}
 
-  .select__menu {
-    z-index: 3;
-  }
+.dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px dashed $border;
+  border-radius: 2px;
+  background-color: $light;
+  color: $gray-light;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+}
+
+.thumbs-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.thumb {
+  display: inline-flex;
+  border-radius: 1px solid $border;
+  border-radius: 2px;
+  margin: 0 0.5rem 0.5rem 0;
+  min-width: 150px;
+  padding: 0.25rem;
+  box-sizing: border-box;
 }
 
 // Posts
@@ -1990,9 +2122,8 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin: 2rem 0;
-
-    border-top: 2px solid $border;
-    border-bottom: 2px solid $border;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
     padding: 1rem;
     color: $gray;
 
@@ -2139,6 +2270,11 @@ footer {
 
   @media (min-width: 768px) {
     max-width: 250px;
+  }
+
+  svg {
+    position: relative;
+    bottom: 1px;
   }
 
   span {
@@ -2338,6 +2474,13 @@ footer {
       }
     }
   }
+}
+
+// How to sell page
+
+.hts-row .img-fluid {
+  max-width: 150px;
+  margin: 0 auto 1rem;
 }
 
 // Cards

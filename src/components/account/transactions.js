@@ -14,11 +14,9 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/orders`, {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
+    fetch(
+      `${process.env.SITE_URL}/wp-json/wc/v3/orders?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`
+    )
       .then(response => response.json())
       .then(resultData => {
         setData(resultData)
@@ -37,7 +35,7 @@ const AccountSection = () => {
       </h2>
       <Loader visible={loading} />
       {data ? (
-        <Tabs justify defaultActiveKey="purchases" transition={false}>
+        <Tabs justify defaultActiveKey="purchases">
           <Tab eventKey="purchases" title="Purchases">
             <table className="table account-table">
               <thead>

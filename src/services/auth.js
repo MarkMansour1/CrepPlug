@@ -10,8 +10,8 @@ export const getUser = () =>
 export const setUser = user =>
   window.localStorage.setItem("currentUser", JSON.stringify(user))
 
-export const handleLogin = ({ username, password }) => {
-  fetch(
+export async function handleLogin(username, password) {
+  const response = fetch(
     `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
     {
       method: "POST",
@@ -19,6 +19,12 @@ export const handleLogin = ({ username, password }) => {
   )
     .then(response => response.json())
     .then(data => {
+      setUser({
+        token: data.token,
+        username: data.user_display_name,
+        id: data.store_id,
+      })
+
       fetch(
         `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/get_by_user/${data.store_id}`,
         {
@@ -29,8 +35,6 @@ export const handleLogin = ({ username, password }) => {
       )
         .then(res => res.json())
         .then(res => {
-          navigate("/account")
-
           return setUser({
             token: data.token,
             username: data.user_display_name,
@@ -41,34 +45,39 @@ export const handleLogin = ({ username, password }) => {
         .catch(err => {
           console.log(err)
         })
+
+      return data
     })
     .catch(err => {
       console.log(err)
     })
 
-  return false
+  return response
 }
 
-export const handleSignup = ({ username, email, password }) => {
-  fetch(`${process.env.SITE_URL}/wp-json/wp/v2/users/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: username,
-      email: email,
-      password: password,
-      role: `wcfm_vendor`,
-    }),
-  })
+export async function handleSignup(username, email, password) {
+  const response = fetch(
+    `${process.env.SITE_URL}/wp-json/wp/v2/users/register`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+        role: `wcfm_vendor`,
+      }),
+    }
+  )
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      return data
     })
     .catch(err => {
       console.log(err)
     })
 
-  return false
+  return response
 }
 
 export const handleLoginGraphql = ({ username, password }) => {

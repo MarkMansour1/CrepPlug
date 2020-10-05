@@ -28,8 +28,8 @@ const PageComponent = props => {
   const [dcreaseSize, setDcreaseSize] = useState(dcreaseSizes[0].value)
   const user = getUser()
 
-  const handleRemove = productId => {
-    var products = removeCartProduct(user, productId)
+  const handleRemove = (productId, productSize) => {
+    var products = removeCartProduct(user, productId, productSize)
     setData(products)
   }
 
@@ -64,9 +64,13 @@ const PageComponent = props => {
           slug: "dcreaseslug",
           image: null,
           name: "D-Crease Insert",
+          size: null,
           price: "£9.99",
+          quantity: 1,
           stockQuantity: null,
           manageStock: false,
+          // TODO replace with dcrease vendor
+          vendorId: null,
         },
         1
       )
@@ -89,7 +93,7 @@ const PageComponent = props => {
               <table className="table product-table">
                 <tbody>
                   {data.map(product => (
-                    <tr key={product.productId}>
+                    <tr key={product.productId + product.size}>
                       <td style={{ width: "125px" }}>
                         <Link to={`/product/${product.slug}`}>
                           <div className="img-container">
@@ -108,7 +112,9 @@ const PageComponent = props => {
                         <Link to={`/product/${product.slug}`}>
                           {product.name}
                         </Link>
-                        <small>{product.size}</small>
+                        <small className="d-block text-gray">
+                          Size: {product.size}
+                        </small>
                       </td>
                       <td>{product.price}</td>
                       <td style={{ width: "150px" }}>
@@ -118,6 +124,7 @@ const PageComponent = props => {
                               let products = changeCartQuantity(
                                 user,
                                 product.productId,
+                                product.size,
                                 false
                               )
                               setData(products)
@@ -132,6 +139,7 @@ const PageComponent = props => {
                               let products = changeCartQuantity(
                                 user,
                                 product.productId,
+                                product.size,
                                 true
                               )
                               setData(products)
@@ -144,7 +152,9 @@ const PageComponent = props => {
                       </td>
                       <td>
                         <button
-                          onClick={() => handleRemove(product.productId)}
+                          onClick={() =>
+                            handleRemove(product.productId, product.size)
+                          }
                           className="btn btn-sm"
                         >
                           <Cross size="2em" />
@@ -193,7 +203,9 @@ const PageComponent = props => {
                               onChange={e => setDcreaseSize(e.target.value)}
                             >
                               {dcreaseSizes.map(size => (
-                                <option value={size.value}>{size.label}</option>
+                                <option value={size.value} key={size.value}>
+                                  {size.label}
+                                </option>
                               ))}
                             </select>
                           </td>

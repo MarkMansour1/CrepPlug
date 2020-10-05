@@ -2,7 +2,7 @@ export const applyFilters = (state, productList) => {
   // If there is a search filter, remove all the products not matching the search
   if (state.search.length > 0) {
     for (let i = 0; i < productList.length; i++) {
-      if (!searchMatch(state.search, productList[i].node)) {
+      if (!searchMatchFunction(state.search, productList[i].node)) {
         productList.splice(i, 1)
         i--
       }
@@ -145,19 +145,19 @@ export const applyFilters = (state, productList) => {
 
 export const applySort = (sort, productList) => {
   if (sort === "recent") {
-    productList.sort(mostRecent)
+    productList.sort(mostRecentFunction)
   } else if (sort === "popular") {
-    productList.sort(mostPopular)
+    productList.sort(mostPopularFunction)
   } else if (sort === "priceasc") {
-    productList.sort(priceAscending)
+    productList.sort(priceAscendingFunction)
   } else if (sort === "pricedesc") {
-    productList.sort(priceDescending)
+    productList.sort(priceDescendingFunction)
   }
 
   return productList
 }
 
-function searchMatch(search, product) {
+function searchMatchFunction(search, product) {
   var searchItems = search.split(" ")
   var searchRange = product.name
   for (let i in product.productCategories.nodes) {
@@ -182,20 +182,45 @@ function searchMatch(search, product) {
   return matchesNeeded > 0 ? false : true
 }
 
-function mostRecent(a, b) {
+function mostRecentFunction(a, b) {
   a = new Date(a.node.date)
   b = new Date(b.node.date)
 
   return b - a
 }
 
-function mostPopular(a, b) {
-  return 0
+export function mostPopularFunction(a, b) {
+  a = a.node.metaData.find(meta => meta.key === "_wcfm_product_views")
+  if (!a || a === undefined) {
+    a = 0
+  } else {
+    a = parseInt(a.value) || 0
+  }
+
+  b = b.node.metaData.find(meta => meta.key === "_wcfm_product_views")
+  if (!b || b === undefined) {
+    b = 0
+  } else {
+    b = parseInt(b.value) || 0
+  }
+
+  return b - a
 }
 
-function priceAscending(a, b) {
-  a = parseFloat(a.node.price.substr(1))
-  b = parseFloat(b.node.price.substr(1))
+function priceAscendingFunction(a, b) {
+  a = a.node.price
+  if (!a || a === undefined) {
+    a = 0
+  } else {
+    a = parseFloat(a.substr(1))
+  }
+
+  b = b.node.price
+  if (!b || b === undefined) {
+    b = 0
+  } else {
+    b = parseFloat(b.substr(1))
+  }
 
   if (a === b) {
     return 0
@@ -204,9 +229,20 @@ function priceAscending(a, b) {
   }
 }
 
-function priceDescending(a, b) {
-  a = parseFloat(a.node.price.substr(1))
-  b = parseFloat(b.node.price.substr(1))
+function priceDescendingFunction(a, b) {
+  a = a.node.price
+  if (!a || a === undefined) {
+    a = 0
+  } else {
+    a = parseFloat(a.substr(1))
+  }
+
+  b = b.node.price
+  if (!b || b === undefined) {
+    b = 0
+  } else {
+    b = parseFloat(b.substr(1))
+  }
 
   if (a === b) {
     return 0

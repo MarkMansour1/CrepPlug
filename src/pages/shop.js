@@ -11,7 +11,11 @@ import SingleProduct from "../components/single-product"
 import ProductBlock from "../components/block-product"
 import { RightArrow, Filters, UpChevron, DownChevron } from "../components/svg"
 
-import { applyFilters, applySort } from "../services/filters"
+import {
+  applyFilters,
+  applySort,
+  mostPopularFunction,
+} from "../services/filters"
 
 import dcreaselogo from "../images/dcrease/dcrease-logo.png"
 
@@ -201,12 +205,18 @@ class PageComponent extends React.Component {
         }
       }
     }
-
     // Puts the sizes in order
     sizes.sort((a, b) => a - b)
 
     // Most popular
-    var mostPopular = allProducts.slice(0, 10)
+    var products = allProducts.slice()
+    for (var i = 0; i < products.length; i++) {
+      if (products[i].node.manageStock && !products[i].node.stockQuantity) {
+        products.splice(i, 1)
+        i--
+      }
+    }
+    var mostPopular = products.sort(mostPopularFunction).slice(0, 10)
 
     return (
       <Layout>
@@ -235,7 +245,7 @@ class PageComponent extends React.Component {
                     onClick={this.toggleFilters}
                   >
                     <div>
-                      <Filters />
+                      <Filters size=".75em" />
                       {` Filters`}
                     </div>
                     <span>{this.state.filtersClosed ? "+" : "-"}</span>
@@ -475,13 +485,13 @@ class PageComponent extends React.Component {
                           <div>
                             <img src={dcreaselogo} alt="" />
                           </div>
-                          <div class="dcrease-txt">
+                          <div className="dcrease-txt">
                             Go
                             <span>
                               Crease <br /> Free
                             </span>
                           </div>
-                          <div class="dcrease-link">
+                          <div className="dcrease-link">
                             A CrepPlug verified <br /> crease preventer{" "}
                             <RightArrow />
                           </div>
@@ -590,6 +600,11 @@ export const query = graphql`
             nodes {
               name
             }
+          }
+          metaData {
+            id
+            key
+            value
           }
           attributes {
             nodes {
