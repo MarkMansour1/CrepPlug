@@ -61,6 +61,8 @@ const AccountSection = () => {
     })
       .then(response => response.json())
       .then(resultData => {
+        console.log(resultData)
+
         setUsername(resultData.name)
         setFirst(resultData.first_name)
         setLast(resultData.last_name)

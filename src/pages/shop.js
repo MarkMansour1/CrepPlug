@@ -586,6 +586,9 @@ export const query = graphql`
           date
           manageStock
           stockQuantity
+          vendorId
+          vendorImage
+          vendorName
           image {
             sourceUrl
           }

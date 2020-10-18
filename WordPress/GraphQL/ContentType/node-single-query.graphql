@@ -12,6 +12,7 @@ query SINGLE_CONTENT_QUERY($id: ID!) {
         id
       }
     }
+    databaseId
     deleteWithUser
     description
     excludeFromSearch
@@ -20,6 +21,8 @@ query SINGLE_CONTENT_QUERY($id: ID!) {
     hasArchive
     hierarchical
     id
+    isFrontPage
+    isPostsPage
     label
     labels {
       addNew
@@ -61,6 +64,7 @@ query SINGLE_CONTENT_QUERY($id: ID!) {
     showInNavMenus
     showInRest
     showUi
+    uri
     __typename
   }
 }

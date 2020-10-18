@@ -47,6 +47,7 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
       guid
       id
       isFrontPage
+      isPostsPage
       isRevision
       lastEditedBy {
         node {
@@ -72,10 +73,16 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
         ... on DefaultTemplate {
           templateName
         }
-        ... on FullWidthTemplate {
+        ... on CartPageTemplate {
           templateName
         }
-        ... on HomepageTemplate {
+        ... on ProductAddedPageTemplate {
+          templateName
+        }
+        ... on RegisterPageTemplate {
+          templateName
+        }
+        ... on FullWidthPageTemplate {
           templateName
         }
       }

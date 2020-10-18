@@ -5,8 +5,6 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import kanye from "../images/kanye.png"
-
 const PageComponent = ({ data }) => (
   <Layout>
     <SEO title="404: Not found" />

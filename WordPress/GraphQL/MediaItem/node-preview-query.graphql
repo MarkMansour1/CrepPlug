@@ -37,6 +37,7 @@ query PREVIEW_QUERY($id: ID!) {
     description
     desiredSlug
     enclosure
+    fileSize
     guid
     id
     lastEditedBy {
@@ -64,6 +65,7 @@ query PREVIEW_QUERY($id: ID!) {
       }
       sizes {
         file
+        fileSize
         height
         mimeType
         name
@@ -95,10 +97,16 @@ query PREVIEW_QUERY($id: ID!) {
       ... on DefaultTemplate {
         templateName
       }
-      ... on FullWidthTemplate {
+      ... on CartPageTemplate {
         templateName
       }
-      ... on HomepageTemplate {
+      ... on ProductAddedPageTemplate {
+        templateName
+      }
+      ... on RegisterPageTemplate {
+        templateName
+      }
+      ... on FullWidthPageTemplate {
         templateName
       }
     }

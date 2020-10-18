@@ -452,8 +452,8 @@ const CartMenu = props => {
         </div>
         <div className="cart-items">
           {data &&
-            data.map(product => (
-              <div className="cart-item" key={product.productId + product.size}>
+            data.map((product, index) => (
+              <div className="cart-item" key={index}>
                 <Link to={`/product/${product.slug}`}>
                   <div className="img-container">
                     {product.image && product.image.sourceUrl ? (

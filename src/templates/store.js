@@ -163,6 +163,7 @@ class PageComponent extends React.Component {
   handleSorterChange(event) {
     var value = event.target.value
     var productList = this.state.items.slice()
+    console.log(productList)
     productList = applySort(value, productList)
 
     this.setState({
@@ -250,15 +251,16 @@ class PageComponent extends React.Component {
     return (
       <div>
         <SEO title="Shop" />
-        <Banner
+        {/* <Banner
           details={[
             this.state.storeName,
             "5 products, 10 reviews",
             this.props.banner.childImageSharp.fluid,
           ]}
-        />
-        <div className="container container-wide pt-4 pt-md-0">
-          <div className="row">
+        /> */}
+        <div className="container container-wide pt-5">
+          <h2 className="text-center">{this.state.storeName}'s store</h2>
+          <div className="row mt-5">
             <div className="col-12 col-md-3">
               <div className="row">
                 <div className="col sticky">

@@ -31,17 +31,17 @@ const PageComponent = () => {
         if (res.code === "[jwt_auth] invalid_username") {
           setResponse({
             success: false,
-            message: "Username or email not found. Please try again.",
+            message: "Unknown username or email",
           })
         } else if (res.code === "[jwt_auth] incorrect_password") {
           setResponse({
             success: false,
-            message: "The password you entered is incorrect. Please try again.",
+            message: "Incorrect password",
           })
         } else {
           setResponse({
             success: false,
-            message: "We couldn't log you in. Please try again.",
+            message: "We couldn't log you in. Please try again",
           })
         }
       }
@@ -64,13 +64,6 @@ const PageComponent = () => {
         </div>
         <form method="post" onSubmit={handleSubmit}>
           <h2>Log In</h2>
-          {response && (
-            <div
-              className={`mb-3 text-${response.success ? "success" : "danger"}`}
-            >
-              {response.message}
-            </div>
-          )}
           <div className="form-group">
             <label htmlFor="username">Username or Email address</label>
             <input
@@ -107,6 +100,15 @@ const PageComponent = () => {
           >
             Log In
           </button>
+          {response && (
+            <div
+              className={`mt-3 alert alert-${
+                response.success ? "success" : "danger"
+              }`}
+            >
+              {response.message}
+            </div>
+          )}
           <p className="mt-4">
             New to CrepPlug?{" "}
             <Link to="/signup" className="text-underline">

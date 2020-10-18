@@ -84,7 +84,7 @@ class PageComponent extends React.Component {
 
     return (
       <Layout>
-        <SEO title="Home" />
+        <SEO title="Making Buying & Selling Trainers Easy" />
         <div className="container container-wide pt-5 pt-md-4">
           <div className="row home-row">
             <div className="col-12 col-lg-8">

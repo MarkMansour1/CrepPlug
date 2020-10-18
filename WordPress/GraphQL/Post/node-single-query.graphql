@@ -69,10 +69,16 @@ query SINGLE_CONTENT_QUERY($id: ID!) {
       ... on DefaultTemplate {
         templateName
       }
-      ... on FullWidthTemplate {
+      ... on CartPageTemplate {
         templateName
       }
-      ... on HomepageTemplate {
+      ... on ProductAddedPageTemplate {
+        templateName
+      }
+      ... on RegisterPageTemplate {
+        templateName
+      }
+      ... on FullWidthPageTemplate {
         templateName
       }
     }

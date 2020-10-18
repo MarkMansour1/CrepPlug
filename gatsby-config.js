@@ -17,7 +17,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: `https://designsuite.pro/graphql`,
+        url: `http://markm105.sg-host.com/graphql`,
         verbose: true,
         develop: {
           hardCacheMediaFiles: true,

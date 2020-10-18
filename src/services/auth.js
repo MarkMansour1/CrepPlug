@@ -11,6 +11,10 @@ export const setUser = user =>
   window.localStorage.setItem("currentUser", JSON.stringify(user))
 
 export async function handleLogin(username, password) {
+  console.log(
+    `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`
+  )
+
   const response = fetch(
     `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
     {
@@ -19,6 +23,8 @@ export async function handleLogin(username, password) {
   )
     .then(response => response.json())
     .then(data => {
+      console.log(data)
+
       setUser({
         token: data.token,
         username: data.user_display_name,

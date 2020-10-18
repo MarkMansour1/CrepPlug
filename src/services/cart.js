@@ -1,15 +1,18 @@
+export const isBrowser = () => typeof window !== "undefined"
+
 export const getCartProducts = () => {
-  if (localStorage.getItem("cartProducts")) {
-    let products = JSON.parse(localStorage.getItem("cartProducts"))
-    return products
-  } else {
-    return null
+  var products = null
+
+  if (isBrowser() && localStorage.getItem("cartProducts")) {
+    products = JSON.parse(localStorage.getItem("cartProducts"))
   }
+
+  return products
 }
 
 export const addCartProduct = (user, productData, quantity, size) => {
   let products = []
-  if (localStorage.getItem("cartProducts")) {
+  if (isBrowser() && localStorage.getItem("cartProducts")) {
     products = JSON.parse(localStorage.getItem("cartProducts"))
   }
 
@@ -61,12 +64,16 @@ export const addCartProduct = (user, productData, quantity, size) => {
 }
 
 export const removeCartProduct = (user, productId, productSize) => {
-  let storageProducts = JSON.parse(localStorage.getItem("cartProducts"))
-  let products = storageProducts.filter(
-    product =>
-      !(product.productId === productId && product.size === productSize)
-  )
-  localStorage.setItem("cartProducts", JSON.stringify(products))
+  var products = []
+
+  if (isBrowser()) {
+    let storageProducts = JSON.parse(localStorage.getItem("cartProducts"))
+    products = storageProducts.filter(
+      product =>
+        !(product.productId === productId && product.size === productSize)
+    )
+    localStorage.setItem("cartProducts", JSON.stringify(products))
+  }
 
   //  TODO remove from woocommmerce cart
 
@@ -74,14 +81,14 @@ export const removeCartProduct = (user, productId, productSize) => {
 }
 
 export const clearCartProducts = user => {
-  localStorage.removeItem("cartProducts")
+  isBrowser() && localStorage.removeItem("cartProducts")
 
   //   TODO clear woocommmerce cart
 }
 
 export const changeCartQuantity = (user, productId, productSize, increase) => {
   let products = []
-  if (localStorage.getItem("cartProducts")) {
+  if (isBrowser() && localStorage.getItem("cartProducts")) {
     products = JSON.parse(localStorage.getItem("cartProducts"))
   }
 
@@ -113,7 +120,7 @@ export const changeCartQuantity = (user, productId, productSize, increase) => {
     }
   }
 
-  localStorage.setItem("cartProducts", JSON.stringify(products))
+  isBrowser() && localStorage.setItem("cartProducts", JSON.stringify(products))
   return products
   // TODO update woocommerce cart
 }

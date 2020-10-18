@@ -46,6 +46,7 @@ query PREVIEW_QUERY($id: ID!) {
     guid
     id
     isFrontPage
+    isPostsPage
     isRevision
     lastEditedBy {
       node {
@@ -71,10 +72,16 @@ query PREVIEW_QUERY($id: ID!) {
       ... on DefaultTemplate {
         templateName
       }
-      ... on FullWidthTemplate {
+      ... on CartPageTemplate {
         templateName
       }
-      ... on HomepageTemplate {
+      ... on ProductAddedPageTemplate {
+        templateName
+      }
+      ... on RegisterPageTemplate {
+        templateName
+      }
+      ... on FullWidthPageTemplate {
         templateName
       }
     }

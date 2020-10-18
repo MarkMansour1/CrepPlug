@@ -13,6 +13,7 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
           id
         }
       }
+      databaseId
       deleteWithUser
       description
       excludeFromSearch
@@ -21,6 +22,8 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
       hasArchive
       hierarchical
       id
+      isFrontPage
+      isPostsPage
       label
       labels {
         addNew
@@ -62,6 +65,7 @@ query NODE_LIST_QUERY($first: Int!, $after: String) {
       showInNavMenus
       showInRest
       showUi
+      uri
       __typename
     }
     pageInfo {

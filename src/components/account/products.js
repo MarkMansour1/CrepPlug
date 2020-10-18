@@ -85,7 +85,7 @@ const AccountSection = () => {
                   </td>
                   <td className="text-right">
                     <Link
-                      to={`/edit-product/${product.slug}`}
+                      to={`/edit?product=${product.id}`}
                       className="btn btn-light btn-sm"
                     >
                       <Edit /> Edit

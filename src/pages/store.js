@@ -40,6 +40,8 @@ export const query = graphql`
           price
           regularPrice
           date
+          manageStock
+          stockQuantity
           vendorId
           vendorImage
           vendorName
@@ -57,6 +59,11 @@ export const query = graphql`
             nodes {
               name
             }
+          }
+          metaData {
+            id
+            key
+            value
           }
           attributes {
             nodes {

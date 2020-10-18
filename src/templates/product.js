@@ -29,6 +29,7 @@ const PageTemplate = ({ data }) => {
   const [showCart, setCart] = useState(false)
   const [showMessage, setMessage] = useState(false)
   const [showRequest, setRequest] = useState(false)
+  const [error, setError] = useState(false)
   const user = getUser()
 
   const { page, products } = data
@@ -143,8 +144,10 @@ const PageTemplate = ({ data }) => {
 
     let res = addCartProduct(user, page, quantity, size)
 
-    if (res == false) {
-      console.log("didnt add")
+    if (res === false) {
+      setError("Item is already in your cart.")
+    } else {
+      setError(false)
     }
 
     setCart(res)
@@ -188,6 +191,7 @@ const PageTemplate = ({ data }) => {
                 </div>
               )} */}
               <div className="product-attributes">
+                {/* TODO check these values (0,1) to make sure attributes stay in order */}
                 {attributes &&
                   attributes.nodes &&
                   attributes.nodes[0] &&
@@ -222,6 +226,7 @@ const PageTemplate = ({ data }) => {
                   <strong>+£3.99</strong> shipping
                 </div>
               </div>
+
               <form onSubmit={cartSubmit} className="product-cart">
                 {!outOfStock && (
                   <div className="form-group row">
@@ -268,6 +273,7 @@ const PageTemplate = ({ data }) => {
                     )}
                   </div>
                 )}
+                {error && <div className="alert alert-danger">{error}</div>}
                 <button
                   type="submit"
                   className="btn btn-primary cart-add"
