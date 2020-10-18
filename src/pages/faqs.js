@@ -47,7 +47,7 @@ class PageComponent extends React.Component {
 
     return (
       <Layout>
-        <SEO title="Sourcing" />
+        <SEO title="FAQs" />
         <div className="container container-narrow">
           <h2 className="text-center py-5">Frequently Asked Questions</h2>
           <h4>As a Seller</h4>
