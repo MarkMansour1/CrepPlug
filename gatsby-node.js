@@ -61,15 +61,31 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 }
 
-exports.createSchemaCustomization = ({ actions }) => {
+exports.createSchemaCustomization = ({ actions, schema }) => {
   const { createTypes } = actions
-  const typeDefs = `
-    type WpSimpleProduct implements Node {
-      vendorId: String
-      vendorName: String
-      vendorImage: String
-    }
-   
-  `
+  const typeDefs = [
+    `
+      type WpSimpleProduct implements Node {
+        vendorId: String
+        vendorName: String
+        vendorImage: String
+        localImage: LocalImage
+      }
+    `,
+    schema.buildObjectType({
+      name: `LocalImage`,
+      fields: {
+        views: {
+          type: `String`,
+          resolve(source) {
+            console.log(source)
+
+            if (typeof source !== "undefined") return source
+            else return null
+          },
+        },
+      },
+    }),
+  ]
   createTypes(typeDefs)
 }
