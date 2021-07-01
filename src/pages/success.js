@@ -12,7 +12,7 @@ const PageComponent = () => {
   if (urlParams.has("product")) {
     product = urlParams.get("product")
   } else {
-    navigate("/")
+    typeof window !== "undefined" && navigate("/")
   }
 
   return (

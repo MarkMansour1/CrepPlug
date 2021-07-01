@@ -29,11 +29,12 @@ export async function handleLogin(username, password) {
   )
 
   // Login to wordpress in the background
-  window.open(
-    `${process.env.SITE_URL}/?tuser=${username}&tpass=${password}`,
-    "_blank",
-    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
-  )
+  typeof window !== "undefined" &&
+    window.open(
+      `${process.env.SITE_URL}/?tuser=${username}&tpass=${password}`,
+      "_blank",
+      "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+    )
 
   const response = fetch(
     `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`,
@@ -149,11 +150,12 @@ export const isLoggedIn = () => {
 
 export const logout = callback => {
   // Logout of wordpress in the background
-  window.open(
-    `${process.env.SITE_URL}/?tlogout=true`,
-    "_blank",
-    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
-  )
+  typeof window !== "undefined" &&
+    window.open(
+      `${process.env.SITE_URL}/?tlogout=true`,
+      "_blank",
+      "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+    )
 
   setUser({})
   callback()

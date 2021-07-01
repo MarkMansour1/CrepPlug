@@ -1,25 +1,19 @@
 export async function createProduct(user, productData) {
-  // const response = fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: `Bearer ${user.token}`,
-  //   },
-  //   body: JSON.stringify(productData),
-  // })
-  //   .then(response => response.json())
-  //   .then(res => {
-  //     return res
-  //   })
-  //   .catch(err => {
-  //     console.log(err)
-  //   })
-
-  // TODO uncomment product add
-  const response = {
-    id: 1,
-    slug: "patrick-ewings-33-hi-redblackwhite",
-  }
+  const response = fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.token}`,
+    },
+    body: JSON.stringify(productData),
+  })
+    .then(response => response.json())
+    .then(res => {
+      return res
+    })
+    .catch(err => {
+      console.log(err)
+    })
 
   return response
 }
