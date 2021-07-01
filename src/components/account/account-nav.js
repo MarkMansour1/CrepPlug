@@ -32,11 +32,11 @@ class AccountNav extends React.Component {
           </>
         )}
         <div className="account-nav">
-          <Link activeClassName="active" to="/account">
+          {/* <Link activeClassName="active" to="/account">
             <Dashboard />
             <div>Overview</div>
-          </Link>
-          <Link activeClassName="active" to="/account/products">
+          </Link> */}
+          <Link activeClassName="active" to="/account">
             <Products />
             <div>Products</div>
           </Link>

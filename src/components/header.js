@@ -156,10 +156,26 @@ class Header extends React.Component {
               </Accordion.Toggle>
             </Card>
             <Link to="/sourcing">Sourcing</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/accessories">Accessories</Link>
+            <Link to="/cleaning">Cleaning</Link>
             <Card>
               <Accordion.Collapse eventKey="1">
+                <Card.Body>
+                  <a href="https://markm105.sg-host.com/product/d-crease-insert/">
+                    <span style={{ whiteSpace: "nowrap" }}>
+                      D-Crease Insert
+                    </span>
+                  </a>
+                  <Link to={`/shop?search=accessories`}>
+                    <span>Watches</span>
+                  </Link>
+                </Card.Body>
+              </Accordion.Collapse>
+              <Accordion.Toggle as={Card.Header} eventKey="1">
+                Accessories
+              </Accordion.Toggle>
+            </Card>
+            <Card>
+              <Accordion.Collapse eventKey="2">
                 <Card.Body>
                   <Link to="/merch">
                     <span>Merch</span>
@@ -175,12 +191,12 @@ class Header extends React.Component {
                   </Link>
                 </Card.Body>
               </Accordion.Collapse>
-              <Accordion.Toggle as={Card.Header} eventKey="1">
+              <Accordion.Toggle as={Card.Header} eventKey="2">
                 The Hub
               </Accordion.Toggle>
             </Card>
             <Card>
-              <Accordion.Collapse eventKey="2">
+              <Accordion.Collapse eventKey="3">
                 <Card.Body>
                   <Link to="/how-to-sell">
                     <span>How To Sell</span>
@@ -190,7 +206,7 @@ class Header extends React.Component {
                   </Link>
                 </Card.Body>
               </Accordion.Collapse>
-              <Accordion.Toggle as={Card.Header} eventKey="2">
+              <Accordion.Toggle as={Card.Header} eventKey="3">
                 Contact Us
               </Accordion.Toggle>
             </Card>
@@ -326,7 +342,8 @@ class Header extends React.Component {
                 >
                   <Cart size="1.5rem" />
                 </div> */}
-                <Link to="/cart" style={{ position: "relative" }}>
+                {/* TODO remove target=blank */}
+                <a href="http://markm105.sg-host.com/cart" target="_blank">
                   <Cart size="1.5rem" />
                   {/* {getCartProducts().length > 0 && (
                     <span
@@ -336,7 +353,7 @@ class Header extends React.Component {
                       {getCartProducts().length}
                     </span>
                   )} */}
-                </Link>
+                </a>
               </div>
             </div>
           </div>
@@ -344,8 +361,19 @@ class Header extends React.Component {
             <div className="container container-wide">
               <div className="header-menu">
                 <Link to="/sourcing">Sourcing</Link>
-                <Link to="/services">Services</Link>
-                <Link to="/accessories">Accessories</Link>
+                <Link to="/cleaning">Cleaning</Link>
+                <div className="header-dropdown">
+                  <div className="header-dropdown-link">Accessories</div>
+                  <div className="header-dropdown-content">
+                    <a
+                      href="https://markm105.sg-host.com/product/d-crease-insert/"
+                      style={{ whiteSpace: "nowrap" }}
+                    >
+                      D-Crease Insert
+                    </a>
+                    <Link to={`/shop?search=accessories`}>Watches</Link>
+                  </div>
+                </div>
                 <div className="header-dropdown">
                   <div className="header-dropdown-link">The Hub</div>
                   <div className="header-dropdown-content">
