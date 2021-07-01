@@ -226,7 +226,6 @@ const PageTemplate = ({ data }) => {
                   <strong>+£3.99</strong> shipping
                 </div>
               </div>
-
               <form onSubmit={cartSubmit} className="product-cart">
                 {!outOfStock && (
                   <div className="form-group row">
@@ -246,7 +245,7 @@ const PageTemplate = ({ data }) => {
                         <div className="quantity">{quantity}</div>
                         <div
                           onClick={() => {
-                            if (quantity < stockQuantity) {
+                            if (!manageStock || quantity < stockQuantity) {
                               setQuantity(quantity + 1)
                             }
                           }}
@@ -281,6 +280,7 @@ const PageTemplate = ({ data }) => {
                 >
                   {outOfStock ? "Out of stock" : "Add to Cart"}
                 </button>
+                
               </form>
               <div className="product-actions">
                 <button
@@ -445,13 +445,7 @@ export const query = graphql`
           image {
             sourceUrl
           }
-          localImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
+
           productCategories {
             nodes {
               name

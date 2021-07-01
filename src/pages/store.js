@@ -48,13 +48,6 @@ export const query = graphql`
           image {
             sourceUrl
           }
-          localImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
           productCategories {
             nodes {
               name

@@ -257,13 +257,7 @@ export const query = graphql`
             key
             value
           }
-          localImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
+          
           productCategories {
             nodes {
               name

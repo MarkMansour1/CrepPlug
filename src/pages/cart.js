@@ -112,9 +112,11 @@ const PageComponent = props => {
                         <Link to={`/product/${product.slug}`}>
                           {product.name}
                         </Link>
-                        <small className="d-block text-gray">
-                          Size: {product.size}
-                        </small>
+                        {product.size && (
+                          <small className="d-block text-gray">
+                            Size: {product.size}
+                          </small>
+                        )}
                       </td>
                       <td>{product.price}</td>
                       <td style={{ width: "150px" }}>
@@ -262,13 +264,7 @@ export const query = graphql`
           image {
             sourceUrl
           }
-          localImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
+          
         }
       }
     }

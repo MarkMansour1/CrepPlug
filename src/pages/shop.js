@@ -575,7 +575,7 @@ export const query = graphql`
         }
       }
     }
-    products: allWpSimpleProduct {
+    products: allWpSimpleProduct(limit: 50) {
       edges {
         node {
           id
@@ -592,13 +592,7 @@ export const query = graphql`
           image {
             sourceUrl
           }
-          localImage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
-              }
-            }
-          }
+
           productCategories {
             nodes {
               name

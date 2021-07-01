@@ -2,17 +2,37 @@ import { navigate } from "gatsby"
 
 export const isBrowser = () => typeof window !== "undefined"
 
-export const getUser = () =>
-  isBrowser() && window.localStorage.getItem("currentUser")
-    ? JSON.parse(window.localStorage.getItem("currentUser"))
-    : {}
+export const getUser = () => {
+  if (isBrowser() && window.localStorage.getItem("currentUser")) {
+    let user = JSON.parse(window.localStorage.getItem("currentUser"))
+
+    if (new Date() > Date.parse(user.expiration)) {
+      user = {}
+    }
+
+    return user
+  } else {
+    return {}
+  }
+}
 
 export const setUser = user =>
   window.localStorage.setItem("currentUser", JSON.stringify(user))
 
 export async function handleLogin(username, password) {
-  console.log(
-    `${process.env.SITE_URL}/wp-json/jwt-auth/v1/token?username=${username}&password=${password}`
+  // Set expiration one week from now
+  var today = new Date()
+  var expirationDate = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 7
+  )
+
+  // Login to wordpress in the background
+  window.open(
+    `${process.env.SITE_URL}/?tuser=${username}&tpass=${password}`,
+    "_blank",
+    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
   )
 
   const response = fetch(
@@ -23,12 +43,11 @@ export async function handleLogin(username, password) {
   )
     .then(response => response.json())
     .then(data => {
-      console.log(data)
-
       setUser({
         token: data.token,
         username: data.user_display_name,
         id: data.store_id,
+        expiration: expirationDate,
       })
 
       fetch(
@@ -46,6 +65,7 @@ export async function handleLogin(username, password) {
             username: data.user_display_name,
             id: data.store_id,
             shareKey: res[0].share_key,
+            expiration: expirationDate,
           })
         })
         .catch(err => {
@@ -128,6 +148,13 @@ export const isLoggedIn = () => {
 }
 
 export const logout = callback => {
+  // Logout of wordpress in the background
+  window.open(
+    `${process.env.SITE_URL}/?tlogout=true`,
+    "_blank",
+    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+  )
+
   setUser({})
   callback()
 }

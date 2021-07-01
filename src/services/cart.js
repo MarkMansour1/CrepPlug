@@ -11,6 +11,16 @@ export const getCartProducts = () => {
 }
 
 export const addCartProduct = (user, productData, quantity, size) => {
+  window.open(
+    `${process.env.SITE_URL}/?add-to-cart=${productData.productId}`,
+    "_blank",
+    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+  )
+
+  return true
+}
+
+export const addLocalCartProduct = (user, productData, quantity, size) => {
   let products = []
   if (isBrowser() && localStorage.getItem("cartProducts")) {
     products = JSON.parse(localStorage.getItem("cartProducts"))
@@ -59,8 +69,6 @@ export const addCartProduct = (user, productData, quantity, size) => {
   } else {
     return false
   }
-
-  //   TODO add to woocommmerce cart
 }
 
 export const removeCartProduct = (user, productId, productSize) => {
