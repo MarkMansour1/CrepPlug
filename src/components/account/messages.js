@@ -13,13 +13,15 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wp/v2/messages`, {
+    fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wp/v2/messages`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
     })
       .then(response => response.json())
       .then(resultData => {
+        console.log(resultData)
+
         // Gets the most recent message from each sender
         var data = []
         var senders = []

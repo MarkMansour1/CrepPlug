@@ -24,7 +24,7 @@ const PageComponent2 = props => {
   // TODO get vendor reviews
 
   // useEffect(() => {
-  // fetch(`${process.env.SITE_URL}/wp-json/wcfmmp/v1/store-vendors/${id}`, {
+  // fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wcfmmp/v1/store-vendors/${id}`, {
   //   headers: {
   //     Authorization: `Bearer ${user.token}`,
   //   },

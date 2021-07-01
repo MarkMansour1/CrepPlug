@@ -12,7 +12,7 @@ export const getCartProducts = () => {
 
 export const addCartProduct = (user, productData, quantity, size) => {
   window.open(
-    `${process.env.SITE_URL}/?add-to-cart=${productData.productId}`,
+    `${process.env.GATSBY_SITE_URL}/?add-to-cart=${productData.productId}`,
     "_blank",
     "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
   )

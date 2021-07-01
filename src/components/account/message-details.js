@@ -18,13 +18,15 @@ const AccountSection = () => {
   const sender = url[url.length - 1]
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wp/v2/messages`, {
+    fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wp/v2/messages`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res)
+
         setData(res.reverse())
         setLoading(false)
       })

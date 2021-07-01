@@ -1,6 +1,6 @@
 export async function addWishlistProduct(user, data) {
   const response = fetch(
-    `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/add_product/`,
+    `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/add_product/`,
     {
       method: "POST",
       headers: {
@@ -23,7 +23,7 @@ export async function addWishlistProduct(user, data) {
 
 export const removeWishlistProduct = (user, itemId) => {
   fetch(
-    `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/remove_product/${itemId}`,
+    `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/wishlist/remove_product/${itemId}`,
     {
       headers: {
         Authorization: `Bearer ${user.token}`,

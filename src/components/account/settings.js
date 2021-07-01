@@ -54,7 +54,7 @@ const AccountSection = () => {
     document.body.appendChild(script)
 
     // Get user details from wordpress
-    fetch(`${process.env.SITE_URL}/wp-json/wp/v2/users/${user.id}`, {
+    fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wp/v2/users/${user.id}`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

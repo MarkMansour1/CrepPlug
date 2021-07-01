@@ -23,7 +23,7 @@ const PageComponent = props => {
 
   useEffect(() => {
     fetch(
-      `${process.env.SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/get_products`,
+      `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/wishlist/${user.shareKey}/get_products`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,

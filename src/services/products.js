@@ -1,12 +1,15 @@
 export async function createProduct(user, productData) {
-  const response = fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.token}`,
-    },
-    body: JSON.stringify(productData),
-  })
+  const response = fetch(
+    `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+      body: JSON.stringify(productData),
+    }
+  )
     .then(response => response.json())
     .then(res => {
       return res
@@ -22,7 +25,7 @@ export async function updateProduct(productId, productData) {
   // TODO maybe replace consumer keys with user token
 
   // const response = fetch(
-  //   `${process.env.SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`,
+  //   `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.GATSBY_CONSUMER_KEY}&consumer_secret=${process.env.GATSBY_CONSUMER_SECRET}`,
   //   {
   //     method: "PUT",
   //     headers: {
@@ -54,13 +57,16 @@ export async function uploadImage(user, file) {
   formData.append("title", file.name)
   formData.append("caption", "")
 
-  const data = await fetch(`${process.env.SITE_URL}/wp-json/wp/v2/media`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
-    body: formData,
-  })
+  const data = await fetch(
+    `${process.env.GATSBY_SITE_URL}/wp-json/wp/v2/media`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+      body: formData,
+    }
+  )
     .then(res => res.json())
     .then(data => {
       if (data.source_url) {

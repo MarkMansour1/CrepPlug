@@ -8,7 +8,7 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products/reviews`, {
+    fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products/reviews`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },

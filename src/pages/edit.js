@@ -36,11 +36,14 @@ const PageComponent = props => {
   } = productOptions
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products/${productId}`, {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    })
+    fetch(
+      `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products/${productId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    )
       .then(res => res.json())
       .then(res => {
         console.log(res)

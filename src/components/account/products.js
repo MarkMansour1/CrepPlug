@@ -15,14 +15,14 @@ const AccountSection = () => {
   const user = getUser()
 
   useEffect(() => {
-    fetch(`${process.env.SITE_URL}/wp-json/wc/v3/products`, {
+    fetch(`${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products`, {
       headers: {
         Authorization: `Bearer ${user.token}`,
       },
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
+        console.log(res)
         setData(res)
         setLoading(false)
       })

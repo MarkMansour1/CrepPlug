@@ -15,7 +15,7 @@ const AccountSection = () => {
 
   useEffect(() => {
     fetch(
-      `${process.env.SITE_URL}/wp-json/wc/v3/orders?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`,
+      `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/orders?consumer_key=${process.env.GATSBY_CONSUMER_KEY}&consumer_secret=${process.env.GATSBY_CONSUMER_SECRET}`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,

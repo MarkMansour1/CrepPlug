@@ -68,7 +68,7 @@ const PageTemplate = ({ data }) => {
     }
 
     fetch(
-      `${process.env.SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`
+      `${process.env.GATSBY_SITE_URL}/wp-json/wc/v3/products/${productId}?consumer_key=${process.env.GATSBY_CONSUMER_KEY}&consumer_secret=${process.env.GATSBY_CONSUMER_SECRET}`
     )
       .then(res => res.json())
       .then(data => {
@@ -280,7 +280,6 @@ const PageTemplate = ({ data }) => {
                 >
                   {outOfStock ? "Out of stock" : "Add to Cart"}
                 </button>
-                
               </form>
               <div className="product-actions">
                 <button
