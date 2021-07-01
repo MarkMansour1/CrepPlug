@@ -37,8 +37,8 @@ const PageComponent = () => {
           </div>
           <div className="col-12 col-md-9 account-wrapper">
             <Router>
-              <Dashboard path="/account" />
-              <Products path="account/products" />
+              {/* <Dashboard path="/account" /> */}
+              <Products path="account" />
               <Messages path="account/messages" />
               <MessageDetails path="account/message/*" />
               <Transactions path="account/transactions" />

@@ -22,6 +22,7 @@ const AccountSection = () => {
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         setData(res)
         setLoading(false)
       })

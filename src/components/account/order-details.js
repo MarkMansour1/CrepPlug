@@ -15,7 +15,12 @@ const AccountSection = () => {
 
   useEffect(() => {
     fetch(
-      `${process.env.SITE_URL}/wp-json/wc/v3/orders/${orderId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`
+      `${process.env.SITE_URL}/wp-json/wc/v3/orders/${orderId}?consumer_key=${process.env.CONSUMER_KEY}&consumer_secret=${process.env.CONSUMER_SECRET}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
     )
       .then(res => res.json())
       .then(res => {
@@ -64,12 +69,12 @@ const OrderDetails = ({ order }) => {
 
   return (
     <div>
-      <div className="alert alert-secondary" role="alert">
+      {/* <div className="alert alert-secondary" role="alert">
         Already shipped this order?{" "}
         <a href="#" className="alert-link">
           Mark as shipped.
         </a>
-      </div>
+      </div> */}
       <h3>Order #{order.id}</h3>
       <p>Placed on: {new Date(order.date_created).toLocaleDateString()}</p>
       <p className="m-0">Status: {order.status}</p>

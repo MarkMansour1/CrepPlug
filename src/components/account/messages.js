@@ -60,21 +60,25 @@ const AccountSection = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map(message => (
-              <tr key={message.id}>
-                <td>{message.title.rendered}</td>
-                <td>{message.cmb2.users.sender}</td>
-                <td>{timeSince(message.date)}</td>
-                <td>
-                  <Link
-                    to={`/account/message/${message.cmb2.users.sender}`}
-                    className="text-secondary"
-                  >
-                    Open Chat
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {data.length > 0 ? (
+              data.map(message => (
+                <tr key={message.id}>
+                  <td>{message.title.rendered}</td>
+                  <td>{message.cmb2.users.sender}</td>
+                  <td>{timeSince(message.date)}</td>
+                  <td>
+                    <Link
+                      to={`/account/message/${message.cmb2.users.sender}`}
+                      className="text-secondary"
+                    >
+                      Open Chat
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <td>You have no messages.</td>
+            )}
           </tbody>
         </table>
       ) : null}
