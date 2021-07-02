@@ -39,6 +39,19 @@ module.exports = {
     //   },
     // },
     {
+      resolve: `gatsby-plugin-gdpr-cookies`,
+      options: {
+        googleAnalytics: {
+          trackingId: "", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-analytics", // default
+          anonymize: true, // default
+          allowAdFeatures: false, // default
+        },
+        // defines the environments where the tracking should be available  - default is ["production"]
+        environments: ["production", "development"],
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -48,7 +61,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress-experimental`,
       options: {
-        url: `http://markm105.sg-host.com/graphql`,
+        url: `${process.env.GATSBY_SITE_URL}/graphql`,
         verbose: true,
         develop: {
           hardCacheMediaFiles: true,

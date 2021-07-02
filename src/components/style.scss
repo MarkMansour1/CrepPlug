@@ -2596,3 +2596,29 @@ footer {
     transform: rotate(-360deg);
   }
 }
+
+// Cookies
+
+.CookieConsent {
+  & > div:first-of-type {
+    flex: 1 0 300px !important;
+    margin: 15px !important;
+  }
+
+  button {
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    font-family: $mont !important;
+    border-radius: 2px !important;
+    color: #fff !important;
+    background-color: #23a1d3 !important;
+    border-color: #23a1d3 !important;
+
+    &:hover {
+      color: #fff !important;
+      background-color: #1e88b2 !important;
+      border-color: #1c80a7 !important;
+    }
+  }
+}
