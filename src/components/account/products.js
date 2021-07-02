@@ -22,7 +22,6 @@ const AccountSection = () => {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res)
         setData(res)
         setLoading(false)
       })
@@ -57,7 +56,7 @@ const AccountSection = () => {
               }
 
               return (
-                <tr>
+                <tr key={product.slug}>
                   <td style={{ minWidth: "100px" }}>
                     <a href={`/product/${product.slug}`} target="_blank">
                       <div className="img-container">

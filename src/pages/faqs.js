@@ -9,41 +9,36 @@ import Card from "react-bootstrap/Card"
 
 class PageComponent extends React.Component {
   render() {
-    const seller = [
-      {
-        question: "How do I get started?",
-        answer:
-          "You want to start selling? Make sure you have a PayPal account and go ahead and sign up by clicking My Account, fill in your profile/ account details.Now you can start uploading items, selling them and start making money in a matter of minutes.",
-      },
-      {
-        question: "How much does it cost?",
-        answer:
-          "Setting up a store at CrepPlug and posting items is completely FREE! We we want you to succeed as much as we do. Only when you sell something we take a (6%) transaction fee. We both win. There are no set up fees, no listing fees and no monthly fees.",
-      },
-      {
-        question: "How many items can I upload?",
-        answer:
-          " There is no limit at all and you are allowed to upload how many items you want.",
-      },
-    ]
+    const { data } = this.props
+    const page = data.wpPage
 
-    const buyer = [
-      {
-        question: "How many items can I upload?",
-        answer:
-          " There is no limit at all and you are allowed to upload how many items you want.",
-      },
-      {
-        question: "How much does it cost?",
-        answer:
-          "Setting up a store at CrepPlug and posting items is completely FREE! We we want you to succeed as much as we do. Only when you sell something we take a (6%) transaction fee. We both win. There are no set up fees, no listing fees and no monthly fees.",
-      },
-      {
-        question: "How do I get started?",
-        answer:
-          "You want to start selling? Make sure you have a PayPal account and go ahead and sign up by clicking My Account, fill in your profile/ account details.Now you can start uploading items, selling them and start making money in a matter of minutes.",
-      },
-    ]
+    // Gets the content from the page
+    let content = document.createElement("DIV")
+    content.innerHTML = page.content
+    let faqs = content.textContent || content.innerText || ""
+
+    // Splits the faqs into buyer and seller
+    faqs = faqs.split("As A Buyer")
+    let spaces = "\n\n\n\n"
+
+    // Splits each indivdual question and answer and creates an array
+    let seller = faqs[0].split(spaces)
+    seller = seller
+      .map(question => {
+        let i = question.indexOf("?") + 1
+        var qna = [question.slice(0, i), question.slice(i + 1)]
+        return qna
+      })
+      .slice(1, seller.length - 1)
+
+    let buyer = faqs[1].split(spaces)
+    buyer = buyer
+      .map(question => {
+        let i = question.indexOf("?") + 1
+        var qna = [question.slice(0, i), question.slice(i + 1)]
+        return qna
+      })
+      .slice(1, buyer.length - 1)
 
     return (
       <Layout>
@@ -53,12 +48,12 @@ class PageComponent extends React.Component {
           <h4>As a Seller</h4>
           <Accordion>
             {seller.map((faq, index) => (
-              <Card>
+              <Card key={index}>
                 <Accordion.Collapse eventKey={index + 1}>
-                  <Card.Body>{faq.answer}</Card.Body>
+                  <Card.Body>{faq[1]}</Card.Body>
                 </Accordion.Collapse>
                 <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-                  {faq.question}
+                  {faq[0]}
                 </Accordion.Toggle>
               </Card>
             ))}
@@ -66,12 +61,12 @@ class PageComponent extends React.Component {
           <h4 className="mt-5">As a Buyer</h4>
           <Accordion>
             {buyer.map((faq, index) => (
-              <Card>
+              <Card key={index}>
                 <Accordion.Collapse eventKey={index + 1}>
-                  <Card.Body>{faq.answer}</Card.Body>
+                  <Card.Body>{faq[1]}</Card.Body>
                 </Accordion.Collapse>
                 <Accordion.Toggle as={Card.Header} eventKey={index + 1}>
-                  {faq.question}
+                  {faq[0]}
                 </Accordion.Toggle>
               </Card>
             ))}
@@ -83,3 +78,12 @@ class PageComponent extends React.Component {
 }
 
 export default PageComponent
+
+export const pageQuery = graphql`
+  query {
+    wpPage(id: { eq: "cG9zdDoxNDM1MQ==" }) {
+      id
+      content
+    }
+  }
+`

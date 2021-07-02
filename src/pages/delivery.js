@@ -20,7 +20,7 @@ class PageComponent extends React.Component {
             data.banner.childImageSharp.fluid,
           ]}
         />
-        <div className="container container-wide">
+        <div className="container container-wide pt-5">
           <div
             dangerouslySetInnerHTML={{
               __html: page.content,

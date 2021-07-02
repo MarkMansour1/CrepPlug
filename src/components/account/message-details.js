@@ -52,6 +52,7 @@ export default AccountSection
 const MessageDetails = ({ user, data, sender }) => {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState(data)
+  const [loading, setLoading] = useState(false)
 
   for (let i = 0; i < data.length; i++) {
     var users = [data[i].cmb2.users.sender, data[i].cmb2.users.receiver]
@@ -66,11 +67,13 @@ const MessageDetails = ({ user, data, sender }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
+    setLoading(true)
 
     sendMessage(user, sender, message).then(res => {
       data.push(res)
       setMessages(data)
       setMessage("")
+      setLoading(false)
     })
   }
 
@@ -110,6 +113,7 @@ const MessageDetails = ({ user, data, sender }) => {
               name="message"
               onChange={event => setMessage(event.target.value)}
               value={message}
+              disabled={loading}
             />
           </form>
         </div>

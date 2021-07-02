@@ -28,11 +28,22 @@ const AccountSection = () => {
         for (let i in resultData) {
           var message = resultData[i]
           var users = message.cmb2.users
+
+          // Adds messages sent by other users
           if (
             !senders.includes(users.sender) &&
             users.receiver === user.username
           ) {
             senders.push(users.sender)
+            data.push(message)
+          }
+
+          // Adds messages sent by you to other users
+          if (
+            !senders.includes(users.receiver) &&
+            users.sender === user.username
+          ) {
+            senders.push(users.receiver)
             data.push(message)
           }
         }
@@ -55,9 +66,8 @@ const AccountSection = () => {
         <table className="table account-table">
           <thead>
             <tr>
-              <th>Message</th>
-              <th>Sender</th>
-              <th>Time</th>
+              <th>User</th>
+              <th>Last Message</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -65,12 +75,19 @@ const AccountSection = () => {
             {data.length > 0 ? (
               data.map(message => (
                 <tr key={message.id}>
-                  <td>{message.title.rendered}</td>
-                  <td>{message.cmb2.users.sender}</td>
+                  <td>
+                    {message.cmb2.users.sender === user.username
+                      ? message.cmb2.users.receiver
+                      : message.cmb2.users.sender}
+                  </td>
                   <td>{timeSince(message.date)}</td>
                   <td>
                     <Link
-                      to={`/account/message/${message.cmb2.users.sender}`}
+                      to={`/account/message/${
+                        message.cmb2.users.sender === user.username
+                          ? message.cmb2.users.receiver
+                          : message.cmb2.users.sender
+                      }`}
                       className="text-secondary"
                     >
                       Open Chat
