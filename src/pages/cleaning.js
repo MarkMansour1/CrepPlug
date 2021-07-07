@@ -64,7 +64,7 @@ class PageComponent extends React.Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlhtmlFor="size">UK size *</label>
+                  <label htmlhtmlFor="size">UK Size *</label>
                   <input
                     type="number"
                     className="form-control"

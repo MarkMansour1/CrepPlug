@@ -78,7 +78,7 @@ class PageComponent extends React.Component {
               <form name="sourcing" method="POST" data-netlify="true">
                 <input type="hidden" name="form-name" value="sourcing" />
                 <div className="form-group">
-                  <label htmlhtmlFor="email">Email address *</label>
+                  <label htmlhtmlFor="email">Email Address *</label>
                   <input
                     type="email"
                     className="form-control"
@@ -89,7 +89,7 @@ class PageComponent extends React.Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlhtmlFor="model">Model (name of trainer) *</label>
+                  <label htmlhtmlFor="model">Trainer Model *</label>
                   <input
                     type="text"
                     className="form-control"
@@ -100,7 +100,7 @@ class PageComponent extends React.Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlhtmlFor="size">UK size *</label>
+                  <label htmlhtmlFor="size">UK Size *</label>
                   <input
                     type="number"
                     className="form-control"

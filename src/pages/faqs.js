@@ -14,7 +14,7 @@ class PageComponent extends React.Component {
 
     var buyer, seller
 
-    if (window !== undefined) {
+    if (typeof window !== "undefined") {
       // Gets the content from the page
       let content = document.createElement("DIV")
       content.innerHTML = page.content
