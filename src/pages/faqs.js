@@ -12,33 +12,37 @@ class PageComponent extends React.Component {
     const { data } = this.props
     const page = data.wpPage
 
-    // Gets the content from the page
-    let content = document.createElement("DIV")
-    content.innerHTML = page.content
-    let faqs = content.textContent || content.innerText || ""
+    var buyer, seller
 
-    // Splits the faqs into buyer and seller
-    faqs = faqs.split("As A Buyer")
-    let spaces = "\n\n\n\n"
+    if (window !== undefined) {
+      // Gets the content from the page
+      let content = document.createElement("DIV")
+      content.innerHTML = page.content
+      let faqs = content.textContent || content.innerText || ""
 
-    // Splits each indivdual question and answer and creates an array
-    let seller = faqs[0].split(spaces)
-    seller = seller
-      .map(question => {
-        let i = question.indexOf("?") + 1
-        var qna = [question.slice(0, i), question.slice(i + 1)]
-        return qna
-      })
-      .slice(1, seller.length - 1)
+      // Splits the faqs into buyer and seller
+      faqs = faqs.split("As A Buyer")
+      let spaces = "\n\n\n\n"
 
-    let buyer = faqs[1].split(spaces)
-    buyer = buyer
-      .map(question => {
-        let i = question.indexOf("?") + 1
-        var qna = [question.slice(0, i), question.slice(i + 1)]
-        return qna
-      })
-      .slice(1, buyer.length - 1)
+      // Splits each indivdual question and answer and creates an array
+      seller = faqs[0].split(spaces)
+      seller = seller
+        .map(question => {
+          let i = question.indexOf("?") + 1
+          var qna = [question.slice(0, i), question.slice(i + 1)]
+          return qna
+        })
+        .slice(1, seller.length - 1)
+
+      buyer = faqs[1].split(spaces)
+      buyer = buyer
+        .map(question => {
+          let i = question.indexOf("?") + 1
+          var qna = [question.slice(0, i), question.slice(i + 1)]
+          return qna
+        })
+        .slice(1, buyer.length - 1)
+    }
 
     return (
       <Layout>
