@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
         buttonText="Accept"
         declineButtonText="Decline"
         cookieName="gatsby-gdpr-google-analytics"
+        style={{ justifyContent: "center" }}
       >
         This website uses cookies to enhance the user experience.
       </CookieConsent>

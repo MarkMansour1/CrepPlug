@@ -2064,6 +2064,10 @@ footer {
   margin-top: 1rem;
 }
 
+.thumb-wrapper {
+  position: relative;
+}
+
 .thumb {
   display: inline-flex;
   border-radius: 1px solid $border;
@@ -2072,6 +2076,15 @@ footer {
   min-width: 150px;
   padding: 0.25rem;
   box-sizing: border-box;
+}
+
+.thumb-remove {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+  background: $gray-dark;
+  color: white;
+  cursor: pointer;
 }
 
 // Posts
@@ -2600,15 +2613,9 @@ footer {
 // Cookies
 
 .CookieConsent {
-  & > div:first-of-type {
-    flex: 1 0 300px !important;
-    margin: 15px !important;
-  }
-
   button {
-    text-transform: uppercase !important;
-    font-weight: 600 !important;
-    letter-spacing: 1px !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
     font-family: $mont !important;
     border-radius: 2px !important;
     color: #fff !important;
@@ -2620,5 +2627,9 @@ footer {
       background-color: #1e88b2 !important;
       border-color: #1c80a7 !important;
     }
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0 200px;
   }
 }

@@ -12,8 +12,8 @@ class PageComponent extends React.Component {
     return (
       <Layout>
         <SEO title="Terms of Service" />
-        <div className="container container-wide pt-5">
-          <div className="text-center">
+        <div className="container pt-5">
+          <div className="text-center mb-5">
             <h1>Terms Of Service</h1>
             <p>This Agreement was last modified on {page.date}</p>
           </div>
@@ -32,7 +32,7 @@ export default PageComponent
 
 export const pageQuery = graphql`
   query {
-    wpPage(title: { eq: "Privacy Policy" }) {
+    wpPage(title: { eq: "Terms Of Service" }) {
       id
       content
       date(formatString: "DD/MM/YYYY")

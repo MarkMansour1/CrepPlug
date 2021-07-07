@@ -111,13 +111,15 @@ const PageTemplate = ({ data }) => {
 
   // Gets 6  products for related
   var relatedProducts = []
-  for (let i in related.nodes) {
-    // Adds all the products matching the related id to the relatedproducts array
-    relatedProducts = relatedProducts.concat(
-      products.edges.filter(
-        ({ node: product }) => product.id === related.nodes[i].id
+  if (related) {
+    for (let i in related.nodes) {
+      // Adds all the products matching the related id to the relatedproducts array
+      relatedProducts = relatedProducts.concat(
+        products.edges.filter(
+          ({ node: product }) => product.id === related.nodes[i].id
+        )
       )
-    )
+    }
   }
 
   // If there aren't enough related products, fill the rest with random products
@@ -199,7 +201,7 @@ const PageTemplate = ({ data }) => {
                     <div>
                       Colour:{" "}
                       {attributes.nodes[0].options.map(value => (
-                        <span>{value}</span>
+                        <span key={value}>{value}</span>
                       ))}
                     </div>
                   )}
@@ -210,7 +212,7 @@ const PageTemplate = ({ data }) => {
                     <div>
                       Condition:{" "}
                       {attributes.nodes[1].options.map(value => (
-                        <span>{value}</span>
+                        <span key={value}>{value}</span>
                       ))}
                     </div>
                   )}
@@ -540,7 +542,7 @@ const SellerInfo = ({ vendor }) => {
               starDimension="10px"
               starSpacing="0"
             />
-            <small>10 reviews</small>
+            <small>0 reviews</small>
           </div>
         </div>
       </Link>

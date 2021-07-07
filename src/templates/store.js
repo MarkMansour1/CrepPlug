@@ -237,7 +237,7 @@ class PageComponent extends React.Component {
           }
         } else if (attr.name == "pa_size") {
           for (let option in attr.options) {
-            let opt = attr.options[option]
+            let opt = attr.options[option].replace("-", ".")
             if (!sizes.includes(opt)) {
               sizes.push(opt)
             }
@@ -365,7 +365,7 @@ class PageComponent extends React.Component {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for={filter}
+                                  htmlFor={filter}
                                 >
                                   {filter}
                                 </label>
@@ -396,7 +396,7 @@ class PageComponent extends React.Component {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for={filter}
+                                  htmlFor={filter}
                                 >
                                   {filter}
                                 </label>
@@ -427,7 +427,7 @@ class PageComponent extends React.Component {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for={filter}
+                                  htmlFor={filter}
                                 >
                                   {filter}
                                 </label>
@@ -458,7 +458,7 @@ class PageComponent extends React.Component {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for={filter}
+                                  htmlFor={filter}
                                 >
                                   {filter}
                                 </label>

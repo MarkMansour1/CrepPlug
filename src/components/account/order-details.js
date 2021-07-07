@@ -76,8 +76,14 @@ const OrderDetails = ({ order }) => {
         </a>
       </div> */}
       <h3>Order #{order.id}</h3>
-      <p>Placed on: {new Date(order.date_created).toLocaleDateString()}</p>
-      <p className="m-0">Status: {order.status}</p>
+      <p>
+        <strong>Placed on: </strong>
+        {new Date(order.date_created).toLocaleDateString()}
+      </p>
+      <p className="m-0">
+        <strong>Status: </strong>
+        {order.status}
+      </p>
       <div className="pt-5">
         <h4>Order Items</h4>
         <table className="w-100">

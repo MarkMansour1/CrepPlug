@@ -60,8 +60,6 @@ class PageComponent extends React.Component {
   }
 
   clearFilters() {
-    // TODO reset form elements
-
     this.setState(
       {
         minPrice: null,
@@ -197,7 +195,7 @@ class PageComponent extends React.Component {
           }
         } else if (attr.name == "pa_size") {
           for (let option in attr.options) {
-            let opt = attr.options[option]
+            let opt = attr.options[option].replace("-", ".")
             if (!sizes.includes(opt)) {
               sizes.push(opt)
             }
@@ -250,213 +248,216 @@ class PageComponent extends React.Component {
                     </div>
                     <span>{this.state.filtersClosed ? "+" : "-"}</span>
                   </h3>
-                  <div
-                    className={`shop-filters ${
-                      this.state.filtersClosed ? "shop-filters-closed" : ""
-                    }`}
-                  >
-                    <Accordion>
-                      <Card>
-                        <Accordion.Collapse eventKey="0">
-                          <Card.Body>
-                            <div className="form-group">
-                              <label htmlFor="search" />
-                              <input
-                                id="search"
-                                name="search"
-                                className="form-control"
-                                type="text"
-                                value={this.state.search}
-                                onChange={this.handleFilterChange}
-                                placeholder="Search..."
-                              />
-                            </div>
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="0">
-                          Search
-                          <span className="badge badge-light ml-3">
-                            {this.state.search.length > 0 && "1"}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                      <Card>
-                        <Accordion.Collapse eventKey="1">
-                          <Card.Body>
-                            <div className="form-row">
-                              <div className="form-group col">
-                                <label htmlFor="minPrice" />
-                                <input
-                                  id="minPrice"
-                                  className="form-control"
-                                  label="Min"
-                                  type="number"
-                                  min="0"
-                                  step="10"
-                                  placeholder="Min"
-                                  name="minPrice"
-                                  onChange={this.handleFilterChange}
-                                />
-                              </div>
-                              <div className="form-group col">
-                                <label htmlFor="maxPrice" />
-                                <input
-                                  id="maxPrice"
-                                  className="form-control"
-                                  label="Max"
-                                  type="number"
-                                  min="10"
-                                  step="10"
-                                  placeholder="Max"
-                                  name="maxPrice"
-                                  onChange={this.handleFilterChange}
-                                />
-                              </div>
-                            </div>
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="1">
-                          Price Range
-                          <span className="badge badge-light ml-3">
-                            {this.state.minPrice && this.state.maxPrice
-                              ? "2"
-                              : this.state.minPrice || this.state.maxPrice
-                              ? "1"
-                              : null}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                      <Card>
-                        <Accordion.Collapse eventKey="2">
-                          <Card.Body>
-                            {categories.map(filter => (
-                              <div className="form-check" key={filter}>
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value={filter}
-                                  id={filter}
-                                  name="categories"
-                                  onChange={this.handleFilterChange}
-                                />
-                                <label
-                                  className="form-check-label"
-                                  for={filter}
-                                >
-                                  {filter}
-                                </label>
-                              </div>
-                            ))}
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="2">
-                          Categories
-                          <span className="badge badge-light ml-3">
-                            {this.state.categories.length > 0 &&
-                              this.state.categories.length}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                      <Card>
-                        <Accordion.Collapse eventKey="3">
-                          <Card.Body>
-                            {conditions.map(filter => (
-                              <div className="form-check" key={filter}>
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value={filter}
-                                  id={filter}
-                                  name="conditions"
-                                  onChange={this.handleFilterChange}
-                                />
-                                <label
-                                  className="form-check-label"
-                                  for={filter}
-                                >
-                                  {filter}
-                                </label>
-                              </div>
-                            ))}
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="3">
-                          Condition
-                          <span className="badge badge-light ml-3">
-                            {this.state.conditions.length > 0 &&
-                              this.state.conditions.length}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                      <Card>
-                        <Accordion.Collapse eventKey="4">
-                          <Card.Body>
-                            {sizes.map(filter => (
-                              <div className="form-check" key={filter}>
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value={filter}
-                                  id={filter}
-                                  name="sizes"
-                                  onChange={this.handleFilterChange}
-                                />
-                                <label
-                                  className="form-check-label"
-                                  for={filter}
-                                >
-                                  {filter}
-                                </label>
-                              </div>
-                            ))}
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="4">
-                          Size
-                          <span className="badge badge-light ml-3">
-                            {this.state.sizes.length > 0 &&
-                              this.state.sizes.length}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                      <Card>
-                        <Accordion.Collapse eventKey="5">
-                          <Card.Body>
-                            {colours.map(filter => (
-                              <div className="form-check" key={filter}>
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value={filter}
-                                  id={filter}
-                                  name="colours"
-                                  onChange={this.handleFilterChange}
-                                />
-                                <label
-                                  className="form-check-label"
-                                  for={filter}
-                                >
-                                  {filter}
-                                </label>
-                              </div>
-                            ))}
-                          </Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Toggle as={Card.Header} eventKey="5">
-                          Colour
-                          <span className="badge badge-light ml-3">
-                            {this.state.colours.length > 0 &&
-                              this.state.colours.length}
-                          </span>
-                        </Accordion.Toggle>
-                      </Card>
-                    </Accordion>
-                    <button
-                      className="btn btn-light btn-sm w-100 my-4"
-                      onClick={this.clearFilters}
+                  <div id="shop-filters-wrapper">
+                    <div
+                      id="shop-filters"
+                      className={`shop-filters ${
+                        this.state.filtersClosed ? "shop-filters-closed" : ""
+                      }`}
                     >
-                      Clear Filters
-                    </button>
+                      <Accordion>
+                        <Card>
+                          <Accordion.Collapse eventKey="0">
+                            <Card.Body>
+                              <div className="form-group">
+                                <label htmlFor="search" />
+                                <input
+                                  id="search"
+                                  name="search"
+                                  className="form-control"
+                                  type="text"
+                                  value={this.state.search}
+                                  onChange={this.handleFilterChange}
+                                  placeholder="Search..."
+                                />
+                              </div>
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="0">
+                            Search
+                            <span className="badge badge-light ml-3">
+                              {this.state.search.length > 0 && "1"}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                        <Card>
+                          <Accordion.Collapse eventKey="1">
+                            <Card.Body>
+                              <div className="form-row">
+                                <div className="form-group col">
+                                  <label htmlFor="minPrice" />
+                                  <input
+                                    id="minPrice"
+                                    className="form-control"
+                                    label="Min"
+                                    type="number"
+                                    min="0"
+                                    step="10"
+                                    placeholder="Min"
+                                    name="minPrice"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                </div>
+                                <div className="form-group col">
+                                  <label htmlFor="maxPrice" />
+                                  <input
+                                    id="maxPrice"
+                                    className="form-control"
+                                    label="Max"
+                                    type="number"
+                                    min="10"
+                                    step="10"
+                                    placeholder="Max"
+                                    name="maxPrice"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                </div>
+                              </div>
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="1">
+                            Price Range
+                            <span className="badge badge-light ml-3">
+                              {this.state.minPrice && this.state.maxPrice
+                                ? "2"
+                                : this.state.minPrice || this.state.maxPrice
+                                ? "1"
+                                : null}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                        <Card>
+                          <Accordion.Collapse eventKey="2">
+                            <Card.Body>
+                              {categories.map(filter => (
+                                <div className="form-check" key={filter}>
+                                  <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={filter}
+                                    id={filter}
+                                    name="categories"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor={filter}
+                                  >
+                                    {filter}
+                                  </label>
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="2">
+                            Categories
+                            <span className="badge badge-light ml-3">
+                              {this.state.categories.length > 0 &&
+                                this.state.categories.length}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                        <Card>
+                          <Accordion.Collapse eventKey="3">
+                            <Card.Body>
+                              {conditions.map(filter => (
+                                <div className="form-check" key={filter}>
+                                  <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={filter}
+                                    id={filter}
+                                    name="conditions"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor={filter}
+                                  >
+                                    {filter}
+                                  </label>
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="3">
+                            Condition
+                            <span className="badge badge-light ml-3">
+                              {this.state.conditions.length > 0 &&
+                                this.state.conditions.length}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                        <Card>
+                          <Accordion.Collapse eventKey="4">
+                            <Card.Body>
+                              {sizes.map(filter => (
+                                <div className="form-check" key={filter}>
+                                  <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={filter}
+                                    id={filter}
+                                    name="sizes"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor={filter}
+                                  >
+                                    {filter}
+                                  </label>
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="4">
+                            Size
+                            <span className="badge badge-light ml-3">
+                              {this.state.sizes.length > 0 &&
+                                this.state.sizes.length}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                        <Card>
+                          <Accordion.Collapse eventKey="5">
+                            <Card.Body>
+                              {colours.map(filter => (
+                                <div className="form-check" key={filter}>
+                                  <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={filter}
+                                    id={filter}
+                                    name="colours"
+                                    onChange={this.handleFilterChange}
+                                  />
+                                  <label
+                                    className="form-check-label"
+                                    htmlFor={filter}
+                                  >
+                                    {filter}
+                                  </label>
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                          <Accordion.Toggle as={Card.Header} eventKey="5">
+                            Colour
+                            <span className="badge badge-light ml-3">
+                              {this.state.colours.length > 0 &&
+                                this.state.colours.length}
+                            </span>
+                          </Accordion.Toggle>
+                        </Card>
+                      </Accordion>
+                      {/* <button
+                        className="btn btn-light btn-sm w-100 my-4"
+                        onClick={this.clearFilters}
+                      >
+                        Clear Filters
+                      </button> */}
+                    </div>
                   </div>
                   <div className="shop-filters-header">
                     <div>

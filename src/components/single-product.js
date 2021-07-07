@@ -20,8 +20,10 @@ class Single extends React.Component {
     }
 
     var sizeList = ""
-    if (sizes.length > 0) {
-      sizeList = "Size " + sizes[0]
+    if (sizes.length > 1) {
+      sizeList = "Multiple sizes"
+    } else if (sizes.length > 0) {
+      sizeList = "Size " + sizes[0][0].replace("-", ".")
     }
 
     const outOfStock =

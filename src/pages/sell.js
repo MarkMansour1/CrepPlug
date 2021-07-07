@@ -5,7 +5,7 @@ import Select from "react-select"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { AddProduct } from "../components/svg"
+import { AddProduct, Cross } from "../components/svg"
 import AccountNav from "../components/account/account-nav"
 
 import { getUser, isBrowser, isLoggedIn } from "../services/auth"
@@ -315,24 +315,24 @@ const PageComponent = props => {
                     Upload your images here
                   </div>
                   <aside className="thumbs-container">
-                    {loading ? "Loading..." : null}
                     {images.map((image, index) => (
-                      <div>
+                      <div class="thumb-wrapper">
                         <div className="thumb" key={index}>
                           <div className="img-container">
                             <img src={image.src} className="thumb-img" />
                           </div>
                         </div>
                         <div
-                          className="d-block"
+                          className="thumb-remove"
                           onClick={() =>
                             setImages(images.filter(i => i.src !== image.src))
                           }
                         >
-                          Remove
+                          <Cross size={"1.5rem"} />
                         </div>
                       </div>
                     ))}
+                    {loading ? "Loading..." : null}
                   </aside>
                 </div>
                 <button

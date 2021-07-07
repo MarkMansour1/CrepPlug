@@ -58,7 +58,7 @@ const AccountSection = () => {
               return (
                 <tr key={product.slug}>
                   <td style={{ minWidth: "100px" }}>
-                    <a href={`/product/${product.slug}`} target="_blank">
+                    <Link to={`/product/${product.slug}`}>
                       <div className="img-container">
                         {product.images[0] && product.images[0].src ? (
                           <img src={product.images[0].src} alt={product.name} />
@@ -66,12 +66,10 @@ const AccountSection = () => {
                           <img src={defaultimg} alt={product.name} />
                         )}
                       </div>
-                    </a>
+                    </Link>
                   </td>
                   <td className="product-details">
-                    <a href={`/product/${product.slug}`} target="_blank">
-                      {product.name}
-                    </a>
+                    <Link to={`/product/${product.slug}`}>{product.name}</Link>
                     <span>
                       {product.stock_status === "instock"
                         ? "In stock"

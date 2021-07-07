@@ -18,7 +18,7 @@ const Component = () => {
                 value={categoryFilter}
                 id={categoryFilter}
               />
-              <label className="form-check-label" for={categoryFilter}>
+              <label className="form-check-label" htmlFor={categoryFilter}>
                 {categoryFilter}
               </label>
             </div>

@@ -126,9 +126,6 @@ class Header extends React.Component {
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
                   <Link to="/account">
-                    <span>Dashboard</span>
-                  </Link>
-                  <Link to="/account/products">
                     <span>Products</span>
                   </Link>
                   <Link to="/account/messages">
@@ -160,11 +157,11 @@ class Header extends React.Component {
             <Card>
               <Accordion.Collapse eventKey="1">
                 <Card.Body>
-                  <a href="https://markm105.sg-host.com/product/d-crease-insert/">
+                  <Link to="/product/d-crease-insert">
                     <span style={{ whiteSpace: "nowrap" }}>
                       D-Crease Insert
                     </span>
-                  </a>
+                  </Link>
                   <Link to={`/shop?search=accessories`}>
                     <span>Watches</span>
                   </Link>
@@ -306,9 +303,6 @@ class Header extends React.Component {
                     </Link>
                     <div className="header-dropdown-content">
                       <Link to="/account">
-                        <span>Dashboard</span>
-                      </Link>
-                      <Link to="/account/products">
                         <span>Products</span>
                       </Link>
                       <Link to="/account/messages">
@@ -365,12 +359,12 @@ class Header extends React.Component {
                 <div className="header-dropdown">
                   <div className="header-dropdown-link">Accessories</div>
                   <div className="header-dropdown-content">
-                    <a
-                      href="https://markm105.sg-host.com/product/d-crease-insert/"
+                    <Link
+                      to="/product/d-crease-insert"
                       style={{ whiteSpace: "nowrap" }}
                     >
                       D-Crease Insert
-                    </a>
+                    </Link>
                     <Link to={`/shop?search=accessories`}>Watches</Link>
                   </div>
                 </div>

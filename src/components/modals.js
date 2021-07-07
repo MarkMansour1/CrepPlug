@@ -119,9 +119,14 @@ export function CartModal(props) {
         <div className="product-modal">
           <Cart />
           <p>{`${props.name}`} added to cart.</p>
-          <Link to="/cart" className="btn btn-dark" onClick={props.onHide}>
+          {/* TODO remove target=blank */}
+          <a
+            href="http://markm105.sg-host.com/cart"
+            className="btn btn-dark"
+            target="_blank"
+          >
             View Cart
-          </Link>
+          </a>
           <button className="btn btn-outline-dark" onClick={props.onHide}>
             Close
           </button>

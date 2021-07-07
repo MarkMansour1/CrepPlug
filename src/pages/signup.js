@@ -11,6 +11,8 @@ const PageComponent = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirm, setRepeat] = useState("")
+  const [size, setSize] = useState("")
+  const [paypal, setPaypal] = useState("")
 
   const [response, setResponse] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -116,6 +118,21 @@ const PageComponent = () => {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="size">Shoe Size</label>
+            <input
+              type="number"
+              min="1"
+              step="0.5"
+              className="form-control"
+              id="size"
+              name="size"
+              onChange={event => setSize(event.target.value)}
+              value={size}
+              disabled={loading}
+              required
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -141,6 +158,19 @@ const PageComponent = () => {
               required
             />
           </div>
+          {/* <div className="form-group">
+            <label htmlFor="paypal">Paypal Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="paypal"
+              name="paypal"
+              onChange={event => setPaypal(event.target.value)}
+              value={paypal}
+              disabled={loading}
+              required
+            />
+          </div> */}
           <small>
             By creating an account you agree to our{" "}
             <a

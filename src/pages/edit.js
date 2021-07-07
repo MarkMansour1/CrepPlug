@@ -5,7 +5,7 @@ import Select from "react-select"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Products } from "../components/svg"
+import { Products, Cross } from "../components/svg"
 import AccountNav from "../components/account/account-nav"
 
 import { getUser, isBrowser, isLoggedIn } from "../services/auth"
@@ -110,6 +110,11 @@ const PageComponent = props => {
             })
           }
         }
+
+        let productImages = res.images.map(i => ({
+          src: i.src,
+        }))
+        setImages(productImages)
 
         setLoading(false)
       })
@@ -422,24 +427,24 @@ const PageComponent = props => {
                     Upload your images here
                   </div>
                   <aside className="thumbs-container">
-                    {loading ? "Loading..." : null}
                     {images.map((image, index) => (
-                      <div>
+                      <div class="thumb-wrapper">
                         <div className="thumb" key={index}>
                           <div className="img-container">
                             <img src={image.src} className="thumb-img" />
                           </div>
                         </div>
                         <div
-                          className="d-block"
+                          className="thumb-remove"
                           onClick={() =>
                             setImages(images.filter(i => i.src !== image.src))
                           }
                         >
-                          Remove
+                          <Cross size={"1.5rem"} />
                         </div>
                       </div>
                     ))}
+                    {loading ? "Loading..." : null}
                   </aside>
                 </div>
                 <button
@@ -447,7 +452,7 @@ const PageComponent = props => {
                   className="btn btn-secondary btn-lg w-100"
                   disabled={loading}
                 >
-                  Add Product
+                  Save Changes
                 </button>
               </form>
             </div>

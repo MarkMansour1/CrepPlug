@@ -153,7 +153,9 @@ const BackgroundSection = () => (
                 </div>
               </div>
               <div className="row copyrightrow">
-                <div className="col-12 col-sm-6">© Copyright CrepPlug 2020</div>
+                <div className="col-12 col-sm-6">
+                  © Copyright CrepPlug {new Date().getFullYear()}
+                </div>
                 <div className="col-12 col-sm-6 text-xl-right">
                   <a href="https://captivastudio.com" target="_blank">
                     Website by Captiva

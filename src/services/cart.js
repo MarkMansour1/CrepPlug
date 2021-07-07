@@ -10,7 +10,19 @@ export const getCartProducts = () => {
   return products
 }
 
+export const addCartVariableProduct = (user, productData, quantity, size) => {
+  // TODO hide this window better
+  window.open(
+    `${process.env.GATSBY_SITE_URL}/?add-to-cart=${productData.productId}&variation_id=${size}`,
+    "_blank",
+    "toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10000, top=10000, width=10, height=10, visible=none"
+  )
+
+  return true
+}
+
 export const addCartProduct = (user, productData, quantity, size) => {
+  // TODO hide this window better
   window.open(
     `${process.env.GATSBY_SITE_URL}/?add-to-cart=${productData.productId}`,
     "_blank",
