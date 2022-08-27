@@ -16,6 +16,7 @@ import fetcher from "../services/fetcher"
 
 const IndexPage = ({ data }) => {
   const { data: products } = useSWR("/wp-json/wc/v3/products", fetcher)
+  const { data: posts } = useSWR("/wp-json/wp/v2/posts", fetcher)
   console.log(products)
 
   const { buy, sell, source } = data
@@ -63,15 +64,13 @@ const IndexPage = ({ data }) => {
             </BackgroundImage>
           </div>
           <div className="col-12 col-lg-8 d-none d-lg-block">
-            {products && (
-              <ProductBlock
-                title="Most Popular"
-                link="/shop"
-                linkText="Shop All"
-                products={products}
-                // products={mostPopular}
-              />
-            )}
+            <ProductBlock
+              title="Most Popular"
+              link="/shop"
+              linkText="Shop All"
+              products={products ?? []}
+              // products={mostPopular}
+            />
           </div>
           <div className="col-12 col-md-6 col-lg-4">
             <BackgroundImage Tag="div" fluid={source.childImageSharp.fluid}>
@@ -116,13 +115,13 @@ const IndexPage = ({ data }) => {
             ))}
           </div>
         </div>
-        {/* <ProductBlock
+        <ProductBlock
           title="Latest Footwear"
           link="/shop"
           linkText="Shop All"
-          products={mostRecent}
+          products={products ?? []}
         />
-        <ProductBlock
+        {/* <ProductBlock
           title="CrepPlug Picks"
           link="/shop"
           linkText="Shop All"

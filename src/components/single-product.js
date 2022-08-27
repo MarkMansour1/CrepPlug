@@ -1,18 +1,10 @@
 import React from "react"
-import Img from "gatsby-image"
 import { timeSince } from "../services/utils"
 import defaultimg from "../images/default_product.png"
 
 const SingleProduct = ({ product }) => {
-  var sizes = []
-
-  if (product.attributes) {
-    product.attributes.forEach(attribute => {
-      if (attribute.name === "pa_size") {
-        sizes.push(attribute.options)
-      }
-    })
-  }
+  var sizes = product.attributes.find(attribute => attribute.name === "Size")
+    .options
 
   var sizeList = ""
   if (sizes.length > 1) {
