@@ -30,8 +30,6 @@ const PageTemplate = ({ data }) => {
     }
   }
 
-  console.log(related)
-
   return (
     <Layout>
       <div className="container pt-5">
@@ -84,7 +82,7 @@ const PageTemplate = ({ data }) => {
           <div className="row">
             {related.map(({ node: post }) => (
               <div className="col-6 col-md-4" key={post.id}>
-                <SinglePost data={post} />
+                <SinglePost post={post} />
               </div>
             ))}
           </div>

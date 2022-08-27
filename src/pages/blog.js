@@ -6,108 +6,37 @@ import SEO from "../components/seo"
 import Banner from "../components/banner"
 import SinglePost from "../components/single-post"
 
-class PageComponent extends React.Component {
-  constructor(props) {
-    super(props)
+import useSWR from "swr"
+import fetcher from "../services/fetcher"
 
-    this.state = {
-      items: [],
-    }
+const BlogPage = ({ data }) => {
+  const { data: posts } = useSWR("wp-json/wp/v2/posts", fetcher)
 
-    this.filterPosts = this.filterPosts.bind(this)
-  }
-
-  filterPosts(filter) {
-    const allPosts = this.props.data.posts.edges
-    var postList = allPosts.slice()
-
-    if (filter != "All") {
-      for (let i = 0; i < postList.length; i++) {
-        var contains = false
-
-        for (let cat in postList[i].node.categories.nodes) {
-          if (postList[i].node.categories.nodes[cat].name === filter) {
-            contains = true
-            break
-          }
-        }
-
-        if (contains === false) {
-          postList.splice(i, 1)
-          i--
-        }
-      }
-    }
-
-    this.setState({
-      items: postList,
-    })
-  }
-
-  componentDidMount() {
-    const allPosts = this.props.data.posts.edges
-
-    this.setState({
-      items: allPosts,
-    })
-  }
-
-  render() {
-    const { data } = this.props
-    const posts = data.posts.edges
-
-    var categories = ["All"]
-    for (let post in posts) {
-      for (let cat in posts[post].node.categories.nodes) {
-        if (
-          categories.indexOf(posts[post].node.categories.nodes[cat].name) === -1
-        ) {
-          categories.push(posts[post].node.categories.nodes[cat].name)
-        }
-      }
-    }
-
-    return (
-      <Layout>
-        <SEO title="Blog" />
-        <Banner
-          details={[
-            "blog",
-            "Read through our blog and find out about upcoming releases, discover new brands and individuals through our lookbooks, new ways to rock your favourite crep & more.",
-            data.banner.childImageSharp.fluid,
-          ]}
-        />
-        <div className="container container-wide pt-5">
-          <div className="py-4">
-            {categories.map(category => (
-              <button
-                className="btn btn-light btn-sm ml-2"
-                key={category}
-                id={category}
-                onClick={() => {
-                  this.filterPosts(category)
-                }}
-              >
-                {category}
-              </button>
+  return (
+    <Layout>
+      <SEO title="Blog" />
+      <Banner
+        details={[
+          "blog",
+          "Read through our blog and find out about upcoming releases, discover new brands and individuals through our lookbooks, new ways to rock your favourite crep & more.",
+          data.banner.childImageSharp.fluid,
+        ]}
+      />
+      <div className="container container-wide pt-5">
+        <div className="row">
+          {posts &&
+            posts.map(post => (
+              <div className="col-3 mb-4" key={post.id}>
+                <SinglePost post={post} />
+              </div>
             ))}
-          </div>
-          <div className="row">
-            {this.state.items.map(({ node: post }) => {
-              return (
-                <div className="col-3 mb-4" key={post.id}>
-                  <SinglePost data={post} />
-                </div>
-              )
-            })}
-          </div>
         </div>
-      </Layout>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
 
-export default PageComponent
+export default BlogPage
 
 export const query = graphql`
          query {

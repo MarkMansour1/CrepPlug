@@ -17,7 +17,6 @@ import fetcher from "../services/fetcher"
 const IndexPage = ({ data }) => {
   const { data: products } = useSWR("wp-json/wc/v3/products", fetcher)
   const { data: posts } = useSWR("wp-json/wp/v2/posts", fetcher)
-  console.log(posts)
 
   const { buy, sell, source } = data
   const { nike, adidas, jordan, puma, yeezy, vans } = data
