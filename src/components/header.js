@@ -4,8 +4,6 @@ import Accordion from "react-bootstrap/Accordion"
 import Card from "react-bootstrap/Card"
 
 import {
-  Logo,
-  LogoSmall,
   Hamburger,
   Wishlist,
   Account,
@@ -19,6 +17,7 @@ import {
 } from "../components/svg"
 
 import defaultimg from "../images/default_product.png"
+import logo from "../images/logo.png"
 
 class Header extends React.Component {
   constructor(props) {
@@ -79,7 +78,7 @@ class Header extends React.Component {
             </div>
             <div className="header-logo">
               <Link to="/">
-                <Logo />
+                <img src={logo} alt="CrepPlug" style={{ height: "20px" }} />
               </Link>
             </div>
             <div className="mobile-right">
@@ -260,7 +259,7 @@ class Header extends React.Component {
               <div className="header-left">
                 <div className="header-logo">
                   <Link to="/">
-                    <Logo />
+                    <img src={logo} alt="CrepPlug" style={{ height: "20px" }} />
                   </Link>
                 </div>
                 <div className="header-search">

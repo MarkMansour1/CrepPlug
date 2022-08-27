@@ -2,11 +2,12 @@ import React from "react"
 import { Link, graphql, StaticQuery } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
 
-import { Logo, Instagram, Facebook, Twitter, YouTube } from "./svg"
+import { Instagram, Facebook, Twitter, YouTube } from "./svg"
 
 import fees from "../images/footer/fees.png"
 import protection from "../images/footer/protection.png"
 import listings from "../images/footer/listings.png"
+import logo from "../images/logo.png"
 
 const Boxes = () => (
   <div className="container container-wide">
@@ -68,7 +69,7 @@ const BackgroundSection = () => (
               </div>
               <div className="row footerrow">
                 <div className="col-12 col-sm-6 col-xl-3 text-center">
-                  <Logo />
+                  <img src={logo} alt="CrepPlug" style={{ height: "32px" }} />
                   <div className="social-links">
                     <a
                       href="https://www.instagram.com/creppluguk"
