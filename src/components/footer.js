@@ -121,12 +121,34 @@ const BackgroundSection = () => (
                 <div className="col-6 col-sm-6 col-xl-2 mt-5 mt-xl-0 ml-xl-5 order-2 order-sm-3 order-xl-2">
                   <h4>Account</h4>
                   <div className="footer-links">
-                    <Link to="/account">Dashboard</Link>
-                    <Link to="/account/products">Products</Link>
-                    <Link to="/account/messages">Messages</Link>
-                    <Link to="/account/transactions">Transactions</Link>
-                    <Link to="/account/settings">Settings</Link>
-                    <Link to="/account">Logout</Link>
+                    <a href={`${process.env.GATSBY_SITE_URL}/my-account`}>
+                      My Account
+                    </a>
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/store-manager/messages`}
+                    >
+                      Messages
+                    </a>
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/my-account/orders`}
+                    >
+                      Purchase History
+                    </a>
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/my-account/settings`}
+                    >
+                      Settings
+                    </a>
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/my-account/edit-account`}
+                    >
+                      Change Password
+                    </a>
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/my-account/customer-logout`}
+                    >
+                      Logout
+                    </a>
                   </div>
                 </div>
                 <div className="col-12 col-sm-6 col-xl-4 order-3 order-sm-1 order-xl-3 mt-5 mt-sm-0">

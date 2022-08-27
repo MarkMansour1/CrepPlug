@@ -89,12 +89,12 @@ class Header extends React.Component {
               >
                 <Search size="1.4rem" />
               </div>
-              <Link to="/wishlist">
+              <a href={`${process.env.GATSBY_SITE_URL}/wishlist`}>
                 <Wishlist size="1.5rem" />
-              </Link>
-              <Link to="/cart">
+              </a>
+              <a href={`${process.env.GATSBY_SITE_URL}/cart`}>
                 <Cart size="1.75rem" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -106,23 +106,34 @@ class Header extends React.Component {
         >
           <Accordion>
             <Link to="/shop">Buy</Link>
-            <Link to="/sell">Sell</Link>
+            <a href={`${process.env.GATSBY_SITE_URL}/register`}>Sell</a>
             <Card>
               <Accordion.Collapse eventKey="0">
                 <Card.Body>
-                  <Link to="/account">
-                    <span>Products</span>
-                  </Link>
-                  <Link to="/account/messages">
-                    <span>Messages</span>
-                  </Link>
-                  <Link to="/account/transactions">
-                    <span>Transactions</span>
-                  </Link>
-                  <Link to="/account/settings">
-                    <span>Settings</span>
-                  </Link>
-                  <a href="" style={{ cursor: "pointer" }}>
+                  <a href={`${process.env.GATSBY_SITE_URL}/my-account`}>
+                    My Account
+                  </a>
+                  <a
+                    href={`${process.env.GATSBY_SITE_URL}/store-manager/messages`}
+                  >
+                    Messages
+                  </a>
+                  <a href={`${process.env.GATSBY_SITE_URL}/my-account/orders`}>
+                    Purchase History
+                  </a>
+                  <a
+                    href={`${process.env.GATSBY_SITE_URL}/my-account/settings`}
+                  >
+                    Settings
+                  </a>
+                  <a
+                    href={`${process.env.GATSBY_SITE_URL}/my-account/edit-account`}
+                  >
+                    Change Password
+                  </a>
+                  <a
+                    href={`${process.env.GATSBY_SITE_URL}/my-account/customer-logout`}
+                  >
                     Logout
                   </a>
                 </Card.Body>
@@ -136,11 +147,13 @@ class Header extends React.Component {
             <Card>
               <Accordion.Collapse eventKey="1">
                 <Card.Body>
-                  <Link to="/product/d-crease-insert">
+                  <a
+                    href={`${process.env.GATSBY_SITE_URL}/product/d-crease-insert`}
+                  >
                     <span style={{ whiteSpace: "nowrap" }}>
                       D-Crease Insert
                     </span>
-                  </Link>
+                  </a>
                   <Link to={`/shop?search=accessories`}>
                     <span>Watches</span>
                   </Link>
@@ -267,12 +280,15 @@ class Header extends React.Component {
               </div>
               <div className="header-right">
                 <Link to="/shop">Buy</Link>
-                <Link to="/sell">Sell</Link>
-                <Link to="/wishlist">
+                <a href={`${process.env.GATSBY_SITE_URL}/register`}>Sell</a>
+                <a href={`${process.env.GATSBY_SITE_URL}/wishlist`}>
                   <Wishlist size="1.25rem" />
-                </Link>
-                <a href="http://markm105.sg-host.com/cart" target="_blank">
+                </a>
+                <a href={`${process.env.GATSBY_SITE_URL}/cart`}>
                   <Cart size="1.5rem" />
+                </a>
+                <a href={`${process.env.GATSBY_SITE_URL}/my-account`}>
+                  <Account size="1.5rem" />
                 </a>
               </div>
             </div>
@@ -285,12 +301,12 @@ class Header extends React.Component {
                 <div className="header-dropdown">
                   <div className="header-dropdown-link">Accessories</div>
                   <div className="header-dropdown-content">
-                    <Link
-                      to="/product/d-crease-insert"
+                    <a
+                      href={`${process.env.PUBLIC_URL}/product/d-crease-insert`}
                       style={{ whiteSpace: "nowrap" }}
                     >
                       D-Crease Insert
-                    </Link>
+                    </a>
                     <Link to={`/shop?search=accessories`}>Watches</Link>
                   </div>
                 </div>
