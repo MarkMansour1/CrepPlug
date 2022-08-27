@@ -8,7 +8,7 @@ import Banner from "../components/banner"
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
-    const page = data.wpPage
+    const page = { content: "" }
 
     return (
       <Layout>
@@ -35,18 +35,13 @@ class PageComponent extends React.Component {
 export default PageComponent
 
 export const pageQuery = graphql`
-  {
-    banner: file(relativePath: { eq: "banners/delivery.jpg" }) {
-      childImageSharp {
-        fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    wpPage(title: { eq: "Privacy Policy" }) {
-      id
-      content
-      date(formatString: "DD/MM/YYYY")
-    }
-  }
-`
+         {
+           banner: file(relativePath: { eq: "banners/delivery.jpg" }) {
+             childImageSharp {
+               fluid(maxHeight: 175) {
+                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+               }
+             }
+           }
+         }
+       `

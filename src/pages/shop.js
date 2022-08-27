@@ -561,64 +561,20 @@ class PageComponent extends React.Component {
 export default PageComponent
 
 export const query = graphql`
-  query {
-    banner: file(relativePath: { eq: "banners/crep.jpg" }) {
-      childImageSharp {
-        fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    dcrease: file(relativePath: { eq: "dcrease/banner.jpg" }) {
-      childImageSharp {
-        fluid(quality: 100, maxWidth: 250) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    products: allWpSimpleProduct(limit: 50) {
-      edges {
-        node {
-          id
-          slug
-          name
-          price
-          regularPrice
-          date
-          manageStock
-          stockQuantity
-          vendorId
-          vendorImage
-          vendorName
-          image {
-            sourceUrl
-          }
-
-          productCategories {
-            nodes {
-              name
-            }
-          }
-          metaData {
-            id
-            key
-            value
-          }
-          attributes {
-            nodes {
-              name
-              options
-            }
-          }
-        }
-      }
-    }
-    categories: allWpProductCategory {
-      edges {
-        node {
-          name
-        }
-      }
-    }
-  }
-`
+         query {
+           banner: file(relativePath: { eq: "banners/crep.jpg" }) {
+             childImageSharp {
+               fluid(maxHeight: 175) {
+                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+               }
+             }
+           }
+           dcrease: file(relativePath: { eq: "dcrease/banner.jpg" }) {
+             childImageSharp {
+               fluid(quality: 100, maxWidth: 250) {
+                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+               }
+             }
+           }
+         }
+       `

@@ -110,44 +110,13 @@ class PageComponent extends React.Component {
 export default PageComponent
 
 export const query = graphql`
-  query {
-    banner: file(relativePath: { eq: "banners/blog.jpg" }) {
-      childImageSharp {
-        fluid(maxHeight: 175) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
-    posts: allWpPost(sort: { fields: date, order: DESC }) {
-      edges {
-        node {
-          id
-          title
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl
-            }
-          }
-          date(formatString: "MMMM DD, YYYY")
-          slug
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-          author {
-            node {
-              name
-              slug
-              avatar {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+         query {
+           banner: file(relativePath: { eq: "banners/blog.jpg" }) {
+             childImageSharp {
+               fluid(maxHeight: 175) {
+                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
+               }
+             }
+           }
+         }
+       `

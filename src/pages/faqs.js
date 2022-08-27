@@ -10,7 +10,7 @@ import Card from "react-bootstrap/Card"
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
-    const page = data.wpPage
+    const page = { content: "" }
 
     var buyer, seller
 
@@ -83,11 +83,4 @@ class PageComponent extends React.Component {
 
 export default PageComponent
 
-export const pageQuery = graphql`
-  query {
-    wpPage(id: { eq: "cG9zdDoxNDM1MQ==" }) {
-      id
-      content
-    }
-  }
-`
+

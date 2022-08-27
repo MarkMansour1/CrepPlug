@@ -7,8 +7,7 @@ import SEO from "../components/seo"
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
-    const page = data.wpPage
-
+    const page = { content: "" }
     return (
       <Layout>
         <SEO title="Terms of Service" />
@@ -29,13 +28,3 @@ class PageComponent extends React.Component {
 }
 
 export default PageComponent
-
-export const pageQuery = graphql`
-  query {
-    wpPage(title: { eq: "Terms Of Service" }) {
-      id
-      content
-      date(formatString: "DD/MM/YYYY")
-    }
-  }
-`

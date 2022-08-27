@@ -14,8 +14,8 @@ import { mostPopularFunction } from "../services/filters"
 class PageComponent extends React.Component {
   render() {
     const { data } = this.props
-    const posts = data.posts.edges
-    var products = data.products.edges
+    const posts = []
+    var products = []
 
     var allProducts = products.slice()
     for (var i = 0; i < allProducts.length; i++) {
@@ -210,97 +210,33 @@ export const brandImage = graphql`
 `
 
 export const query = graphql`
-  query {
-    buy: file(relativePath: { eq: "index/buy.jpg" }) {
-      ...homeImage
-    }
-    sell: file(relativePath: { eq: "index/sell.jpg" }) {
-      ...homeImage
-    }
-    source: file(relativePath: { eq: "index/source.jpg" }) {
-      ...homeImage
-    }
-    nike: file(relativePath: { eq: "brands/nike.png" }) {
-      ...brandImage
-    }
-    adidas: file(relativePath: { eq: "brands/adidas.png" }) {
-      ...brandImage
-    }
-    jordan: file(relativePath: { eq: "brands/jordan.png" }) {
-      ...brandImage
-    }
-    puma: file(relativePath: { eq: "brands/puma.png" }) {
-      ...brandImage
-    }
-    yeezy: file(relativePath: { eq: "brands/yeezy.png" }) {
-      ...brandImage
-    }
-    vans: file(relativePath: { eq: "brands/vans.png" }) {
-      ...brandImage
-    }
-    products: allWpSimpleProduct {
-      edges {
-        node {
-          id
-          slug
-          name
-          price
-          regularPrice
-          date
-          manageStock
-          stockQuantity
-          image {
-            sourceUrl
-          }
-          metaData {
-            id
-            key
-            value
-          }
-          
-          productCategories {
-            nodes {
-              name
-            }
-          }
-          attributes {
-            nodes {
-              name
-              options
-            }
-          }
-        }
-      }
-    }
-    posts: allWpPost(limit: 6, sort: { fields: date, order: DESC }) {
-      edges {
-        node {
-          id
-          title
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl
-            }
-          }
-          author {
-            node {
-              username
-              avatar {
-                url
-              }
-            }
-          }
-          date(formatString: "MMMM DD, YYYY")
-          slug
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-        }
-      }
-    }
-  }
-`
+         query {
+           buy: file(relativePath: { eq: "index/buy.jpg" }) {
+             ...homeImage
+           }
+           sell: file(relativePath: { eq: "index/sell.jpg" }) {
+             ...homeImage
+           }
+           source: file(relativePath: { eq: "index/source.jpg" }) {
+             ...homeImage
+           }
+           nike: file(relativePath: { eq: "brands/nike.png" }) {
+             ...brandImage
+           }
+           adidas: file(relativePath: { eq: "brands/adidas.png" }) {
+             ...brandImage
+           }
+           jordan: file(relativePath: { eq: "brands/jordan.png" }) {
+             ...brandImage
+           }
+           puma: file(relativePath: { eq: "brands/puma.png" }) {
+             ...brandImage
+           }
+           yeezy: file(relativePath: { eq: "brands/yeezy.png" }) {
+             ...brandImage
+           }
+           vans: file(relativePath: { eq: "brands/vans.png" }) {
+             ...brandImage
+           }
+         }
+       `

@@ -18,13 +18,6 @@ import {
   YouTube,
 } from "../components/svg"
 
-import { getUser, isLoggedIn, logout } from "../services/auth"
-import {
-  getCartProducts,
-  removeCartProduct,
-  changeCartQuantity,
-} from "../services/cart"
-
 import defaultimg from "../images/default_product.png"
 
 class Header extends React.Component {
@@ -35,13 +28,8 @@ class Header extends React.Component {
       searchString: "",
       mobileOpen: false,
       searchOpen: false,
-      cartOpen: false,
       cartProducts: [],
     }
-  }
-
-  componentDidMount() {
-    this.setState({ cartProducts: getCartProducts() })
   }
 
   handleInputChange = event => {
@@ -62,19 +50,16 @@ class Header extends React.Component {
       this.setState({
         mobileOpen: !this.state.mobileOpen,
         searchOpen: false,
-        cartOpen: false,
       })
     } else if (menu === "search") {
       this.setState({
         mobileOpen: false,
         searchOpen: !this.state.searchOpen,
-        cartOpen: false,
       })
     } else if (menu === "cart") {
       this.setState({
         mobileOpen: false,
         searchOpen: false,
-        cartOpen: !this.state.cartOpen,
       })
     }
   }
@@ -137,13 +122,7 @@ class Header extends React.Component {
                   <Link to="/account/settings">
                     <span>Settings</span>
                   </Link>
-                  <a
-                    onClick={event => {
-                      event.preventDefault()
-                      logout(() => navigate(`/login`))
-                    }}
-                    style={{ cursor: "pointer" }}
-                  >
+                  <a href="" style={{ cursor: "pointer" }}>
                     Logout
                   </a>
                 </Card.Body>
@@ -262,10 +241,6 @@ class Header extends React.Component {
             </button>
           </form>
         </div>
-        <CartMenu
-          open={this.state.cartOpen}
-          close={() => this.toggleMobileMenu("cart")}
-        />
         <header>
           <div className="header-primary">
             <div className="container container-wide">
@@ -292,61 +267,12 @@ class Header extends React.Component {
               </div>
               <div className="header-right">
                 <Link to="/shop">Buy</Link>
-                <Link to={isLoggedIn() ? "/sell" : "/login"}>Sell</Link>
+                <Link to="/sell">Sell</Link>
                 <Link to="/wishlist">
                   <Wishlist size="1.25rem" />
                 </Link>
-                {isLoggedIn() ? (
-                  <div className="header-dropdown">
-                    <Link to="/account">
-                      <Account size="1.5rem" />
-                    </Link>
-                    <div className="header-dropdown-content">
-                      <Link to="/account">
-                        <span>Products</span>
-                      </Link>
-                      <Link to="/account/messages">
-                        <span>Messages</span>
-                      </Link>
-                      <Link to="/account/transactions">
-                        <span>Transactions</span>
-                      </Link>
-                      <Link to="/account/settings">
-                        <span>Settings</span>
-                      </Link>
-                      <a
-                        onClick={event => {
-                          event.preventDefault()
-                          logout(() => navigate(`/login`))
-                        }}
-                        style={{ cursor: "pointer" }}
-                      >
-                        Logout
-                      </a>
-                    </div>
-                  </div>
-                ) : (
-                  <Link to="/login">
-                    <Account size="1.5rem" />
-                  </Link>
-                )}
-                {/* <div
-                  className="cart-toggle header-toggle"
-                  onClick={this.toggleCartMenu}
-                >
-                  <Cart size="1.5rem" />
-                </div> */}
-                {/* TODO remove target=blank */}
                 <a href="http://markm105.sg-host.com/cart" target="_blank">
                   <Cart size="1.5rem" />
-                  {/* {getCartProducts().length > 0 && (
-                    <span
-                      className="badge badge-light"
-                      style={{ position: "absolute", top: "25%", right: "8px" }}
-                    >
-                      {getCartProducts().length}
-                    </span>
-                  )} */}
                 </a>
               </div>
             </div>
@@ -406,133 +332,3 @@ class Header extends React.Component {
 }
 
 export default Header
-
-export const MinimalHeader = () => (
-  <header className="header-dark">
-    <div className="container container-wide">
-      <div className="minimal-header">
-        <div className="header-logo">
-          <Link to="/">
-            <Logo />
-          </Link>
-        </div>
-        <div className="header-back">
-          <Link to="/">Go Back</Link>
-        </div>
-      </div>
-    </div>
-  </header>
-)
-
-const CartMenu = props => {
-  const { open, close } = props
-  const [data, setData] = useState(getCartProducts())
-  const [dcreaseSize, setDcreaseSize] = useState(null)
-  const user = getUser()
-
-  const handleRemove = productId => {
-    var products = removeCartProduct(user, productId)
-    setData(products)
-  }
-
-  const getTotals = () => {
-    let subtotal = 0
-    let shipping = 0
-    let total = 0
-
-    for (let product in data) {
-      let price = data[product].price.substring(1)
-      subtotal += parseFloat(price) * data[product].quantity
-      shipping += 3.99
-    }
-
-    total = subtotal + shipping
-
-    return {
-      subtotal: subtotal.toFixed(2),
-      shipping: shipping.toFixed(2),
-      total: total.toFixed(2),
-    }
-  }
-
-  const addSuggested = e => {
-    e.preventDefault()
-
-    console.log(e.target.value)
-  }
-
-  return (
-    <div className={`cart-menu ${open ? "cart-menu-open" : ""}`}>
-      <div className="cart-container">
-        <div className="cart-title">
-          <h3 className="title">
-            Your Cart
-            <button className="btn btn-light" onClick={close}>
-              <Cross size="2rem" />
-            </button>
-          </h3>
-        </div>
-        <div className="cart-items">
-          {data &&
-            data.map((product, index) => (
-              <div className="cart-item" key={index}>
-                <Link to={`/product/${product.slug}`}>
-                  <div className="img-container">
-                    {product.image && product.image.sourceUrl ? (
-                      <img src={product.image.sourceUrl} alt={product.name} />
-                    ) : (
-                      <img src={defaultimg} alt="" />
-                    )}
-                  </div>
-                </Link>
-                <div>
-                  <Link to={`/product/${product.slug}`}>{product.name}</Link>
-                  <div>{product.price}</div>
-                  <div className="product-quantity">
-                    <div
-                      onClick={() => {
-                        let products = changeCartQuantity(
-                          user,
-                          product.productId,
-                          false
-                        )
-                        setData(products)
-                      }}
-                      className="btn btn-sm"
-                    >
-                      -
-                    </div>
-                    <div className="quantity">{product.quantity}</div>
-                    <div
-                      onClick={() => {
-                        let products = changeCartQuantity(
-                          user,
-                          product.productId,
-                          true
-                        )
-                        setData(products)
-                      }}
-                      className="btn btn-sm"
-                    >
-                      +
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleRemove(product.productId)}
-                    className="btn btn-sm"
-                  >
-                    <Cross size="2em" /> Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
-        <div className="cart-actions">
-          <Link to="/cart" className="btn btn-primary btn-block">
-            Checkout
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
-}

@@ -98,72 +98,12 @@ export const merchImage = graphql`
 `
 
 export const pageQuery = graphql`
-  query {
-    hoodie: file(relativePath: { eq: "merch/hoodie.png" }) {
-      ...merchImage
-    }
-    sticker: file(relativePath: { eq: "merch/sticker.png" }) {
-      ...merchImage
-    }
-    products: allWpSimpleProduct(
-      limit: 10
-      sort: { fields: date, order: DESC }
-    ) {
-      edges {
-        node {
-          id
-          slug
-          name
-          price
-          regularPrice
-          date
-          image {
-            sourceUrl
-          }
-          productCategories {
-            nodes {
-              name
-            }
-          }
-          attributes {
-            nodes {
-              name
-              options
-            }
-          }
-        }
-      }
-    }
-    posts: allWpPost(limit: 6, sort: { fields: date, order: DESC }) {
-      edges {
-        node {
-          id
-          title
-          excerpt
-          featuredImage {
-            node {
-              sourceUrl
-            }
-          }
-          date(formatString: "MMMM DD, YYYY")
-          slug
-          categories {
-            nodes {
-              name
-              slug
-            }
-          }
-          author {
-            node {
-              name
-              slug
-              avatar {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+         query {
+           hoodie: file(relativePath: { eq: "merch/hoodie.png" }) {
+             ...merchImage
+           }
+           sticker: file(relativePath: { eq: "merch/sticker.png" }) {
+             ...merchImage
+           }
+         }
+       `

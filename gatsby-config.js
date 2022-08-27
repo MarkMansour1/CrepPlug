@@ -58,26 +58,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-wordpress-experimental`,
-      options: {
-        url: `${process.env.GATSBY_SITE_URL}/graphql`,
-        verbose: true,
-        develop: {
-          hardCacheMediaFiles: true,
-        },
-        debug: {
-          graphql: {
-            writeQueriesToDisk: true,
-          },
-        },
-        type: {
-          Page: {
-            // exclude: true,
-          },
-        },
-      },
-    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -90,13 +70,6 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-plugin-remote-images`,
-      options: {
-        nodeType: "WpSimpleProduct",
-        imagePath: "image.sourceUrl",
       },
     },
     {
