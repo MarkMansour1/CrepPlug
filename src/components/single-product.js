@@ -16,10 +16,7 @@ const SingleProduct = ({ product }) => {
   const outOfStock =
     product.manage_stock && !product.stock_quantity ? true : false
 
-  const image =
-    product.images && product.images.length > 0
-      ? product.images[0].src
-      : defaultimg
+  const image = product?.images?.[0]?.src ?? defaultimg
 
   return (
     <div className="single-product">

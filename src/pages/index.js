@@ -15,9 +15,9 @@ import useSWR from "swr"
 import fetcher from "../services/fetcher"
 
 const IndexPage = ({ data }) => {
-  const { data: products } = useSWR("/wp-json/wc/v3/products", fetcher)
-  const { data: posts } = useSWR("/wp-json/wp/v2/posts", fetcher)
-  console.log(products)
+  const { data: products } = useSWR("wp-json/wc/v3/products", fetcher)
+  const { data: posts } = useSWR("wp-json/wp/v2/posts", fetcher)
+  console.log(posts)
 
   const { buy, sell, source } = data
   const { nike, adidas, jordan, puma, yeezy, vans } = data
@@ -69,7 +69,6 @@ const IndexPage = ({ data }) => {
               link="/shop"
               linkText="Shop All"
               products={products ?? []}
-              // products={mostPopular}
             />
           </div>
           <div className="col-12 col-md-6 col-lg-4">
@@ -121,74 +120,15 @@ const IndexPage = ({ data }) => {
           linkText="Shop All"
           products={products ?? []}
         />
-        {/* <ProductBlock
-          title="CrepPlug Picks"
-          link="/shop"
-          linkText="Shop All"
-          products={cpPicks}
-        /> */}
-        {/* <PostBlock
+        <PostBlock
           title="From The Blog"
           link="/blog"
           linkText="Read More"
-          posts={posts}
-        /> */}
+          posts={posts ?? []}
+        />
       </div>
     </Layout>
   )
-}
-
-class PageComponent extends React.Component {
-  render() {
-    // var allProducts = products.slice()
-    // for (var i = 0; i < allProducts.length; i++) {
-    //   if (
-    //     allProducts[i].node.manageStock &&
-    //     !allProducts[i].node.stockQuantity
-    //   ) {
-    //     allProducts.splice(i, 1)
-    //     i--
-    //   }
-    // }
-
-    // var mostRecent = []
-    // for (var i = 0; i < allProducts.length; i++) {
-    //   if (
-    //     mostRecent.length < 10 &&
-    //     allProducts[i].node.image &&
-    //     allProducts[i].node.image.sourceUrl
-    //   ) {
-    //     mostRecent.push(allProducts[i])
-    //   }
-    // }
-
-    // var mostPopular = allProducts.slice().sort(mostPopularFunction).slice(0, 10)
-
-    // allProducts = shuffle(allProducts.slice())
-
-    // var cpPicks = []
-    // for (var i = 0; i < allProducts.length; i++) {
-    //   if (
-    //     cpPicks.length < 10 &&
-    //     allProducts[i].node.image &&
-    //     allProducts[i].node.image.sourceUrl
-    //   ) {
-    //     if (allProducts[i].node.productCategories != null) {
-    //       allProducts[i].node.productCategories.nodes.forEach(category => {
-    //         if (category.name === "Adidas") {
-    //           cpPicks.push(allProducts[i])
-    //         }
-    //       })
-    //     }
-    //   }
-    // }
-
-    return (
-      <Layout>
-        <SEO title="Making Buying & Selling Trainers Easy" />
-      </Layout>
-    )
-  }
 }
 
 export default IndexPage

@@ -4,49 +4,41 @@ import { Link } from "gatsby"
 import { Calendar } from "../components/svg"
 import defaultimg from "../images/default_product.png"
 
-class Single extends React.Component {
-  render() {
-    var post = this.props.data
+const SinglePost = ({ post, excerpt }) => {
+  const image = post?.better_featured_image?.source_url ?? defaultimg
 
-    return (
-      <div className="single-post">
-        <Link to={`/blog/${post.slug}`}>
-          <div className="img-container-sm">
-            {post.featuredImage &&
-            post.featuredImage.node &&
-            post.featuredImage.node.sourceUrl ? (
-              <img src={post.featuredImage.node.sourceUrl} alt={post.title} />
-            ) : (
-              <img src={defaultimg} alt="" />
-            )}
-          </div>
-        </Link>
-        <div className="post-categories">
-          {post.categories.nodes.map(({ name: name }) => (
-            <div className="post-category" key={name}>
-              {name}
-            </div>
-          ))}
+  return (
+    <div className="single-post">
+      <Link to={`/blog/${post.slug}`}>
+        <div className="img-container-sm">
+          <img src={image} alt={post?.title?.rendered} />
         </div>
-        <Link to={`/blog/${post.slug}`}>
-          <div className="post-title">{post.title}</div>
-        </Link>
-        {post == "true" ? (
-          <div className="post-excerpt">
-            <span
-              dangerouslySetInnerHTML={{
-                __html: post.excerpt,
-              }}
-            />
+      </Link>
+      {/* <div className="post-categories">
+        {post.categories.nodes.map(({ name: name }) => (
+          <div className="post-category" key={name}>
+            {name}
           </div>
-        ) : null}
-        <div className="post-date">
-          <Calendar />
-          {post.date}
+        ))}
+      </div> */}
+      <Link to={`/blog/${post.slug}`}>
+        <div className="post-title">{post?.title?.rendered}</div>
+      </Link>
+      {excerpt ? (
+        <div className="post-excerpt">
+          <span
+            dangerouslySetInnerHTML={{
+              __html: post?.excerpt?.rendered,
+            }}
+          />
         </div>
+      ) : null}
+      <div className="post-date">
+        <Calendar />
+        {post.date}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
-export default Single
+export default SinglePost
