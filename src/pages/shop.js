@@ -477,7 +477,9 @@ class PageComponent extends React.Component {
                     </select>
                   </div>
                   <div className="shop-banner d-none d-md-block">
-                    <Link to="/product/d-crease-insert">
+                    <a
+                      href={`${process.env.GATSBY_SITE_URL}/product/d-crease-insert`}
+                    >
                       <BackgroundImage
                         Tag="div"
                         fluid={data.dcrease.childImageSharp.fluid}
@@ -498,7 +500,7 @@ class PageComponent extends React.Component {
                           </div>
                         </div>
                       </BackgroundImage>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

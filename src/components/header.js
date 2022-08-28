@@ -301,7 +301,7 @@ class Header extends React.Component {
                   <div className="header-dropdown-link">Accessories</div>
                   <div className="header-dropdown-content">
                     <a
-                      href={`${process.env.PUBLIC_URL}/product/d-crease-insert`}
+                      href={`${process.env.GATSBY_SITE_URL}/product/d-crease-insert`}
                       style={{ whiteSpace: "nowrap" }}
                     >
                       D-Crease Insert
