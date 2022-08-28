@@ -3,8 +3,9 @@ import { timeSince } from "../services/utils"
 import defaultimg from "../images/default_product.png"
 
 const SingleProduct = ({ product }) => {
-  var sizes = product.attributes.find(attribute => attribute.name === "Size")
-    .options
+  var sizes =
+    product.attributes.find(attribute => attribute.name === "Size")?.options ??
+    []
 
   var sizeList = ""
   if (sizes.length > 1) {

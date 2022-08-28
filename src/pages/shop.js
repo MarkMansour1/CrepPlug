@@ -48,7 +48,7 @@ const ShopPage = ({ data }) => {
 
     let productLists = {
       sold: [],
-      unsold: [],
+      unsold: products,
     }
 
     setState({
@@ -367,11 +367,11 @@ const ShopPage = ({ data }) => {
                       </Card>
                     </Accordion>
                     {/* <button
-                        className="btn btn-light btn-sm w-100 my-4"
-                        onClick={clearFilters}
-                      >
-                        Clear Filters
-                      </button> */}
+                      className="btn btn-light btn-sm w-100 my-4"
+                      onClick={clearFilters}
+                    >
+                      Clear Filters
+                    </button> */}
                   </div>
                 </div>
                 <div className="shop-filters-header">
