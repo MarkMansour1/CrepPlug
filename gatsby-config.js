@@ -3,82 +3,89 @@ require("dotenv").config({
 })
 
 module.exports = {
-  siteMetadata: {
-    title: `CrepPlug`,
-    description: `A UK Footwear Community making buying & selling trainers easy.`,
-    author: `@markmansour`,
-  },
-  plugins: [
-    `gatsby-plugin-sass`,
-    `gatsby-plugin-react-helmet`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     // The property ID; the tracking code won't be generated without it
-    //     trackingId: "UA-115326499-1",
-    //     // Defines where to place the tracking script - `true` in the head and `false` in the body
-    //     head: true,
-    //     // Setting this parameter is optional
-    //     anonymize: true,
-    //     // Setting this parameter is also optional
-    //     respectDNT: true,
-    //     // Avoids sending pageview hits from custom paths
-    //     exclude: ["/preview/**", "/do-not-track/me/too/"],
-    //     // Delays sending pageview hits on route update (in milliseconds)
-    //     pageTransitionDelay: 0,
-    //     // Enables Google Optimize using your container Id
-    //     optimizeId: "YOUR_GOOGLE_OPTIMIZE_TRACKING_ID",
-    //     // Enables Google Optimize Experiment ID
-    //     experimentId: "YOUR_GOOGLE_EXPERIMENT_ID",
-    //     // Set Variation ID. 0 for original 1,2,3....
-    //     variationId: "YOUR_GOOGLE_OPTIMIZE_VARIATION_ID",
-    //     // Any additional optional fields
-    //     sampleRate: 5,
-    //     siteSpeedSampleRate: 10,
-    //     cookieDomain: "example.com",
-    //   },
-    // },
-    {
-      resolve: `gatsby-plugin-gdpr-cookies`,
-      options: {
-        googleAnalytics: {
-          trackingId: "", // leave empty if you want to disable the tracker
-          cookieName: "gatsby-gdpr-google-analytics", // default
-          anonymize: true, // default
-          allowAdFeatures: false, // default
+    siteMetadata: {
+        title: `CrepPlug`,
+        description: `A UK Footwear Community making buying & selling trainers easy.`,
+        author: `@markmansour`,
+    },
+    plugins: [
+        `gatsby-plugin-sass`,
+        `gatsby-plugin-react-helmet`,
+        // {
+        //   resolve: `gatsby-plugin-google-analytics`,
+        //   options: {
+        //     // The property ID; the tracking code won't be generated without it
+        //     trackingId: "UA-115326499-1",
+        //     // Defines where to place the tracking script - `true` in the head and `false` in the body
+        //     head: true,
+        //     // Setting this parameter is optional
+        //     anonymize: true,
+        //     // Setting this parameter is also optional
+        //     respectDNT: true,
+        //     // Avoids sending pageview hits from custom paths
+        //     exclude: ["/preview/**", "/do-not-track/me/too/"],
+        //     // Delays sending pageview hits on route update (in milliseconds)
+        //     pageTransitionDelay: 0,
+        //     // Enables Google Optimize using your container Id
+        //     optimizeId: "YOUR_GOOGLE_OPTIMIZE_TRACKING_ID",
+        //     // Enables Google Optimize Experiment ID
+        //     experimentId: "YOUR_GOOGLE_EXPERIMENT_ID",
+        //     // Set Variation ID. 0 for original 1,2,3....
+        //     variationId: "YOUR_GOOGLE_OPTIMIZE_VARIATION_ID",
+        //     // Any additional optional fields
+        //     sampleRate: 5,
+        //     siteSpeedSampleRate: 10,
+        //     cookieDomain: "example.com",
+        //   },
+        // },
+        {
+            resolve: `gatsby-plugin-gdpr-cookies`,
+            options: {
+                googleAnalytics: {
+                    trackingId: "", // leave empty if you want to disable the tracker
+                    cookieName: "gatsby-gdpr-google-analytics", // default
+                    anonymize: true, // default
+                    allowAdFeatures: false, // default
+                },
+                // defines the environments where the tracking should be available  - default is ["production"]
+                environments: ["production", "development"],
+            },
         },
-        // defines the environments where the tracking should be available  - default is ["production"]
-        environments: ["production", "development"],
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-plugin-create-client-paths`,
-      options: { prefixes: [`/account/*`, `/store/*`] },
-    },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
-    // "gatsby-plugin-netlify", // make sure to keep it last in the array
-  ],
-}
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `images`,
+                path: `${__dirname}/src/images`,
+            },
+        },
+        `gatsby-transformer-sharp`,
+        {
+            resolve: `gatsby-plugin-sharp`,
+            options: {
+                defaults: {},
+                failOn: `none`,
+                base64Width: 20,
+                forceBase64Format: `png`,
+                useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
+                stripMetadata: true,
+                defaultQuality: 50,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-manifest`,
+            options: {
+                name: `gatsby-starter-default`,
+                short_name: `starter`,
+                start_url: `/`,
+                background_color: `#663399`,
+                theme_color: `#663399`,
+                display: `minimal-ui`,
+                icon: `src/images/icon.png`, // This path is relative to the root of the site.
+            },
+        },
+        // this (optional) plugin enables Progressive Web App + Offline functionality
+        // To learn more, visit: https://gatsby.dev/offline
+        // `gatsby-plugin-offline`,
+        // "gatsby-plugin-netlify", // make sure to keep it last in the array
+    ],
+};
