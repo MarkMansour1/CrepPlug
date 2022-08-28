@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 
 import { Calendar } from "../components/svg"
 import defaultimg from "../images/default_product.png"
+import { timeSince } from "../services/utils"
 
 const SinglePost = ({ post, excerpt }) => {
   const image = post?.better_featured_image?.source_url ?? defaultimg
@@ -35,7 +36,7 @@ const SinglePost = ({ post, excerpt }) => {
       ) : null}
       <div className="post-date">
         <Calendar />
-        {post.date}
+        {timeSince(post.date)}
       </div>
     </div>
   )

@@ -20,6 +20,7 @@ const IndexPage = ({ data }) => {
 
   const { buy, sell, source } = data
   const { nike, adidas, jordan, puma, yeezy, vans } = data
+
   const brands = [
     { name: "Nike", image: nike },
     { name: "Adidas", image: adidas },

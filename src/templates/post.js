@@ -5,6 +5,7 @@ import { Calendar } from "../components/svg"
 
 import Layout from "../components/layout"
 import SinglePost from "../components/single-post"
+import { timeSince } from "../services/utils"
 
 const PageTemplate = ({ data }) => {
   const page = data.page
@@ -62,7 +63,7 @@ const PageTemplate = ({ data }) => {
               <span className="mr-2">
                 <Calendar size=".8rem" />
               </span>
-              {date}
+              {timeSince(date)}
             </div>
             <div className="blog-categories">
               {categories
