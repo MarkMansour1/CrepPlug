@@ -10,7 +10,7 @@ const SinglePost = ({ post, excerpt }) => {
 
   return (
     <div className="single-post">
-      <Link to={`/blog/${post.slug}`}>
+      <Link to={`/blog/${post.id}`}>
         <div className="img-container-sm">
           <img src={image} alt={post?.title?.rendered} />
         </div>
@@ -22,7 +22,7 @@ const SinglePost = ({ post, excerpt }) => {
           </div>
         ))}
       </div> */}
-      <Link to={`/blog/${post.slug}`}>
+      <Link to={`/blog/${post.id}`}>
         <div className="post-title">{post?.title?.rendered}</div>
       </Link>
       {excerpt ? (

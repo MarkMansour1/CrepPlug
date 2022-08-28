@@ -530,7 +530,7 @@ class PageComponent extends React.Component {
                         className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
                         key={product.id}
                       >
-                        <SingleProduct data={product} />
+                        <SingleProduct product={product} />
                       </div>
                     </>
                   )
@@ -544,7 +544,7 @@ class PageComponent extends React.Component {
                         className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
                         key={product.id}
                       >
-                        <SingleProduct data={product} />
+                        <SingleProduct product={product} />
                       </div>
                     </>
                   )

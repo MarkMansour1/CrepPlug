@@ -1,15 +1,15 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Banner from "../components/banner"
-import SinglePost from "../components/single-post"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
+import Banner from "../../components/banner"
+import SinglePost from "../../components/single-post"
 
 import useSWR from "swr"
-import fetcher from "../services/fetcher"
+import fetcher from "../../services/fetcher"
 
-const BlogPage = ({ data }) => {
+const BlogPage = props => {
   const { data: posts } = useSWR("wp-json/wp/v2/posts", fetcher)
 
   return (
@@ -19,7 +19,7 @@ const BlogPage = ({ data }) => {
         details={[
           "blog",
           "Read through our blog and find out about upcoming releases, discover new brands and individuals through our lookbooks, new ways to rock your favourite crep & more.",
-          data.banner.childImageSharp.fluid,
+          props.data.banner.childImageSharp.fluid,
         ]}
       />
       <div className="container container-wide pt-5">
@@ -39,13 +39,13 @@ const BlogPage = ({ data }) => {
 export default BlogPage
 
 export const query = graphql`
-         query {
-           banner: file(relativePath: { eq: "banners/blog.jpg" }) {
-             childImageSharp {
-               fluid(maxHeight: 175) {
-                 ...GatsbyImageSharpFluid_withWebp_tracedSVG
-               }
-             }
-           }
-         }
-       `
+  query {
+    banner: file(relativePath: { eq: "banners/blog.jpg" }) {
+      childImageSharp {
+        fluid(maxHeight: 175) {
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
+        }
+      }
+    }
+  }
+`
