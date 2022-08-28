@@ -560,7 +560,24 @@ class PageComponent extends React.Component {
   }
 }
 
-export default PageComponent
+const ShopPage = ({ data }) => {
+  return (
+    <Layout>
+      <SEO title="Shop" />
+      <Banner
+        details={[
+          "crepplug shop",
+          "On CrepPlug, you can Buy and Sell New Trainers or Used Trainers, exclusive Custom Air Force 1, Nikes, Jordan’s, Yeezy’s and much more for the cheapest prices on the market.",
+          data.banner.childImageSharp.fluid,
+          false,
+        ]}
+      />
+      <div className="container container-wide pt-4 pt-md-0"></div>
+    </Layout>
+  )
+}
+
+export default ShopPage
 
 export const query = graphql`
          query {
