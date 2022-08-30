@@ -52,12 +52,7 @@ const ShopPage = ({ data }) => {
     const filterProducts = () => {
         if (!products) return;
 
-        // var productLists = applyFilters(state, products.slice())
-
-        let productLists = {
-            sold: [],
-            unsold: products,
-        };
+        var productLists = applyFilters(state, products.slice());
 
         setState({
             ...state,
@@ -124,6 +119,8 @@ const ShopPage = ({ data }) => {
     });
     // Puts the sizes in order
     sizes.sort((a, b) => a - b);
+
+    console.log(state);
 
     return (
         <Layout>
@@ -226,13 +223,17 @@ const ShopPage = ({ data }) => {
                     <div className="col-12 col-md-9">
                         <div className="justify-content-between align-items-center d-none d-md-flex py-4">
                             <div>
-                                {state.items.length > 0 ? (
-                                    <>
-                                        Showing 1-{state.items.length}{" "}
-                                        {state.search.length > 0
-                                            ? `of results for "${state.search}"`
-                                            : "of results"}
-                                    </>
+                                {products ? (
+                                    state.items.length > 0 ? (
+                                        <>
+                                            Showing 1-{state.items.length}{" "}
+                                            {state.search.length > 0
+                                                ? `of results for "${state.search}"`
+                                                : "of results"}
+                                        </>
+                                    ) : (
+                                        <>No results</>
+                                    )
                                 ) : (
                                     <>Loading items...</>
                                 )}
@@ -257,26 +258,31 @@ const ShopPage = ({ data }) => {
                             </select>
                         </div>
                         <div className="row">
-                            {state.items.length > 0
-                                ? state.items.map((product) => {
-                                      return (
-                                          <>
-                                              <div
-                                                  className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
-                                                  key={product.id}
-                                              >
-                                                  <SingleProduct
-                                                      product={product}
-                                                  />
-                                              </div>
-                                          </>
-                                      );
-                                  })
+                            {products
+                                ? state.items.length > 0
+                                    ? state.items.map((product) => {
+                                          return (
+                                              <>
+                                                  <div
+                                                      className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                                                      key={product.id}
+                                                  >
+                                                      <SingleProduct
+                                                          product={product}
+                                                      />
+                                                  </div>
+                                              </>
+                                          );
+                                      })
+                                    : null
                                 : Array(24)
                                       .fill(0)
-                                      .map(() => {
+                                      .map((_, index) => {
                                           return (
-                                              <div className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4">
+                                              <div
+                                                  key={`skeleton${index}`}
+                                                  className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                                              >
                                                   <Skeleton height={200} />
                                               </div>
                                           );

@@ -46,15 +46,13 @@ const Filters = ({
         if (name === "minPrice" || name === "maxPrice") {
             setState({ ...state, [name]: parseFloat(value) });
         } else if (name === "search") {
-            setState({ ...state, [name]: value });
+            setState({ ...state, search: value });
         } else {
             var stateValues = state[name];
             var index = stateValues.indexOf(value);
             index > -1 ? stateValues.splice(index, 1) : stateValues.push(value);
-
             setState({ ...state, [name]: stateValues });
         }
-
         filterProducts();
     };
 

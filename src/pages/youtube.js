@@ -16,10 +16,9 @@ const PageComponent = (props) => {
             .then((res) => res.json())
             .then((res) => {
                 setData(res.items);
-                console.log(res.items);
             })
             .catch((err) => {
-                console.log(err);
+                throw err;
             });
     }, []);
 

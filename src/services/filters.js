@@ -2,7 +2,7 @@ export const applyFilters = (state, productList) => {
     // If there is a search filter, remove all the products not matching the search
     if (state.search.length > 0) {
         for (let i = 0; i < productList.length; i++) {
-            if (!searchMatchFunction(state.search, productList[i].node)) {
+            if (!searchMatchFunction(state.search, productList[i])) {
                 productList.splice(i, 1);
                 i--;
             }
@@ -12,9 +12,7 @@ export const applyFilters = (state, productList) => {
     // If a minimum price is set, remove all products below it
     if (state.minPrice !== null) {
         for (let i = 0; i < productList.length; i++) {
-            if (
-                parseFloat(productList[i].node.price.substr(1)) < state.minPrice
-            ) {
+            if (parseFloat(productList[i].price) < state.minPrice) {
                 productList.splice(i, 1);
                 i--;
             }
@@ -24,9 +22,7 @@ export const applyFilters = (state, productList) => {
     // If a maximum price is set, remove all products above it
     if (state.maxPrice !== null) {
         for (let i = 0; i < productList.length; i++) {
-            if (
-                parseFloat(productList[i].node.price.substr(1)) > state.maxPrice
-            ) {
+            if (parseFloat(productList[i].price) > state.maxPrice) {
                 productList.splice(i, 1);
                 i--;
             }
@@ -39,7 +35,7 @@ export const applyFilters = (state, productList) => {
         for (let i = 0; i < productList.length; i++) {
             // Checks if any of the product categories are included in the filters
             if (
-                !productList[i].node.productCategories.nodes.some(
+                !productList[i].categories.some(
                     (category) => state.categories.indexOf(category.name) >= 0
                 )
             ) {
@@ -53,17 +49,15 @@ export const applyFilters = (state, productList) => {
     // If there are condition filters enabled, apply them to the product list
     if (state.conditions.length > 0) {
         for (let i = 0; i < productList.length; i++) {
-            var product = productList[i].node;
+            var product = productList[i];
 
             // Creates an array of conditions from the product attributes
             var conditions = [];
             if (product.attributes) {
-                for (let index in product.attributes.nodes) {
-                    if (
-                        product.attributes.nodes[index].name === "pa_condition"
-                    ) {
+                for (let index in product.attributes) {
+                    if (product.attributes[index].name === "Condition") {
                         conditions = conditions.concat(
-                            product.attributes.nodes[index].options
+                            product.attributes[index].options
                         );
                     }
                 }
@@ -85,16 +79,14 @@ export const applyFilters = (state, productList) => {
     // If there are size filters enabled, apply them to the product list
     if (state.sizes.length > 0) {
         for (let i = 0; i < productList.length; i++) {
-            var product = productList[i].node;
+            var product = productList[i];
 
             // Creates an array of sizes from the product attributes
             var sizes = [];
             if (product.attributes) {
-                for (let index in product.attributes.nodes) {
-                    if (product.attributes.nodes[index].name === "pa_size") {
-                        sizes = sizes.concat(
-                            product.attributes.nodes[index].options
-                        );
+                for (let index in product.attributes) {
+                    if (product.attributes[index].name === "Size") {
+                        sizes = sizes.concat(product.attributes[index].options);
                     }
                 }
             }
@@ -114,15 +106,15 @@ export const applyFilters = (state, productList) => {
     // If there are colour filters enabled, apply them to the product list
     if (state.colours.length > 0) {
         for (let i = 0; i < productList.length; i++) {
-            var product = productList[i].node;
+            var product = productList[i];
 
             // Creates an array of colours from the product attributes
             var colours = [];
             if (product.attributes) {
-                for (let index in product.attributes.nodes) {
-                    if (product.attributes.nodes[index].name === "pa_colour") {
+                for (let index in product.attributes) {
+                    if (product.attributes[index].name === "Colour") {
                         colours = colours.concat(
-                            product.attributes.nodes[index].options
+                            product.attributes[index].options
                         );
                     }
                 }
@@ -145,11 +137,11 @@ export const applyFilters = (state, productList) => {
     // Creates a new list for the sold products
     var soldList = [];
     for (let i = 0; i < productList.length; i++) {
-        let product = productList[i].node;
+        let product = productList[i];
 
         // If the product is out of stock, add it to the sold list and remove it from the unsold list
-        if (product.manageStock && !product.stockQuantity) {
-            soldList.push({ node: product });
+        if (product.manage_stock && !product.stock_quantity) {
+            soldList.push(product);
             productList.splice(i, 1);
             i--;
         }
@@ -175,8 +167,8 @@ export const applySort = (sort, productList) => {
 function searchMatchFunction(search, product) {
     var searchItems = search.split(" ");
     var searchRange = product.name;
-    for (let i in product.productCategories.nodes) {
-        searchRange += " " + product.productCategories.nodes[i].name;
+    for (let i in product.categories) {
+        searchRange += " " + product.categories[i].name;
     }
 
     var matchesNeeded = 0;
