@@ -23,6 +23,8 @@ import useSWR from "swr";
 import fetcher from "../services/fetcher";
 import Loader from "../components/loader";
 
+import Skeleton from "react-loading-skeleton";
+
 const ShopPage = ({ data }) => {
     const [state, setState] = useState({
         minPrice: null,
@@ -255,30 +257,30 @@ const ShopPage = ({ data }) => {
                             </select>
                         </div>
                         <div className="row">
-                            {state.items.length > 0 ? (
-                                state.items.map((product) => {
-                                    return (
-                                        <>
-                                            <div
-                                                className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
-                                                key={product.id}
-                                            >
-                                                <SingleProduct
-                                                    product={product}
-                                                />
-                                            </div>
-                                        </>
-                                    );
-                                })
-                            ) : (
-                                <div className="mx-auto text-gray-dark">
-                                    <Loader
-                                        visible={true}
-                                        size="3rem"
-                                        padding="10rem 0"
-                                    />
-                                </div>
-                            )}
+                            {state.items.length > 0
+                                ? state.items.map((product) => {
+                                      return (
+                                          <>
+                                              <div
+                                                  className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                                                  key={product.id}
+                                              >
+                                                  <SingleProduct
+                                                      product={product}
+                                                  />
+                                              </div>
+                                          </>
+                                      );
+                                  })
+                                : Array(24)
+                                      .fill(0)
+                                      .map(() => {
+                                          return (
+                                              <div className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4">
+                                                  <Skeleton height={200} />
+                                              </div>
+                                          );
+                                      })}
                         </div>
                         <div className="row mt-5">
                             {state.soldItems.map((product) => {
