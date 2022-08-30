@@ -15,7 +15,10 @@ import useSWR from "swr";
 import fetcher from "../services/fetcher";
 
 const IndexPage = ({ data }) => {
-    const { data: products } = useSWR("wp-json/wc/v3/products", fetcher);
+    const { data: products } = useSWR(
+        "wp-json/wc/v3/products?per_page=100",
+        fetcher
+    );
     const { data: posts } = useSWR("wp-json/wp/v2/posts", fetcher);
 
     const { buy, sell, source } = data;
@@ -81,7 +84,15 @@ const IndexPage = ({ data }) => {
                             title="Most Popular"
                             link="/shop"
                             linkText="Shop All"
-                            products={products ?? []}
+                            products={
+                                products
+                                    ?.slice()
+                                    .sort(mostPopularFunction)
+                                    .filter(
+                                        (product) => product.stock_quantity > 0
+                                    )
+                                    .slice(0, 10) ?? []
+                            }
                         />
                     </div>
                     <div className="col-12 col-md-6 col-lg-4">

@@ -163,7 +163,7 @@ const ShopPage = ({ data }) => {
                                                 Showing 1-{state.items.length}{" "}
                                                 {state.search.length > 0
                                                     ? `of results for "${state.search}"`
-                                                    : "of items"}
+                                                    : "of results"}
                                             </>
                                         ) : (
                                             "Loading items..."
@@ -231,7 +231,7 @@ const ShopPage = ({ data }) => {
                                         Showing 1-{state.items.length}{" "}
                                         {state.search.length > 0
                                             ? `of results for "${state.search}"`
-                                            : "of items"}
+                                            : "of results"}
                                     </>
                                 ) : (
                                     <>Loading items...</>
