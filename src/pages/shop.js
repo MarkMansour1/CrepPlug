@@ -120,8 +120,6 @@ const ShopPage = ({ data }) => {
     // Puts the sizes in order
     sizes.sort((a, b) => a - b);
 
-    console.log(state);
-
     return (
         <Layout>
             <Seo title="Shop" />

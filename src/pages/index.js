@@ -87,11 +87,11 @@ const IndexPage = ({ data }) => {
                             products={
                                 products
                                     ?.slice()
-                                    .sort(mostPopularFunction)
-                                    .filter(
+                                    ?.sort(mostPopularFunction)
+                                    ?.filter(
                                         (product) => product.stock_quantity > 0
                                     )
-                                    .slice(0, 10) ?? []
+                                    ?.slice(0, 10) ?? []
                             }
                         />
                     </div>
