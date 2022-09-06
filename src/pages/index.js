@@ -69,12 +69,12 @@ const IndexPage = ({ data }) => {
                                     <h2>
                                         Sell your <span>trainers here</span>
                                     </h2>
-                                    <Link
-                                        to="/sell"
+                                    <a
+                                        href={`${process.env.GATSBY_SITE_URL}/register/`}
                                         className="btn btn-outline-light"
                                     >
                                         Start Selling
-                                    </Link>
+                                    </a>
                                 </div>
                             </div>
                         </BackgroundImage>

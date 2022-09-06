@@ -52,9 +52,12 @@ class PageComponent extends React.Component {
                             </p>
                         </div>
                     </div>
-                    <Link to="/sell" className="btn btn-secondary btn-lg mt-4">
+                    <a
+                        href={`${process.env.GATSBY_SITE_URL}/register/`}
+                        className="btn btn-secondary btn-lg mt-4"
+                    >
                         Start Selling
-                    </Link>
+                    </a>
                     <hr style={{ margin: "100px 0" }} />
                     <h2 className="text-uppercase">Buying on CrepPlug</h2>
                     <div className="row my-5 pt-4 hts-row">

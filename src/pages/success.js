@@ -26,9 +26,12 @@ const PageComponent = () => {
                 >
                     View Product
                 </Link>
-                <Link to="/sell" className="btn btn-primary my-4 ml-2">
+                <a
+                    href={`${process.env.GATSBY_SITE_URL}/register/`}
+                    className="btn btn-primary my-4 ml-2"
+                >
                     Add Another
-                </Link>
+                </a>
             </div>
         </Layout>
     );

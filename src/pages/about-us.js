@@ -113,12 +113,12 @@ class PageComponent extends React.Component {
                                         through CrepPlug with PayPal are
                                         protected!
                                     </p>
-                                    <Link
-                                        to="/sell"
+                                    <a
+                                        href={`${process.env.GATSBY_SITE_URL}/register/`}
                                         className="btn btn-secondary"
                                     >
                                         Sell An Item
-                                    </Link>
+                                    </a>
                                     <Link
                                         to="/buyer-protection"
                                         className="btn btn-secondary"
