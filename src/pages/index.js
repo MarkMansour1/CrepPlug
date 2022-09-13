@@ -86,12 +86,15 @@ const IndexPage = ({ data }) => {
                             linkText="Shop All"
                             products={
                                 products
-                                    ?.slice()
-                                    ?.sort(mostPopularFunction)
-                                    ?.filter(
-                                        (product) => product.stock_quantity > 0
-                                    )
-                                    ?.slice(0, 10) ?? []
+                                    ? products
+                                          ?.slice()
+                                          ?.sort(mostPopularFunction)
+                                          ?.filter(
+                                              (product) =>
+                                                  product.stock_quantity > 0
+                                          )
+                                          ?.slice(0, 10)
+                                    : []
                             }
                         />
                     </div>
@@ -152,13 +155,13 @@ const IndexPage = ({ data }) => {
                     title="Latest Footwear"
                     link="/shop"
                     linkText="Shop All"
-                    products={products ?? []}
+                    products={products ? products : []}
                 />
                 <PostBlock
                     title="From The Blog"
                     link="/blog"
                     linkText="Read More"
-                    posts={posts ?? []}
+                    posts={posts ? posts : []}
                 />
             </div>
         </Layout>
