@@ -20,7 +20,7 @@ class PageComponent extends React.Component {
                     ]}
                 />
                 <div className="container container-wide pt-5">
-                    <h1 className="d-md-none pt-3">Sourcing</h1>
+                    <h1 className="d-md-none pt-3">Cleaning</h1>
                     <div className="row">
                         <div className="col-md-4">
                             <p className="text-gray">
