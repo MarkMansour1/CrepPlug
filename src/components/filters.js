@@ -31,7 +31,6 @@ const Filters = ({
             sizes: [],
             colours: [],
             search: "",
-            urlSearch: "",
         });
 
         navigate("/shop");

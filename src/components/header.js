@@ -41,7 +41,7 @@ class Header extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    navigate(`/shop?search=${this.state.searchString}`)
+    navigate(`/shop?search=${this.state.searchString.replace(/ /g, "+")}`)
   }
 
   toggleMobileMenu = menu => {

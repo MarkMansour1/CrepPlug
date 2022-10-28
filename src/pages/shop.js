@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, graphql, navigate } from "gatsby";
 import BackgroundImage from "gatsby-background-image";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-
 import Layout from "../components/layout";
 import Seo from "../components/seo";
 import Banner from "../components/banner";
@@ -24,6 +21,8 @@ import fetcher from "../services/fetcher";
 import Loader from "../components/loader";
 
 import Skeleton from "react-loading-skeleton";
+
+// import { products, productCategories } from "../components/cache";
 
 const ShopPage = ({ data }) => {
     const [state, setState] = useState({
@@ -52,7 +51,10 @@ const ShopPage = ({ data }) => {
     const filterProducts = () => {
         if (!products) return;
 
-        var productLists = applyFilters(state, products.slice());
+        var productLists = applyFilters(
+            { ...state, search: searchString || "" },
+            products.slice()
+        );
 
         setState({
             ...state,
@@ -73,9 +75,18 @@ const ShopPage = ({ data }) => {
         });
     };
 
-    const url = typeof window !== "undefined" ? window.location.search : "";
-    const urlParams = new URLSearchParams(url);
-    const searchString = urlParams.get("search") ? urlParams.get("search") : "";
+    var url = typeof window !== "undefined" ? window.location.search : "";
+    var urlParams = new URLSearchParams(url);
+
+    const [searchString, setSearchString] = useState("");
+    useEffect(() => {
+        let search = urlParams.get("search");
+
+        if (search) search = search.replace(/\+/g, " ");
+        if (search === searchString) return;
+
+        setSearchString(search);
+    }, [urlParams]);
 
     useEffect(() => {
         setState({
@@ -132,12 +143,12 @@ const ShopPage = ({ data }) => {
                 ]}
             />
             <div className="container container-wide pt-4 pt-md-0">
-                {/* <ProductBlock
+                <ProductBlock
                     title="Most Popular"
                     link="/shop"
                     linkText="Shop All"
                     products={products?.slice(0, 10) ?? []}
-                /> */}
+                />
                 <div className="row">
                     <div className="col-12 col-md-3">
                         <div className="row">
@@ -260,16 +271,14 @@ const ShopPage = ({ data }) => {
                                 ? state.items.length > 0
                                     ? state.items.map((product) => {
                                           return (
-                                              <>
-                                                  <div
-                                                      className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
-                                                      key={product.id}
-                                                  >
-                                                      <SingleProduct
-                                                          product={product}
-                                                      />
-                                                  </div>
-                                              </>
+                                              <div
+                                                  className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                                                  key={product.id}
+                                              >
+                                                  <SingleProduct
+                                                      product={product}
+                                                  />
+                                              </div>
                                           );
                                       })
                                     : null
@@ -289,14 +298,12 @@ const ShopPage = ({ data }) => {
                         <div className="row mt-5">
                             {state.soldItems.map((product) => {
                                 return (
-                                    <>
-                                        <div
-                                            className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
-                                            key={`${product.id}-sold`}
-                                        >
-                                            <SingleProduct product={product} />
-                                        </div>
-                                    </>
+                                    <div
+                                        className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
+                                        key={`${product.id}-sold`}
+                                    >
+                                        <SingleProduct product={product} />
+                                    </div>
                                 );
                             })}
                         </div>
