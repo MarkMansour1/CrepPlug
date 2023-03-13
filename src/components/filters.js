@@ -92,7 +92,7 @@ const Filters = ({
                             <Accordion.Toggle as={Card.Header} eventKey="0">
                                 Search
                                 <span className="badge badge-light ml-3">
-                                    {state.search.length > 0 && "1"}
+                                    {state.search?.length > 0 && "1"}
                                 </span>
                             </Accordion.Toggle>
                         </Card>

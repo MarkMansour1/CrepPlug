@@ -1,6 +1,6 @@
 export const applyFilters = (state, productList) => {
     // If there is a search filter, remove all the products not matching the search
-    if (state.search.length > 0) {
+    if (state.search?.length > 0) {
         for (let i = 0; i < productList.length; i++) {
             if (!searchMatchFunction(state.search, productList[i])) {
                 productList.splice(i, 1);
