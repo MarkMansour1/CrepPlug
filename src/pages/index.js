@@ -127,7 +127,7 @@ const IndexPage = ({ data }) => {
                         </Link>
                     </div>
                     <div className="block-body row pb-0">
-                        {brands.map((brand, index) => (
+                        {brands?.map((brand, index) => (
                             <div
                                 className={`col-4 col-md-3 col-xl-2 ${
                                     index < 3 ? "mb-xl-0 mb-4" : ""
@@ -155,13 +155,13 @@ const IndexPage = ({ data }) => {
                     title="Latest Footwear"
                     link="/shop"
                     linkText="Shop All"
-                    products={products ? products : []}
+                    products={products?.length > 0 ? products : []}
                 />
                 <PostBlock
                     title="From The Blog"
                     link="/blog"
                     linkText="Read More"
-                    posts={posts ? posts : []}
+                    posts={posts?.length > 0 ? posts : []}
                 />
             </div>
         </Layout>

@@ -24,12 +24,11 @@ const BlogPage = (props) => {
             />
             <div className="container container-wide pt-5">
                 <div className="row">
-                    {posts &&
-                        posts.map((post) => (
-                            <div className="col-3 mb-4" key={post.id}>
-                                <SinglePost post={post} />
-                            </div>
-                        ))}
+                    {posts?.map((post) => (
+                        <div className="col-3 mb-4" key={post.id}>
+                            <SinglePost post={post} />
+                        </div>
+                    ))}
                 </div>
             </div>
         </Layout>

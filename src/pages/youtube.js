@@ -35,7 +35,7 @@ const PageComponent = (props) => {
             <div className="container container-wide pt-5">
                 <div className="row">
                     {data
-                        ? data.map((video) => (
+                        ? data?.map((video) => (
                               <div
                                   className="col-6 col-sm-4 col-md-3 col-xl-24 mb-4"
                                   key={video.id}

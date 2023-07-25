@@ -16,7 +16,7 @@ const SinglePost = ({ post, excerpt }) => {
         </div>
       </Link>
       {/* <div className="post-categories">
-        {post.categories.nodes.map(({ name: name }) => (
+        {post.categories.nodes?.map(({ name: name }) => (
           <div className="post-category" key={name}>
             {name}
           </div>

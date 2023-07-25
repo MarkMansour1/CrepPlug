@@ -18,7 +18,7 @@ const Block = ({ title, link, linkText, products }) => {
                 </div>
                 <div className="block-body">
                     {products.length > 1 ? (
-                        products.map((product) => (
+                        products?.map((product) => (
                             <div className="block-product" key={product.id}>
                                 <SingleProduct product={product} />
                             </div>

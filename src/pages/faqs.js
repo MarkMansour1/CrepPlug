@@ -15,7 +15,7 @@ const IndexPage = ({ data }) => {
                 <h2 className="text-center py-5">Frequently Asked Questions</h2>
                 {/* <h4>As a Seller</h4>
         <Accordion>
-          {seller.map((faq, index) => (
+          {seller?.map((faq, index) => (
             <Card key={index}>
               <Accordion.Collapse eventKey={index + 1}>
                 <Card.Body>{faq[1]}</Card.Body>
@@ -28,7 +28,7 @@ const IndexPage = ({ data }) => {
         </Accordion>
         <h4 className="mt-5">As a Buyer</h4>
         <Accordion>
-          {buyer.map((faq, index) => (
+          {buyer?.map((faq, index) => (
             <Card key={index}>
               <Accordion.Collapse eventKey={index + 1}>
                 <Card.Body>{faq[1]}</Card.Body>

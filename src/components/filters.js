@@ -21,21 +21,21 @@ const Filters = ({
         });
     };
 
-    const clearFilters = () => {
-        setState({
-            ...state,
-            minPrice: null,
-            maxPrice: null,
-            categories: [],
-            conditions: [],
-            sizes: [],
-            colours: [],
-            search: "",
-        });
+    // const clearFilters = () => {
+    //     setState({
+    //         ...state,
+    //         minPrice: null,
+    //         maxPrice: null,
+    //         categories: [],
+    //         conditions: [],
+    //         sizes: [],
+    //         colours: [],
+    //         search: "",
+    //     });
 
-        navigate("/shop");
-        filterProducts();
-    };
+    //     navigate("/shop");
+    //     filterProducts();
+    // };
 
     const handleFilterChange = (event) => {
         const target = event.target;
@@ -145,7 +145,7 @@ const Filters = ({
                         <Card>
                             <Accordion.Collapse eventKey="2">
                                 <Card.Body>
-                                    {categories.map((filter) => (
+                                    {categories?.map((filter) => (
                                         <div
                                             className="form-check"
                                             key={filter}
@@ -179,7 +179,7 @@ const Filters = ({
                         <Card>
                             <Accordion.Collapse eventKey="3">
                                 <Card.Body>
-                                    {conditions.map((filter) => (
+                                    {conditions?.map((filter) => (
                                         <div
                                             className="form-check"
                                             key={filter}
@@ -213,7 +213,7 @@ const Filters = ({
                         <Card>
                             <Accordion.Collapse eventKey="4">
                                 <Card.Body>
-                                    {sizes.map((filter) => (
+                                    {sizes?.map((filter) => (
                                         <div
                                             className="form-check"
                                             key={filter}
@@ -247,7 +247,7 @@ const Filters = ({
                         <Card>
                             <Accordion.Collapse eventKey="5">
                                 <Card.Body>
-                                    {colours.map((filter) => (
+                                    {colours?.map((filter) => (
                                         <div
                                             className="form-check"
                                             key={filter}

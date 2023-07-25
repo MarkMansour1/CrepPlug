@@ -183,7 +183,7 @@ class PageComponent extends React.Component {
                         </a>
                     </p>
                     <div className="row">
-                        {reviews.map((review) => (
+                        {reviews?.map((review) => (
                             <div className="col-6 col-sm-4 col-lg-3 mb-4">
                                 <Img
                                     fluid={review.childImageSharp.fluid}

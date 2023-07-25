@@ -14,7 +14,7 @@ const Block = ({ title, link, linkText, posts }) => (
             </Link>
         </div>
         <div className="block-body">
-            {posts.map((post) => (
+            {posts?.map((post) => (
                 <div className="block-post" key={post.id}>
                     <SinglePost post={post} />
                 </div>

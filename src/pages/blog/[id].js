@@ -41,7 +41,7 @@ const BlogPage = (props) => {
                     </div>
                     {/* <h3>Related Posts</h3>
           <div className="row">
-            {posts.slice(0, 3).map(post => (
+            {posts.slice(0, 3)?.map(post => (
               <div className="col-6 col-md-4" key={post.id}>
                 <SinglePost post={post} />
               </div>

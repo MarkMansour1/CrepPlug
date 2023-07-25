@@ -112,15 +112,15 @@ const ShopPage = ({ data }) => {
     });
 
     products?.map((product) => {
-        product.attributes.map((attribute) => {
+        product.attributes?.map((attribute) => {
             if (attribute.name == "Size") {
-                attribute?.options.map((option) => {
+                attribute?.options?.map((option) => {
                     if (!sizes.includes(option)) {
                         sizes.push(option);
                     }
                 });
             } else if (attribute.name == "Colour") {
-                attribute?.options.map((option) => {
+                attribute?.options?.map((option) => {
                     if (!colours.includes(option)) {
                         colours.push(option);
                     }
@@ -269,7 +269,7 @@ const ShopPage = ({ data }) => {
                         <div className="row">
                             {products
                                 ? state.items.length > 0
-                                    ? state.items.map((product) => {
+                                    ? state.items?.map((product) => {
                                           return (
                                               <div
                                                   className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
@@ -296,7 +296,7 @@ const ShopPage = ({ data }) => {
                                       })}
                         </div>
                         <div className="row mt-5">
-                            {state.soldItems.map((product) => {
+                            {state?.soldItems?.map((product) => {
                                 return (
                                     <div
                                         className="col-6 col-sm-4 col-lg-3 col-xl-24 mb-4"
